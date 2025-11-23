@@ -21,18 +21,19 @@ class OnboardingPageWed extends StatelessWidget {
                 ),
                 //2
                 Positioned(
+                  //left: 294,
                   right: 10,
-                  bottom: 450,
+                  top: 68,
                   child: Opacity(
                     opacity: .90,
                     child: Container(
                       height: 35,
                       width: 65,
-                      padding: EdgeInsets.all(8),
+                      //padding: EdgeInsets.all(8),
+                     // margin: EdgeInsets.symmetric(horizontal: 8),
                       decoration: BoxDecoration(
                         color: Color(0xffE8E9EC),
                         borderRadius: BorderRadius.circular(20), 
-                                             
                       ),
                       child: MaterialButton(
                         onPressed: (){

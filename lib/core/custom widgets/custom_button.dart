@@ -10,7 +10,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
        width: 335,
-       height: 48,
+       height: 48 ,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: AppColers.primaryColor,
