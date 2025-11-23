@@ -18,51 +18,54 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      autovalidateMode: AutovalidateMode.onUnfocus,
-      decoration: InputDecoration(        
-        prefixIcon: Icon,
-        hintText: hintText,
-        hintStyle: const TextStyle(
-          color: TextColers.secondaryTextColor,
-          fontSize: 12,
-          fontWeight: FontWeight.w300,
-        ),
-        filled: true,
-        fillColor:  AppColers.backgroundColor,
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColers.primaryColor,
-            width: 1.5,
+    return Container(
+      width: double.infinity,      
+      child: TextFormField(
+        controller: controller,
+        autovalidateMode: AutovalidateMode.onUnfocus,
+        decoration: InputDecoration(        
+          prefixIcon: Icon,
+          hintText: hintText,
+          hintStyle: const TextStyle(
+            color: TextColers.secondaryTextColor,
+            fontSize: 12,
+            fontWeight: FontWeight.w300,
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: AppColers.primaryColor,
+          filled: true,
+          fillColor:  AppColers.backgroundColor,
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: AppColers.primaryColor,
+              width: 1.5,
+            ),
           ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color:Colors.blueAccent,
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: AppColers.primaryColor,
+            ),
+            borderRadius: BorderRadius.circular(10),
           ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.red,
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color:Colors.blueAccent,
+            ),
+            borderRadius: BorderRadius.circular(10),
           ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.red,
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Colors.red,
+            ),
+            borderRadius: BorderRadius.circular(10),
           ),
-          borderRadius: BorderRadius.circular(10),
-        ),        
-      ),     
-      validator: validator,
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Colors.red,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),        
+        ),     
+        validator: validator,
+      ),
     );
   }
 }

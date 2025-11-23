@@ -60,7 +60,7 @@ class Themedata {
       backgroundColor: DarkThemeColors.primaryColor,
       iconSize: 30,          
     ),
-    //fontFamily: "Montserrat",
+    fontFamily: "inter",
 
   );
 

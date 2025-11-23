@@ -19,7 +19,7 @@ class OnboardingScreens extends StatelessWidget {
           builder: (context,val,child) {
             var provider=context.read<OnboardingProvider>();
 
-            return Column(
+            return Column(              
               children: [      
                             
                 Expanded(
@@ -41,7 +41,7 @@ class OnboardingScreens extends StatelessWidget {
                     itemBuilder: (context, index, realIndex) => OnboardingPageWed( modeldata: provider.onboardingdata[index],),                    
                   ),
                 ),
-            
+                SizedBox(height: 26,),
                 AnimatedSmoothIndicator(
                   effect: WormEffect(
                     activeDotColor: AppColers.primaryColor,
@@ -59,10 +59,10 @@ class OnboardingScreens extends StatelessWidget {
 
                 ),
 
-                SizedBox(height: 20,),
+                SizedBox(height: 24,),
                   
                 Padding(
-                  padding: const EdgeInsets.all(6),
+                  padding: const EdgeInsets.only(left: 18,right: 18),
                   child: CustomButton(
                     text: "Next",
                     onPressed: () {

@@ -16,7 +16,7 @@ class OnboardingPageWed extends StatelessWidget {
                 //1
                 Image.asset(modeldata.imageurl ,
                   width: double.infinity,
-                  height: 600,
+                  height: 560,
                   fit: BoxFit.cover,
                 ),
                 //2
@@ -77,20 +77,25 @@ class OnboardingPageWed extends StatelessWidget {
                   children: [
                     SizedBox(height: 20,),
                     Text(
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,                  
                       modeldata.text1,style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,  
+                      fontSize: 18, 
+                      
                     ),),
                     SizedBox(height: 20,),
                     Text(
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       modeldata.text2,style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: TextColers.secondaryTextColor 
                     ),),              
-                    SizedBox(height: 10,),    
+                       
                   ],
                 ),
               ),

@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
-import 'package:mindsense_app/core/custom%20widgets/custom_passwordtextformfield.dart';
-import 'package:mindsense_app/core/custom%20widgets/custom_textformfield.dart';
-import 'package:mindsense_app/core/styles/colors.dart';
-import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
+import 'package:mindsense_app/features/sign%20up/ui/widgets/signup_form_wid.dart';
+import 'package:mindsense_app/features/sign%20up/ui/widgets/signup_platforms_auth_wid.dart';
+import 'package:mindsense_app/features/sign%20up/ui/widgets/signup_uppertext_wid.dart';
+import 'package:mindsense_app/features/sign%20up/ui/widgets/tologin_widget.dart';
 import 'package:provider/provider.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
-
-  
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -25,167 +22,37 @@ class SignupScreen extends StatelessWidget {
           },
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(right: 10,left: 10,top: 45),
+              padding: const EdgeInsets.only(right: 18,left: 18,top: 50),
               child: Consumer(
                 builder: (context,val,child) {
                   var provider=context.read<SignupProvider>();
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.center,        
                     children: [
-                  
-                      Row(
-                        spacing: 10,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Welcome to",style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                          ),),
-                          Text("Smart Emotion",style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                            color: TextColers.thirdTextColor,
-                            
-                          ),),
-                        ],
-                      ),
-                      SizedBox(height: 10,),
-                      Text("Sign in to your account",style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                      ),),
-                      SizedBox(height: 25,),
+                      // upper text wid
+                      SignupUppertextWid(),
+
+                      SizedBox(height: 48,),
                       
-                      //form
-                      Form(
-                        key: provider.formKey,
-                          child:
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                        
-                              Text("Name",style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),),   
-                              SizedBox(height: 5,),
-                  
-                              CustomTextFormField(
-                                controller: provider.signupNameController, 
-                                hintText: "Enter your Name",
-                                Icon: Icon(Icons.person_2_outlined),
-                                validator: provider.nameValidator,
-                                
-                              ),
-                              SizedBox(height: 15,),
-                        
-                        
-                              Text("Email",style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),),   
-                              SizedBox(height: 5,),
-                  
-                              CustomTextFormField(
-                                controller: provider.signupEmailController, 
-                                hintText: "Enter your email",
-                                Icon: Icon(Icons.email_outlined),
-                                validator: provider.emailValidator,                                
-                              ),
-                              SizedBox(height: 15,),
-                  
-                              Text("Password",style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),),
-                        
-                              SizedBox(height: 5,),
-                        
-                              CustomPasswordTextFormField(
-                                controller: provider.signupPasswordController, 
-                                hintText: "password",
-                                validator: provider.passwordValidator,
-                              ),              
+                      //signup form widget
+                      SignupFormWid(provider: provider,),
                               
-                              
-                              SizedBox(height: 35,),
-                              //login button
-                              Center(
-                                child: CustomButton(text:"Sign Up",
-                                onPressed: () {
-                                  provider.signupButton();
-                                },
-                                ),
-                              ),
-                            ],
-                  
-                          ),
-                      ),
-                              
-                      SizedBox(height: 35,),
+                      SizedBox(height: 24,),
                               
                       Text("or continue with",style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500
                       ),),
                         
-                      SizedBox(height: 30,),
+                      SizedBox(height: 24,),
                               
-                      //platforms images
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 50,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              
-                            },
-                            child: Image.asset("assets/images/google.png"),
-                          ),
-                              
-                          InkWell(
-                            onTap: () {
-                              
-                            },
-                            child: Image.asset("assets/images/apple.png"),
-                          ),
-                              
-                          InkWell(
-                            onTap: () {
-                              
-                            },
-                            child: Image.asset("assets/images/facebook.png"),
-                          ),
-                          
-                        ],
-                      ),
-                              
-                      SizedBox(height: 30,),
-                        
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(" Don you have an account?",style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),),
-                          TextButton(                    
-                            onPressed: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (context) => LoginScreen()),
-                                (route) => false,   
-                              );
-                            },
-                            child: Text("Log In",                      
-                              style: TextStyle(
-                                fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                                color: TextColers.thirdTextColor
-                          ),)),
-                        ],
-                      )
-                    
+                      //platforms auth widget
+                      SignupPlatformsAuthWid(),
+                     
+                      SizedBox(height: 24,),
+                      
+                      //to login widget  
+                      TologinWidget(),
                     ],
                   );
                 }

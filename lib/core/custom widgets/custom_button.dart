@@ -9,8 +9,8 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-       width: 335,
-       height: 48 ,
+      
+      width: double.infinity,       
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: AppColers.primaryColor,
