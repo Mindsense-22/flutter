@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/on%20boarding/data/onboarding_model.dart';
@@ -16,7 +17,7 @@ class OnboardingPageWed extends StatelessWidget {
                 //1
                 Image.asset(modeldata.imageurl ,
                   width: double.infinity,
-                  height: 560,
+                  height: 500.h,
                   fit: BoxFit.cover,
                 ),
                 //2
@@ -27,8 +28,8 @@ class OnboardingPageWed extends StatelessWidget {
                   child: Opacity(
                     opacity: .90,
                     child: Container(
-                      height: 35,
-                      width: 65,
+                      height: 35.h,
+                      width: 65.w,
                       //padding: EdgeInsets.all(8),
                      // margin: EdgeInsets.symmetric(horizontal: 8),
                       decoration: BoxDecoration(
@@ -43,8 +44,8 @@ class OnboardingPageWed extends StatelessWidget {
                         },
                         child: Text("skip",style: TextStyle(
                           color: Color(0xff121A32),
-                          fontWeight: FontWeight.w500
-                          
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
                           
                           
                         ),),                    
@@ -82,16 +83,16 @@ class OnboardingPageWed extends StatelessWidget {
                       textAlign: TextAlign.center,                  
                       modeldata.text1,style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18, 
+                      fontSize: 18.sp, 
                       
                     ),),
-                    SizedBox(height: 20,),
+                    SizedBox(height: 20.h,),
                     Text(
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       modeldata.text2,style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 14.spMin,
                       fontWeight: FontWeight.w400,
                       color: TextColers.secondaryTextColor 
                     ),),              

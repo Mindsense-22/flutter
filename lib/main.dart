@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/styles/theme_data.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/on%20boarding/ui/onboarding_screens.dart';
 import 'package:mindsense_app/features/sign%20up/ui/signup_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ScreenUtilInit(
+      designSize: Size(375, 812),
+      builder: (context, child) => MyApp(),
+    )
+  );
+  
+  //runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(  
       debugShowCheckedModeBanner: false,  
       theme: Themedata.darktheme,  
-      home: LoginScreen(),
+      home: OnboardingScreens(),
     );
   }
 }
