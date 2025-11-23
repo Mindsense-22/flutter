@@ -28,7 +28,8 @@ class _CustomPasswordTextFormFieldState
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-      obscureText: locked,  
+      obscureText: locked, 
+      autovalidateMode: AutovalidateMode.onUnfocus, 
       decoration: InputDecoration(
         suffixIcon: IconButton(
           onPressed: () {

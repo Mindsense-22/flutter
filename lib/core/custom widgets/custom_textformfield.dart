@@ -20,7 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      
+      autovalidateMode: AutovalidateMode.onUnfocus,
       decoration: InputDecoration(        
         prefixIcon: Icon,
         hintText: hintText,

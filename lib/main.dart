@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/styles/theme_data.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
-import 'package:mindsense_app/features/on%20boarding/ui/onboarding.dart';
+import 'package:mindsense_app/features/on%20boarding/ui/onboarding_screens.dart';
 import 'package:mindsense_app/features/sign%20up/ui/signup_screen.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(  
       debugShowCheckedModeBanner: false,  
       theme: Themedata.darktheme,  
-      home: Onboarding(),
+      home: OnboardingScreens(),
     );
   }
 }

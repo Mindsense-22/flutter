@@ -2,21 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 
 class CustomButton extends StatelessWidget {
-   CustomButton({super.key, this.onpreessed, required this.text});
-  final String? Function(String?)? onpreessed;
-  final String text;
+   final VoidCallback onPressed; // ✅ note VoidCallback
+   final String text;
+   CustomButton({super.key,  required this.onPressed, required this.text});
+   
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: 48,
+       width: 335,
+       height: 48,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: AppColers.primaryColor,
         borderRadius: BorderRadius.circular(10)
       ),
       child: MaterialButton(
-        onPressed:(){onpreessed;},
+       
+        
+        padding: EdgeInsets.all(8),
+        onPressed:onPressed,
         child: Text(text,style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
