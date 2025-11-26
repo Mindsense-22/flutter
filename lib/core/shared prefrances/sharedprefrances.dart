@@ -30,9 +30,21 @@ class SharedPreferencesitem {
   static int? getInt(String key) {
     return sharedPreferences.getInt(key);
   }
+  
+  static Future<void> setDouble(String key, double value) async {
+    await sharedPreferences.setDouble(key, value);
+  }
+
+  static double? getDouble(String key) {
+    return sharedPreferences.getDouble(key);
+  }
 
   static Future<void> remove(String key) async {
     await sharedPreferences.remove(key);
+  }
+
+  static Future<void> clear() async {
+    await sharedPreferences.clear();
   }
 
 }
