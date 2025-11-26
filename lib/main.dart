@@ -5,6 +5,7 @@ import 'package:mindsense_app/core/styles/theme_data.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/on%20boarding/ui/onboarding_screens.dart';
 import 'package:mindsense_app/features/sign%20up/ui/signup_screen.dart';
+import 'package:mindsense_app/features/splash/ui/splash_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(  
       debugShowCheckedModeBanner: false,  
       theme: Themedata.darktheme,  
-      home: OnboardingScreens(),
+      home: SplashScreen(),
     );
   }
 }
