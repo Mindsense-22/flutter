@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       child: Image.asset("assets/images/onp1.jpg",
         height: 200,
         width: 200,    
-      )
+      ),
     );
   }
 
