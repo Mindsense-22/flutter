@@ -56,9 +56,9 @@ class OnboardingScreens extends StatelessWidget {
                     provider.updateCurrentpage(index);                    
                     provider.carouselController.animateToPage(provider.currentPage);                    
                   },
-
+            
                 ),
-
+            
                 SizedBox(height: 24,),
                   
                 Padding(
@@ -72,9 +72,9 @@ class OnboardingScreens extends StatelessWidget {
                   
                   ),
                 ),
-
+            
                 SizedBox(height: 45,),
-
+            
               ],
             );
           }
