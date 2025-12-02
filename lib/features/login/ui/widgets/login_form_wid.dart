@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_passwordtextformfield.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_textformfield.dart';
+import 'package:mindsense_app/features/forget%20password/ui/forgetpassword_setemail.dart';
 import 'package:mindsense_app/features/login/logic/login_provider.dart';
 
 class LoginFormWid extends StatelessWidget {
@@ -46,7 +47,9 @@ class LoginFormWid extends StatelessWidget {
             Container(
               alignment: Alignment.bottomRight ,
               child: TextButton(                    
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetpasswordSetemail(),));
+                },
                 child: Text("Forgot Password?",                      
                   style: TextStyle(
                     fontSize: 16,

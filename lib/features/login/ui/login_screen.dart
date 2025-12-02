@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/features/login/logic/login_provider.dart';
 import 'package:mindsense_app/features/login/ui/widgets/login_form_wid.dart';
 import 'package:mindsense_app/features/login/ui/widgets/platforms_auth_wid.dart';
@@ -35,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                       //upper text widget
                       UppertextWid(),
 
-                      SizedBox(height: 24,),
+                      SizedBox(height: 24.h,),
                       
                       //login form                      
                       LoginFormWid( provider: provider,),
