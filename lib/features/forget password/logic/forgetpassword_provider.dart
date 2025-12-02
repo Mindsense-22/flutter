@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ForgetpasswordProvider extends ChangeNotifier{
+  ///////////////////////set email and send code page ////////////////////
   TextEditingController forgetPasswordEmailController =TextEditingController();  
   final setEmailFormKey = GlobalKey<FormState>();
   bool sendCodeButtonisloading=false;
@@ -44,5 +45,5 @@ class ForgetpasswordProvider extends ChangeNotifier{
       );
     }
   }
-  
+  //////////////////////////////////////////////////////////////////////////////////////
 }
