@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:pinput/pinput.dart';
+
+class ForgotpasswordPincodeTextFieldWid extends StatelessWidget {
+  const ForgotpasswordPincodeTextFieldWid({super.key, this.provider});
+  final provider;
+
+  @override
+  Widget build(BuildContext context) {
+
+    final errorPinTheme = PinTheme(
+      width: 55.w,
+      height: 50.h,
+      textStyle: TextStyle(
+        fontSize: 20.sp,
+        fontWeight: FontWeight.w600,
+        color: Colors.red,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.r),
+        border: Border.all(color: Colors.red, width: 2.5),
+        //color: Colors.red.withOpacity(0.1),
+        color: Colors.grey[400],
+      ),
+    );
+
+    return Pinput(
+      controller: provider.forgetPasswordPinCodeController,
+      length: 6,
+      keyboardType: TextInputType.number,
+      autofocus: false,
+      showCursor: true,
+
+      
+      
+
+      defaultPinTheme: provider.ispincodeError
+          ? errorPinTheme
+          : PinTheme(
+              width: 55.w,
+              height: 50.h,
+              textStyle: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                border: Border.all(color: Colors.blue, width: 1.4),
+                color: Colors.grey[400],
+              ),
+            ),
+
+      focusedPinTheme: provider.ispincodeError
+          ? errorPinTheme
+          : PinTheme(
+              width: 55.w,
+              height: 50.h,
+              textStyle: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                border: Border.all(color: Colors.blue, width: 2),
+                color: Colors.white,
+              ),
+            ),
+
+      submittedPinTheme: provider.ispincodeError
+          ? errorPinTheme
+          : PinTheme(
+              width: 55.w,
+              height: 50.h,
+              textStyle: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                border: Border.all(color: AppColers.primaryColor, width: 2),
+                color: Colors.grey.shade100,
+              ),
+            ),
+
+      errorPinTheme: errorPinTheme,
+    );
+  }
+}
