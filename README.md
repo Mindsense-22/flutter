@@ -1,6 +1,6 @@
 # mindsense_app
 
-A new Flutter project.
+A new Flutter project For College Graduation Project.
 
 ## Getting Started
 
