@@ -46,6 +46,7 @@ class Themedata {
     iconTheme: const IconThemeData(
       color: Colors.white
     ),
+    
     scaffoldBackgroundColor: DarkThemeColors.backgroundColor,
     appBarTheme:const AppBarTheme(
       // this two lines to make appbar not change its color

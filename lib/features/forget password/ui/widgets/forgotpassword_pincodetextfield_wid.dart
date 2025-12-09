@@ -27,9 +27,15 @@ class ForgotpasswordPincodeTextFieldWid extends StatelessWidget {
       ),
     );
 
-    return Pinput(
+    return Pinput( 
+      cursor: Container(
+        width: 2,
+        height: 24,
+        color: Colors.white,
+      ),           
       controller: provider.forgetPasswordPinCodeController,
       length: 6,
+      
       keyboardType: TextInputType.number,
       autofocus: false,
       showCursor: true,
@@ -56,19 +62,21 @@ class ForgotpasswordPincodeTextFieldWid extends StatelessWidget {
 
       focusedPinTheme: provider.ispincodeError
           ? errorPinTheme
-          : PinTheme(
+          : PinTheme(              
               width: 55.w,
               height: 50.h,
               textStyle: TextStyle(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
-                color: Colors.black,
+                color: Colors.white,
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.r),
                 border: Border.all(color: Colors.blue, width: 2),
-                color: Colors.white,
+                color: Colors.transparent,
+                
               ),
+
             ),
 
       submittedPinTheme: provider.ispincodeError
@@ -89,6 +97,7 @@ class ForgotpasswordPincodeTextFieldWid extends StatelessWidget {
             ),
 
       errorPinTheme: errorPinTheme,
+      
     );
   }
 }
