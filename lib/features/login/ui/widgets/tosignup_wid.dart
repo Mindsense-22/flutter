@@ -12,7 +12,7 @@ class TosignupWid extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       
       children: [
-        Text("Don't you have an account?",style: TextStyle(
+        Text("Don't have an account?",style: TextStyle(
           fontSize: 20.spMin,
           fontWeight: FontWeight.w500,
         ),),

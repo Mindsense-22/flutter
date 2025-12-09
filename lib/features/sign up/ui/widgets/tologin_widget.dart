@@ -10,7 +10,7 @@ class TologinWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(" Don you have an account?",style: TextStyle(
+        Text(" Do you have an account?",style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
         ),),
