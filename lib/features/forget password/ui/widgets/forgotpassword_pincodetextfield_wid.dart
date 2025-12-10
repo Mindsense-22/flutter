@@ -31,7 +31,7 @@ class ForgotpasswordPincodeTextFieldWid extends StatelessWidget {
       cursor: Container(
         width: 2,
         height: 24,
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.onSecondary,
       ),           
       controller: provider.forgetPasswordPinCodeController,
       length: 6,
@@ -68,7 +68,7 @@ class ForgotpasswordPincodeTextFieldWid extends StatelessWidget {
               textStyle: TextStyle(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.r),

@@ -11,11 +11,13 @@ class ForgetpasswordSetpincodeUppertextWid extends StatelessWidget {
         Text("We’ve sent a verification ",style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w600,
+          color: Theme.of(context).colorScheme.onSecondary,
         ),),
 
         Text("code to your email",style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w600,
+          color: Theme.of(context).colorScheme.onSecondary,
         ),),
 
         SizedBox(height: 8,),

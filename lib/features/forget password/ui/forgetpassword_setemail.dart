@@ -46,6 +46,7 @@ class ForgetpasswordSetemail extends StatelessWidget {
                             Text("Email",style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
+                              color: Theme.of(context).colorScheme.onSecondary,
                             ),),   
                             SizedBox(height: 5,),
                     

@@ -169,95 +169,98 @@ class ForgetpasswordProvider extends ChangeNotifier{
     }
   }
   
-  Future messgeShowDialog(context){
+  Future<dynamic> messgeShowDialog(context){
     return showDialog(
       context: context,
       builder: (context) {
-        return Stack(
-          children: [
-            // Blurred background
-            BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-              child: Container(
-               //color: Colors.black.withOpacity(0.3),
-                 color: AppColers.backgroundColor.withValues(alpha: .3),
-              ),
-            ),
-
-            // Popup Card
-            Center(
-              child: Container(
-                alignment: Alignment.center,
-                width: 335.w,
-                height: 309.h,
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  //color: Colors.white,
-                   color: Colors.white.withValues(alpha: .7),
-                  //color: AppColers.backgroundColor.withValues(alpha: .6),
-                  borderRadius: BorderRadius.circular(10),
+        return PopScope(
+          canPop: false,
+          child: Stack(
+            children: [
+              // Blurred background
+              BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                child: Container(
+                 //color: Colors.black.withOpacity(0.3),
+                   color: AppColers.backgroundColor.withValues(alpha: .3),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 13,right: 13),
-                  child: Column(  
-                    crossAxisAlignment: CrossAxisAlignment.center,                  
-                    children: [
-                      Container(
-                        width: 100.w,
-                        height: 100.h,
-                        decoration: BoxDecoration(
-                          color: AppColers.primaryColor,
-                          borderRadius: BorderRadius.circular(100.r),
+              ),
+          
+              // Popup Card
+              Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  width: 335.w,
+                  height: 309.h,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    //color: Colors.white,
+                     color: Colors.white.withValues(alpha: .7),
+                    //color: AppColers.backgroundColor.withValues(alpha: .6),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 13,right: 13),
+                    child: Column(  
+                      crossAxisAlignment: CrossAxisAlignment.center,                  
+                      children: [
+                        Container(
+                          width: 100.w,
+                          height: 100.h,
+                          decoration: BoxDecoration(
+                            color: AppColers.primaryColor,
+                            borderRadius: BorderRadius.circular(100.r),
+                          ),
+                          child: Center(
+                            child: SvgPicture.asset(
+                              "assets/images/message-notif.svg",
+                              width: 42.w,
+                              height: 42.h,
+                            ),                          
+                          ),
+                    
                         ),
-                        child: Center(
-                          child: SvgPicture.asset(
-                            "assets/images/message-notif.svg",
-                            width: 42.w,
-                            height: 42.h,
-                          ),                          
+                        SizedBox(height: 16.h,),
+                        Text(
+                          "Success!",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            color: Color(0xff08160A),
+                            //color: Colors.white
+                          ),
                         ),
-                  
-                      ),
-                      SizedBox(height: 16.h,),
-                      Text(
-                        "Success!",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
-                          color: Color(0xff08160A),
-                          //color: Colors.white
-                        ),
-                      ),
-                      SizedBox(height: 16.h,),
-                      Text(                      
-                        "Your password has been reset\nsuccessfully",
-                        textAlign: TextAlign.center ,
-                        style: TextStyle(                      
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          //color: Color(0xff59615E)
-                          color: Color(0xff08160A)
-                          //color: Colors.white
-                        ),
-                      ), 
-                      SizedBox(height: 16.h,),                
-                      CustomButton(
-                        onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                            context, 
-                            MaterialPageRoute(builder: (context) => LoginScreen(),), 
-                            (route) => false,
-                          );
-                          //Navigator.pop(context);
-                        },
-                        text: "Back to Login"
-                      )
-                    ],
+                        SizedBox(height: 16.h,),
+                        Text(                      
+                          "Your password has been reset\nsuccessfully",
+                          textAlign: TextAlign.center ,
+                          style: TextStyle(                      
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                            //color: Color(0xff59615E)
+                            color: Color(0xff08160A)
+                            //color: Colors.white
+                          ),
+                        ), 
+                        SizedBox(height: 16.h,),                
+                        CustomButton(
+                          onPressed: () {
+                            Navigator.pushAndRemoveUntil(
+                              context, 
+                              MaterialPageRoute(builder: (context) => LoginScreen(),), 
+                              (route) => false,
+                            );
+                            //Navigator.pop(context);
+                          },
+                          text: "Back to Login"
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       }
     );

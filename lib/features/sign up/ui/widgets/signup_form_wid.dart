@@ -19,6 +19,7 @@ class SignupFormWid extends StatelessWidget {
           Text("Name",style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.onSecondary,
           ),),   
           SizedBox(height: 4,),
 
@@ -35,6 +36,7 @@ class SignupFormWid extends StatelessWidget {
           Text("Email",style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.onSecondary,
           ),),   
           SizedBox(height: 4,),
 
@@ -49,6 +51,7 @@ class SignupFormWid extends StatelessWidget {
           Text("Password",style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.onSecondary,
           ),),
     
           SizedBox(height: 4,),

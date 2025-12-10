@@ -45,7 +45,7 @@ class OnboardingScreens extends StatelessWidget {
                 AnimatedSmoothIndicator(
                   effect: WormEffect(
                     activeDotColor: AppColers.primaryColor,
-                    dotColor: Colors.white,
+                    dotColor: Theme.of(context).colorScheme.onSecondary,
                     dotHeight: 12,
                     dotWidth: 12,
                     spacing: 6,

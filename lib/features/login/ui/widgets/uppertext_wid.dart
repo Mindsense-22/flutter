@@ -15,6 +15,7 @@ class UppertextWid extends StatelessWidget {
             Text("Welcome",style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),),
             Text("back!",style:TextStyle(
               fontSize: 24,
@@ -30,6 +31,7 @@ class UppertextWid extends StatelessWidget {
         Text("Login to your account",style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w600,
+          color: Theme.of(context).colorScheme.onSecondary,
         ),),
       ],
     );

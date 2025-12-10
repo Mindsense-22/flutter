@@ -45,7 +45,8 @@ class LoginScreen extends StatelessWidget {
                               
                       Text("or continue with",style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.w500
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),),
                           
                       SizedBox(height: 24,),

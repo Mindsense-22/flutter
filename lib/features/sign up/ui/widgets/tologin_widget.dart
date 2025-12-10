@@ -13,6 +13,7 @@ class TologinWidget extends StatelessWidget {
         Text(" Do you have an account?",style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
+          color: Theme.of(context).colorScheme.onSecondary,
         ),),
         TextButton(                    
           onPressed: () {

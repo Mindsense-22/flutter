@@ -15,6 +15,7 @@ class TosignupWid extends StatelessWidget {
         Text("Don't have an account?",style: TextStyle(
           fontSize: 20.spMin,
           fontWeight: FontWeight.w500,
+          color: Theme.of(context).colorScheme.onSecondary,
         ),),
         TextButton(                    
           onPressed: (){

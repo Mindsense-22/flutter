@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 
 class DarkThemeColors{
   static const Color primaryColor = Color(0xff55EEDA);  
-  static const Color secondaryColor = Colors.white;
+  static const Color onSecondaryColor = Colors.white;
+  static const Color onprimaryColor = Colors.black;
   static const Color backgroundColor = Color(0xff121A32);  
   static const Color textcolor=Color(0xFFFFFFFF);
 }

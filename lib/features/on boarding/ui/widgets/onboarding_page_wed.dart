@@ -17,7 +17,7 @@ class OnboardingPageWed extends StatelessWidget {
                 //1
                 Image.asset(modeldata.imageurl ,
                   width: double.infinity,
-                  height: 500.h,
+                  height: 520.h,
                   fit: BoxFit.cover,
                 ),
                 //2
@@ -57,47 +57,52 @@ class OnboardingPageWed extends StatelessWidget {
             ),
 
             Transform.translate(
-              offset: Offset(0, -5),
-              child: Container(
-               
-                padding: EdgeInsets.all(10),              
-                width: double.infinity,             
-                decoration: BoxDecoration(
-                  color: AppColers.backgroundColor,              
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),                    
+              offset: Offset(0, -15),
+              child: ClipRRect(
+                
+                child: Container(
+                 
+                  padding: EdgeInsets.all(10),              
+                  width: double.infinity,             
+                  decoration: BoxDecoration(
+                    //color: Colors.red,
+                    color: Theme.of(context).scaffoldBackgroundColor,           
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),                    
+                    ),
+                    border: const Border(
+                      top: BorderSide(color: AppColers.primaryColor, width: 1.5),
+                    ),              
                   ),
-                  border: const Border(
-                    top: BorderSide(color: AppColers.primaryColor, width: 1.5),
-                  ),              
-                ),
-                child: Column(
-                  spacing: 2,
-                  mainAxisAlignment: MainAxisAlignment.center,              
-                  children: [
-                    SizedBox(height: 20,),
-                    Text(
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,                  
-                      modeldata.text1,style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.sp, 
-                      
-                    ),),
-                    SizedBox(height: 20.h,),
-                    Text(
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      modeldata.text2,style: TextStyle(
-                      fontSize: 14.spMin,
-                      fontWeight: FontWeight.w400,
-                      color: TextColers.secondaryTextColor 
-                    ),),              
-                       
-                  ],
+                  child: Column(
+                    spacing: 2,
+                    mainAxisAlignment: MainAxisAlignment.center,              
+                    children: [
+                      SizedBox(height: 20,),
+                      Text(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,                  
+                        modeldata.text1,style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.sp,
+                        color: Theme.of(context).colorScheme.onSecondary, 
+                        
+                      ),),
+                      SizedBox(height: 20.h,),
+                      Text(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        modeldata.text2,style: TextStyle(
+                        fontSize: 14.spMin,
+                        fontWeight: FontWeight.w400,
+                        color: Theme.of(context).colorScheme.onSecondary, 
+                      ),),              
+                         
+                    ],
+                  ),
                 ),
               ),
             ),

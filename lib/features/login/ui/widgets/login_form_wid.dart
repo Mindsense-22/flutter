@@ -19,6 +19,7 @@ class LoginFormWid extends StatelessWidget {
             Text("Email",style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),),   
             SizedBox(height: 5,),
 
@@ -34,6 +35,7 @@ class LoginFormWid extends StatelessWidget {
             Text("Password",style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),),
         
             SizedBox(height: 5,),
@@ -54,7 +56,7 @@ class LoginFormWid extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: Colors.white
+                    color: Theme.of(context).colorScheme.onSecondary,
               ),)),
             ),
             

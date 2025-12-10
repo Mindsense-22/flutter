@@ -11,6 +11,7 @@ class ForgetpasswordSetemailUppertext extends StatelessWidget {
         Text("Forgot Your Password?",style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w600,
+          color: Theme.of(context).colorScheme.onSecondary,
         ),),
 
         SizedBox(height: 8,),

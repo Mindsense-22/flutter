@@ -17,6 +17,7 @@ class ForgetpasswoedSetnewpasswordUppertextWid extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 24,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
             Text(
@@ -32,6 +33,7 @@ class ForgetpasswoedSetnewpasswordUppertextWid extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 24,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
           ],
@@ -41,6 +43,7 @@ class ForgetpasswoedSetnewpasswordUppertextWid extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 24,
+            color: Theme.of(context).colorScheme.onSecondary,
           ),
         )
       ],

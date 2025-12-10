@@ -44,6 +44,7 @@ class ForgetpasswoedSetnewpassword extends StatelessWidget {
                               Text("New Password",style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
+                                color: Theme.of(context).colorScheme.onSecondary,
                               ),),   
                               SizedBox(height: 4,),
                       
@@ -58,6 +59,7 @@ class ForgetpasswoedSetnewpassword extends StatelessWidget {
                               Text("Confirm Password",style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
+                                color: Theme.of(context).colorScheme.onSecondary,
                               ),),
                           
                               SizedBox(height: 5,),

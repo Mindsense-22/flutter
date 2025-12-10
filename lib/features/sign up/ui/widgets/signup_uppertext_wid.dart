@@ -15,6 +15,7 @@ class SignupUppertextWid extends StatelessWidget {
             Text("Welcome to",style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),),
             Text("Smart Emotion",style: TextStyle(
               fontSize: 24,
@@ -28,6 +29,7 @@ class SignupUppertextWid extends StatelessWidget {
         Text("Sign in to your account",style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w500,
+          color: Theme.of(context).colorScheme.onSecondary,
         ),),
 
       ],
