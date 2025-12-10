@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 
 
-class CustomTextFormField extends StatelessWidget {
+class CustomEmailTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final String? Function(String?)? validator;
   final Icon;
 
   
-  const CustomTextFormField({
+  const CustomEmailTextFormField({
     Key? key,
     required this.controller,
     required this.hintText,    
@@ -25,8 +26,15 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         autovalidateMode: AutovalidateMode.onUnfocus,
         decoration: InputDecoration(        
-          prefixIcon: Icon,
-          
+          // prefixIcon: Icon,
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(11.0),
+            child: SvgPicture.asset(
+              "assets/images/email_icon.svg",
+              width: 21.5.w,
+              height: 18.5.h,
+            ),
+          ),
           hintText: hintText,
           hintStyle: const TextStyle(
             color: TextColers.secondaryTextColor,

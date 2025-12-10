@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_emailtextformfield.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_passwordtextformfield.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_textformfield.dart';
 import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
@@ -26,7 +29,15 @@ class SignupFormWid extends StatelessWidget {
           CustomTextFormField(
             controller: provider.signupNameController, 
             hintText: "Enter your Name",
-            Icon: Icon(Icons.person_2_outlined),
+            //Icon: Icon(Icons.person_2_outlined),
+            Icon: Padding(
+              padding: const EdgeInsets.all(11.0),
+              child: SvgPicture.asset(
+                "assets/images/user-icon.svg",
+                width: 21.5.w,
+                height: 18.5.h,
+              ),
+            ),
             validator: provider.nameValidator,
             
           ),
@@ -40,7 +51,7 @@ class SignupFormWid extends StatelessWidget {
           ),),   
           SizedBox(height: 4,),
 
-          CustomTextFormField(
+          CustomEmailTextFormField(
             controller: provider.signupEmailController, 
             hintText: "Enter your email",
             Icon: Icon(Icons.email_outlined),
