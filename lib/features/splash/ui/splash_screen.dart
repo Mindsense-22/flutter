@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();    
-    Future.delayed(Duration(seconds: 3)).then((value) {
+    Future.delayed(Duration(seconds: 2)).then((value) {
       Navigator.pushAndRemoveUntil(
         // ignore: use_build_context_synchronously
         context,
@@ -33,16 +33,74 @@ class _SplashScreenState extends State<SplashScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             spacing: 15,
             children: [
-              Image.asset(
-                "assets/images/logo.png",
-                width: double.infinity,
-                height: 275.h,
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    width: 175.w,
+                    height: 175.h,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      //color: Colors.blue, 
+                      border: Border.all(
+                        color:  Color(0xff55EEDA).withValues(alpha: .2),
+                        width: 1.5,         
+                      ),
+                      borderRadius: BorderRadius.circular(100), 
+                    ),
+                  ),
+                  Positioned(
+                    top:-33,
+                    bottom: -23,
+                    child: Image.asset(
+                      "assets/images/logo2.png",
+                      width: 137.9.w,
+                      height: 143.7.h,
+                    ),
+                  ),
+                  Container(
+                    width: 129.9.w,
+                    height: 129.9.h,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,                        
+                      border: Border.all(
+                        color:  Color(0xff55EEDA).withValues(alpha: .2),
+                        width: 1.5,         
+                      ),
+                      borderRadius: BorderRadius.circular(200), 
+                    ),
+                  ),
+                  Positioned(
+                   
+                    bottom: 120,
+                    child: Image.asset(
+                      "assets/images/arrows.png",
+                      width: 80.w,
+                      height: 36.h,
+                    ),
+                  ),
+                  
+                  
+              
+                ],
               ),
-              //SizedBox(height: 24.h,),
-              Text("MindSense",style: TextStyle(
-                fontSize: 32.sp,
-                fontWeight: FontWeight.bold,                
-              ),)
+              
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Mind",style: TextStyle(
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.bold,                
+                  ),),
+                  Text("Sense",style: TextStyle(
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.bold, 
+                    color: Theme.of(context).colorScheme.primary              
+                  ),)
+                ],
+              )
+              
             ],
           ),
         ),
