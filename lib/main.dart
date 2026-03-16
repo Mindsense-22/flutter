@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/theme_data.dart';
+import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
+import 'package:mindsense_app/features/home/ui/homescreen.dart';
 import 'package:mindsense_app/features/login/logic/login_provider.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
@@ -30,13 +32,14 @@ void main() async{
             ChangeNotifierProvider(
               create: (_) => Mainscreenprovider(),
             ),
+            ChangeNotifierProvider(
+              create: (_) => Homescreenprovider(),
+            ),
           ],
         child: MyApp(),
       )
     )
   );
-  
-  //runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -57,7 +60,7 @@ class MyApp extends StatelessWidget {
               child: child!,
             );
           },
-          home: SplashScreen(),
+          home: MainScreen(),
         );
       }
     );

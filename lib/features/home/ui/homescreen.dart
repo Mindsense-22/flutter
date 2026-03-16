@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/features/home/ui/widgets/emogiessectionwid.dart';
 import 'package:mindsense_app/features/home/ui/widgets/homescreenbuttom.dart';
 import 'package:mindsense_app/features/home/ui/widgets/statusbarwidget.dart';
 
@@ -16,7 +17,8 @@ class Homescreen extends StatelessWidget {
             child: Column(
               children: [
                 Statusbarwidget(),
-                SizedBox(height: 464.h,),
+                SizedBox(height: 36.h,),
+                Emogiessectionwid(),
                 SizedBox(height: 32.h,),
                 Homescreenbuttom(),
                 SizedBox(height: 16.h,),
