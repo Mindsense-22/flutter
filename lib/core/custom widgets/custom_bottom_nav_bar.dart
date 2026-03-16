@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mindsense_app/core/styles/colors.dart';
+
+class CustomBottomNavBar extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onTap;
+
+  const CustomBottomNavBar({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80.h,
+      decoration: BoxDecoration(
+        color: DarkThemeColors.backgroundColor,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10.r),
+          topRight: Radius.circular(10.r),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColers.primaryColor.withAlpha(100),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildNavItem(0,"assets/images/homeiconblack.svg" ,"assets/images/homeicon.svg" ,"Home"),
+          _buildNavItem(1,"assets/images/chart-histogramblack.svg","assets/images/chart-histogram.svg" , "Dashboard"),
+          _buildNavItem(2,"assets/images/extention.svg","assets/images/extention.svg" , "Apps"),
+          _buildNavItem(3,"assets/images/user-circle.svg","assets/images/user-circleblack.svg" , "Profile"),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavItem(int index, String path1,String path2 ,String label) {
+    bool isSelected = currentIndex == index;
+
+    return GestureDetector(
+      onTap: () => onTap(index),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        decoration: BoxDecoration(
+          color: isSelected ? DarkThemeColors.primaryColor : Colors.transparent,
+          borderRadius: BorderRadius.circular(30.r),
+        ),
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              isSelected ? path1:path2,
+              width: 28,
+              height: 28,
+
+            ),
+            if (isSelected) ...[
+              SizedBox(width: 8.w),
+              Text(
+                label,
+                style: TextStyle(
+                  color: DarkThemeColors.backgroundColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18.sp,
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 
 class LoginProvider extends ChangeNotifier {
   TextEditingController loginEmailController =TextEditingController();
@@ -42,6 +43,7 @@ class LoginProvider extends ChangeNotifier {
         backgroundColor: Colors.black,
        )
       );
+      Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen(),));
     }
     else {
       log("Form is NOT valid");
