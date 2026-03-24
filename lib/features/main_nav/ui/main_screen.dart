@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_bottom_nav_bar.dart';
 import 'package:mindsense_app/features/home/ui/homescreen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
+import 'package:mindsense_app/features/profile/ui/profile_screen.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
     const Homescreen(),
     const Center(child: Text("Statistics Screen", style: TextStyle(color: Colors.white, fontSize: 24))),
     const Center(child: Text("Apps Screen", style: TextStyle(color: Colors.white, fontSize: 24))),
-    const Center(child: Text("Profile Screen", style: TextStyle(color: Colors.white, fontSize: 24))),
+    const ProfileScreen(),
   ];
 
   @override
