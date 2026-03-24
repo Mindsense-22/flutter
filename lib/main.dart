@@ -8,10 +8,12 @@ import 'package:mindsense_app/features/login/logic/login_provider.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/on%20boarding/ui/onboarding_screens.dart';
+import 'package:mindsense_app/features/profile/ui/profile_screen.dart';
 import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
 import 'package:mindsense_app/features/sign%20up/ui/signup_screen.dart';
 import 'package:mindsense_app/features/splash/ui/splash_screen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
+import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
@@ -35,6 +37,9 @@ void main() async{
             ChangeNotifierProvider(
               create: (_) => Homescreenprovider(),
             ),
+            ChangeNotifierProvider(
+              create: (_) => ProfileScreenProvider(),
+            ),
           ],
         child: MyApp(),
       )
@@ -48,11 +53,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Consumer<SignupProvider>(// change it with dark mode provider
+    return Consumer<ProfileScreenProvider>(// change it with dark mode provider
       builder: (context,val,child) {
         return MaterialApp(  
-          debugShowCheckedModeBanner: false,  
-          theme:Themedata.darktheme, 
+          debugShowCheckedModeBanner: false,
+          //theme: Themedata.darktheme, 
+          theme: val.isDarkMode ? Themedata.darktheme : Themedata.lighttheme,
           builder: (context, child) {
             final mediaQueryData = MediaQuery.of(context);
             return MediaQuery(
@@ -60,7 +66,7 @@ class MyApp extends StatelessWidget {
               child: child!,
             );
           },
-          home: MainScreen(),
+          home: SplashScreen(),
         );
       }
     );
