@@ -10,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+    
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -22,21 +22,21 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         actions: [          
-          MaterialButton(
-            onPressed: () {},
+          InkWell(
+            onTap: () {},
+            borderRadius: BorderRadius.circular(120.r),            
             child: SvgPicture.asset(
               "assets/images/settings_icon_white.svg",
-              colorFilter: ColorFilter.mode(
-                theme.iconTheme.color ?? Colors.white,
-                BlendMode.srcIn,
-              ),
-            ), 
+              width: 26.w,
+              height: 26.h,
+            ),
           ),
+          SizedBox(width: 20.w,)
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding:  EdgeInsets.symmetric(horizontal:  20.w),
           child: Column(
             // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: const [

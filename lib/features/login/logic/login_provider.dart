@@ -43,7 +43,7 @@ class LoginProvider extends ChangeNotifier {
         backgroundColor: Colors.black,
        )
       );
-      Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen(),));
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),), (route) => false,);
     }
     else {
       log("Form is NOT valid");
