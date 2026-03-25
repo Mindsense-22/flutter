@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/Analyzing/photo%20analysis/logic/photo_analysis_provider.dart';
+import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/photo_scan_result_screen.dart';
+import 'package:provider/provider.dart';
 
 class CamerapermissiondialogWid extends StatelessWidget {
   const CamerapermissiondialogWid({super.key});
@@ -47,8 +50,8 @@ class CamerapermissiondialogWid extends StatelessWidget {
                       child: Center(
                         child: SvgPicture.asset(
                           "assets/images/cameraicon.svg",
-                          width: 37.5.w,
-                          height: 37.5.h,
+                          width: 37.63.w,
+                          height: 37.63.h,
                         ),                          
                       ),                
                     ), 
@@ -73,8 +76,7 @@ class CamerapermissiondialogWid extends StatelessWidget {
                           height: 48.h,
                           width: 125.w,
                           padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            
+                          decoration: BoxDecoration(                            
                             borderRadius: BorderRadius.circular(10.r),
                             border: Border.all(color: AppColers.primaryColor,width: 2.w)
                           ),
@@ -96,32 +98,39 @@ class CamerapermissiondialogWid extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
+                        ),                       
 
-                        Container(
-                          height: 48.h,
-                          width: 125.w,
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: AppColers.primaryColor,
-                            borderRadius: BorderRadius.circular(10.r)
-                          ),
-                          child: MaterialButton(
-                            elevation: 0,                            
-                            highlightColor: Colors.transparent,
-                            splashColor: Colors.transparent,
-                            onPressed:(){},
-                            child: Center(
-                              child: Text(
-                                "Allow",                                
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black
-                                ),
+                        Consumer<PhotoAnalysisProvider>(
+                          builder: (context,val,child) {
+                            return Container(
+                              height: 48.h,
+                              width: 125.w,
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: AppColers.primaryColor,
+                                borderRadius: BorderRadius.circular(10.r)
                               ),
-                            ), 
-                          ),
+                              child: MaterialButton(
+                                elevation: 0,                            
+                                highlightColor: Colors.transparent,
+                                splashColor: Colors.transparent,
+                                onPressed:(){
+                                  val.changeCameraPermission(true);
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => PhotoScanResultScreen(),));
+                                },
+                                child: Center(
+                                  child: Text(
+                                    "Allow",                                
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black
+                                    ),
+                                  ),
+                                ), 
+                              ),
+                            );
+                          }
                         ),
                       ],
                     ),
