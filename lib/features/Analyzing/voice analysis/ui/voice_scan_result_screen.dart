@@ -1,15 +1,14 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/start_photo_scan_screen.dart';
-import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/start_voice_scan_screen.dart';
+import 'package:mindsense_app/features/Analyzing/report/ui/report_screen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 
-class PhotoScanResultScreen extends StatelessWidget {
-  const PhotoScanResultScreen({super.key});
+class VoiceScanResultScreen extends StatelessWidget {
+  const VoiceScanResultScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +62,7 @@ class PhotoScanResultScreen extends StatelessWidget {
             SizedBox(height: 24.h,),
         
             Text(
-              "Your image has been successfully analyzed! Now, continue to\nanalyze your voice",
+              "Your voice has been analyzed\nTap below to see your full emotional report",
               style: TextStyle(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w500
@@ -84,26 +83,13 @@ class PhotoScanResultScreen extends StatelessWidget {
               child: MaterialButton( 
                 padding: EdgeInsets.all(8),
                 onPressed:(){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => StartVoiceScanScreen(),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ReportScreen(),));
                 },
-                child: Row(
-                  spacing: 5.w,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 19.6.h,
-                      width: 16.w,
-                      child: SvgPicture.asset(
-                        "assets/images/mic_icon_black.svg",                        
-                      ),
-                    ),
-                    Text("Start Voice Analysis",style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black
-                    ),),
-                  ],
-                ),                    
+                child: Text("See Results",style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black
+                ),),                    
               ),
             ),
             SizedBox(height: 24.h,),
@@ -123,8 +109,8 @@ class PhotoScanResultScreen extends StatelessWidget {
               child: MaterialButton( 
                 padding: EdgeInsets.all(8),
                 onPressed:(){
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),(route) => false,);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => StartPhotoScanScreen(),));
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                 },
                 child: Row(
                   spacing: 5.w,
@@ -134,10 +120,10 @@ class PhotoScanResultScreen extends StatelessWidget {
                       height: 22.h,
                       width: 22.w,
                       child: SvgPicture.asset(
-                        "assets/images/face_scan_icon.svg",                        
+                        "assets/images/mic_icon_white.svg",                        
                       ),
                     ),
-                    Text("Scan a New Photo",style: TextStyle(
+                    Text("Scan a New Record ",style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                       color: Theme.of(context).colorScheme.onSecondary
