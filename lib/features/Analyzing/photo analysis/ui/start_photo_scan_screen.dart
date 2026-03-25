@@ -58,7 +58,7 @@ class StartPhotoScanScreen extends StatelessWidget {
                     onPressed: (){
                       val.cameraPermissionAllowed?
                         log("ok"):// move to next screen 
-                        log("no");// pop up permission widget
+                        log("no"); val.cameraPermissionShowDialog(context);// pop up permission widget
                     },
                     text: "Start Photo Scan"
                   );
