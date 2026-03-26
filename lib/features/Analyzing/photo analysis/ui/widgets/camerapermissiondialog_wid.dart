@@ -114,9 +114,9 @@ class CamerapermissiondialogWid extends StatelessWidget {
                                 elevation: 0,                            
                                 highlightColor: Colors.transparent,
                                 splashColor: Colors.transparent,
-                                onPressed:(){                                  
+                                onPressed:(){                                                                     
                                   val.changeCameraPermission(true);
-                                  Navigator.pop(context);                                  
+                                  Navigator.pop(context);                                                                   
                                 },
                                 child: Center(
                                   child: Text(

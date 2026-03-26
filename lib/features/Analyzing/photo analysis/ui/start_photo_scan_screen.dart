@@ -78,7 +78,7 @@ class StartPhotoScanScreen extends StatelessWidget {
                         } else {
                           log("no");
                           val.cameraPermissionShowDialog(context);
-                        }
+                        }                        
                       },
                       text: "Start Photo Scan"
                     );
