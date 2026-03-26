@@ -195,7 +195,8 @@ class ForgetpasswordProvider extends ChangeNotifier{
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     //color: Colors.white,
-                     color: Colors.white.withValues(alpha: .7),
+                    //color: Colors.white.withValues(alpha: .7),
+                    color: Color(0xff06152D),
                     //color: AppColers.backgroundColor.withValues(alpha: .6),
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -226,7 +227,7 @@ class ForgetpasswordProvider extends ChangeNotifier{
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
-                            color: Color(0xff08160A),
+                            color: Theme.of(context).colorScheme.onSecondary,
                             //color: Colors.white
                           ),
                         ),
@@ -238,7 +239,7 @@ class ForgetpasswordProvider extends ChangeNotifier{
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
                             //color: Color(0xff59615E)
-                            color: Color(0xff08160A)
+                            color: Theme.of(context).colorScheme.onSecondary,
                             //color: Colors.white
                           ),
                         ), 
