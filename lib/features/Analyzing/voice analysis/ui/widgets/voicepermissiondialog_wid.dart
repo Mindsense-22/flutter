@@ -52,20 +52,18 @@ class VoicepermissiondialogWid extends StatelessWidget {
                       child: Center(
                         child: SvgPicture.asset(
                           "assets/images/mic_icon_black_filled.svg",
-                          width: 37.63.w,
-                          height: 37.63.h,
+                          width: 42.w,
+                          height: 42.h,
                         ),                          
                       ),                
                     ), 
                     SizedBox(height: 20.h,),
                     Text(                      
                       "Please allow microphone access so we can analyze your voice for emotional detection",
-                      textAlign: TextAlign.center ,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center ,                      
                       style: TextStyle(                      
                         fontWeight: FontWeight.w600,
-                        fontSize: 17.5.sp,                        
+                        fontSize: 16.5.sp,                        
                         color: Theme.of(context).colorScheme.onSecondary,                        
                       ),
                     ), 
