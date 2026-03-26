@@ -59,8 +59,10 @@ class VoicepermissiondialogWid extends StatelessWidget {
                     ), 
                     SizedBox(height: 20.h,),
                     Text(                      
-                      "Please allow microphone access\nso we can analyze your voice for emotional detection",
+                      "Please allow microphone access so we can analyze your voice for emotional detection",
                       textAlign: TextAlign.center ,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(                      
                         fontWeight: FontWeight.w600,
                         fontSize: 17.5.sp,                        
@@ -117,8 +119,9 @@ class VoicepermissiondialogWid extends StatelessWidget {
                                 highlightColor: Colors.transparent,
                                 splashColor: Colors.transparent,
                                 onPressed:(){
+                                  Navigator.pop(context);
                                   val.changeVoicePermission(true);
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => VoiceScanResultScreen(),));
+                                  
                                 },
                                 child: Center(
                                   child: Text(

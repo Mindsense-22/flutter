@@ -8,7 +8,7 @@ import 'package:mindsense_app/features/Analyzing/photo%20analysis/logic/photo_an
 import 'package:mindsense_app/features/home/ui/homescreen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:provider/provider.dart';
-
+import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/photo_scan_result_screen.dart';
 class StartPhotoScanScreen extends StatelessWidget {
   const StartPhotoScanScreen({super.key});
 
@@ -69,9 +69,16 @@ class StartPhotoScanScreen extends StatelessWidget {
                   builder: (context,val,child) {
                     return CustomButton(
                       onPressed: (){
-                        val.cameraPermissionAllowed?
-                          log("ok"):// move to next screen 
-                          log("no"); val.cameraPermissionShowDialog(context);// pop up permission widget
+                        if (val.cameraPermissionAllowed) {
+                          log("ok");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PhotoScanResultScreen()),
+                          );
+                        } else {
+                          log("no");
+                          val.cameraPermissionShowDialog(context);
+                        }
                       },
                       text: "Start Photo Scan"
                     );

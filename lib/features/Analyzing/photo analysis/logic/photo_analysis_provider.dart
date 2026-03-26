@@ -18,7 +18,7 @@ class PhotoAnalysisProvider extends ChangeNotifier{
 
   Future<dynamic>cameraPermissionShowDialog(context){
     return showDialog(
-      context: context,
+      context: context,      
       builder: (context) {
         return CamerapermissiondialogWid();
       }
