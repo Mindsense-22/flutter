@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
               child: child!,
             );
           },
-          home: MainScreen(),
+          home: SplashScreen(),
         );
       }
     );

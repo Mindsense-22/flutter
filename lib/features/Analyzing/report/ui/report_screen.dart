@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/start_photo_scan_screen.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/imageanalysis_report_wid.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/overallstate_wid.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/voiceanalysis_report_wid.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
+import 'package:provider/provider.dart';
 
 class ReportScreen extends StatelessWidget {
   const ReportScreen({super.key});
@@ -85,6 +87,33 @@ class ReportScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20.h,),
+              Consumer<AnalyzingProvider>(
+                builder: (context,val,child) {
+                  return Container(      
+                    width: double.infinity,
+                    height: 51.h,       
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: MaterialButton( 
+                      padding: EdgeInsets.all(8),
+                      onPressed:(){
+                        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => MainScreen(),),(route) => false,);
+                        PaintingBinding.instance.imageCache.clear();
+                        val.selctedimage=null;
+                      },
+                      child: Text("End Analysis",style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color:Theme.of(context).colorScheme.onSecondary
+                      ),),                    
+                    ),
+                  );
+                }
+              ),
+              SizedBox(height: 23.h,),
 
     
             ],
