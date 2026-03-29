@@ -21,18 +21,26 @@ class PhotoSelectScreen extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal:20.w),
             child: Column(              
-              spacing: 25.h,
+              
               children: [
                 SizedBox(
-                  height: 100.h,
+                  height: 105.h,
                 ),
                 Text(
                   textAlign: TextAlign.center,
-                  "Select An Image From Gallery Or Take It From Camera To start Analyze It. ",style: TextStyle(
+                  "Select An Image From Gallery Or Take It From Camera To start ",style: TextStyle(
                   fontSize: 20.sp,
-                  fontWeight: FontWeight.w600
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).colorScheme.onSecondary,
                 ),),
-                SizedBox(height: 60.h,),
+                Text(
+                  textAlign: TextAlign.center,
+                  "Analyze It",style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColers.primaryColor,
+                ),),                
+                SizedBox(height: 95.h,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -60,7 +68,7 @@ class PhotoSelectScreen extends StatelessWidget {
                 
 
                 SizedBox(
-                  height: 100.h,
+                  height: 135.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +77,7 @@ class PhotoSelectScreen extends StatelessWidget {
 
                     Container(
                       width: 152.w,
-                      height: 55.h,
+                      height: 51.h, 
                       decoration: BoxDecoration(
                         color: AppColers.backgroundColor,
                         borderRadius: BorderRadius.circular(10.r),
@@ -93,7 +101,7 @@ class PhotoSelectScreen extends StatelessWidget {
 
                     Container(
                       width: 152.w,
-                      height: 55.h,
+                      height: 51.h, 
                       decoration: BoxDecoration(
                         color: AppColers.backgroundColor,
                         borderRadius: BorderRadius.circular(10.r),
@@ -117,15 +125,17 @@ class PhotoSelectScreen extends StatelessWidget {
 
                   ],
                 ),
+                SizedBox(height: 25.h,),
                 Container(
                   width: double.infinity,
-                  height: 55.h,
+                  height: 51.h, 
+                  clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     color: AppColers.primaryColor,
                     borderRadius: BorderRadius.circular(10.r),
                     
                   ),
-                  child: MaterialButton(
+                  child: MaterialButton(                    
                     onPressed:(){
                       if(val.selctedimage!=null){
                         Navigator.push(
