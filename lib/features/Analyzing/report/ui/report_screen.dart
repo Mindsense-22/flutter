@@ -56,7 +56,7 @@ class ReportScreen extends StatelessWidget {
                   ),),                    
                 ),
               ),
-            SizedBox(height: 20.h,),
+              SizedBox(height: 20.h,),
     
               Container(      
                 width: double.infinity,
@@ -84,7 +84,8 @@ class ReportScreen extends StatelessWidget {
                   ),),                    
                 ),
               ),
-              SizedBox(height: 23.h,),
+              SizedBox(height: 20.h,),
+
     
             ],
           ),
