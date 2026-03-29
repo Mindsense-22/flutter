@@ -1,0 +1,154 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
+import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/photo_scan_result_screen.dart';
+import 'package:provider/provider.dart';
+
+class PhotoSelectScreen extends StatelessWidget {
+  const PhotoSelectScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+
+      ),
+
+      body: Consumer<AnalyzingProvider>(
+        builder: (context,val,child) {
+          
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal:20.w),
+            child: Column(              
+              spacing: 25.h,
+              children: [
+                SizedBox(
+                  height: 100.h,
+                ),
+                Text(
+                  textAlign: TextAlign.center,
+                  "Select An Image From Gallery Or Take It From Camera To start Analyze It. ",style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600
+                ),),
+                SizedBox(height: 60.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      textAlign: TextAlign.center,
+                      "Image Status : ",
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    Text(
+                      textAlign: TextAlign.center,
+                      val.selctedimage!=null?"Image Taken Successfully":"Not Taken Yet!",
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                        color: val.selctedimage!=null? AppColers.primaryColor:Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
+                
+
+                
+
+                SizedBox(
+                  height: 100.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 25.w,
+                  children: [
+
+                    Container(
+                      width: 152.w,
+                      height: 55.h,
+                      decoration: BoxDecoration(
+                        color: AppColers.backgroundColor,
+                        borderRadius: BorderRadius.circular(10.r),
+                        border: Border.all(
+                          color: AppColers.primaryColor,
+                          width: 2.w
+                        ),
+                      ),
+                      child: MaterialButton(
+                        onPressed:(){
+                          val.pickGalleryImage();
+                        },
+                        child: Text(
+                          "Gallery",style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Container(
+                      width: 152.w,
+                      height: 55.h,
+                      decoration: BoxDecoration(
+                        color: AppColers.backgroundColor,
+                        borderRadius: BorderRadius.circular(10.r),
+                        border: Border.all(
+                          color: AppColers.primaryColor,
+                          width: 2.w
+                        ),
+                      ),
+                      child: MaterialButton(
+                        onPressed:(){
+                          val.pickCameraImage();
+                        },
+                        child: Text(
+                          "Camera",style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 55.h,
+                  decoration: BoxDecoration(
+                    color: AppColers.primaryColor,
+                    borderRadius: BorderRadius.circular(10.r),
+                    
+                  ),
+                  child: MaterialButton(
+                    onPressed:(){
+                      if(val.selctedimage!=null){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PhotoScanResultScreen()),
+                        );
+                      }
+                      
+                    },
+                    child: Text(
+                      "See Result",style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.w700,
+                        color: Theme.of(context).colorScheme.onPrimary
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+      ),
+    );
+  }
+}

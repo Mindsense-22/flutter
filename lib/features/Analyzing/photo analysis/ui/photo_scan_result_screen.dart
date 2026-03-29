@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/start_photo_scan_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/start_voice_scan_screen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
+import 'package:provider/provider.dart';
 
 class PhotoScanResultScreen extends StatelessWidget {
   const PhotoScanResultScreen({super.key});
@@ -108,43 +110,48 @@ class PhotoScanResultScreen extends StatelessWidget {
             ),
             SizedBox(height: 24.h,),
 
-            Container(      
-              width: double.infinity,
-              height: 51.h,       
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: AppColers.primaryColor,
-                  width: 2.w
-                )
-              ),
-              child: MaterialButton( 
-                padding: EdgeInsets.all(8),
-                onPressed:(){
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),(route) => false,);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => StartPhotoScanScreen(),));
-                },
-                child: Row(
-                  spacing: 5.w,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 22.h,
-                      width: 22.w,
-                      child: SvgPicture.asset(
-                        "assets/images/face_scan_icon.svg",                        
-                      ),
-                    ),
-                    Text("Scan a New Photo",style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Theme.of(context).colorScheme.onSecondary
-                    ),),
-                  ],
-                ),                    
-              ),
+            Consumer<AnalyzingProvider>(
+              builder: (context,val,child) {
+                return Container(      
+                  width: double.infinity,
+                  height: 51.h,       
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: AppColers.primaryColor,
+                      width: 2.w
+                    )
+                  ),
+                  child: MaterialButton( 
+                    padding: EdgeInsets.all(8),
+                    onPressed:(){
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),(route) => false,);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => StartPhotoScanScreen(),));
+                      val.selctedimage=null;
+                    },
+                    child: Row(
+                      spacing: 5.w,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 22.h,
+                          width: 22.w,
+                          child: SvgPicture.asset(
+                            "assets/images/face_scan_icon.svg",                        
+                          ),
+                        ),
+                        Text("Scan a New Photo",style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Theme.of(context).colorScheme.onSecondary
+                        ),),
+                      ],
+                    ),                    
+                  ),
+                );
+              }
             ),
             
             
