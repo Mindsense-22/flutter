@@ -59,18 +59,20 @@ class VoiceAnalysisProvider extends ChangeNotifier {
           recordTime ++; 
           notifyListeners();
         });
-        final dir = await getTemporaryDirectory();
-        final path = '${dir.path}/voicerecorder.wav';
-        await recorder.start(recordConfig, path: path);
+        
+        if (await recorder.isPaused()) {
+          await recorder.resume(); 
+        } else {
+          final dir = await getTemporaryDirectory();
+          final path = '${dir.path}/voicerecorder.wav';
+          await recorder.start(recordConfig, path: path);
+        }        
       }
       else {
         // STOP
         timer?.cancel();
         isRecording = false;
         await recorder.pause();
-
-        
-
         notifyListeners();
       }
     } catch (e) {
