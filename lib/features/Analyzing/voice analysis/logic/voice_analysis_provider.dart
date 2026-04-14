@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
@@ -112,6 +113,7 @@ class VoiceAnalysisProvider extends ChangeNotifier {
     
     if (path != null) {          
       audioFile = File(path);
+      AnalyzingProvider().setSelectedAudio(audioFile);
     }
     else{
       audioFile=null;
