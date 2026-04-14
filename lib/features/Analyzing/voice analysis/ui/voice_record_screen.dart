@@ -210,7 +210,7 @@ class VoiceRecordScreen extends StatelessWidget {
                               MaterialPageRoute(builder: (context) => VoiceScanResultScreen()),
                             );                              
                           }, 
-                          text: "Finish"
+                          text: "Save"
                         ),
                         TextButton(
                             onPressed: () {
