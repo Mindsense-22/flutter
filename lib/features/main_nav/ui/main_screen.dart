@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_bottom_nav_bar.dart';
+import 'package:mindsense_app/features/dashboard/ui/dashboard_screen.dart';
+import 'package:mindsense_app/features/exercises/ui/exercises_screen.dart';
 import 'package:mindsense_app/features/home/ui/homescreen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/profile/ui/profile_screen.dart';
@@ -17,8 +19,8 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const Homescreen(),
-    const Center(child: Text("Statistics Screen", style: TextStyle(color: Colors.white, fontSize: 24))),
-    const Center(child: Text("Apps Screen", style: TextStyle(color: Colors.white, fontSize: 24))),
+    const DashboardScreen(),
+    const ExercisesScreen(),
     const ProfileScreen(),
   ];
 

@@ -36,7 +36,7 @@ class CustomBottomNavBar extends StatelessWidget {
         children: [
           _buildNavItem(0,"assets/images/homeiconblack.svg" ,"assets/images/homeicon.svg" ,"Home"),
           _buildNavItem(1,"assets/images/chart-histogramblack.svg","assets/images/chart-histogram.svg" , "Dashboard"),
-          _buildNavItem(2,"assets/images/extentionblack.svg","assets/images/extention.svg" , "Apps"),
+          _buildNavItem(2,"assets/images/extentionblack.svg","assets/images/extention.svg" , "Exercises"),
           _buildNavItem(3,"assets/images/user-circle.svg","assets/images/user-circleblack.svg" , "Profile"),
         ],
       ),
