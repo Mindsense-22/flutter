@@ -7,6 +7,7 @@ import 'package:mindsense_app/features/Analyzing/photo%20analysis/logic/photo_an
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/photo_scan_result_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_scan_result_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class VoicepermissiondialogWid extends StatelessWidget {
@@ -74,32 +75,36 @@ class VoicepermissiondialogWid extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
 
-                        Container(
-                          height: 48.h,
-                          width: 125.w,
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(                            
-                            borderRadius: BorderRadius.circular(10.r),
-                            border: Border.all(color: AppColers.primaryColor,width: 2.w)
-                          ),
-                          child: MaterialButton(
-                            elevation: 0,                            
-                            highlightColor: Colors.transparent,
-                            splashColor: Colors.transparent,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Center(
-                              child: Text(
-                                "Cancel",                                
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white
+                        Consumer<VoiceAnalysisProvider>(
+                          builder: (context,val,child) {
+                            return Container(
+                              height: 48.h,
+                              width: 125.w,
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(                            
+                                borderRadius: BorderRadius.circular(10.r),
+                                border: Border.all(color: AppColers.primaryColor,width: 2.w)
+                              ),
+                              child: MaterialButton(
+                                elevation: 0,                            
+                                highlightColor: Colors.transparent,
+                                splashColor: Colors.transparent,
+                                onPressed: (){                                  
+                                  Navigator.pop(context);
+                                },
+                                child: Center(
+                                  child: Text(
+                                    "Cancel",                                
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          }
                         ),                       
 
                         Consumer<VoiceAnalysisProvider>(
@@ -116,9 +121,10 @@ class VoicepermissiondialogWid extends StatelessWidget {
                                 elevation: 0,                            
                                 highlightColor: Colors.transparent,
                                 splashColor: Colors.transparent,
-                                onPressed:(){
-                                  Navigator.pop(context);
+                                onPressed:()async{
                                   val.changeVoicePermission(true);
+                                  Navigator.pop(context);    
+                                  await Permission.microphone.request();
                                   
                                 },
                                 child: Center(

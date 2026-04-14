@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:record/record.dart';
@@ -12,7 +13,7 @@ import 'package:mindsense_app/features/Analyzing/voice analysis/ui/widgets/voice
 import 'package:audioplayers/audioplayers.dart';
 
 class VoiceAnalysisProvider extends ChangeNotifier {
-  bool voicePermissionAllowed = false;
+  bool voicePermissionAllowed = SharedPreferencesitem.getBool("voicePermissionAllowed") ??false;
   bool isRecording = false;
   int recordTime = 0;
   Timer? timer; 
@@ -42,7 +43,8 @@ class VoiceAnalysisProvider extends ChangeNotifier {
 
   /// Permission
   void changeVoicePermission(bool permission) {
-    voicePermissionAllowed = permission;
+    SharedPreferencesitem.setBool("voicePermissionAllowed", permission);
+    voicePermissionAllowed = SharedPreferencesitem.getBool("voicePermissionAllowed") ??false; 
     notifyListeners();
   }
 
@@ -56,8 +58,7 @@ class VoiceAnalysisProvider extends ChangeNotifier {
           recordTime=0;
         }
         recoredStoped=false;
-        isRecording = true;
-        await Permission.microphone.request();
+        isRecording = true;        
         notifyListeners();
         timer = Timer.periodic(Duration(seconds: 1), (timer) {
           recordTime ++; 

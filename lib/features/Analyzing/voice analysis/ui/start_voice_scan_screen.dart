@@ -9,6 +9,7 @@ import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_an
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_record_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_scan_result_screen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class StartVoiceScanScreen extends StatelessWidget {
@@ -70,13 +71,21 @@ class StartVoiceScanScreen extends StatelessWidget {
                 Consumer<VoiceAnalysisProvider>(
                   builder: (context,val,child) {
                     return CustomButton(
-                      onPressed: (){
+                      onPressed: ()async{
                         if (val.voicePermissionAllowed) {
                           log("ok");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => VoiceRecordScreen()),
-                          );
+                          var status = await Permission.microphone.status;
+                          if (!status.isGranted) {
+                            await Permission.microphone.request();
+                            openAppSettings();
+                          }
+                          if(status.isGranted){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => VoiceRecordScreen()),
+                            );
+                          }
+                          
                         } else {
                           log("no");
                           val.voicePermissionShowDialog(context);
