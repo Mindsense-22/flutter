@@ -19,6 +19,8 @@ class VoiceAnalysisProvider extends ChangeNotifier {
   File? audioFile;
   final AudioRecorder recorder = AudioRecorder();
   final AudioPlayer audioPlayer = AudioPlayer();
+  List<double> amplitudes = [];
+  Timer? amplitudeTimer;
 
   final RecordConfig recordConfig = const RecordConfig(
     encoder: AudioEncoder.wav,
@@ -52,6 +54,7 @@ class VoiceAnalysisProvider extends ChangeNotifier {
         if(recoredStoped&&audioFile!=null){
           recordTime=0;
         }
+        recoredStoped=false;
         isRecording = true;
         await Permission.microphone.request();
         notifyListeners();
@@ -66,13 +69,28 @@ class VoiceAnalysisProvider extends ChangeNotifier {
           final dir = await getTemporaryDirectory();
           final path = '${dir.path}/voicerecorder.wav';
           await recorder.start(recordConfig, path: path);
-        }        
+        }
+
+        // for wave shape
+        amplitudeTimer = Timer.periodic(Duration(milliseconds: 100), (timer) async {
+          final amp = await recorder.getAmplitude();
+          double value = amp.current;        
+          value = value * 2;
+          
+          amplitudes.add(value);
+          if (amplitudes.length > 40) {
+            amplitudes.removeAt(0);
+          }
+          notifyListeners();
+        }); 
+               
       }
-      else {
-        // STOP
+      else {        
         timer?.cancel();
         isRecording = false;
         await recorder.pause();
+        amplitudeTimer?.cancel();
+        amplitudeTimer = null;
         notifyListeners();
       }
     } catch (e) {
@@ -91,23 +109,29 @@ class VoiceAnalysisProvider extends ChangeNotifier {
     audioFile=null;    
     final path = await recorder.stop();
     log(path.toString());
+    
     if (path != null) {          
       audioFile = File(path);
     }
     else{
       audioFile=null;
     }
+    amplitudeTimer?.cancel();
+    amplitudeTimer = null;
+    amplitudes.clear();
     notifyListeners();
   }
 
-  /// CANCEL recording
   Future<void> cancelRecording() async {
     try {
       timer?.cancel();      
       isRecording = false;
       recordTime = 0;
       audioFile=null;
-      await recorder.cancel();      
+      await recorder.cancel();   
+      amplitudeTimer?.cancel();
+      amplitudeTimer = null;  
+      amplitudes.clear(); 
       notifyListeners();
     } catch (e) {
       debugPrint("Cancel recording error: $e");
@@ -134,6 +158,7 @@ class VoiceAnalysisProvider extends ChangeNotifier {
     return "${twoDigits(minutes)}:${twoDigits(seconds)}";
   }
 
+  //// play recorded audio
   Future<void> playRecordedAudio() async {
     try {
       if (audioFile == null || !audioFile!.existsSync()) {

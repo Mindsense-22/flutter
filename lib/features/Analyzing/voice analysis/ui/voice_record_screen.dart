@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_scan_result_screen.dart';
+import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/widgets/voicewave_wid.dart';
 import 'package:provider/provider.dart';
 
 class VoiceRecordScreen extends StatelessWidget {
@@ -104,11 +106,21 @@ class VoiceRecordScreen extends StatelessWidget {
                     ),
                 
                     SizedBox(height: 24.h,),
-                    SizedBox(height: 60.h,width: 166.w,),
-                    SizedBox(height: 102.h,),
+                    
+                    //// wave form paint
+                    val.isRecording==true? 
+                    Selector<VoiceAnalysisProvider, List<double>>(
+                      selector: (_, provider) => provider.amplitudes,
+                      builder: (_, amplitudes, __) {
+                        return VoiceWave(amplitudes: amplitudes);
+                      },
+                    )
+                    :SizedBox(width: 200.w,height: 65.h,),
+
+                    SizedBox(height: 60.h,),
                     ///// control buttons
                     SizedBox(
-                      height: 200.h,
+                      height: 180.h,
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
@@ -187,25 +199,25 @@ class VoiceRecordScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+                                        
                     val.isRecording == false && val.audioFile != null&&val.recoredStoped==true&&val.recordTime!=0
                     ? Column(
                       children: [
+                        CustomButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => VoiceScanResultScreen()),
+                            );                              
+                          }, 
+                          text: "Finish"
+                        ),
                         TextButton(
                             onPressed: () {
                               val.playRecordedAudio();
                             },
                             child: const Text("Play audio",),
-                          ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => VoiceScanResultScreen()),
-                              );
-                              
-                            },
-                            child: const Text("Next",),
-                          ),  
+                        ),                                                  
                       ],
                     )
                     : const SizedBox.shrink()
