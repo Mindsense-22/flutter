@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
               child: child!,
             );
           },
-          home: VoiceRecordScreen(),
+          home: MainScreen(),
         );
       }
     );

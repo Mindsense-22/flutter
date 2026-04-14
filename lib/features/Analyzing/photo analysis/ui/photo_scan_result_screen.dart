@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
+import 'package:mindsense_app/features/Analyzing/photo%20analysis/logic/photo_analysis_provider.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/start_photo_scan_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/start_voice_scan_screen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
@@ -124,31 +125,36 @@ class PhotoScanResultScreen extends StatelessWidget {
                       width: 2.w
                     )
                   ),
-                  child: MaterialButton( 
-                    padding: EdgeInsets.all(8),
-                    onPressed:(){
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),(route) => false,);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => StartPhotoScanScreen(),));
-                      val.selctedimage=null;
-                    },
-                    child: Row(
-                      spacing: 5.w,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 22.h,
-                          width: 22.w,
-                          child: SvgPicture.asset(
-                            "assets/images/face_scan_icon.svg",                        
-                          ),
-                        ),
-                        Text("Scan a New Photo",style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Theme.of(context).colorScheme.onSecondary
-                        ),),
-                      ],
-                    ),                    
+                  child: Consumer<PhotoAnalysisProvider>(
+                    builder: (context,val2,child) {
+                      return MaterialButton( 
+                        padding: EdgeInsets.all(8),
+                        onPressed:(){
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),(route) => false,);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => StartPhotoScanScreen(),));
+                          val.selctedimage=null;
+                          val2.clearSelectedImage();
+                        },
+                        child: Row(
+                          spacing: 5.w,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 22.h,
+                              width: 22.w,
+                              child: SvgPicture.asset(
+                                "assets/images/face_scan_icon.svg",                        
+                              ),
+                            ),
+                            Text("Scan a New Photo",style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: Theme.of(context).colorScheme.onSecondary
+                            ),),
+                          ],
+                        ),                    
+                      );
+                    }
                   ),
                 );
               }

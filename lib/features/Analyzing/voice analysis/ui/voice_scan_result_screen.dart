@@ -117,6 +117,7 @@ class VoiceScanResultScreen extends StatelessWidget {
                       padding: EdgeInsets.all(8),
                       onPressed:(){
                         Navigator.pop(context);
+                        Navigator.pop(context);
                         
                       },
                       child: Row(

@@ -16,6 +16,10 @@ class PhotoAnalysisProvider extends ChangeNotifier{
   bool cameraPermissionAllowed=false;
   XFile ?selctedimage;
 
+  clearSelectedImage(){
+    selctedimage=null;
+    notifyListeners();
+  }
   pickGalleryImage()async{
     var image = await ImagePicker().pickImage(
       source: ImageSource.gallery,
