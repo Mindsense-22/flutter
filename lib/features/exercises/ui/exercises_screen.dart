@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/features/exercises/logic/exercises_provider.dart';
+import 'package:mindsense_app/features/exercises/ui/widgets/better_sleep_wid.dart';
 import 'package:mindsense_app/features/exercises/ui/widgets/quick_relife_wid.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +35,7 @@ class ExercisesScreen extends StatelessWidget {
       
         body: SingleChildScrollView(
           child: Padding(
-            padding:EdgeInsets.only(left: 15.w),
+            padding:EdgeInsets.only(left: 12.w),
             child: Consumer<ExercisesProvider>(
               builder: (context,val,child) {
                 return Column(
@@ -64,6 +65,7 @@ class ExercisesScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 20.h,),
                     //last widget here
+                    BetterSleepWid()
                   ],
                 );
               }

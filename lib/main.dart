@@ -12,6 +12,7 @@ import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_an
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/start_voice_scan_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_record_screen.dart';
 import 'package:mindsense_app/features/dashboard/logic/dashboard_provider.dart';
+import 'package:mindsense_app/features/exercises/logic/audio_player_provider.dart';
 import 'package:mindsense_app/features/exercises/logic/exercises_provider.dart';
 import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
 import 'package:mindsense_app/features/home/ui/homescreen.dart';
@@ -68,6 +69,9 @@ void main() async{
             ),
             ChangeNotifierProvider(
               create: (_) => DashboardProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => AudioProvider (),
             ),
           ],
         child: MyApp(),
