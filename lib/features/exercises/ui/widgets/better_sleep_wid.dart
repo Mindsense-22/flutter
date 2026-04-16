@@ -206,7 +206,7 @@ class BetterSleepWid extends StatelessWidget {
                                 child: Center(
                                   child: SvgPicture.asset(
                                     (isActive && isPlaying)
-                                        ? 'assets/images/headset.svg'
+                                        ? 'assets/images/audio_pause_button.svg'
                                         : 'assets/images/icon-play-sleep2.svg',
                                     width: 24.w,
                                     height: 24.h,
