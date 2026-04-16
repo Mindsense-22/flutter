@@ -145,8 +145,19 @@ class VoiceRecordScreen extends StatelessWidget {
                                     "assets/images/cancel-audio-button.svg",
                                   ),
                                 ),
-                              ),                          
-                              InkWell(
+                              ), 
+                              val.recordTime==0
+                              ?Container(
+                                width: 60.w,
+                                height: 60.h,
+                                decoration: BoxDecoration(
+                                  
+                                ),
+                                child: SvgPicture.asset(
+                                  "assets/images/audio_under_complete.svg",
+                                ),
+                              )                                                       
+                              :InkWell(
                                 borderRadius: BorderRadius.circular(100),
                                 splashColor: Colors.white.withValues(alpha: 0.2),
                                 highlightColor: Colors.transparent,
@@ -164,7 +175,7 @@ class VoiceRecordScreen extends StatelessWidget {
                                     
                                   ),
                                   child: SvgPicture.asset(
-                                    "assets/images/replay-audio-button.svg",
+                                    "assets/images/audio_complete.svg",
                                   ),
                                 ),
                               ),
@@ -210,7 +221,7 @@ class VoiceRecordScreen extends StatelessWidget {
                               MaterialPageRoute(builder: (context) => VoiceScanResultScreen()),
                             );                              
                           }, 
-                          text: "Save"
+                          text: "Next"
                         ),
                         TextButton(
                             onPressed: () {
