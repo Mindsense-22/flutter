@@ -155,6 +155,9 @@ class VoiceRecordScreen extends StatelessWidget {
                                 ),
                                 child: SvgPicture.asset(
                                   "assets/images/audio_under_complete.svg",
+                                  
+                                  colorFilter: ColorFilter.mode(Colors.green.withValues(alpha: .4), BlendMode.dstOut),
+                                  
                                 ),
                               )                                                       
                               :InkWell(
