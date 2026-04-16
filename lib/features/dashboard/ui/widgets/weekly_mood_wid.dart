@@ -64,7 +64,8 @@ class WeeklyMoodWid extends StatelessWidget {
               
             ],
           ),
-          SizedBox(height: 15.h),          
+          SizedBox(height: 15.h),
+          
           RichText(   
             maxLines: 3,         
             text: TextSpan(              

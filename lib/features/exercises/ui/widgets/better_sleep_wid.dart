@@ -74,8 +74,7 @@ class BetterSleepWid extends StatelessWidget {
                                   // Title
                                   Text(
                                     val.bettersleepList[index].name,
-                                    style: TextStyle(
-                                      fontFamily: 'Inter',
+                                    style: TextStyle(                                      
                                       fontWeight: FontWeight.w500,
                                       fontSize: 14.sp,
                                       height: 20 / 14,
@@ -121,8 +120,7 @@ class BetterSleepWid extends StatelessWidget {
                                           SizedBox(width: 4.w),
                                           Text(
                                             'Audio Session',
-                                            style: TextStyle(
-                                              fontFamily: 'Inter',
+                                            style: TextStyle(                                              
                                               fontWeight: FontWeight.w400,
                                               fontSize: 8.sp,
                                               height: 1.4,
