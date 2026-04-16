@@ -27,7 +27,8 @@ class ExercisesScreen extends StatelessWidget {
             "Exercises",
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 20.sp
+              fontSize: 20.sp,
+              color: Theme.of(context).colorScheme.onSecondary
             ),
           ),
           centerTitle: true,
@@ -47,6 +48,7 @@ class ExercisesScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
+                        color: Theme.of(context).colorScheme.onSecondary
                       ),
                     ),
                     SizedBox(height: 20.h,),
@@ -61,6 +63,7 @@ class ExercisesScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
+                        color: Theme.of(context).colorScheme.onSecondary
                       ),
                     ),
                     SizedBox(height: 20.h,),

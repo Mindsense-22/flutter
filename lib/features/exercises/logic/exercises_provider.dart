@@ -3,11 +3,14 @@ import 'package:mindsense_app/features/exercises/modules/better_sleep_item.dart'
 import 'package:mindsense_app/features/exercises/modules/quick_relief_item.dart';
 
 class ExercisesProvider extends ChangeNotifier{
+  
   bool isAudioPlaying=false;
+  
   changeisAudioPlaying(status){
     isAudioPlaying=status;
     notifyListeners();
   }
+  
   List<QuickReliefItem> quickReliefsList = [
     QuickReliefItem(
       duration: 2,
