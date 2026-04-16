@@ -13,11 +13,16 @@ class Tipwid extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xff1E293B), // Dark card background
         borderRadius: BorderRadius.circular(20.r),        
-        boxShadow: [
-          BoxShadow(
-            color: AppColers.primaryColor.withAlpha(50),
-            blurRadius: 10,
-            offset: const Offset(6,5),
+        boxShadow: [          
+          BoxShadow(            
+            color: Color(0xff3DCADC).withAlpha(50),
+            blurRadius: 4.r,
+            offset: const Offset(2,2),
+          ),
+          BoxShadow(            
+            color: Color(0xff55EEDA).withAlpha(50),
+            blurRadius: 4.r,
+            offset: const Offset(1.5,4),
           ),
         ],
       ),
