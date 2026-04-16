@@ -60,6 +60,19 @@ class AboutUserWid extends StatelessWidget {
                       color: Color(0xff0B0F19),
                       width: 2.w,
                     ), 
+                    // boxShadow: [          
+                    //   BoxShadow(            
+                    //     color: Color(0xff2DD4BF).withAlpha(40),
+                    //     blurRadius: 16.r,
+                    //     offset: const Offset(0,-10),
+                    //   ),
+                    //   BoxShadow(
+                        
+                    //     color: Color(0xff2DD4BF).withAlpha(40),
+                    //     blurRadius: 16.r,
+                    //     offset: const Offset(2,10),
+                    //   ),
+                    // ],
                   ),
                   child: SvgPicture.asset("assets/images/camera_icon_black.svg",
                     height: 16.h,
