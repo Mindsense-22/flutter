@@ -100,7 +100,7 @@ class AboutUserWid extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             Text(
-              "Ammar Elmihy",
+              "Username",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.onSecondary,
                 fontSize: 20.sp,
@@ -109,7 +109,7 @@ class AboutUserWid extends StatelessWidget {
             ),
             SizedBox(height: 4.h),
             Text(
-              "ammar125@gmail.com",
+              "Example@gmail.com",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.onSecondary.withValues(alpha: .7),
                 fontSize: 16.sp,
