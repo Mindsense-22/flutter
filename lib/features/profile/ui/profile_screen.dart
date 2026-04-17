@@ -50,11 +50,11 @@ class ProfileScreen extends StatelessWidget {
             padding:  EdgeInsets.symmetric(horizontal:  20.w),
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: const [
+              children:  [
                 AboutUserWid(),
                 GeneralSettingsWid(),
                 FavouriteWid(),
-                SizedBox(height: 30),
+                SizedBox(height: 30.h),
               ],
             ),
           ),
