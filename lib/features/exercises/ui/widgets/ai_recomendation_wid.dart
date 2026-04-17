@@ -33,11 +33,22 @@ class _AiRecommendationCardState extends State<AiRecommendationCard> {
     _initAudio();
   }
 
+  bool _isInitialized = false;
   Future<void> _initAudio() async {
+    if (_isInitialized) return;
+
+    _isInitialized = true;
+
     try {
       await _player.setUrl(widget.aiRecomendationSession.audiourl);
     } catch (_) {}
   }
+
+  // Future<void> _initAudio() async {
+  //   try {
+  //     await _player.setUrl(widget.aiRecomendationSession.audiourl);
+  //   } catch (_) {}
+  // }
 
   @override
   void dispose() {
@@ -302,7 +313,8 @@ class _InfoChips extends StatelessWidget {
         SizedBox(width: 16.w),
         _InfoChip(
           iconAsset: 'assets/images/clock-01.svg',
-          label: _formatDuration(duration),
+          //label: _formatDuration(duration),
+          label:_formatDuration(duration)
         ),
       ],
     );
@@ -584,3 +596,4 @@ class _SeekBar extends StatelessWidget {
     );
   }
 }
+

@@ -34,6 +34,8 @@
 //   }
 // }
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class Mainscreenprovider extends ChangeNotifier {
@@ -49,12 +51,13 @@ class Mainscreenprovider extends ChangeNotifier {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
-
+    log(index.toString());
     notifyListeners();
   }
 
   void onPageChanged(int newIndex) {
-    index = newIndex;
+    index = newIndex; 
+    log(index.toString());   
     notifyListeners();
   }
 

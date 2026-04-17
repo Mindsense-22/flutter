@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:mindsense_app/features/exercises/logic/audio_player_provider.dart';
 import 'package:mindsense_app/features/exercises/logic/exercises_provider.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,9 @@ class BetterSleepWid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final audioProvider = Provider.of<AudioProvider>(context);
     return Consumer<ExercisesProvider>(
+      
       builder: (context,val,child) {
         return 
         ListView.builder(
@@ -186,6 +189,10 @@ class BetterSleepWid extends StatelessWidget {
                               val.bettersleepList[index].audioonlinePath,
                             );
                           },
+                          // onTap:() {
+                          //   audioProvider.play(val.bettersleepList[index].audioonlinePath);
+
+                          // },
 
                           child: Consumer<AudioProvider>(
                             builder: (context, audio, child) {
