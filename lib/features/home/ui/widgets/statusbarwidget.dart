@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/drive%20mode/ui/drivemode_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +21,8 @@ class Statusbarwidget extends StatelessWidget {
             Material(
               color: Colors.transparent,
               child: InkWell(
-                borderRadius: BorderRadius.all(Radius.circular(48.r)),
-                splashColor: Colors.grey[600],
+                borderRadius: BorderRadius.all(Radius.circular(12.r)),
+                splashColor: const Color.fromARGB(255, 85, 85, 85),
                 onTap: () {
                   context.read<Mainscreenprovider>().changeIndex(3);
                 },
@@ -78,7 +79,7 @@ class Statusbarwidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.r),
                 splashColor: Colors.blue,
                 onTap: () {
-                  
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DrivemodeScreen(),));
                 },
                 child: Ink(
                   width: 88.w,
