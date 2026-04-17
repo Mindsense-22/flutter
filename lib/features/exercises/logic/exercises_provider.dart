@@ -8,7 +8,7 @@ class ExercisesProvider extends ChangeNotifier{
   String userstate="Overcoming Stress";  
   bool isAudioPlaying=false;
   String aiRecomendationAdioDuration="";
-  AiRecomendationSession aiRecomendationSession =AiRecomendationSession(imageurl: "https://drive.google.com/uc?export=download&id=1aCcXuZxGQ2bqb-nHpU9vYFOAfSv58WyA", audiourl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", audioimageurl: "https://drive.google.com/uc?export=download&id=1xPTqvDeaUtrp_zsdHvIbSIje_MzBEaA3", duration: 0);
+  AiRecomendationSession aiRecomendationSession =AiRecomendationSession(imageurl: "https://drive.google.com/uc?export=download&id=1aCcXuZxGQ2bqb-nHpU9vYFOAfSv58WyA", audiourl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", audioimageurl: "https://drive.google.com/uc?export=view&id=15E_ys5g0OJxEBXSxX9cpLCduwptDJjvo", duration: 0);
   changeUserState(String userstate){
     this.userstate=userstate;
     notifyListeners();

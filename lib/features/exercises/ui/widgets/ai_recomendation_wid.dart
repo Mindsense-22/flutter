@@ -1,5 +1,7 @@
 // ai_recommendation_card.dart
 
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -509,8 +511,12 @@ class _MiniPlayer extends StatelessWidget {
                         fit: BoxFit.cover,
                         placeholder: (_, __) =>
                             Container(color: const Color(0xFF1E293B)),
-                        errorWidget: (_, __, ___) =>
-                            Container(color: const Color(0xFF1E293B)),
+                        errorWidget: (_, __, ___) {
+                          log("error on audio image");
+                          return
+                          Container(color: const Color(0xFF1E293B));
+                        }
+                            ,
                       ),
                     ),
                   ),
