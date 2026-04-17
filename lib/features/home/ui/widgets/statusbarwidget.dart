@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,25 +17,35 @@ class Statusbarwidget extends StatelessWidget {
         return Row(
           children: [
             
-            Container(
-              width: 48.w,
-              height: 48.h,
-              decoration: BoxDecoration(
-                color: AppColers.primaryColor,
-                borderRadius: BorderRadius.all(Radius.circular(48))
-              ),
-              child: 
-                val.profileImagePath==null
-              ?CachedNetworkImage(
-                imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
-                fit: BoxFit.fill,                    
-              )
-              :ClipRRect(
-                clipBehavior: Clip.antiAlias,
-                borderRadius: BorderRadius.circular(108.r),
-                child: Image.file(
-                  context.watch<ProfileScreenProvider>().profileImage!,
-                  fit: BoxFit.cover,                        
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.all(Radius.circular(48.r)),
+                splashColor: Colors.grey[600],
+                onTap: () {
+                  context.read<Mainscreenprovider>().changeIndex(3);
+                },
+                child: Ink(
+                  width: 48.w,
+                  height: 48.h,
+                  decoration: BoxDecoration(
+                    color: AppColers.primaryColor,
+                    borderRadius: BorderRadius.all(Radius.circular(48.r)),
+                  ),
+                  child: 
+                    val.profileImagePath==null
+                  ?CachedNetworkImage(
+                    imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
+                    fit: BoxFit.fill,                    
+                  )
+                  :ClipRRect(
+                    clipBehavior: Clip.antiAlias,
+                    borderRadius: BorderRadius.circular(108.r),
+                    child: Image.file(
+                      context.watch<ProfileScreenProvider>().profileImage!,
+                      fit: BoxFit.cover,                        
+                    ),
+                  ),
                 ),
               ),
             ),            
