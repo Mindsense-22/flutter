@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/features/exercises/logic/exercises_provider.dart';
+import 'package:mindsense_app/features/exercises/ui/widgets/ai_recomendation_wid.dart';
 import 'package:mindsense_app/features/exercises/ui/widgets/better_sleep_wid.dart';
 import 'package:mindsense_app/features/exercises/ui/widgets/quick_relife_wid.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
@@ -41,8 +42,9 @@ class ExercisesScreen extends StatelessWidget {
               builder: (context,val,child) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //SizedBox(height: 577.h,),
+                  children: [                    
+                    AiRecommendationCard(aiRecomendationSession: val.aiRecomendationSession,),
+                    SizedBox(height: 24.h,),
                     Text(
                       "Quick Relief",
                       style: TextStyle(
