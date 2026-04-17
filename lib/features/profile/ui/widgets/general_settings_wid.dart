@@ -82,43 +82,48 @@ class SettingItemsWid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap, 
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 4.h), 
-        decoration: const BoxDecoration(),
-        child: Row(
-          children: [
-            Container(
-              width: 40.w,
-              height: 40.h,
-              decoration: BoxDecoration(
-                color: const Color(0xff55EEDA).withValues(alpha: .1),
-                borderRadius: BorderRadius.circular(10.r),
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  iconPath, 
-                  width: 22.w,
-                  height: 22.w,
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10.r),
+        splashColor: Colors.grey[600],
+        onTap: onTap, 
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 4.h), 
+          decoration: const BoxDecoration(),
+          child: Row(
+            children: [
+              Container(
+                width: 40.w,
+                height: 40.h,
+                decoration: BoxDecoration(
+                  color: const Color(0xff55EEDA).withValues(alpha: .1),
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    iconPath, 
+                    width: 22.w,
+                    height: 22.w,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(width: 16.w),
-            Text(
-              title, 
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16.sp,
+              SizedBox(width: 16.w),
+              Text(
+                title, 
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16.sp,
+                ),
               ),
-            ),
-            const Spacer(),
-            const Icon(Icons.arrow_forward_ios, size: 16),
-          ],
+              const Spacer(),
+              const Icon(Icons.arrow_forward_ios, size: 16),
+            ],
+          ),
         ),
+      
       ),
-    
     );
   }
 }

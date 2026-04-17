@@ -61,31 +61,35 @@ class Statusbarwidget extends StatelessWidget {
               ],
             ),
             Spacer(),
-            InkWell(
-              borderRadius: BorderRadius.circular(10.r),
-              onTap: () {
-                
-              },
-              child: Container(
-                width: 88.w,
-                height: 26.h,
-                padding: EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: Color(0xff4D5DD3),
-                  borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                ),
-                child: Row(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/images/caricon.svg"
-                    ),
-                    Text(
-                      " Drive Mode",style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 10.sp
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(10.r),
+                splashColor: Colors.blue,
+                onTap: () {
+                  
+                },
+                child: Ink(
+                  width: 88.w,
+                  height: 26.h,
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: Color(0xff4D5DD3),
+                    borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                  ),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        "assets/images/caricon.svg"
                       ),
-                    )
-                  ],
+                      Text(
+                        " Drive Mode",style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 10.sp
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

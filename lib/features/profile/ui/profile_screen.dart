@@ -53,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
               children:  [
                 AboutUserWid(),
                 GeneralSettingsWid(),
-                FavouriteWid(),
+                //FavouriteWid(),
                 SizedBox(height: 30.h),
               ],
             ),
