@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/styles/colors.dart';
 import '../../logic/homescreenprovider.dart';
@@ -38,7 +41,9 @@ class Emogiessectionwid extends StatelessWidget {
                 bool isSelected = provider.selectedIndex == index;
                 return GestureDetector(
                   onTap: () {
-                    provider.changeSelectedIndex(index);
+                    provider.changeSelectedIndex(index);                    
+                    provider.changeImogiStatus(provider.emojis[index]["label"]!);
+                    log(provider.imogistatus);
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
@@ -53,13 +58,11 @@ class Emogiessectionwid extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          provider.emojis[index]["emoji"]!,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 24.sp,
-                          ),
-                        ),
+                        SvgPicture.asset(
+                          provider.emojis[index]["emojiPath"]!,  
+                          width: 30.w ,
+                          height: 30.h ,                 
+                        ),                        
                         if (isSelected) ...[
                           SizedBox(height: 4.h),
                           Text(
