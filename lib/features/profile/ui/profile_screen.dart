@@ -17,8 +17,12 @@ class ProfileScreen extends StatelessWidget {
     
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        var provider=context.read<Mainscreenprovider>();
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        final provider = context.read<Mainscreenprovider>();
+        // Delay to let navigation settle
+        await Future.delayed(const Duration(milliseconds: 50));
+        if (!context.mounted) return;
         provider.changeIndex(0);
         log(provider.index.toString());
       },

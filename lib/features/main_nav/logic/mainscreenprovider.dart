@@ -43,16 +43,30 @@ class Mainscreenprovider extends ChangeNotifier {
 
   final PageController pageController = PageController();
 
+  // void changeIndex(int newIndex) {
+  //   index = newIndex;
+
+  //   pageController.animateToPage(
+  //     newIndex,
+  //     duration: const Duration(milliseconds: 300),
+  //     curve: Curves.easeInOut,
+  //   );
+  //   log(index.toString());
+  //   notifyListeners();
+  // }
   void changeIndex(int newIndex) {
     index = newIndex;
-
-    pageController.animateToPage(
-      newIndex,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-    log(index.toString());
     notifyListeners();
+
+    if (pageController.hasClients) {
+      pageController.animateToPage(
+        newIndex,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.bounceIn,
+      );
+    }
+
+    log(index.toString());
   }
 
   void onPageChanged(int newIndex) {

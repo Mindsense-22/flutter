@@ -70,7 +70,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       body: PageView(
         //physics: const NeverScrollableScrollPhysics(),
-        physics: const BouncingScrollPhysics(),
+        //physics: const BouncingScrollPhysics(),
         controller: provider.pageController,
         onPageChanged: provider.onPageChanged,
         children: _screens,
