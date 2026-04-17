@@ -7,40 +7,79 @@ import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/profile/ui/profile_screen.dart';
 import 'package:provider/provider.dart';
 
-class MainScreen extends StatefulWidget {
+// class MainScreen extends StatefulWidget {
+//   const MainScreen({super.key});
+
+//   @override
+//   State<MainScreen> createState() => _MainScreenState();
+// }
+
+// class _MainScreenState extends State<MainScreen> {
+//   int _currentIndex = 0;
+
+//   final List<Widget> _screens = [
+//     const Homescreen(),
+//     const DashboardScreen(),
+//     const ExercisesScreen(),
+//     const ProfileScreen(),
+//   ];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Consumer<Mainscreenprovider>(
+//       builder: (context,val,child) {
+//         return Scaffold(
+//           //body: _screens[val.index],
+          
+//           body: PageView(
+//             controller: val.pageController,
+//             onPageChanged: val.onPageChanged,
+//             children: _screens,
+//           ),
+
+//           bottomNavigationBar: CustomBottomNavBar(
+//             currentIndex: val.index,
+//             onTap: (index) {
+//               val.changeIndex(index);
+//               // setState(() {
+//               //   _currentIndex = index;
+//               // });
+//             },
+//           ),
+//         );
+//       }
+//     );
+//   }
+// }
+
+
+class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
-
-  final List<Widget> _screens = [
-    const Homescreen(),
-    const DashboardScreen(),
-    const ExercisesScreen(),
-    const ProfileScreen(),
+  final List<Widget> _screens = const [
+    Homescreen(),
+    DashboardScreen(),
+    ExercisesScreen(),
+    ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<Mainscreenprovider>(
-      builder: (context,val,child) {
-        return Scaffold(
-          body: _screens[val.index],
-          bottomNavigationBar: CustomBottomNavBar(
-            currentIndex: val.index,
-            onTap: (index) {
-              val.changeIndex(index);
-              // setState(() {
-              //   _currentIndex = index;
-              // });
-            },
-          ),
-        );
-      }
+    final provider = context.watch<Mainscreenprovider>();
+
+    return Scaffold(
+      body: PageView(
+        //physics: const NeverScrollableScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
+        controller: provider.pageController,
+        onPageChanged: provider.onPageChanged,
+        children: _screens,
+      ),
+
+      bottomNavigationBar: CustomBottomNavBar(
+        currentIndex: provider.index,
+        onTap: provider.changeIndex,
+      ),
     );
   }
 }
