@@ -52,7 +52,7 @@ class _AiRecommendationCardState extends State<AiRecommendationCard> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(right: 12.w),
-      child: Container(
+      child: Container(        
         width: double.infinity,
         padding: EdgeInsets.all(20.w),
         decoration: BoxDecoration(
@@ -61,18 +61,19 @@ class _AiRecommendationCardState extends State<AiRecommendationCard> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              const Color(0x402DD4BF).withAlpha(25),
-              const Color(0x33122042).withAlpha(20),
+              const Color(0xff2DD4BF).withAlpha(50),
+              const Color(0xff122042).withAlpha(30),              
             ],
-            stops: const [0.35, 1.0],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0x262DD4BF).withAlpha(20),
-              blurRadius: 4,
-              offset: const Offset(0, 4),
+            stops: [.60,1]
+          ),  
+          boxShadow: [            
+            BoxShadow(            
+              color: Color(0xff2DD4BF).withAlpha(12),
+              blurRadius: 4.r,
+              offset: const Offset(0,5),
             ),
-          ],
+          ],        
+          
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,7 +173,7 @@ class _AiBadge extends StatelessWidget {
           ),
           SizedBox(width: 8.w),
           Text(
-            'AI Recommendation',
+            'AI Recommenhhhdation',
             style: TextStyle(
               fontFamily: 'Inter',
               fontWeight: FontWeight.bold,
