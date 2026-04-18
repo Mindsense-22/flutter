@@ -61,7 +61,7 @@ class Mainscreenprovider extends ChangeNotifier {
     if (pageController.hasClients) {
       pageController.animateToPage(
         newIndex,
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 200),
         curve: Curves.easeOut,
       );
     }
