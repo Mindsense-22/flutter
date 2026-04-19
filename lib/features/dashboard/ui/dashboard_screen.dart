@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/features/dashboard/ui/widgets/dashboard_info_wid.dart';
+import 'package:mindsense_app/features/dashboard/ui/widgets/dashboard_wid.dart';
 import 'package:mindsense_app/features/dashboard/ui/widgets/weekly_mood_wid.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:provider/provider.dart';
@@ -37,8 +38,8 @@ class DashboardScreen extends StatelessWidget {
             children: [
               DashboardInfoWid(),
               SizedBox(height: 49.h,),
-              // dashbord here
-              SizedBox(height: 21.h,),
+              DashboardWid(),
+              SizedBox(height: 10.h,),
               WeeklyMoodWid(),
             ],
           ),
