@@ -48,8 +48,11 @@ class CustomBottomNavBar extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => onTap(index),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+      child: AnimatedContainer(        
+        // curve: Curves.easeInOutCubic,
+        // duration: const Duration(milliseconds: 150),
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 100),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
         decoration: BoxDecoration(
           color: isSelected ? DarkThemeColors.primaryColor : Colors.transparent,

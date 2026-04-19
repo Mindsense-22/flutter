@@ -36,6 +36,7 @@ class ExercisesScreen extends StatelessWidget {
         ),
       
         body: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
           child: Padding(
             padding:EdgeInsets.only(left: 12.w),
             child: Consumer<ExercisesProvider>(

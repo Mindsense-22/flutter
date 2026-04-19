@@ -68,9 +68,8 @@ class MainScreen extends StatelessWidget {
     final provider = context.watch<Mainscreenprovider>();
 
     return Scaffold(
-      body: PageView(
-        //physics: const NeverScrollableScrollPhysics(),
-        //physics: const BouncingScrollPhysics(),
+      body: PageView(        
+        physics: const PageScrollPhysics(),
         controller: provider.pageController,
         onPageChanged: provider.onPageChanged,
         children: _screens,
