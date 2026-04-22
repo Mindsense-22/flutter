@@ -16,85 +16,82 @@ Future<dynamic> messgeShowDialog(context){
       context: context,
       builder: (context) {
         var provider=context.read<ProfileScreenProvider>();
-        return PopScope(
-          canPop: true,
-          child: Stack(
-            children: [
-              // Blurred background
-              BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                child: Container(
-                 //color: Colors.black.withOpacity(0.3),
-                   color: AppColers.backgroundColor.withValues(alpha: .3),
-                ),
+        return Stack(
+          children: [
+            // Blurred background
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+              child: Container(
+               //color: Colors.black.withOpacity(0.3),
+                 color: AppColers.backgroundColor.withValues(alpha: .3),
               ),
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  color: Colors.transparent,
-                ),
+            ),
+            GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Container(
+                color: Colors.transparent,
               ),
-              // Popup Card
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: double.infinity,
-                    height: 335.h,
-                    
-                    decoration: BoxDecoration(                    
-                      color: Colors.white,                    
-                      borderRadius: BorderRadius.circular(20.r),
-                    ),
-                    child: Column(  
-                      crossAxisAlignment: CrossAxisAlignment.start,                  
-                      children: [
-                        Stack(
-                          children: [
-                            SizedBox(
-                              height: 335.h,
-                              width: double.infinity,
-                              child: 
-                              SharedPreferencesitem.getString("profileImagePath")==null
-                              ?ClipRRect(
-                                //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r)),
-                                clipBehavior: Clip.antiAlias,
-                                borderRadius: BorderRadiusGeometry.circular(20.r),
-                                child: CachedNetworkImage(
-                                  imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
-                                  fit: BoxFit.cover,   
-                                                  
-                                ),
-                              )
-                              :ClipRRect(
-                                //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r)),
-                                borderRadius: BorderRadiusGeometry.circular(20.r),
-                                clipBehavior: Clip.antiAlias,
-                                
-                                child: Image.file(
-                                  provider.profileImage!,
-                                  fit: BoxFit.cover,                        
-                                ),
+            ),
+            // Popup Card
+            Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: Container(
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  height: 335.h,
+                  
+                  decoration: BoxDecoration(                    
+                    color: Colors.white,                    
+                    borderRadius: BorderRadius.circular(20.r),
+                  ),
+                  child: Column(  
+                    crossAxisAlignment: CrossAxisAlignment.start,                  
+                    children: [
+                      Stack(
+                        children: [
+                          SizedBox(
+                            height: 335.h,
+                            width: double.infinity,
+                            child: 
+                            SharedPreferencesitem.getString("profileImagePath")==null
+                            ?ClipRRect(
+                              //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r)),
+                              clipBehavior: Clip.antiAlias,
+                              borderRadius: BorderRadiusGeometry.circular(20.r),
+                              child: CachedNetworkImage(
+                                imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
+                                fit: BoxFit.cover,   
+                                                
+                              ),
+                            )
+                            :ClipRRect(
+                              //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r)),
+                              borderRadius: BorderRadiusGeometry.circular(20.r),
+                              clipBehavior: Clip.antiAlias,
+                              
+                              child: Image.file(
+                                provider.profileImage!,
+                                fit: BoxFit.cover,                        
                               ),
                             ),
-                            IconButton(
-                              onPressed: (){
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(Icons.arrow_back,size: 25.h,color: Colors.black,),
-                            ), 
-                          ],
-                        )                       
-                        
-                      ],
-                    ),
+                          ),
+                          IconButton(
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(Icons.arrow_back,size: 25.h,color: Colors.black,),
+                          ), 
+                        ],
+                      )                       
+                      
+                    ],
                   ),
                 ),
               ),
-            
-            ],
-          ),
+            ),
+          
+          ],
         );
       }
     );
