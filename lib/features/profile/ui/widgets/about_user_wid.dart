@@ -26,11 +26,11 @@ class AboutUserWid extends StatelessWidget {
               splashColor: Colors.blueGrey[600],
               onTap: () {
                 log("photo tapped");
-                
+                messgeShowDialog(context);
               },
               onLongPress: () {
                 log("photo tapped LongPress");
-                messgeShowDialog(context);
+                
               },              
               child: Stack(
                 alignment: Alignment.center,
