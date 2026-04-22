@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:provider/provider.dart';
@@ -109,6 +110,7 @@ class AboutUserWid extends StatelessWidget {
             ),
             SizedBox(height: 4.h),
             Text(
+              SharedPreferencesitem.getString("gmail")??              
               "Example@gmail.com",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.onSecondary.withValues(alpha: .7),

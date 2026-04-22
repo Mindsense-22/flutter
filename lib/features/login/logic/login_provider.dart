@@ -46,6 +46,7 @@ class LoginProvider extends ChangeNotifier {
       );
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),), (route) => false,);
       SharedPreferencesitem.setString("token", "111111");
+      SharedPreferencesitem.setString("gmail", loginEmailController.text);
     }
     else {
       log("Form is NOT valid");

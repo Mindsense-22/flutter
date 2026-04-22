@@ -3,10 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/profile/ui/widgets/about_user_wid.dart';
 import 'package:mindsense_app/features/profile/ui/widgets/favourite_wid.dart';
 import 'package:mindsense_app/features/profile/ui/widgets/general_settings_wid.dart';
+import 'package:mindsense_app/features/splash/ui/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -36,6 +38,31 @@ class ProfileScreen extends StatelessWidget {
               fontSize: 20.sp,
             ),
           ),
+          leading:
+          IconButton(
+              onPressed:(){
+                context.read<Mainscreenprovider>().index=0;
+                Navigator.pushAndRemoveUntil(context,
+                 MaterialPageRoute(builder: (context) => SplashScreen(),), 
+                 (route) => false,
+                );
+                SharedPreferencesitem.clear();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    duration: Duration(seconds: 1),
+                    content: Text("Logged Out!",style: TextStyle(
+                      color: Colors.white
+                    ),),
+                    backgroundColor: Colors.red,
+                  )
+                );
+                
+              }, 
+              icon: Icon(Icons.logout,
+                size: 22.sp,
+              )
+            ),
+          
           actions: [          
             InkWell(
               onTap: () {},
@@ -46,7 +73,8 @@ class ProfileScreen extends StatelessWidget {
                 height: 26.h,
               ),
             ),
-            SizedBox(width: 20.w,)
+            
+            SizedBox(width: 15.w,),            
           ],
         ),
         body: SingleChildScrollView(
