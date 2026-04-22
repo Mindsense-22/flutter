@@ -289,7 +289,7 @@ class _InfoChips extends StatelessWidget {
   /// Formats Duration to a concise human-readable label.
   /// Shows "..." while loading, e.g. "5 min", "3 min 40 sec", "1 hr 2 min".
   String _formatDuration(Duration? d) {
-    if (d == null) return '...';
+    if (d == null) return '  min   sec';
     if (d.inSeconds < 60) return '${d.inSeconds} sec';
     if (d.inHours < 1) {
       final m = d.inMinutes;
