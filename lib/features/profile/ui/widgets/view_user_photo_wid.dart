@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
+import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
@@ -38,10 +39,10 @@ Future<dynamic> messgeShowDialog(context){
                 child: Container(
                   alignment: Alignment.center,
                   width: 335.w,
-                  height: 320.h,
+                  height: 350.h,
                   
                   decoration: BoxDecoration(                    
-                    color: Colors.red,                    
+                    color: Colors.white,                    
                     borderRadius: BorderRadius.circular(10.r),
                   ),
                   child: Column(  
@@ -49,7 +50,7 @@ Future<dynamic> messgeShowDialog(context){
                     children: [
                       Container(
                         alignment: Alignment.centerLeft,
-                        height: 30.h,
+                        height: 40.h,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.black,
@@ -63,12 +64,18 @@ Future<dynamic> messgeShowDialog(context){
                         ),
                       ),                        
                       SizedBox(
-                        height: 290.h,
+                        height: 310.h,
+                        width: double.infinity,
                         child: 
-                        provider.profileImagePath==null
-                        ?CachedNetworkImage(
-                        imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
-                        fit: BoxFit.cover,                    
+                        SharedPreferencesitem.getString("profileImagePath")==null
+                        ?ClipRRect(
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r)),
+                          clipBehavior: Clip.antiAlias,
+                          child: CachedNetworkImage(
+                            imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
+                            fit: BoxFit.cover,   
+                                             
+                          ),
                         )
                         :ClipRRect(
                           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r)),

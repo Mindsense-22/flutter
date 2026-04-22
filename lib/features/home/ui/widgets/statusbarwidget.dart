@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/drive%20mode/ui/drivemode_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
@@ -34,7 +35,7 @@ class Statusbarwidget extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(48.r)),
                   ),
                   child: 
-                    val.profileImagePath==null
+                  SharedPreferencesitem.getString("profileImagePath")==null
                   ?CachedNetworkImage(
                     imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
                     fit: BoxFit.fill,                    

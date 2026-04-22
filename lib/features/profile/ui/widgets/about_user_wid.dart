@@ -56,7 +56,7 @@ class AboutUserWid extends StatelessWidget {
                       borderRadius: BorderRadius.circular(108.r),                                
                     ),
                       child:
-                        val.profileImagePath==null
+                        SharedPreferencesitem.getString("profileImagePath")==null
                         ?CachedNetworkImage(
                           imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
                           fit: BoxFit.fill,                    
