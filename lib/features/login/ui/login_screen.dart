@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(height: 24,),
                               
                       //platforms auth
-                      PlatformsAuth(),
+                      //PlatformsAuth(),
                       
                       SizedBox(height: 24,),
                           

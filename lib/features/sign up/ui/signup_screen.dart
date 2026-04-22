@@ -48,7 +48,7 @@ class SignupScreen extends StatelessWidget {
                       SizedBox(height: 24,),
                               
                       //platforms auth widget
-                      SignupPlatformsAuthWid(),
+                      //SignupPlatformsAuthWid(),
                      
                       SizedBox(height: 24,),
                       
