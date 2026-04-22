@@ -44,7 +44,7 @@ class ProfileScreenProvider extends ChangeNotifier {
   final path = SharedPreferencesitem.getString("profileImagePath");
 
   if (path != null && path.isNotEmpty) {
-    profileImagePath = path;
+    profileImagePath = path;    
     profileImage = File(path);
     notifyListeners();
   }

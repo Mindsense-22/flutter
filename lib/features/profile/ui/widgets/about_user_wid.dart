@@ -65,7 +65,7 @@ class AboutUserWid extends StatelessWidget {
                           clipBehavior: Clip.antiAlias,
                           borderRadius: BorderRadius.circular(108.r),
                           child: Image.file(
-                            context.watch<ProfileScreenProvider>().profileImage!,
+                            val.profileImage!,
                             fit: BoxFit.cover,                        
                           ),
                         ),
