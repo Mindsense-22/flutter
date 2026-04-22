@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 
 class LoginProvider extends ChangeNotifier {
@@ -44,6 +45,7 @@ class LoginProvider extends ChangeNotifier {
        )
       );
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),), (route) => false,);
+      SharedPreferencesitem.setString("token", "111111");
     }
     else {
       log("Form is NOT valid");
