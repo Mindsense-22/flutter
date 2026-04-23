@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_emailtextformfield.dart';
-import 'package:mindsense_app/core/custom%20widgets/custom_textformfield.dart';
 import 'package:mindsense_app/features/forget%20password/logic/forgetpassword_provider.dart';
 import 'package:mindsense_app/features/forget%20password/ui/widgets/forgetpassword_setemail_uppertext_wid.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +53,7 @@ class ForgetpasswordSetemail extends StatelessWidget {
                             CustomEmailTextFormField(
                               controller: provider.forgetPasswordEmailController, 
                               hintText: "Enter your email",
-                              Icon: Icon(Icons.email_outlined),
+                              icon: Icon(Icons.email_outlined),
                               validator:(p0) => provider.setEmailValidator(p0),
                             ),
                             

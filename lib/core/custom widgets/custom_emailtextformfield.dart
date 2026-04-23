@@ -8,14 +8,14 @@ class CustomEmailTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final String? Function(String?)? validator;
-  final Icon;
+  final icon;
 
   
-  const CustomEmailTextFormField({
-    Key? key,
+  const CustomEmailTextFormField({super.key, 
+    
     required this.controller,
     required this.hintText,    
-    this.validator, this.Icon,     
+    this.validator, this.icon,     
   }) ;
 
   @override

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_emailtextformfield.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_passwordtextformfield.dart';
-import 'package:mindsense_app/core/custom%20widgets/custom_textformfield.dart';
 import 'package:mindsense_app/features/forget%20password/ui/forgetpassword_setemail.dart';
 import 'package:mindsense_app/features/login/logic/login_provider.dart';
 
@@ -27,7 +26,7 @@ class LoginFormWid extends StatelessWidget {
             CustomEmailTextFormField(
               controller: provider.loginEmailController, 
               hintText: "Enter your email",
-              Icon: Icon(Icons.email_outlined),
+              icon: Icon(Icons.email_outlined),
               validator: provider.emailValidator,
             ),
 

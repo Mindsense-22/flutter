@@ -55,7 +55,7 @@ class SignupFormWid extends StatelessWidget {
           CustomEmailTextFormField(
             controller: provider.signupEmailController, 
             hintText: "Enter your email",
-            Icon: Icon(Icons.email_outlined),
+            icon: Icon(Icons.email_outlined),
             validator: provider.emailValidator,                                
           ),
           SizedBox(height: 16.h,),

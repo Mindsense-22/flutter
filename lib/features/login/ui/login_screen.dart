@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {  
-  LoginScreen({super.key});    
+  const LoginScreen({super.key});    
   @override
   Widget build(BuildContext context) {    
     return ChangeNotifierProvider(
