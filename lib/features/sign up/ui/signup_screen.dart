@@ -35,7 +35,7 @@ class SignupScreen extends StatelessWidget {
                       SizedBox(height: 48,),
                       
                       //signup form widget
-                      SignupFormWid(provider: provider,),
+                      SignupFormWid(provider: provider,context: context,),
                               
                       SizedBox(height: 24,),
                               

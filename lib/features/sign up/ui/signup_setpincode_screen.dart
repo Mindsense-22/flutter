@@ -1,18 +1,21 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
-import 'package:mindsense_app/features/forget%20password/logic/forgetpassword_provider.dart';
 import 'package:mindsense_app/features/forget%20password/ui/widgets/forgetpassword_setpincode_uppertext_wid.dart';
 import 'package:mindsense_app/features/forget%20password/ui/widgets/forgotpassword_pincodetextfield_wid.dart';
+import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
+import 'package:mindsense_app/features/sign%20up/ui/widgets/signup_pincodetextfield_wid.dart';
 import 'package:provider/provider.dart';
 
-class ForgetpasswordSetpincode extends StatelessWidget {
-  const ForgetpasswordSetpincode({super.key});
-
+class SignupSetpincodeScreen extends StatelessWidget {
+  const SignupSetpincodeScreen({super.key, required this.context});
+  final BuildContext context;
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => ForgetpasswordProvider(),
+      create: (context) => SignupProvider(),
       child: Scaffold(
         appBar: AppBar(),
 
@@ -21,9 +24,9 @@ class ForgetpasswordSetpincode extends StatelessWidget {
             FocusScope.of(context).unfocus();
           },
           child: SingleChildScrollView(
-            child: Consumer<ForgetpasswordProvider>(
+            child: Consumer<SignupProvider>(
               builder: (context,val,child) {
-                var provider=context.read<ForgetpasswordProvider>();
+                var provider=context.read<SignupProvider>();
                 return Padding(
                   padding: const EdgeInsets.only(right: 18,left: 18,top: 56),
                   child: Column(
@@ -44,7 +47,7 @@ class ForgetpasswordSetpincode extends StatelessWidget {
                           children: [
 
                             //pin code
-                            ForgotpasswordPincodeTextFieldWid(provider: provider,),
+                            SignupPincodetextfieldWid(provider: provider,),
                             
                             SizedBox(height: 32.h,),
 
@@ -53,7 +56,7 @@ class ForgetpasswordSetpincode extends StatelessWidget {
                               child: CustomButton(
                                 text: "Verify",
                                 onPressed:() {
-                                  provider.verifyCodeButton(context);
+                                  provider.checkSignUpPinCode(this.context);                                  
                                 }  
                               ),
                             ),
@@ -88,6 +91,7 @@ class ForgetpasswordSetpincode extends StatelessWidget {
       ),
     );
   }
+
 
 
 }

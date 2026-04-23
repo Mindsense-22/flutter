@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
 import 'package:pinput/pinput.dart';
 
-class ForgotpasswordPincodeTextFieldWid extends StatelessWidget {
-  const ForgotpasswordPincodeTextFieldWid({super.key, this.provider});
-  final provider;
-
+class SignupPincodetextfieldWid extends StatelessWidget {
+  const SignupPincodetextfieldWid({super.key, required this.provider});
+  final SignupProvider provider;
   @override
   Widget build(BuildContext context) {
 
@@ -33,14 +32,12 @@ class ForgotpasswordPincodeTextFieldWid extends StatelessWidget {
         height: 24,
         color: Theme.of(context).colorScheme.onSecondary,
       ),           
-      controller: provider.forgetPasswordPinCodeController,
+      controller: provider.signUpPinCodeController,
       length: 6,
       
       keyboardType: TextInputType.number,
       autofocus: false,
-      showCursor: true,
-
-      
+      showCursor: true,     
       
 
       defaultPinTheme: provider.ispincodeError

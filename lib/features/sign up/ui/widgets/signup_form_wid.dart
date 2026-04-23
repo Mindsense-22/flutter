@@ -8,8 +8,9 @@ import 'package:mindsense_app/core/custom%20widgets/custom_textformfield.dart';
 import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
 
 class SignupFormWid extends StatelessWidget {
-  const SignupFormWid({super.key, required this.provider});
+  const SignupFormWid({super.key, required this.provider, required this.context});
   final SignupProvider provider;
+  final BuildContext context;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -20,11 +21,11 @@ class SignupFormWid extends StatelessWidget {
         children: [
     
           Text("Name",style: TextStyle(
-            fontSize: 16,
+            fontSize: 16.sp,
             fontWeight: FontWeight.w500,
             color: Theme.of(context).colorScheme.onSecondary,
           ),),   
-          SizedBox(height: 4,),
+          SizedBox(height: 4.h,),
 
           CustomTextFormField(
             controller: provider.signupNameController, 
@@ -41,15 +42,15 @@ class SignupFormWid extends StatelessWidget {
             validator: provider.nameValidator,
             
           ),
-          SizedBox(height: 16,),
+          SizedBox(height: 16.h,),
     
     
           Text("Email",style: TextStyle(
-            fontSize: 16,
+            fontSize: 16.sp,
             fontWeight: FontWeight.w500,
             color: Theme.of(context).colorScheme.onSecondary,
           ),),   
-          SizedBox(height: 4,),
+          SizedBox(height: 4.h,),
 
           CustomEmailTextFormField(
             controller: provider.signupEmailController, 
@@ -57,29 +58,43 @@ class SignupFormWid extends StatelessWidget {
             Icon: Icon(Icons.email_outlined),
             validator: provider.emailValidator,                                
           ),
-          SizedBox(height: 16,),
+          SizedBox(height: 16.h,),
 
           Text("Password",style: TextStyle(
-            fontSize: 16,
+            fontSize: 16.sp,
             fontWeight: FontWeight.w500,
             color: Theme.of(context).colorScheme.onSecondary,
           ),),
     
-          SizedBox(height: 4,),
+          SizedBox(height: 4.h,),
     
           CustomPasswordTextFormField(
             controller: provider.signupPasswordController, 
             hintText: "password",
             validator: provider.passwordValidator,
-          ),              
+          ),          
+          SizedBox(height: 16.h),
+          Text("Re Enetr Password",style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.onSecondary,
+          ),),
+    
+          SizedBox(height: 4.h,),
+    
+          CustomPasswordTextFormField(
+            controller: provider.signupReEnterPasswordController, 
+            hintText: "re enter password",
+            validator: provider.reEnterpasswordValidator,
+          ),    
           
           
-          SizedBox(height: 32,),
+          SizedBox(height: 32.h,),
           //login button
           Center(
             child: CustomButton(text:"Sign Up",
             onPressed: () {
-              provider.signupButton();
+              provider.signupButton(this.context);
             },
             ),
           ),
