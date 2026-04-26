@@ -3,6 +3,7 @@ import 'package:mindsense_app/core/custom%20widgets/custom_bottom_nav_bar.dart';
 import 'package:mindsense_app/features/dashboard/ui/dashboard_screen.dart';
 import 'package:mindsense_app/features/exercises/ui/exercises_screen.dart';
 import 'package:mindsense_app/features/home/ui/homescreen.dart';
+import 'package:mindsense_app/features/games/ui/games_hub_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/profile/ui/profile_screen.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,7 @@ import 'package:provider/provider.dart';
 //     const Homescreen(),
 //     const DashboardScreen(),
 //     const ExercisesScreen(),
+//     const GamesHubScreen(),
 //     const ProfileScreen(),
 //   ];
 
@@ -60,6 +62,7 @@ class MainScreen extends StatelessWidget {
     Homescreen(),
     DashboardScreen(),
     ExercisesScreen(),
+    GamesHubScreen(),
     ProfileScreen(),
   ];
 

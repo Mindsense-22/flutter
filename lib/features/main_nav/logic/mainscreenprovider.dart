@@ -41,7 +41,13 @@ import 'package:flutter/material.dart';
 class Mainscreenprovider extends ChangeNotifier {
   int index = 0;
 
-  final PageController pageController = PageController();
+  PageController pageController = PageController();
+
+  void jumpToIndex(int newIndex) {
+    index = newIndex;
+    pageController = PageController(initialPage: newIndex);
+    notifyListeners();
+  }
 
   // void changeIndex(int newIndex) {
   //   index = newIndex;

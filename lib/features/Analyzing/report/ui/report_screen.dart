@@ -8,7 +8,12 @@ import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/start_photo
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/imageanalysis_report_wid.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/overallstate_wid.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/voiceanalysis_report_wid.dart';
+import 'package:mindsense_app/features/Analyzing/report/logic/analysisreportprovider.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
+import 'package:mindsense_app/features/games/logic/gamification_provider.dart';
+import 'package:mindsense_app/features/games/ui/games_hub_screen.dart';
+import 'package:mindsense_app/features/games/ui/widgets/game_recommendation_card.dart';
+import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -40,25 +45,57 @@ class ReportScreen extends StatelessWidget {
               VoiceanalysisReportWid(),
               SizedBox(height: 32.h,),
     
-              Container(      
-                width: double.infinity,
-                height: 51.h,       
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  color: AppColers.primaryColor,
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                child: MaterialButton( 
-                  padding: EdgeInsets.all(8),
-                  onPressed:(){
-                    
-                  },
-                  child: Text("Get Recommendation",style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black
-                  ),),                    
-                ),
+              Consumer<GamificationProvider>(
+                builder: (context, gp, _) {
+                  if (gp.activeSpec != null) {
+                    return GameRecommendationCard(
+                      spec: gp.activeSpec!,
+                      onPlayNow: () {                                                
+                        context.read<Mainscreenprovider>().jumpToIndex(3);
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => const MainScreen()),
+                          (route) => false,
+                        );
+                      },
+                    );
+                  }
+
+                  return Container(      
+                    width: double.infinity,
+                    height: 51.h,       
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: AppColers.primaryColor,
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: MaterialButton( 
+                      padding: EdgeInsets.all(8),
+                      onPressed:(){
+                        final reportProvider = context.read<Analysisreportprovider>();
+                        String emotion = 'neutral';
+                        final condition = reportProvider.stateCondition.toLowerCase();
+                        if (condition.contains('positive') || condition.contains('happy')) {
+                          emotion = 'happy';
+                        } else if (condition.contains('negative') || condition.contains('sad')) {
+                          emotion = 'sad';
+                        } else if (condition.contains('anxious') || condition.contains('stress')) {
+                          emotion = 'anxious';
+                        } else if (condition.contains('angry')) {
+                          emotion = 'angry';
+                        }
+                        
+                        double confidence = reportProvider.targetvalue * 100;
+                        gp.generateRecommendation(emotion, confidence);
+                      },
+                      child: Text("Get Recommendation",style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black
+                      ),),                    
+                    ),
+                  );
+                }
               ),
               SizedBox(height: 20.h,),
     

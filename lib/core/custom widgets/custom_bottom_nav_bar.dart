@@ -37,7 +37,8 @@ class CustomBottomNavBar extends StatelessWidget {
           _buildNavItem(0,"assets/images/homeiconblack.svg" ,"assets/images/homeicon.svg" ,"Home"),
           _buildNavItem(1,"assets/images/chart-histogramblack.svg","assets/images/chart-histogram.svg" , "Dashboard"),
           _buildNavItem(2,"assets/images/extentionblack.svg","assets/images/extention.svg" , "Exercises"),
-          _buildNavItem(3,"assets/images/user-circle.svg","assets/images/user-circleblack.svg" , "Profile"),
+          _buildNavItem(3,"assets/images/gamepadblack.svg","assets/images/gamepad.svg" , "Games"),
+          _buildNavItem(4,"assets/images/user-circle.svg","assets/images/user-circleblack.svg" , "Profile"),
         ],
       ),
     );
@@ -49,11 +50,10 @@ class CustomBottomNavBar extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap(index),
       child: AnimatedContainer(        
-        // curve: Curves.easeInOutCubic,
-        // duration: const Duration(milliseconds: 150),
         curve: Curves.easeOut,
         duration: const Duration(milliseconds: 100),
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(
+            horizontal: isSelected ? 12.w : 6.w, vertical: 8.h),
         decoration: BoxDecoration(
           color: isSelected ? DarkThemeColors.primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(30.r),
@@ -62,18 +62,17 @@ class CustomBottomNavBar extends StatelessWidget {
           children: [
             SvgPicture.asset(
               isSelected ? path1:path2,
-              width: 28,
-              height: 28,
-
+              width: 24,
+              height: 24,
             ),
             if (isSelected) ...[
-              SizedBox(width: 8.w),
+              SizedBox(width: 6.w),
               Text(
                 label,
                 style: TextStyle(
                   color: DarkThemeColors.backgroundColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14.sp,
                 ),
               ),
             ],
