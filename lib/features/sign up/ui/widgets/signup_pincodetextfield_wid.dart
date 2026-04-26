@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/sign%20up/logic/pincode_signup_provider.dart';
 import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
 import 'package:pinput/pinput.dart';
 
 class SignupPincodetextfieldWid extends StatelessWidget {
   const SignupPincodetextfieldWid({super.key, required this.provider});
-  final SignupProvider provider;
+  final PincodeSignupProvider provider;
   @override
   Widget build(BuildContext context) {
 

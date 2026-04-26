@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mindsense_app/core/Api/authservice.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/home/ui/homescreen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
+
 import 'package:mindsense_app/features/sign%20up/ui/signup_setpincode_screen.dart';
 
 class SignupProvider extends ChangeNotifier{
@@ -13,12 +15,26 @@ class SignupProvider extends ChangeNotifier{
   TextEditingController signupReEnterPasswordController=TextEditingController();
   TextEditingController signupNameController=TextEditingController();
   TextEditingController signupEmailController=TextEditingController();
+  TextEditingController signupAgeController=TextEditingController();
   final formKey = GlobalKey<FormState>();
-  TextEditingController signUpPinCodeController =TextEditingController();
-  final setPinCodeFormKey = GlobalKey<FormState>();
-  bool ispincodeError = false;
-  bool verifyCodeButtonisloading=false;
-  String correctPinCode="111111";
+ 
+  bool signupbuttonisloading=false;
+  
+  
+  void changeSignupButtonIsLoading(val) {
+    signupbuttonisloading = val;
+    notifyListeners();
+  }
+  
+  String ? ageValidator(String ? val){
+    if(val!.isEmpty){
+      return "fill The Field";                          
+    }
+    if (int.parse(val) <7) {
+      return "Age must be 7 or greater";
+    }
+    return null;
+  }
 
   String ? emailValidator(String ? val){
     if(val!.isEmpty){
@@ -42,16 +58,37 @@ class SignupProvider extends ChangeNotifier{
     return null;
   }
 
-  String ? passwordValidator(String ? val){
-    if(val==null||val.isEmpty){
-    return "fill The Field";                          
+  String? passwordValidator(String? val) {
+    if (val == null || val.isEmpty) {
+      return "Fill the field";
     }
-    if(val.length<6){
-      return "password must be more than 5 charachter";
+
+    if (val.length < 8) {
+      return "At least 8 characters";
     }
-    if (!RegExp(r'[a-z]').hasMatch(val)||!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(val)||!RegExp(r'[A-Z]').hasMatch(val)) {
-      return "Password must contain  lowercase letter,uppercase letter,\nspecial character";
-    }   
+
+    if (!RegExp(r'[A-Z]').hasMatch(val)) {
+      return "Must contain uppercase letter";
+    }
+
+    if (!RegExp(r'[a-z]').hasMatch(val)) {
+      return "Must contain lowercase letter";
+    }
+
+    if (!RegExp(r'[0-9]').hasMatch(val)) {
+      return "Must contain number";
+    }
+
+    // ✅ يحتوي على واحد من المسموح فقط
+    if (!RegExp(r'[@$!%*?&]').hasMatch(val)) {
+      return "Must contain one special char (@\$!%*?&)";
+    }
+
+    // ❌ يمنع أي special character تاني
+    if (RegExp(r'[^a-zA-Z0-9@$!%*?&]').hasMatch(val)) {
+      return "Only allowed special chars are (@\$!%*?&)";
+    }
+
     return null;
   }
 
@@ -64,78 +101,67 @@ class SignupProvider extends ChangeNotifier{
     } 
     return null;
   }
-  /////pin code
-  //get orignal token from api
-  Future<void> getUserToken()async{
-
-  }
-  void checkSignUpPinCode(context) async{
-    if (setPinCodeFormKey.currentState!.validate()&&signUpPinCodeController.text==correctPinCode) {
-      resetPinError();
-      log("Form is valid");
-      log(signUpPinCodeController.text);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Form is valid",style: TextStyle(
-            color: Colors.white
-          ),),
-          backgroundColor: Colors.black,
-        )
-      );
-      await SharedPreferencesitem.setString("token", signUpPinCodeController.text);
-      
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => MainScreen(),),
-        (route) => false,
-      );      
-      
-      signUpPinCodeController.clear();  // may cause error when deal with api
-      
-      
-    }
-    else {
-      changeIsPinCodeError();   
-      HapticFeedback.vibrate();
-
-      log("Form is NOT valid");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: Duration(milliseconds:3000 ),
-          content: Text("Form is not valid , Enter Pin Code Again",style: TextStyle(
-            color: Colors.white
-          ),),
-          backgroundColor: Colors.black,
-        )
-      );
-      signUpPinCodeController.clear(); // may cause error when deal with api
-         
-      resetPinError();
-    }
-  }
-  void changeIsPinCodeError(){
-    ispincodeError = true;
-    notifyListeners();
-  }
-
-  void resetPinError(){
-    ispincodeError=false;
-    notifyListeners();
-  }
-  void resendCode(){
-
-  }
-  /////////////////////////////////////////////////
-  ///uplaod user data and get token
-  Future<void> signupButton(context) async{
+   
+ 
+  Future<void> signupButton(context) async {
     if (formKey.currentState!.validate()) {
+      changeSignupButtonIsLoading(true);
       log("Form is valid");
-      await SharedPreferencesitem.setString("gmail", signupEmailController.text);
-      // Continue signup logic here
+      
+      try {       
+        await AuthService.signUp(
+          name: signupNameController.text,
+          email: signupEmailController.text,
+          password: signupPasswordController.text,
+          passwordConfirm: signupReEnterPasswordController.text,
+          age: int.parse(signupAgeController.text),
+        );
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => SignupSetpincodeScreen(context: context,),));
+        await SharedPreferencesitem.setString(
+          "gmail",
+          signupEmailController.text,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Pin Code sent To your Email"),
+          ),
+        );
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SignupSetpincodeScreen(
+              context: context,
+            ),
+          ),
+        );
+        changeSignupButtonIsLoading(false);
+      } catch (e) {
+        log("Signup failed");
+        changeSignupButtonIsLoading(false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          
+          SnackBar(
+            duration: Duration(seconds: 1),
+            backgroundColor: Colors.red,
+            content: Text(AuthService.apiMessege,style: TextStyle(
+              color: Colors.white
+            ),),            
+          ),
+        );
+      }
+
     } else {
       log("Form is NOT valid");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: Duration(milliseconds: 700),
+          content: Text("Form Is NOT Valid",style: TextStyle(
+            color: Colors.white
+          ),),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 }

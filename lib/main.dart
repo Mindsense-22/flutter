@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/Api/dio_factory.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/theme_data.dart';
 import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
@@ -22,6 +23,7 @@ import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/on%20boarding/ui/onboarding_screens.dart';
 import 'package:mindsense_app/features/profile/ui/profile_screen.dart';
+import 'package:mindsense_app/features/sign%20up/logic/pincode_signup_provider.dart';
 import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
 import 'package:mindsense_app/features/sign%20up/ui/signup_screen.dart';
 import 'package:mindsense_app/features/splash/ui/splash_screen.dart';
@@ -32,6 +34,7 @@ import 'package:provider/provider.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesitem.init(); 
+  await DioFactory.init();
   runApp(
     ScreenUtilInit(
       designSize: Size(375, 812),
@@ -40,6 +43,9 @@ void main() async{
           providers: [
             ChangeNotifierProvider(
               create: (_) => SignupProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => PincodeSignupProvider(),
             ),
             ChangeNotifierProvider(
               create: (_) => LoginProvider(),

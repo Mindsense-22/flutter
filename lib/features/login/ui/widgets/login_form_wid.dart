@@ -4,6 +4,7 @@ import 'package:mindsense_app/core/custom%20widgets/custom_emailtextformfield.da
 import 'package:mindsense_app/core/custom%20widgets/custom_passwordtextformfield.dart';
 import 'package:mindsense_app/features/forget%20password/ui/forgetpassword_setemail.dart';
 import 'package:mindsense_app/features/login/logic/login_provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginFormWid extends StatelessWidget {
   const LoginFormWid({super.key, required this.provider});
@@ -62,13 +63,19 @@ class LoginFormWid extends StatelessWidget {
             
             SizedBox(height: 28,),
             //login button
-            Center(
-              child: CustomButton(
-                text: "Login",
-                onPressed:() {
-                  provider.loginButton(context);                                  
-                }  
-              ),
+            Consumer<LoginProvider>(
+              builder: (context,val,child) {
+                return Center(
+                  child:
+                  val.isloading==false?
+                  CustomButton(
+                    text: "Login",
+                    onPressed:() {
+                      provider.loginButton(context);                                  
+                    }  
+                  ):CircularProgressIndicator()
+                );
+              }
             ),
           ],
 

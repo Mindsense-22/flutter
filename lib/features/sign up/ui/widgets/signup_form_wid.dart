@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_ageformfield.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_emailtextformfield.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_passwordtextformfield.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_textformfield.dart';
 import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
+import 'package:provider/provider.dart';
 
 class SignupFormWid extends StatelessWidget {
   const SignupFormWid({super.key, required this.provider, required this.context});
@@ -21,7 +23,7 @@ class SignupFormWid extends StatelessWidget {
         children: [
     
           Text("Name",style: TextStyle(
-            fontSize: 16.sp,
+            fontSize: 14.sp,
             fontWeight: FontWeight.w500,
             color: Theme.of(context).colorScheme.onSecondary,
           ),),   
@@ -42,7 +44,21 @@ class SignupFormWid extends StatelessWidget {
             validator: provider.nameValidator,
             
           ),
-          SizedBox(height: 16.h,),
+          SizedBox(height: 14.h,),
+          Text("Age",style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.onSecondary,
+          ),),   
+          SizedBox(height: 4.h,),
+
+          CustomAgeformfield(
+            controller: provider.signupAgeController, 
+            hintText: "Enter your age",
+            icon: Icon(Icons.email_outlined),
+            validator: provider.ageValidator,                                
+          ),
+          SizedBox(height: 14.h,),
     
     
           Text("Email",style: TextStyle(
@@ -58,7 +74,9 @@ class SignupFormWid extends StatelessWidget {
             icon: Icon(Icons.email_outlined),
             validator: provider.emailValidator,                                
           ),
-          SizedBox(height: 16.h,),
+          SizedBox(height: 14.h,),
+
+          
 
           Text("Password",style: TextStyle(
             fontSize: 16.sp,
@@ -73,7 +91,7 @@ class SignupFormWid extends StatelessWidget {
             hintText: "password",
             validator: provider.passwordValidator,
           ),          
-          SizedBox(height: 16.h),
+          SizedBox(height: 14.h),
           Text("Re Enetr Password",style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
@@ -89,15 +107,26 @@ class SignupFormWid extends StatelessWidget {
           ),    
           
           
-          SizedBox(height: 32.h,),
+          SizedBox(height: 25.h,),
           //login button
-          Center(
-            child: CustomButton(text:"Sign Up",
-            onPressed: () {
-              provider.signupButton(this.context);
-            },
-            ),
-          ),
+          Consumer<SignupProvider>(
+            builder: (context,val,child) {
+              return Column(
+                children: [
+                  val.signupbuttonisloading==false?
+                  Center(
+                    child: CustomButton(text:"Sign Up",
+                    onPressed: () {
+                      provider.signupButton(this.context);
+                    },
+                    ),
+                  ):
+                  Center(child: CircularProgressIndicator())
+                ],
+              );
+            }
+          )
+          
         ],
 
       ),

@@ -116,6 +116,7 @@ class AboutUserWid extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             Text(
+              SharedPreferencesitem.getString("username")??
               "Username",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.onSecondary,

@@ -3,7 +3,7 @@ import 'package:mindsense_app/core/Api/api_constants.dart';
 
 class DioFactory {
   static late Dio dio;
-  static void init() async {   
+  static Future init() async {   
     dio = Dio(
       BaseOptions(
         baseUrl: ApiConstants.baseUrl,        

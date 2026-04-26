@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:mindsense_app/core/Api/authservice.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 
@@ -10,6 +11,11 @@ class LoginProvider extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();
   bool isloading=false;
   bool islogined=false;
+
+  chaneIsloading(val){
+    isloading=val;
+    notifyListeners();
+  }
 
   String ? emailValidator(String ? val){
     if(val!.isEmpty){
@@ -26,45 +32,73 @@ class LoginProvider extends ChangeNotifier {
     if(val==null||val.isEmpty){
     return "fill The Field";                          
     }
-    if(val.length<6){
-      return "password must be more than 5 charachter";
+    if(val.length<8){
+      return "password must be more than 8 charachter";
     }
     return null;
   }
 
 
-  void loginButton(context) {
+  Future<void> loginButton(context) async {
     if (formKey.currentState!.validate()) {
       log("Form is valid");
-      ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-        content: Text("Form is valid",style: TextStyle(
-          color: Colors.white
-        ),),
-        backgroundColor: Colors.black,
-       )
-      );
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),), (route) => false,);
-      SharedPreferencesitem.setString("token", "111111");
-      SharedPreferencesitem.setString("gmail", loginEmailController.text);
-    }
-    else {
+      chaneIsloading(true);
+      try {
+        final result = await AuthService.login(
+          email: loginEmailController.text,
+          password: loginpasswordController.text,
+        );
+        
+        await SharedPreferencesitem.setString("token", result.token);
+        
+        await SharedPreferencesitem.setString("gmail", loginEmailController.text);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: Duration(milliseconds: 1250),
+            content: Text(
+              "Login successful !",
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.green,
+          ),
+        );
+        chaneIsloading(false);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => MainScreen()),
+          (route) => false,
+        );
+
+      } catch (e) {
+        chaneIsloading(false);
+        log(e.toString());
+        ScaffoldMessenger.of(context).showSnackBar(
+          
+          SnackBar(
+            duration: Duration(milliseconds: 1250),
+            content: Text(e.toString(),style: TextStyle(
+              color: Colors.white
+            ),),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+
+    } else {
       log("Form is NOT valid");
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-        content: Text("Form is not valid",style: TextStyle(
-          color: Colors.white
-        ),),
-        backgroundColor: Colors.black,
-        )
+          content: Text(
+            "Form is not valid",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.black,
+        ),
       );
     }
   }
-
-
-
-
-
   
 }
 
@@ -73,3 +107,31 @@ class LoginProvider extends ChangeNotifier {
 
 
     
+//  void loginButton(context) {
+//     if (formKey.currentState!.validate()) {
+//       log("Form is valid");
+//       ScaffoldMessenger.of(context).showSnackBar(
+//        SnackBar(
+//         content: Text("Form is valid",style: TextStyle(
+//           color: Colors.white
+//         ),),
+//         backgroundColor: Colors.black,
+//        )
+//       );
+//       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),), (route) => false,);
+//       SharedPreferencesitem.setString("token", "111111");
+//       SharedPreferencesitem.setString("gmail", loginEmailController.text);
+//     }
+//     else {
+//       log("Form is NOT valid");
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(
+//         content: Text("Form is not valid",style: TextStyle(
+//           color: Colors.white
+//         ),),
+//         backgroundColor: Colors.black,
+//         )
+//       );
+//     }
+//   }
+

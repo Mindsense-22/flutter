@@ -3,37 +3,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 
-
-class CustomEmailTextFormField extends StatelessWidget {
+class CustomAgeformfield extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final String? Function(String?)? validator;
   final icon;
-
-  
-  const CustomEmailTextFormField({super.key, 
-    
-    required this.controller,
-    required this.hintText,    
-    this.validator, this.icon,     
-  }) ;
+  const CustomAgeformfield({super.key, required this.controller, required this.hintText, this.validator, this.icon});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+   Widget build(BuildContext context) {
+    return SizedBox(
       width: double.infinity,      
       child: TextFormField(
+        keyboardType:TextInputType.number ,
         controller: controller,
         autovalidateMode: AutovalidateMode.onUnfocus,
         decoration: InputDecoration(        
           // prefixIcon: Icon,
           prefixIcon: Padding(
             padding: const EdgeInsets.all(11.0),
-            child: SvgPicture.asset(
-              "assets/images/email_icon.svg",
-              width: 21.5.w,
-              height: 18.5.h,
-            ),
+            child: Icon(Icons.numbers_outlined)
           ),
           hintText: hintText,
           hintStyle: const TextStyle(

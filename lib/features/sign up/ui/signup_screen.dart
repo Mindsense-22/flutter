@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
 import 'package:mindsense_app/features/sign%20up/ui/widgets/signup_form_wid.dart';
 import 'package:mindsense_app/features/sign%20up/ui/widgets/signup_platforms_auth_wid.dart';
@@ -22,22 +23,23 @@ class SignupScreen extends StatelessWidget {
           },
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(right: 18,left: 18,top: 50),
+              padding:  EdgeInsets.only(right: 18.w,left: 18.w,top: 30.h),
               child: Consumer(
                 builder: (context,val,child) {
                   var provider=context.read<SignupProvider>();
                   return Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,        
+                    crossAxisAlignment: CrossAxisAlignment.center,   
+                    mainAxisAlignment: MainAxisAlignment.center,     
                     children: [
                       // upper text wid
                       SignupUppertextWid(),
 
-                      SizedBox(height: 48,),
+                      SizedBox(height: 20.h,),
                       
                       //signup form widget
                       SignupFormWid(provider: provider,context: context,),
                               
-                      SizedBox(height: 24,),
+                      SizedBox(height: 24.h,),
                               
                       // Text("or continue with",style: TextStyle(
                       //   fontSize: 20,
@@ -45,12 +47,12 @@ class SignupScreen extends StatelessWidget {
                       //   color: Theme.of(context).colorScheme.onSecondary,
                       // ),),
                         
-                      SizedBox(height: 24,),
+                      //SizedBox(height: 3.h,),
                               
                       //platforms auth widget
                       //SignupPlatformsAuthWid(),
                      
-                      SizedBox(height: 24,),
+                      // SizedBox(height: 24,),
                       
                       //to login widget  
                       TologinWidget(),

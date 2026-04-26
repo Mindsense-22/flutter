@@ -70,7 +70,9 @@ class ProfileScreen extends StatelessWidget {
           
           actions: [          
             InkWell(
-              onTap: () {},
+              onTap: () async{
+                
+              },
               borderRadius: BorderRadius.circular(120.r),            
               child: SvgPicture.asset(
                 "assets/images/settings_icon_white.svg",

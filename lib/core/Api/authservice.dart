@@ -1,0 +1,111 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:mindsense_app/core/Api/api_constants.dart';
+import 'package:mindsense_app/core/Api/dio_factory.dart';
+import 'package:mindsense_app/core/modules/user.dart';
+import 'package:mindsense_app/features/login/modules/loginresponse_model.dart';
+import 'package:mindsense_app/features/sign%20up/modules/verifypincoderesponse.dart';
+
+class AuthService {
+  static String apiMessege="";
+  // signup
+  static Future<void> signUp({
+    required String name,
+    required String email,
+    required String password,
+    required String passwordConfirm,
+    required int age,
+  }) async {
+    try {
+      final response = await DioFactory.postData(
+        path: ApiConstants.signup,
+        data: {
+          "name": name,
+          "email": email,
+          "password": password,
+          "passwordConfirm": passwordConfirm,
+          "age": age,
+        },        
+      );
+
+      log("SUCCESS: ${response.data}");
+      
+    } catch (e) {
+      if (e is DioException) {
+        log("STATUS: ${e.response?.statusCode}");
+        log("DATA: ${e.response?.data}");
+        apiMessege = e.response?.data["message"];
+      }
+      rethrow;
+    }
+  }
+
+  //verifyPinCode
+  static Future<VerifyPinCodeResponse> verifyPinCode({
+    required String email,
+    required String code,
+  }) async {
+    try {
+      final response = await DioFactory.postData(
+        path: ApiConstants.verify,
+        data: {
+          "email": email,
+          "code": code,
+        },
+      );
+
+      return VerifyPinCodeResponse.fromJson(response.data);
+
+    } on DioException catch (e) {
+      final message = e.response?.data["message"] ?? "Verify failed";
+      throw message;
+    }
+  }
+
+  // ================= RESENDSignUpPinCode =================
+  static Future<void> resendSignUpPinCode(String email) async {
+    await DioFactory.postData(
+      path: ApiConstants.resendCode,
+      data: {"email": email},
+    );
+  }
+
+  //////// login auth//////////////////////////////////
+  
+  static Future<LoginResponse> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await DioFactory.postData(
+        path: ApiConstants.login,
+        data: {
+          "email": email,
+          "password": password,
+        },
+      );
+
+      return LoginResponse.fromJson(response.data);
+
+    } on DioException catch (e) {
+      final message = e.response?.data["message"] ?? "Login failed";
+      throw message;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
