@@ -63,6 +63,7 @@ class LoginProvider extends ChangeNotifier {
             backgroundColor: Colors.green,
           ),
         );
+        log(result.status);
         chaneIsloading(false);
         Navigator.pushAndRemoveUntil(
           context,

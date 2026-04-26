@@ -86,7 +86,7 @@ class AuthService {
           "password": password,
         },
       );
-
+      
       return LoginResponse.fromJson(response.data);
 
     } on DioException catch (e) {

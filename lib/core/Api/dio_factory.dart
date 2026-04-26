@@ -6,7 +6,9 @@ class DioFactory {
   static Future init() async {   
     dio = Dio(
       BaseOptions(
-        baseUrl: ApiConstants.baseUrl,        
+        baseUrl: ApiConstants.baseUrl,  
+        connectTimeout: Duration(seconds: 15)   
+           
       ),
     );
   }
