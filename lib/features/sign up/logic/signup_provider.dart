@@ -58,6 +58,7 @@ class SignupProvider extends ChangeNotifier{
     return null;
   }
 
+
   String? passwordValidator(String? val) {
     if (val == null || val.isEmpty) {
       return "Fill the field";

@@ -25,6 +25,11 @@ class ProfileScreenProvider extends ChangeNotifier {
   String? userName;
   String? userEmail;
   int? userAge;
+  String ? trustedContactname;
+  String ? trustedContactemail;
+  String ? trustedContactrelationship;
+  String ? trustedContactstatus;
+
   bool isLoadingProfile = false;
   setName(newname){
     userName=newname;
@@ -38,6 +43,7 @@ class ProfileScreenProvider extends ChangeNotifier {
     userAge=newage;
     notifyListeners();
   }
+  
   Future<void> fetchUserProfile() async {
     try {
       isLoadingProfile = true;
@@ -47,6 +53,10 @@ class ProfileScreenProvider extends ChangeNotifier {
       userName = userData['name'];
       userEmail = userData['email'];
       userAge = userData['age'];
+      trustedContactname=userData["trustedContact"]["name"];
+      trustedContactemail=userData["trustedContact"]["email"];
+      trustedContactrelationship=userData["trustedContact"]["relationship"];
+      trustedContactstatus=userData["trustedContact"]["status"];
       if(userName!=null){
         await SharedPreferencesitem.setString("userName", userName!);
         setName(userName);
@@ -59,6 +69,24 @@ class ProfileScreenProvider extends ChangeNotifier {
         await SharedPreferencesitem.setInt("userAge", userAge!);
         setAge(userAge);
       }
+      // store trusted contact
+      if(trustedContactname!=null){
+        await SharedPreferencesitem.setString("trustedContactname", trustedContactname!);
+        
+      }
+      if(trustedContactemail!=null){
+        await SharedPreferencesitem.setString("trustedContactemail", trustedContactemail!);
+       
+      }
+      if(trustedContactrelationship!=null){
+        await SharedPreferencesitem.setString("trustedContactrelationship", trustedContactrelationship!);
+       
+      }
+      if(trustedContactstatus!=null){
+        await SharedPreferencesitem.setString("trustedContactstatus", trustedContactstatus!);
+        
+      }
+      
       
       
       isLoadingProfile = false;
@@ -155,5 +183,49 @@ class ProfileScreenProvider extends ChangeNotifier {
   void toggleDarkMode(bool value) {
     isDarkMode = value;
     notifyListeners();
+  }
+
+  bool isApprovingContact = false;
+  Future<void> approveContact(String token) async {
+    try {
+      isApprovingContact = true;
+      notifyListeners();
+
+      await AuthService.approveContact(token);
+
+      isApprovingContact = false;
+      notifyListeners();
+    } catch (e) {
+      isApprovingContact = false;
+      notifyListeners();
+      log("Error approving contact: $e");
+      rethrow;
+    }
+  }
+
+  bool isAddingContact = false;
+  Future<void> addContact({
+    required String contactName,
+    required String contactEmail,
+    required String relationship,
+  }) async {
+    try {
+      isAddingContact = true;
+      notifyListeners();
+
+      await AuthService.addContact(
+        contactName: contactName,
+        contactEmail: contactEmail,
+        relationship: relationship,
+      );
+
+      isAddingContact = false;
+      notifyListeners();
+    } catch (e) {
+      isAddingContact = false;
+      notifyListeners();
+      log("Error adding contact: $e");
+      rethrow;
+    }
   }
 }

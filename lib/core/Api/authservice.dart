@@ -189,5 +189,37 @@ class AuthService {
       throw message;
     }
   }
+
+  static Future<void> approveContact(String token) async {
+    try {
+      await DioFactory.getData(
+        path: "${ApiConstants.approveContact}$token",
+      );
+    } on DioException catch (e) {
+      final message = e.response?.data["message"] ?? "Failed to approve contact";
+      throw message;
+    }
+  }
+
+  static Future<Map<String, dynamic>> addContact({
+    required String contactName,
+    required String contactEmail,
+    required String relationship,
+  }) async {
+    try {
+      final response = await DioFactory.postData(
+        path: ApiConstants.addContact,
+        data: {
+          "contactName": contactName,
+          "contactEmail": contactEmail,
+          "relationship": relationship,
+        },
+      );
+      return response.data;
+    } on DioException catch (e) {
+      final message = e.response?.data["message"] ?? "Failed to add contact";
+      throw message;
+    }
+  }
 }
 

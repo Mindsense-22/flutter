@@ -18,4 +18,6 @@ class ApiConstants {
   static const String analyzeVoice = "/api/emotion/voice";
   static const String analyzeAll = "/api/emotion/all";
   static const String emotionHistory = "/api/emotion/history";
+  static const String approveContact = "/api/v1/users/approve-contact/";
+  static const String addContact = "/api/v1/users/add-contact";
 }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mindsense_app/features/profile/add%20contact/ui/addcontact_screen.dart';
 import 'package:mindsense_app/features/profile/edit%20user%20information/ui/editinformation_screen.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:mindsense_app/features/profile/update%20password/ui/updatepassword_screen.dart';
@@ -59,6 +60,19 @@ class GeneralSettingsWid extends StatelessWidget {
                   if (result == true) {
                     await context.read<ProfileScreenProvider>().init();
                   }
+                },              
+              ),
+              SizedBox(height: 4.h,),
+
+              SettingItemsWid(
+                context: context,
+                title: "Add Trusted Contact",
+                iconPath: "assets/images/Personalinformation_icon.svg",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddcontactScreen(),)
+                  );
                 },              
               ),
               SizedBox(height: 4.h,),
