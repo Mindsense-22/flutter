@@ -5,6 +5,7 @@ import 'package:mindsense_app/features/exercises/ui/exercises_screen.dart';
 import 'package:mindsense_app/features/home/ui/homescreen.dart';
 import 'package:mindsense_app/features/games/ui/games_hub_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
+import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:mindsense_app/features/profile/ui/profile_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +70,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<Mainscreenprovider>();
-
+    
     return Scaffold(
       body: PageView(        
         physics: const PageScrollPhysics(),

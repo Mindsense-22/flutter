@@ -3,6 +3,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mindsense_app/features/profile/edit%20user%20information/ui/editinformation_screen.dart';
+import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
+import 'package:provider/provider.dart';
 
 class GeneralSettingsWid extends StatelessWidget {
   const GeneralSettingsWid({super.key});
@@ -31,7 +34,8 @@ class GeneralSettingsWid extends StatelessWidget {
           child: Column(
             children: [
              
-              SettingItemsWid(                
+              SettingItemsWid(   
+                context: context,             
                 title: "Security",
                 iconPath: "assets/images/security.svg",
                 onTap: () {
@@ -41,7 +45,26 @@ class GeneralSettingsWid extends StatelessWidget {
               SizedBox(height: 4.h,),
 
               SettingItemsWid(
-                title: "Personal information",
+                context: context,
+                title: "Edit Personal information",
+                iconPath: "assets/images/Personalinformation_icon.svg",
+                onTap: () async{
+                  log("Personalinformation_icon clicked!");
+                  final result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => EditinformationScreen()),
+                  );
+
+                  if (result == true) {
+                    await context.read<ProfileScreenProvider>().init();
+                  }
+                },              
+              ),
+              SizedBox(height: 4.h,),
+
+              SettingItemsWid(
+                context: context,
+                title: "Edit Password",
                 iconPath: "assets/images/Personalinformation_icon.svg",
                 onTap: () {
                   log("Personalinformation_icon clicked!");
@@ -50,12 +73,14 @@ class GeneralSettingsWid extends StatelessWidget {
               SizedBox(height: 4.h,),
 
               SettingItemsWid(
+                context: context,
                 title: "Notification",
                 iconPath: "assets/images/notification_icon.svg",
                 onTap: () {
                   log("Notification clicked!");
                 },              
               ),
+
               SizedBox(height: 4.h,),
             ],
           ),
@@ -71,13 +96,14 @@ class SettingItemsWid extends StatelessWidget {
   
   final String title;
   final VoidCallback onTap;
-  final String iconPath; 
+  final String iconPath;
+  final context; 
   
   const SettingItemsWid({
     super.key,
     required this.title,
     required this.onTap,
-    required this.iconPath,
+    required this.iconPath,required this.context,
   });
 
   @override

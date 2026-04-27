@@ -22,6 +22,7 @@ import 'package:mindsense_app/features/login/logic/login_provider.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/on%20boarding/ui/onboarding_screens.dart';
+import 'package:mindsense_app/features/profile/edit%20user%20information/logic/edit_user_information_provider.dart';
 import 'package:mindsense_app/features/profile/ui/profile_screen.dart';
 import 'package:mindsense_app/features/sign%20up/logic/pincode_signup_provider.dart';
 import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
@@ -80,6 +81,9 @@ void main() async{
             ),
             ChangeNotifierProvider(
               create: (_) => AudioProvider (),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => EditUserInformationProvider (),
             ),
             ChangeNotifierProvider(
               create: (_) => GamificationProvider(),

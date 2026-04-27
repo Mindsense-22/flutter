@@ -26,7 +26,18 @@ class ProfileScreenProvider extends ChangeNotifier {
   String? userEmail;
   int? userAge;
   bool isLoadingProfile = false;
-
+  setName(newname){
+    userName=newname;
+    notifyListeners();
+  }
+  setEmail(newemail){
+    userEmail=newemail;
+    notifyListeners();
+  }
+  setAge(newage){
+    userAge=newage;
+    notifyListeners();
+  }
   Future<void> fetchUserProfile() async {
     try {
       isLoadingProfile = true;
@@ -38,12 +49,15 @@ class ProfileScreenProvider extends ChangeNotifier {
       userAge = userData['age'];
       if(userName!=null){
         await SharedPreferencesitem.setString("userName", userName!);
+        setName(userName);
       }
       if(userEmail!=null){
         await SharedPreferencesitem.setString("userEmail", userEmail!);
+        setEmail(userEmail);
       }
       if(userAge!=null){
         await SharedPreferencesitem.setInt("userAge", userAge!);
+        setAge(userAge);
       }
       
       
@@ -56,15 +70,15 @@ class ProfileScreenProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> updateUserProfile({String? name, String? email, int? age}) async {
+  Future<void> updateUserProfile({required  String? name, required String? email,required  int? age}) async {
     try {
       isLoadingProfile = true;
       notifyListeners();
       
       final updatedData = await AuthService.updateMe(name, email, age);
-      if (updatedData['name'] != null) userName = updatedData['name'];
-      if (updatedData['email'] != null) userEmail = updatedData['email'];
-      if (updatedData['age'] != null) userAge = updatedData['age'];
+      if (updatedData['name'] != null){userName = updatedData['name'];notifyListeners();} 
+      if (updatedData['email'] != null){userEmail = updatedData['email'];notifyListeners();} 
+      if (updatedData['age'] != null){userAge = updatedData['age'];notifyListeners();} 
       if(userName!=null){
         await SharedPreferencesitem.setString("userName", userName!);
       }
@@ -74,6 +88,7 @@ class ProfileScreenProvider extends ChangeNotifier {
       if(userAge!=null){
         await SharedPreferencesitem.setInt("userAge", userAge!);
       }
+      
       isLoadingProfile = false;
       notifyListeners();
     } catch (e) {

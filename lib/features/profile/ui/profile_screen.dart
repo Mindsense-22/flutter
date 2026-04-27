@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/exercises/logic/audio_player_provider.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
+import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:mindsense_app/features/profile/ui/widgets/about_user_wid.dart';
 import 'package:mindsense_app/features/profile/ui/widgets/favourite_wid.dart';
 import 'package:mindsense_app/features/profile/ui/widgets/general_settings_wid.dart';
@@ -87,14 +88,17 @@ class ProfileScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Padding(
             padding:  EdgeInsets.symmetric(horizontal:  20.w),
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
-              children:  [
-                AboutUserWid(),
-                GeneralSettingsWid(),
-                //FavouriteWid(),
-                SizedBox(height: 30.h),
-              ],
+            child: ChangeNotifierProvider(
+              create: (_) => ProfileScreenProvider()..init(),
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
+                children:  [
+                  AboutUserWid(),
+                  GeneralSettingsWid(),
+                  //FavouriteWid(),
+                  SizedBox(height: 30.h),
+                ],
+              ),
             ),
           ),
         ),
