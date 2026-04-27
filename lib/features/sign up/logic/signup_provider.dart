@@ -118,7 +118,7 @@ class SignupProvider extends ChangeNotifier{
         );
 
         await SharedPreferencesitem.setString(
-          "gmail",
+          "userEmail",
           signupEmailController.text,
         );
         ScaffoldMessenger.of(context).showSnackBar(

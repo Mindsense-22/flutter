@@ -51,7 +51,7 @@ class LoginProvider extends ChangeNotifier {
         
         await SharedPreferencesitem.setString("token", result.token);
         
-        await SharedPreferencesitem.setString("gmail", loginEmailController.text);
+        await SharedPreferencesitem.setString("userEmail", loginEmailController.text);
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

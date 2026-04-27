@@ -106,6 +106,88 @@ class AuthService {
 
 
 
+  static Future<void> forgotPassword(String email) async {
+    try {
+      await DioFactory.postData(
+        path: ApiConstants.forgotPassword,
+        data: {"email": email},
+      );
+    } on DioException catch (e) {
+      final message = e.response?.data["message"] ?? "Failed to request password reset";
+      throw message;
+    }
+  }
 
+  static Future<void> verifyResetCode(String email, String code) async {
+    try {
+      await DioFactory.postData(
+        path: ApiConstants.verifyResetCode,
+        data: {"email": email, "code": code},
+      );
+    } on DioException catch (e) {
+      final message = e.response?.data["message"] ?? "Invalid code";
+      throw message;
+    }
+  }
+
+  static Future<String> resetPassword(String email, String code, String newPassword) async {
+    try {
+      final response = await DioFactory.patchData(
+        path: ApiConstants.resetPassword,
+        data: {"email": email, "code": code, "newPassword": newPassword},
+      );
+      return response.data["token"];
+    } on DioException catch (e) {
+      final message = e.response?.data["message"] ?? "Failed to reset password";
+      throw message;
+    }
+  }
+
+  static Future<Map<String, dynamic>> getMe() async {
+    try {
+      final response = await DioFactory.getData(
+        path: ApiConstants.getMe,
+      );
+      return response.data["data"]["user"];
+    } on DioException catch (e) {
+      final message = e.response?.data["message"] ?? "Failed to get profile";
+      throw message;
+    }
+  }
+
+  static Future<Map<String, dynamic>> updateMe(String? name, String? email, int? age) async {
+    try {
+      Map<String, dynamic> data = {};
+      if (name != null) data["name"] = name;
+      if (email != null) data["email"] = email;
+      if (age != null) data["age"] = age;
+      
+      final response = await DioFactory.patchData(
+        path: ApiConstants.updateMe,
+        data: data,
+      );
+      return response.data["data"]["user"];
+    } on DioException catch (e) {
+      final message = e.response?.data["message"] ?? "Failed to update profile";
+      throw message;
+    }
+  }
+
+  static Future<String> updateMyPassword(String passwordCurrent, String password, String passwordConfirm) async {
+    try {
+      final response = await DioFactory.patchData(
+        path: ApiConstants.updateMyPassword,
+        data: {
+          "passwordCurrent": passwordCurrent,
+          "password": password,
+          "passwordConfirm": passwordConfirm,
+        },
+      );
+      return response.data["token"];
+    } on DioException catch (e) {
+      final message = e.response?.data["message"] ?? "Failed to update password";
+      throw message;
+    }
+  }
 }
 

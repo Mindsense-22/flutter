@@ -9,6 +9,7 @@ import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/forget%20password/ui/forgetpasswoed_setnewpassword.dart';
 import 'package:mindsense_app/features/forget%20password/ui/forgetpassword_setpincode.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
+import 'package:mindsense_app/core/Api/authservice.dart';
 
 
 class ForgetpasswordProvider extends ChangeNotifier{
@@ -31,17 +32,35 @@ class ForgetpasswordProvider extends ChangeNotifier{
   void sendCodeButton(context) async{
     if (setEmailFormKey.currentState!.validate()) {
       log("Form is valid");
-      ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-        content: Text("Form is valid",style: TextStyle(
-          color: Colors.white
-        ),),
-        backgroundColor: Colors.black,
-       )
-      );
       FocusScope.of(context).unfocus();
-      await Future.delayed(Duration(milliseconds: 200));
-      Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetpasswordSetpincode(),));
+      
+      try {
+        sendCodeButtonisloading = true;
+        notifyListeners();
+        
+        await AuthService.forgotPassword(forgetPasswordEmailController.text);
+        
+        sendCodeButtonisloading = false;
+        notifyListeners();
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Code sent to your email", style: TextStyle(color: Colors.white)),
+            backgroundColor: Colors.green,
+          )
+        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetpasswordSetpincode()));
+      } catch (e) {
+        sendCodeButtonisloading = false;
+        notifyListeners();
+        log(e.toString());
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString(), style: TextStyle(color: Colors.white)),
+            backgroundColor: Colors.red,
+          )
+        );
+      }
     }
     else {
       log("Form is NOT valid");
@@ -63,23 +82,45 @@ class ForgetpasswordProvider extends ChangeNotifier{
   String correctPinCode="111111";
 
   void verifyCodeButton(context) async{
-    if (setPinCodeFormKey.currentState!.validate()&&forgetPasswordPinCodeController.text==correctPinCode) {
+    if (setPinCodeFormKey.currentState!.validate()) {
       resetPinError();
       log("Form is valid");
-      log(forgetPasswordPinCodeController.text);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Form is valid",style: TextStyle(
-            color: Colors.white
-          ),),
-          backgroundColor: Colors.black,
-        )
-      );
-      Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetpasswoedSetnewpassword(),));
-      await Future.delayed(Duration(seconds: 2)); 
-      forgetPasswordPinCodeController.clear();  // may cause error when deal with api
       
-      
+      try {
+        verifyCodeButtonisloading = true;
+        notifyListeners();
+        
+        await AuthService.verifyResetCode(
+          forgetPasswordEmailController.text,
+          forgetPasswordPinCodeController.text
+        );
+        
+        verifyCodeButtonisloading = false;
+        notifyListeners();
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Code verified successfully", style: TextStyle(color: Colors.white)),
+            backgroundColor: Colors.green,
+          )
+        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetpasswoedSetnewpassword()));
+      } catch (e) {
+        verifyCodeButtonisloading = false;
+        changeIsPinCodeError();
+        HapticFeedback.vibrate();
+        log(e.toString());
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: Duration(milliseconds: 3000),
+            content: Text(e.toString(), style: TextStyle(color: Colors.white)),
+            backgroundColor: Colors.red,
+          )
+        );
+        forgetPasswordPinCodeController.clear();
+        await Future.delayed(Duration(seconds: 3));   
+        resetPinError();
+      }
     }
     else {
       changeIsPinCodeError();   
@@ -95,7 +136,7 @@ class ForgetpasswordProvider extends ChangeNotifier{
           backgroundColor: Colors.black,
         )
       );
-      forgetPasswordPinCodeController.clear(); // may cause error when deal with api
+      forgetPasswordPinCodeController.clear();
       await Future.delayed(Duration(seconds: 3));   
       resetPinError();
     }
@@ -142,19 +183,41 @@ class ForgetpasswordProvider extends ChangeNotifier{
     return null;
   }
 
-   void resetPasswordButton(context) {
+   void resetPasswordButton(context) async {
     if (setNewPasswoedFormKey.currentState!.validate()) {
       log("Form is valid");
-      ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-        content: Text("Form is valid",style: TextStyle(
-          color: Colors.white
-        ),),
-        backgroundColor: Colors.black,
-       )
-      );
-      passwordChangeSuccessfuly=true;
-      notifyListeners();
+      
+      try {
+        resetPasswordButtonisloading = true;
+        notifyListeners();
+        
+        await AuthService.resetPassword(
+          forgetPasswordEmailController.text,
+          forgetPasswordPinCodeController.text, // note: needs code, we kept it in memory... wait! We cleared it in verifyCodeButton! 
+          setNewPasswoedController.text
+        );
+        
+        resetPasswordButtonisloading = false;
+        passwordChangeSuccessfuly = true;
+        notifyListeners();
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Password reset successful", style: TextStyle(color: Colors.white)),
+            backgroundColor: Colors.green,
+          )
+        );
+      } catch (e) {
+        resetPasswordButtonisloading = false;
+        notifyListeners();
+        log(e.toString());
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString(), style: TextStyle(color: Colors.white)),
+            backgroundColor: Colors.red,
+          )
+        );
+      }
     }
     else {
       log("Form is NOT valid");

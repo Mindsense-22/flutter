@@ -1,0 +1,58 @@
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:mindsense_app/core/Api/api_constants.dart';
+import 'package:mindsense_app/core/Api/dio_factory.dart';
+
+class EmotionService {
+  static Future<Map<String, dynamic>> analyzeFace(File imageFile) async {
+    try {
+      FormData formData = FormData.fromMap({
+        "file": await MultipartFile.fromFile(imageFile.path, filename: "face.jpg"),
+      });
+
+      final response = await DioFactory.postFormData(
+        path: ApiConstants.analyzeFace,
+        data: formData,
+      );
+
+      return response.data;
+    } on DioException catch (e) {
+      throw e.response?.data["message"] ?? "Failed to analyze face";
+    }
+  }
+
+  static Future<Map<String, dynamic>> analyzeVoice(File audioFile) async {
+    try {
+      FormData formData = FormData.fromMap({
+        "file": await MultipartFile.fromFile(audioFile.path, filename: "voice.wav"),
+      });
+
+      final response = await DioFactory.postFormData(
+        path: ApiConstants.analyzeVoice,
+        data: formData,
+      );
+
+      return response.data;
+    } on DioException catch (e) {
+      throw e.response?.data["message"] ?? "Failed to analyze voice";
+    }
+  }
+
+  static Future<Map<String, dynamic>> analyzeAll(File faceFile, File voiceFile) async {
+    try {
+      FormData formData = FormData.fromMap({
+        "face": await MultipartFile.fromFile(faceFile.path, filename: "face.jpg"),
+        "voice": await MultipartFile.fromFile(voiceFile.path, filename: "voice.wav"),
+      });
+
+      final response = await DioFactory.postFormData(
+        path: ApiConstants.analyzeAll,
+        data: formData,
+      );
+
+      return response.data;
+    } on DioException catch (e) {
+      throw e.response?.data["message"] ?? "Failed to perform combined analysis";
+    }
+  }
+}
