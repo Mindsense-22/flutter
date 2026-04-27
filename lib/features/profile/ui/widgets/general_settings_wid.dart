@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/features/profile/edit%20user%20information/ui/editinformation_screen.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
+import 'package:mindsense_app/features/profile/update%20password/ui/updatepassword_screen.dart';
 import 'package:provider/provider.dart';
 
 class GeneralSettingsWid extends StatelessWidget {
@@ -64,10 +65,13 @@ class GeneralSettingsWid extends StatelessWidget {
 
               SettingItemsWid(
                 context: context,
-                title: "Edit Password",
+                title: "Update Password",
                 iconPath: "assets/images/Personalinformation_icon.svg",
                 onTap: () {
-                  log("Personalinformation_icon clicked!");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => UpdatepasswordScreen(),)
+                  );
                 },              
               ),
               SizedBox(height: 4.h,),
