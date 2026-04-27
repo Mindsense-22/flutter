@@ -5,6 +5,7 @@ import 'package:mindsense_app/core/custom%20widgets/custom_ageformfield.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_textformfield.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
+import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/profile/edit%20user%20information/logic/edit_user_information_provider.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:provider/provider.dart';
@@ -15,11 +16,13 @@ class EditinformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: true,
+      canPop: false,
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
-        // await context.read<ProfileScreenProvider>().init();
-        Navigator.pop(context,true);
+        await context.read<ProfileScreenProvider>().init();
+        if (context.mounted) {
+          Navigator.pop(context, true);        
+        }
       },
       child: Scaffold(
         appBar: AppBar(
