@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/profile/add%20contact/ui/addcontact_screen.dart';
 import 'package:mindsense_app/features/profile/edit%20user%20information/ui/editinformation_screen.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
@@ -67,7 +68,7 @@ class GeneralSettingsWid extends StatelessWidget {
               SettingItemsWid(
                 context: context,
                 title: "Add Trusted Contact",
-                iconPath: "assets/images/Personalinformation_icon.svg",
+                iconPath: "assets/images/contact_test.svg",
                 onTap: () {
                   Navigator.push(
                     context,
@@ -80,7 +81,7 @@ class GeneralSettingsWid extends StatelessWidget {
               SettingItemsWid(
                 context: context,
                 title: "Update Password",
-                iconPath: "assets/images/Personalinformation_icon.svg",
+                iconPath: "assets/images/lock-password.svg",
                 onTap: () {
                   Navigator.push(
                     context,
@@ -150,6 +151,8 @@ class SettingItemsWid extends StatelessWidget {
                     iconPath, 
                     width: 22.w,
                     height: 22.w,
+                    color: AppColers.primaryColor,
+                    
                   ),
                 ),
               ),
