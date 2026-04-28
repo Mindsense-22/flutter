@@ -73,13 +73,15 @@ class ForgetpasswoedSetnewpassword extends StatelessWidget {
                               SizedBox(height: 32,),
                               // button
                               Center(
-                                child: CustomButton(
+                                child:
+                                provider.resetPasswordButtonisloading==false?
+                                CustomButton(
                                   text: "Reset Password",
                                   onPressed:() {
                                     provider.resetPasswordButton(context);
                                     provider.passwordChangeSuccessfuly?provider.messgeShowDialog(context):log("dialog not show");                                  
                                   }  
-                                ),
+                                ):CircularProgressIndicator()
                               ),
                             ],
                       

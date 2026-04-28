@@ -89,11 +89,9 @@ class ProfileScreenProvider extends ChangeNotifier {
       
       
       
-      isLoadingProfile = false;
-      notifyListeners();
+      // isLoadingProfile = false;
+      // notifyListeners();
     } catch (e) {
-      isLoadingProfile = false;
-      notifyListeners();
       log("Error fetching profile: $e");
     }
   }

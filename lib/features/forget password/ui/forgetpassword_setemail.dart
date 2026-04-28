@@ -61,12 +61,14 @@ class ForgetpasswordSetemail extends StatelessWidget {
 
                             // send code button
                             Center(
-                              child: CustomButton(
+                              child:
+                              provider.sendCodeButtonisloading==false?
+                              CustomButton(
                                 text: "Send Code",
                                 onPressed:() {
                                   provider.sendCodeButton(context);
                                 }  
-                              ),
+                              ):CircularProgressIndicator()
                             ),
                           ],
                         ),

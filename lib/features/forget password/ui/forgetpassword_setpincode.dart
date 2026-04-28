@@ -50,20 +50,25 @@ class ForgetpasswordSetpincode extends StatelessWidget {
 
                             // Verify code button
                             Center(
-                              child: CustomButton(
+                              child:
+                              provider.verifyCodeButtonisloading==false?
+                              CustomButton(
                                 text: "Verify",
                                 onPressed:() {
                                   provider.verifyCodeButton(context);
                                 }  
-                              ),
+                              ):CircularProgressIndicator()
                             ),
                           ],
                         ),
                       ),
                       SizedBox(height: 12.h,),
                       Container(
-                        alignment: Alignment.bottomRight ,
-                        child: TextButton(
+                        alignment:provider.resedcodebuttonloading==false?
+                         Alignment.bottomRight:Alignment.bottomCenter ,
+                        child:
+                        provider.resedcodebuttonloading==false?
+                         TextButton(
                           onPressed:() {
                             provider.resendCode();
                           }, 
@@ -76,7 +81,7 @@ class ForgetpasswordSetpincode extends StatelessWidget {
                               fontSize: 18
                             ),
                           ),
-                        ),
+                        ):CircularProgressIndicator()
                       )
                     ],
                   ),

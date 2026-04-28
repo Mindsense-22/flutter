@@ -5,11 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
+import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/forget%20password/ui/forgetpasswoed_setnewpassword.dart';
 import 'package:mindsense_app/features/forget%20password/ui/forgetpassword_setpincode.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class ForgetpasswordProvider extends ChangeNotifier{
@@ -17,7 +19,10 @@ class ForgetpasswordProvider extends ChangeNotifier{
   TextEditingController forgetPasswordEmailController =TextEditingController();  
   final setEmailFormKey = GlobalKey<FormState>();
   bool sendCodeButtonisloading=false;
-
+  changeSendCodeButtonIsLoading(bool val){
+    sendCodeButtonisloading=val;
+    notifyListeners();
+  }
   String ? setEmailValidator(String ? val){
     if(val!.isEmpty){
       return "fill The Field";                          
@@ -31,17 +36,17 @@ class ForgetpasswordProvider extends ChangeNotifier{
 
   void sendCodeButton(context) async{
     if (setEmailFormKey.currentState!.validate()) {
+      
       log("Form is valid");
       FocusScope.of(context).unfocus();
       
       try {
-        sendCodeButtonisloading = true;
-        notifyListeners();
+        changeSendCodeButtonIsLoading(true);
+        
         
         await AuthService.forgotPassword(forgetPasswordEmailController.text);
         
-        sendCodeButtonisloading = false;
-        notifyListeners();
+        changeSendCodeButtonIsLoading(false);
         
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -49,14 +54,15 @@ class ForgetpasswordProvider extends ChangeNotifier{
             backgroundColor: Colors.green,
           )
         );
+        SharedPreferencesitem.setString("forgetPasswordEmailController", forgetPasswordEmailController.text);
         Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetpasswordSetpincode()));
       } catch (e) {
-        sendCodeButtonisloading = false;
+        changeSendCodeButtonIsLoading(false);
         notifyListeners();
         log(e.toString());
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(e.toString(), style: TextStyle(color: Colors.white)),
+            content: Text(AuthService.apiMessege.toString(), style: TextStyle(color: Colors.white)),
             backgroundColor: Colors.red,
           )
         );
@@ -79,25 +85,27 @@ class ForgetpasswordProvider extends ChangeNotifier{
   final setPinCodeFormKey = GlobalKey<FormState>();
   bool ispincodeError = false;
   bool verifyCodeButtonisloading=false;
-  String correctPinCode="111111";
-
+  
+  changeVerifyCodeButtonIsLoading(bool val ){
+    verifyCodeButtonisloading=val;
+    notifyListeners();
+  }
   void verifyCodeButton(context) async{
     if (setPinCodeFormKey.currentState!.validate()) {
       resetPinError();
       log("Form is valid");
       
       try {
-        verifyCodeButtonisloading = true;
-        notifyListeners();
-        
+        changeVerifyCodeButtonIsLoading(true);
+        String testemail=SharedPreferencesitem.getString("forgetPasswordEmailController")!;
         await AuthService.verifyResetCode(
-          forgetPasswordEmailController.text,
+          testemail,
           forgetPasswordPinCodeController.text
         );
         
-        verifyCodeButtonisloading = false;
-        notifyListeners();
-        
+        print(forgetPasswordEmailController.text.isEmpty.toString());
+        changeVerifyCodeButtonIsLoading(false);
+        await SharedPreferencesitem.setString("forgetPasswordPinCodeController", forgetPasswordPinCodeController.text);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("Code verified successfully", style: TextStyle(color: Colors.white)),
@@ -106,9 +114,9 @@ class ForgetpasswordProvider extends ChangeNotifier{
         );
         Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetpasswoedSetnewpassword()));
       } catch (e) {
-        verifyCodeButtonisloading = false;
-        changeIsPinCodeError();
+        changeVerifyCodeButtonIsLoading(false);
         HapticFeedback.vibrate();
+        log(forgetPasswordEmailController.text.toString());
         log(e.toString());
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -117,7 +125,7 @@ class ForgetpasswordProvider extends ChangeNotifier{
             backgroundColor: Colors.red,
           )
         );
-        forgetPasswordPinCodeController.clear();
+        
         await Future.delayed(Duration(seconds: 3));   
         resetPinError();
       }
@@ -136,7 +144,8 @@ class ForgetpasswordProvider extends ChangeNotifier{
           backgroundColor: Colors.black,
         )
       );
-      forgetPasswordPinCodeController.clear();
+      //forgetPasswordPinCodeController.clear(); // notice here
+      
       await Future.delayed(Duration(seconds: 3));   
       resetPinError();
     }
@@ -150,8 +159,19 @@ class ForgetpasswordProvider extends ChangeNotifier{
     ispincodeError=false;
     notifyListeners();
   }
-  void resendCode(){
+  ///// for resend pin code
+  bool resedcodebuttonloading=false;
 
+  void resendCode()async{
+    resedcodebuttonloading=true;
+    notifyListeners();
+    
+    
+    String testeamil=SharedPreferencesitem.getString("forgetPasswordEmailController")!;
+    
+    await AuthService.forgotPassword(testeamil);
+    resedcodebuttonloading=false;
+    notifyListeners();
   }
 
 
@@ -190,23 +210,27 @@ class ForgetpasswordProvider extends ChangeNotifier{
       try {
         resetPasswordButtonisloading = true;
         notifyListeners();
-        
-        await AuthService.resetPassword(
-          forgetPasswordEmailController.text,
-          forgetPasswordPinCodeController.text, // note: needs code, we kept it in memory... wait! We cleared it in verifyCodeButton! 
+        String testemail=SharedPreferencesitem.getString("forgetPasswordEmailController")!;
+        String testpincode=SharedPreferencesitem.getString("forgetPasswordPinCodeController")!;
+        final response=await AuthService.resetPassword(
+          testemail,
+          testpincode, 
           setNewPasswoedController.text
         );
-        
+        var token=response;
         resetPasswordButtonisloading = false;
         passwordChangeSuccessfuly = true;
         notifyListeners();
         
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
+            duration: Duration(milliseconds: 1500),
             content: Text("Password reset successful", style: TextStyle(color: Colors.white)),
-            backgroundColor: Colors.green,
+            backgroundColor: const Color.fromARGB(255, 36, 132, 40),
           )
         );
+        messgeShowDialog(context);
+        SharedPreferencesitem.clear();
       } catch (e) {
         resetPasswordButtonisloading = false;
         notifyListeners();
