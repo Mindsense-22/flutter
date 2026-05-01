@@ -37,8 +37,8 @@ class ReportScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 16.h,),
-              OverallstateWid(),
+              //SizedBox(height: 16.h,),
+              //OverallstateWid(),
               SizedBox(height: 20.h,),
               ImageanalysisReportWid(),
               SizedBox(height: 20.h,),
@@ -72,9 +72,9 @@ class ReportScreen extends StatelessWidget {
                     child: MaterialButton( 
                       padding: EdgeInsets.all(8),
                       onPressed:(){
-                        final reportProvider = context.read<Analysisreportprovider>();
+                        final analyzingProvider = context.read<AnalyzingProvider>();
                         String emotion = 'neutral';
-                        final condition = reportProvider.stateCondition.toLowerCase();
+                        final condition = analyzingProvider.detectedAllEmotion!.toLowerCase();
                         if (condition.contains('positive') || condition.contains('happy')) {
                           emotion = 'happy';
                         } else if (condition.contains('negative') || condition.contains('sad')) {
@@ -85,7 +85,7 @@ class ReportScreen extends StatelessWidget {
                           emotion = 'angry';
                         }
                         
-                        double confidence = reportProvider.targetvalue * 100;
+                        double confidence = analyzingProvider.allFinalScore * 100;
                         gp.generateRecommendation(emotion, confidence);
                       },
                       child: Text("Get Recommendation",style: TextStyle(

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
@@ -89,7 +91,7 @@ class PhotoSelectScreen extends StatelessWidget {
                       ),
                       child: MaterialButton(
                         onPressed:(){
-                          val.pickGalleryImage();
+                          val.pickGalleryImage(context);
                         },
                         child: Text(
                           "Gallery",style: TextStyle(
@@ -113,7 +115,7 @@ class PhotoSelectScreen extends StatelessWidget {
                       ),
                       child: MaterialButton(
                         onPressed:(){
-                          val.pickCameraImage();
+                          val.pickCameraImage(context);
                         },
                         child: Text(
                           "Camera",style: TextStyle(
@@ -127,33 +129,49 @@ class PhotoSelectScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 25.h,),
-                Container(
-                  width: double.infinity,
-                  height: 51.h, 
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: AppColers.primaryColor,
-                    borderRadius: BorderRadius.circular(10.r),
-                    
-                  ),
-                  child: MaterialButton(                    
-                    onPressed:(){
-                      if(val.selctedimage!=null){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => PhotoScanResultScreen()),
-                        );
-                      }
-                      
-                    },
-                    child: Text(
-                      "See Result",style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Theme.of(context).colorScheme.onPrimary
+                Consumer<AnalyzingProvider>(
+                  builder: (context,val2,child) {
+                    return
+                     val2.isAnalyzing 
+                              ? SizedBox(
+                                  height: 20.h,
+                                  width: 20.w,
+                                  child: CircularProgressIndicator(
+                                    color: AppColers.primaryColor,
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                              :
+                     Container(
+                      width: double.infinity,
+                      height: 51.h, 
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        color: AppColers.primaryColor,
+                        borderRadius: BorderRadius.circular(10.r),
+                        
                       ),
-                    ),
-                  ),
+                      child:                           
+                           MaterialButton(                    
+                            onPressed:(){
+                              if(val.selctedimage!=null && !val.isloading){
+                                val2.submitFaceAnalysis(context);
+                              }
+                              else{
+                                log("error");
+                              }
+                              
+                            },
+                            child:  Text(
+                                "See Result",style: TextStyle(
+                                  fontSize: 24.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: Theme.of(context).colorScheme.onPrimary
+                                ),
+                              ),
+                          ),
+                     );
+                  }
                 ),
               ],
             ),

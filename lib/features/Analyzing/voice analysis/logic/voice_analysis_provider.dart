@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -24,6 +25,15 @@ class VoiceAnalysisProvider extends ChangeNotifier {
   List<double> amplitudes = [];
   Timer? amplitudeTimer;
 
+  List<String> voiceAnalysisExercises= [
+     'Take a slow breath in through your nose before speaking',
+     'Relax your jaw and let your lips move freely',
+     'Hum gently for a few seconds to warm up your voice',
+     
+  ];
+  double targetvalue=(80/100);
+  String stateCondition="Positive";
+  
   final RecordConfig recordConfig = const RecordConfig(
     encoder: AudioEncoder.wav,
     sampleRate: 16000,
@@ -104,7 +114,7 @@ class VoiceAnalysisProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> stopRecording() async {
+  Future<void> stopRecording(context) async {
     timer?.cancel();    
     isRecording=false;
     recoredStoped=true;
@@ -114,7 +124,9 @@ class VoiceAnalysisProvider extends ChangeNotifier {
     
     if (path != null) {          
       audioFile = File(path);
-      AnalyzingProvider().setSelectedAudio(audioFile);
+      Provider.of<AnalyzingProvider>(context, listen: false)
+      .setSelectedAudio(audioFile);
+     
     }
     else{
       audioFile=null;

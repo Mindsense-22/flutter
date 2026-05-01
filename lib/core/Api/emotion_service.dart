@@ -4,6 +4,7 @@ import 'package:mindsense_app/core/Api/api_constants.dart';
 import 'package:mindsense_app/core/Api/dio_factory.dart';
 
 class EmotionService {
+  static String apiMesssege="";
   static Future<Map<String, dynamic>> analyzeFace(File imageFile) async {
     try {
       FormData formData = FormData.fromMap({
@@ -17,7 +18,8 @@ class EmotionService {
 
       return response.data;
     } on DioException catch (e) {
-      throw e.response?.data["message"] ?? "Failed to analyze face";
+      apiMesssege = e.response?.data["message"] ?? "Unknown error";
+      throw apiMesssege;
     }
   }
 
@@ -34,7 +36,8 @@ class EmotionService {
 
       return response.data;
     } on DioException catch (e) {
-      throw e.response?.data["message"] ?? "Failed to analyze voice";
+      apiMesssege = e.response?.data["message"] ?? "Failed to analyze voice";
+      throw apiMesssege;
     }
   }
 

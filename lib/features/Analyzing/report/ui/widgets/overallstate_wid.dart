@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:mindsense_app/features/Analyzing/report/logic/analysisreportprovider.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/report_screen.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/animated_circle_progress_wid.dart';
@@ -34,9 +35,9 @@ class OverallstateWid extends StatelessWidget {
             ),
           ),
           SizedBox(height: 50.h,),
-          Consumer<Analysisreportprovider>(
+          Consumer<AnalyzingProvider>(
             builder: (context,val,child) {
-              return AnimatedCircleProgress(target: val.targetvalue,state: val.stateCondition,);
+              return AnimatedCircleProgress(target: val.allFinalScore!,state: val.detectedAllEmotion!,);
             }
           ),
           SizedBox(height: 50.h,),

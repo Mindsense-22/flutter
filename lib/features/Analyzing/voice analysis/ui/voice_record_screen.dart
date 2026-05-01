@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_scan_result_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/widgets/voicewave_wid.dart';
@@ -169,7 +170,7 @@ class VoiceRecordScreen extends StatelessWidget {
                                   // val.audioFile=null;
                                   // val.cancelRecording();
                                   // val.changeIsRecording();
-                                  val.stopRecording();
+                                  val.stopRecording(context);
                                 },
                                 child: Container(
                                   width: 60.w,
@@ -215,24 +216,26 @@ class VoiceRecordScreen extends StatelessWidget {
                     ),
                                         
                     val.isRecording == false && val.audioFile != null&&val.recoredStoped==true&&val.recordTime!=0
-                    ? Column(
-                      children: [
-                        CustomButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => VoiceScanResultScreen()),
-                            );                              
-                          }, 
-                          text: "Next"
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              val.playRecordedAudio();
-                            },
-                            child: const Text("Play audio",),
-                        ),                                                  
-                      ],
+                    ? Consumer<AnalyzingProvider>(
+                      builder: (context,analyzingProvider,child) {
+                        return Column(
+                          children: [
+                            analyzingProvider.isAnalyzing==false?
+                            CustomButton(
+                              onPressed: () {
+                                analyzingProvider.submitVoiceAnalysis(context);                                  
+                              }, 
+                              text: "Analyze"
+                            ):CircularProgressIndicator(),
+                            TextButton(
+                                onPressed: () {
+                                  val.playRecordedAudio();
+                                },
+                                child: const Text("Play audio",),
+                            ),                                                  
+                          ],
+                        );
+                      }
                     )
                     : const SizedBox.shrink()
                     
