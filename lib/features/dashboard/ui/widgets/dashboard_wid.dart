@@ -17,7 +17,7 @@ class DashboardWid extends StatelessWidget {
     return Consumer<DashboardProvider>(
       builder: (context, provider, child) {
         return Container(
-          height:330.h,
+          height:345.h,
           width: double.infinity,          
           decoration: BoxDecoration(
             color:Colors.transparent,
@@ -26,7 +26,7 @@ class DashboardWid extends StatelessWidget {
           ),
           child: provider.isLoading
               ? _buildLoadingState()
-              : provider.items.isEmpty
+              : provider.dashboardItems.isEmpty
                   ? _buildEmptyState()
                   : _buildChartContent(context, provider),
         );
@@ -73,13 +73,13 @@ class DashboardWid extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 282.h,
+              height: 315.h,
               width: 21.w,
               child: YAxis(),
             ),
             SizedBox(width: 13.w,),
             SizedBox(
-              height: 307.h,
+              height: 340.h,
               width: 306.w,
               child: Padding(
                 padding: EdgeInsets.only(right: 0.w),
@@ -87,10 +87,10 @@ class DashboardWid extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   
                   children: List.generate(
-                    provider.items.length,
+                    provider.dashboardItems.length,
                     (index) => _buildBarColumn(
-                      provider.items[index],
-                      provider.maxValue,
+                      provider.dashboardItems[index],
+                      10,
                     ),
                   ),
                 ),
@@ -147,8 +147,8 @@ class DashboardWid extends StatelessWidget {
     required Color color,
     required String day,
   }) {
-    final barHeight = 282.h;
-    final fillHeight = maxValue > 0 ? (value / maxValue) * barHeight : 0.0;    
+    final barHeight = 315.h;
+    final fillHeight = maxValue > 0 ? ((value/10) / maxValue) * barHeight : 0.0;    
     
     return Column(      
       spacing: 5.h,

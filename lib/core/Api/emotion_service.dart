@@ -58,4 +58,47 @@ class EmotionService {
       throw e.response?.data["message"] ?? "Failed to perform combined analysis";
     }
   }
+  static Future<Map<String, dynamic>> getEmotionHistory({
+    int? limit,
+    String? source,
+    String? from,
+    String? to,
+  }) async {
+    try {
+      final response = await DioFactory.getData(
+        path: ApiConstants.emotionHistory,
+        queryParameters: {
+          if (limit != null) "limit": limit,
+          if (source != null) "source": source,
+          if (from != null) "from": from,
+          if (to != null) "to": to,
+        },
+      );
+
+      return response.data;
+    } on DioException catch (e) {
+      throw e.response?.data["message"] ?? "Failed to fetch emotion history";
+    }
+  }
+
+  static Future<Map<String, dynamic>> getEmotionReport({
+    String groupBy = "daily",
+    String? from,
+    String? to,
+  }) async {
+    try {
+      final response = await DioFactory.getData(
+        path: ApiConstants.emotionReport,
+        queryParameters: {
+          "groupBy": groupBy,
+          if (from != null) "from": from,
+          if (to != null) "to": to,
+        },
+      );
+
+      return response.data;
+    } on DioException catch (e) {
+      throw e.response?.data["message"] ?? "Failed to fetch emotion report";
+    }
+  }
 }

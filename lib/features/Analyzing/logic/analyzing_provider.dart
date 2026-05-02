@@ -7,6 +7,8 @@ import 'package:mindsense_app/core/Api/emotion_service.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/photo_scan_result_screen.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/report_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_scan_result_screen.dart';
+import 'package:mindsense_app/features/dashboard/logic/dashboard_provider.dart';
+import 'package:provider/provider.dart';
 
 class AnalyzingProvider extends ChangeNotifier {
   XFile ?selctedimage;
@@ -61,6 +63,9 @@ class AnalyzingProvider extends ChangeNotifier {
       aiPhotoAdvices.add(aiPhotoAdvice);
       photoFinalScore = (result["emotion"]?["confidence"] as num?)?.toDouble() ?? 0.0;
       isAnalyzing = false;
+
+      Provider.of<DashboardProvider>(context, listen: false).setNeedsRefresh();
+
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => PhotoScanResultScreen()),
@@ -130,6 +135,9 @@ class AnalyzingProvider extends ChangeNotifier {
       }
 
       isAnalyzing = false;
+
+      Provider.of<DashboardProvider>(context, listen: false).setNeedsRefresh();
+
       notifyListeners();
       Navigator.push(
         context,
@@ -165,6 +173,9 @@ class AnalyzingProvider extends ChangeNotifier {
       aiAllAdvices.add(aiAllAdvice);
       allFinalScore=  result["emotion"]?["confidence"];
       isAnalyzing = false;
+
+      Provider.of<DashboardProvider>(context, listen: false).setNeedsRefresh();
+
       notifyListeners();
       Navigator.push(
         context,

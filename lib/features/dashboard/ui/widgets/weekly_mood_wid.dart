@@ -38,7 +38,7 @@ class WeeklyMoodWid extends StatelessWidget {
             children: [
               Container(
                 width: 40.w,
-                height: 40.h,
+                height: 30.h,
                 decoration: BoxDecoration(
                   color: AppColers.primaryColor.withValues(alpha: .1),
                   borderRadius: BorderRadius.circular(10.r),
