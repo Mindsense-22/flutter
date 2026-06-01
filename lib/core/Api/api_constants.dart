@@ -1,6 +1,6 @@
 class ApiConstants {
-  //static const String baseUrl = "http://10.0.2.2:5020";
-  static const String baseUrl = "http://192.168.1.8:5020";
+  static const String baseUrl = "http://10.0.2.2:5020";
+  //static const String baseUrl = "http://192.168.1.8:5020";
   static const String signup = "/api/v1/users/signup";
   static const String login = "/api/v1/users/login";
   static const String verify = "/api/v1/users/verify";
@@ -21,5 +21,5 @@ class ApiConstants {
   static const String emotionReport = "/api/emotion/report";
   static const String approveContact = "/api/v1/users/approve-contact/";
   static const String addContact = "/api/v1/users/add-contact";
-  static const String mainDashboard="/api/v1/emotion/flutter-dashboard";
+  static const String mainDashboard="/api/emotion/flutter-dashboard";
 }

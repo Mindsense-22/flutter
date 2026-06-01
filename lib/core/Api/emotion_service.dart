@@ -106,10 +106,14 @@ class EmotionService {
     try {
       final response = await DioFactory.getData(
         path: ApiConstants.mainDashboard,
-      );
+      );      
+
       return response.data;
     } on DioException catch (e) {
-      throw e.response?.data["message"] ?? "Failed to fetch main dashboard";
+      print("ERROR DATA TYPE: ${e.response?.data.runtimeType}");
+      print("ERROR DATA: ${e.response?.data}");
+
+      throw Exception(e.toString());
     }
   }
 }

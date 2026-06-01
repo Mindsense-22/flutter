@@ -1,7 +1,7 @@
 class DashboardItems {
   final String day;
-  final double faceValue;
-  final double voiceValue;
+  final int faceValue;
+  final int voiceValue;
   
 
   DashboardItems({

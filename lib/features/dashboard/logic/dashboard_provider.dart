@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:mindsense_app/features/dashboard/modules/dashboarditems.dart';
 import 'package:mindsense_app/core/Api/emotion_service.dart';
@@ -9,21 +11,15 @@ class DashboardProvider extends ChangeNotifier {
   bool _dashBoardIsLoading=false;
   List<dynamic> emotionHistory = [];
   List<dynamic> emotionReport = [];
-  Map<String, dynamic>? mainDashboardData;
+  List  mainDashboardData=[];
   String? _error;
   bool _needsRefresh = true;
   bool get isLoading => _isLoading;  
   String? get error => _error;
   bool get needsRefresh => _needsRefresh;
-  List <DashboardItems> dashboardItems=[
-    DashboardItems(day: 'Sat', faceValue: 50, voiceValue: 10),
-    DashboardItems(day: 'Sun', faceValue: 40, voiceValue: 20),
-    DashboardItems(day: 'Mon', faceValue: 90, voiceValue: 60),
-    DashboardItems(day: 'Tue', faceValue: 60, voiceValue: 90),
-    DashboardItems(day: 'Wed', faceValue: 50, voiceValue: 10),
-    DashboardItems(day: 'Thu', faceValue: 0, voiceValue: 10),
-    DashboardItems(day: 'Fri', faceValue: 45, voiceValue: 60),
-  ];
+  List <DashboardItems> dashboardItems=[];
+    
+  
   
   Future<void> refreshData() async {
     _isLoading = true;
@@ -52,13 +48,30 @@ class DashboardProvider extends ChangeNotifier {
 
     try {
       final response = await EmotionService.getMainDashboard();
+
+      // log(response.runtimeType.toString());
+      // log(response.toString());
+
       if (response['status'] == 'success') {
-        mainDashboardData = response['data'];
-      } else {
-        _error = response['message'] ?? "Failed to fetch main dashboard";
+        final List<Map<String, dynamic>> chartData =
+            List<Map<String, dynamic>>.from(response['data']['chartData']);
+
+        dashboardItems.clear();
+
+        for (final item in chartData) {
+          dashboardItems.add(
+            DashboardItems(
+              day: item["day"] ?? "",
+              faceValue: item["faceScore"] ?? 0.0,
+              voiceValue: item["voiceScore"] ?? 0.0,
+            ),
+          );notifyListeners();
+          
+        }
+        // log(dashboardItems.length.toString());
       }
     } catch (e) {
-      _error = e.toString();
+      log("main dashboard error: ${e.toString()}");
     } finally {
       _dashBoardIsLoading = false;
       notifyListeners();

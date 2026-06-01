@@ -142,7 +142,7 @@ class DashboardWid extends StatelessWidget {
   }
 
   Widget _buildSingleBar({
-    required double value,
+    required int value,
     required double maxValue,
     required Color color,
     required String day,

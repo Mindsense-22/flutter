@@ -25,6 +25,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = context.read<DashboardProvider>();
+      provider.fetchMainDashboard();
       if (provider.needsRefresh) {
         provider.fetchEmotionHistory();
         provider.fetchEmotionReport();

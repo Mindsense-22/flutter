@@ -111,9 +111,10 @@ class AnalyzingProvider extends ChangeNotifier {
       isAnalyzing = true;
       notifyListeners();
       // shownAdvice=null;      
-      final result = await EmotionService.analyzeVoice(selectedaudio!);      
-      log(result["advice"].toString());
-      detectedEmotion = result["emotion"]?["state"] ?? result["analysis"]?["state"] ?? "neutral";
+      final result = await EmotionService.analyzeVoice(selectedaudio!);   
+      log(result.toString());   
+      //log(result["advice"].toString());
+      detectedEmotion = result["emotion"]?["state"] ?? result["analysis"]?["state"] ?? "gg";
       emotionScores = result["analysis"]?["scores"];   
       aiAdvice = Advice.fromJson(
         result["advice"] ?? {},
