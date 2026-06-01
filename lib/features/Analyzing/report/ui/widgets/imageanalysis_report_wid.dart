@@ -6,6 +6,7 @@ import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/logic/photo_analysis_provider.dart';
 import 'package:mindsense_app/features/Analyzing/report/logic/analysisreportprovider.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/animated_circle_progress_wid.dart';
+import 'package:mindsense_app/features/Analyzing/widgets/reportadvices_wid.dart';
 import 'package:provider/provider.dart';
 
 class ImageanalysisReportWid extends StatelessWidget {
@@ -95,7 +96,7 @@ class ImageanalysisReportWid extends StatelessWidget {
                   //   ),
                   // ),
                   SizedBox(height: 40.h,),
-                  AnimatedCircleProgress(target: analyzingProvider.photoFinalScore??0.0,state: analyzingProvider.detectedPhotoEmotion??"nature",),
+                  AnimatedCircleProgress(target: analyzingProvider.finalScore??5,state: analyzingProvider.detectedEmotion??"nature",),
               
                   SizedBox(height: 50.h),
               
@@ -114,14 +115,16 @@ class ImageanalysisReportWid extends StatelessWidget {
                   ),
               
                   SizedBox(height: 8.h),
-              
-                  // ── Dynamic Exercise List ──
-                  ...analyzingProvider.aiPhotoAdvices.map(
-                    (exercise) => Padding(
-                      padding: EdgeInsets.only(bottom: 8.h),
-                      child: _ExerciseItem(text: exercise),
-                    ),
-                  ),
+                  
+                  ReportadvicesWid(shownAdvice: analyzingProvider.shownAdvice,),
+                  // // ── Dynamic Exercise List ──
+                  // ...analyzingProvider.aiPhotoAdvices.map(
+                  //   (exercise) => Padding(
+                  //     padding: EdgeInsets.only(bottom: 8.h),
+                  //     child: _ExerciseItem(text: exercise),
+                  //   ),
+                  // ),
+                  
                 ],
               );
             }

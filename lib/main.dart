@@ -12,6 +12,7 @@ import 'package:mindsense_app/features/Analyzing/report/ui/report_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/start_voice_scan_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_record_screen.dart';
+import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_scan_result_screen.dart';
 import 'package:mindsense_app/features/dashboard/logic/dashboard_provider.dart';
 import 'package:mindsense_app/features/dashboard/ui/dashboard_screen.dart';
 import 'package:mindsense_app/features/exercises/logic/audio_player_provider.dart';
@@ -122,7 +123,7 @@ class MyApp extends StatelessWidget {
               child: child!,
             );
           },
-          home: MainScreen(),
+          home: SplashScreen(),
         );
       } 
     );

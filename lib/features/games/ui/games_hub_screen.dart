@@ -26,38 +26,6 @@ class _GamesHubScreenState extends State<GamesHubScreen> {
     super.dispose();
   }
 
-  @override
-  void initState() {
-    super.initState();
-    // Check for inactivity reminder after first frame
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final gp = context.read<GamificationProvider>();
-      if (gp.hasInactivityAlert && gp.recentSessions.isNotEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: const Color(0xff1E293B),
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.r)),
-            content: Text(
-              '💭 A quick game could help set your mood today.',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w500),
-            ),
-            duration: const Duration(seconds: 4),
-            action: SnackBarAction(
-              label: 'Play',
-              textColor: const Color(0xff55EEDA),
-              onPressed: () {},
-            ),
-          ),
-        );
-      }
-    });
-  }
-
   void _onGameSelected(GameType game) {
     final spec = GameSpec(
       gameType: game,

@@ -15,7 +15,11 @@ class VoiceRecordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: true,      
+      canPop: true,   
+      onPopInvokedWithResult: (didPop, result) {        
+        Provider.of<VoiceAnalysisProvider>(context, listen: false)
+        .cancelRecording();
+      },   
       child: Scaffold(
         
         appBar: AppBar(
@@ -223,8 +227,16 @@ class VoiceRecordScreen extends StatelessWidget {
                             analyzingProvider.isAnalyzing==false?
                             CustomButton(
                               onPressed: () {
-                                analyzingProvider.submitVoiceAnalysis(context);                                  
-                              }, 
+                                 var provider=context.read<AnalyzingProvider>();
+                                if(provider.analysistype=="voice"){
+                                  analyzingProvider.submitVoiceAnalysis(context);  
+                                }
+                                if(provider.analysistype=="all"){
+                                  analyzingProvider.submitCombinedAnalysis(context);
+                                }
+                                                                
+                              },
+                               
                               text: "Analyze"
                             ):CircularProgressIndicator(),
                             TextButton(

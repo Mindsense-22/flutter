@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/Analyzing/chossen_screen.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/logic/photo_analysis_provider.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/photo_select_screen.dart';
 import 'package:mindsense_app/features/home/ui/homescreen.dart';
@@ -19,6 +20,9 @@ class StartPhotoScanScreen extends StatelessWidget {
       canPop: false,      
       onPopInvokedWithResult: (didPop, result) {
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),  (route) => false,);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ChossenScreen(),));
+        Provider.of<PhotoAnalysisProvider>(context, listen: false)
+        .clearSelectedImage();
       },
       child: Scaffold(
       
@@ -27,6 +31,9 @@ class StartPhotoScanScreen extends StatelessWidget {
             icon: Icon(Icons.arrow_back,size: 24.w,),
             onPressed: () {
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),  (route) => false,);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ChossenScreen(),));
+              Provider.of<PhotoAnalysisProvider>(context, listen: false)
+                .clearSelectedImage();
             },
           ),
         ),

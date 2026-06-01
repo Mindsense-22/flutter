@@ -21,4 +21,5 @@ class ApiConstants {
   static const String emotionReport = "/api/emotion/report";
   static const String approveContact = "/api/v1/users/approve-contact/";
   static const String addContact = "/api/v1/users/add-contact";
+  static const String mainDashboard="/api/v1/emotion/flutter-dashboard";
 }

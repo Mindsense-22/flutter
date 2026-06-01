@@ -6,6 +6,7 @@ import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:mindsense_app/features/Analyzing/report/logic/analysisreportprovider.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/animated_circle_progress_wid.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
+import 'package:mindsense_app/features/Analyzing/widgets/reportadvices_wid.dart';
 import 'package:provider/provider.dart';
 
 class VoiceanalysisReportWid extends StatelessWidget {
@@ -94,7 +95,7 @@ class VoiceanalysisReportWid extends StatelessWidget {
                   //   ),
                   // ),
                   SizedBox(height: 40.h,),
-                  AnimatedCircleProgress(target: val.voiceFinalScore,state: val.detectedVoiceEmotion??"nature",),
+                  AnimatedCircleProgress(target: val.finalScore,state: val.detectedEmotion??"nature",),
               
                   SizedBox(height: 50.h),             
                   
@@ -116,12 +117,13 @@ class VoiceanalysisReportWid extends StatelessWidget {
                   SizedBox(height: 8.h),
               
                   // ── Dynamic Exercise List ──
-                  ...val.aiVoiceAdvices.map(
-                    (exercise) => Padding(
-                      padding: EdgeInsets.only(bottom: 8.h),
-                      child: _ExerciseVoiceItem(text: exercise),
-                    ),
-                  ),
+                  // ...val.aiVoiceAdvices.map(
+                  //   (exercise) => Padding(
+                  //     padding: EdgeInsets.only(bottom: 8.h),
+                  //     child: _ExerciseVoiceItem(text: exercise),
+                  //   ),
+                  // ),
+                  ReportadvicesWid(shownAdvice: val.shownAdvice2,),
                 ],
               );
             }

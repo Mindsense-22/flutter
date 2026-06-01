@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/Analyzing/chossen_screen.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/start_photo_scan_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class Homescreenbuttom extends StatelessWidget {
               return MaterialButton(
                 padding: EdgeInsets.all(8),
                 onPressed:(){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => StartPhotoScanScreen(),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ChossenScreen(),));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
