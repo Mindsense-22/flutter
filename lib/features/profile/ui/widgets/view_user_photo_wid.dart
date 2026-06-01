@@ -1,4 +1,5 @@
-  import 'dart:ui';
+  import 'dart:io';
+import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -62,15 +63,22 @@ Future<dynamic> messgeShowDialog(context){
                                                 
                               ),
                             )
-                            :ClipRRect(
-                              //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r)),
-                              borderRadius: BorderRadiusGeometry.circular(20.r),
-                              clipBehavior: Clip.antiAlias,
-                              
-                              child: Image.file(
-                                provider.profileImage!,
-                                fit: BoxFit.cover,                        
-                              ),
+                            :Consumer<ProfileScreenProvider>(
+                              builder: (context,val,child) {
+                                return ClipRRect(
+                                  //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r)),
+                                  borderRadius: BorderRadiusGeometry.circular(20.r),
+                                  clipBehavior: Clip.antiAlias,
+                                  
+                                  child: Image.file(
+                                    val.profileImage!,
+                                    
+                                    //File(SharedPreferencesitem.getString("profileImagePath")!),
+                                    
+                                    fit: BoxFit.cover,                        
+                                  ),
+                                );
+                              }
                             ),
                           ),
                           IconButton(

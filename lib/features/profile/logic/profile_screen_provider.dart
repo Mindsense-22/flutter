@@ -157,9 +157,10 @@ class ProfileScreenProvider extends ChangeNotifier {
           '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.jpg';
 
       final savedImage = await File(pickedImage.path).copy(newPath);
-
+      //profileImagePath=null;
       profileImage = savedImage;
-      profileImagePath = newPath;
+      profileImagePath = newPath;      
+      
       await SharedPreferencesitem.setString("profileImagePath",profileImagePath!);
       notifyListeners();
     } catch (e) {
@@ -168,7 +169,7 @@ class ProfileScreenProvider extends ChangeNotifier {
   }
 
   Future<void> loadProfileImage() async {  
-  final path = SharedPreferencesitem.getString("profileImagePath");
+  final path =  SharedPreferencesitem.getString("profileImagePath");
 
   if (path != null && path.isNotEmpty) {
     profileImagePath = path;    
