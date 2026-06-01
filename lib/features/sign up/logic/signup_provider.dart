@@ -17,9 +17,9 @@ class SignupProvider extends ChangeNotifier{
   TextEditingController signupEmailController=TextEditingController();
   TextEditingController signupAgeController=TextEditingController();
   final formKey = GlobalKey<FormState>();
- 
+  String userRole="user";
   bool signupbuttonisloading=false;
-  
+  bool checkBoxVal=false;
   
   void changeSignupButtonIsLoading(val) {
     signupbuttonisloading = val;
@@ -102,7 +102,16 @@ class SignupProvider extends ChangeNotifier{
     } 
     return null;
   }
-   
+  
+  void setUserRole(role){
+    userRole=role;
+    changeCheckBoxVal();
+    notifyListeners();
+  }
+  void changeCheckBoxVal(){
+    checkBoxVal=!checkBoxVal;
+    notifyListeners();
+  }
  
   Future<void> signupButton(context) async {
     if (formKey.currentState!.validate()) {
@@ -116,6 +125,7 @@ class SignupProvider extends ChangeNotifier{
           password: signupPasswordController.text,
           passwordConfirm: signupReEnterPasswordController.text,
           age: int.parse(signupAgeController.text),
+          role:userRole,
         );
 
         await SharedPreferencesitem.setString(

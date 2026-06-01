@@ -17,6 +17,7 @@ class AuthService {
     required String password,
     required String passwordConfirm,
     required int age,
+    required String role,
   }) async {
     try {
       final response = await DioFactory.postData(
@@ -27,6 +28,7 @@ class AuthService {
           "password": password,
           "passwordConfirm": passwordConfirm,
           "age": age,
+          "role":role,
         },        
       );
 

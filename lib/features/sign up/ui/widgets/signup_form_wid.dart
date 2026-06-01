@@ -107,8 +107,29 @@ class SignupFormWid extends StatelessWidget {
           ),    
           
           
-          SizedBox(height: 25.h,),
+          SizedBox(height: 5.h,),
+          Row(
+              children: [
+                Consumer<SignupProvider>(
+                  builder: (context,val,child) {
+                    return Checkbox(
+                      value: val.checkBoxVal,
+                      onChanged: (value) {
+                        val.checkBoxVal==false?val.setUserRole("user")
+                          :val.setUserRole("professional");
+                      },
+                    );
+                  }
+                ),
+                const Expanded(
+                  child: Text(
+                    "Sign up as a Professional/Doctor",
+                  ),
+                ),
+              ],
+            ),
           //login button
+          SizedBox(height: 5.h,),
           Consumer<SignupProvider>(
             builder: (context,val,child) {
               return Column(
