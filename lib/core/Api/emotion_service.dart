@@ -101,4 +101,15 @@ class EmotionService {
       throw e.response?.data["message"] ?? "Failed to fetch emotion report";
     }
   }
+
+  static Future<Map<String, dynamic>> getMainDashboard() async {
+    try {
+      final response = await DioFactory.getData(
+        path: ApiConstants.mainDashboard,
+      );
+      return response.data;
+    } on DioException catch (e) {
+      throw e.response?.data["message"] ?? "Failed to fetch main dashboard";
+    }
+  }
 }

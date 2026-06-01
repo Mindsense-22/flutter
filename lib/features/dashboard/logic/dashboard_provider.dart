@@ -9,6 +9,7 @@ class DashboardProvider extends ChangeNotifier {
   bool _dashBoardIsLoading=false;
   List<dynamic> emotionHistory = [];
   List<dynamic> emotionReport = [];
+  Map<String, dynamic>? mainDashboardData;
   String? _error;
   bool _needsRefresh = true;
   bool get isLoading => _isLoading;  
@@ -50,7 +51,12 @@ class DashboardProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      
+      final response = await EmotionService.getMainDashboard();
+      if (response['status'] == 'success') {
+        mainDashboardData = response['data'];
+      } else {
+        _error = response['message'] ?? "Failed to fetch main dashboard";
+      }
     } catch (e) {
       _error = e.toString();
     } finally {

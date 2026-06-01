@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
@@ -16,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
+    log("token :${SharedPreferencesitem.getString("token").toString()}");
     Future.delayed(Duration(seconds: 2)).then((value) {
       Navigator.pushAndRemoveUntil(
         // ignore: use_build_context_synchronously
@@ -29,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     },);
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
