@@ -61,8 +61,21 @@ class ProfileScreenProvider extends ChangeNotifier {
       trustedContactrelationship=userData["trustedContact"]["relationship"];
       trustedContactstatus=userData["trustedContact"]["status"];
       profileImagePath=userData["profileImage"];      
-      await SharedPreferencesitem.setString("avatarLink",profileImagePath!);
-      notifyListeners();
+      if (profileImagePath != null &&
+          profileImagePath is String &&
+          profileImagePath!.isNotEmpty) {
+
+        await SharedPreferencesitem.setString(
+          "avatarLink",
+          profileImagePath!,
+        );
+
+        notifyListeners();
+      }else {
+        // optional fallback
+        await SharedPreferencesitem.remove("avatarLink");
+        notifyListeners();
+      }
       if(userName!=null){
         await SharedPreferencesitem.setString("userName", userName!);
         setName(userName);
@@ -166,7 +179,7 @@ class ProfileScreenProvider extends ChangeNotifier {
       profileImagePath = newPath; 
       photoLoading=true;
       notifyListeners();
-      await SharedPreferencesitem.remove("avatarLink");     
+      //await SharedPreferencesitem.remove("avatarLink");     
       final avatarLink = await AuthService.uploadAvatar(File(profileImagePath!));
       await SharedPreferencesitem.setString("avatarLink",avatarLink);
       photoLoading=false;
