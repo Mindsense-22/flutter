@@ -102,18 +102,18 @@ class GeneralSettingsWid extends StatelessWidget {
               ),
 
               SizedBox(height: 4.h,),
-              SettingItemsWid(
-                context: context,
-                title: "Delete Account",
-                iconPath: "assets/images/Personalinformation_icon.svg",
-                onTap: () {
-                  log("Delete Account clicked!");
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DeleteaccountScreen(),)
-                  );
-                },              
-              ),
+              // SettingItemsWid(
+              //   context: context,
+              //   title: "Delete Account",
+              //   iconPath: "assets/images/Personalinformation_icon.svg",
+              //   onTap: () {
+              //     log("Delete Account clicked!");
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => DeleteaccountScreen(),)
+              //     );
+              //   },              
+              // ),
               SizedBox(height: 4.h,),
             ],
           ),

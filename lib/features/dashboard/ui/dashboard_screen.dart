@@ -65,12 +65,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                  SizedBox(height: 20.h),
                 const WeeklyMoodWid(),                
                 SizedBox(height: 20.h),
-                // CustomButton(
-                //   onPressed: (){
-                //     Navigator.push(context, MaterialPageRoute(builder: (context) => MoreInfoScreen(),));
-                //   },
-                //   text:"View more Insights →" 
-                // ),
+                CustomButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MoreInfoScreen(),));
+                  },
+                  text:"View more Insights →" 
+                ),
                  
               ],
             ),
