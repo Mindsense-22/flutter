@@ -15,6 +15,7 @@ import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_recor
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_scan_result_screen.dart';
 import 'package:mindsense_app/features/dashboard/logic/dashboard_provider.dart';
 import 'package:mindsense_app/features/dashboard/ui/dashboard_screen.dart';
+import 'package:mindsense_app/features/doctors/logic/doctors_provider.dart';
 import 'package:mindsense_app/features/exercises/logic/audio_player_provider.dart';
 import 'package:mindsense_app/features/exercises/logic/exercises_provider.dart';
 import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
@@ -96,6 +97,9 @@ void main() async{
             ),
             ChangeNotifierProvider(
               create: (_) => AddcontactProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => DoctorsProvider(),
             ),
           ],
         child: MyApp(),

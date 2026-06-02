@@ -92,14 +92,14 @@ class GeneralSettingsWid extends StatelessWidget {
               ),
               SizedBox(height: 4.h,),
 
-              SettingItemsWid(
-                context: context,
-                title: "Notification",
-                iconPath: "assets/images/notification_icon.svg",
-                onTap: () {
-                  log("Notification clicked!");
-                },              
-              ),
+              // SettingItemsWid(
+              //   context: context,
+              //   title: "Notification",
+              //   iconPath: "assets/images/notification_icon.svg",
+              //   onTap: () {
+              //     log("Notification clicked!");
+              //   },              
+              // ),
 
               SizedBox(height: 4.h,),
               // SettingItemsWid(
