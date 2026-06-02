@@ -24,4 +24,5 @@ class ApiConstants {
   static const String addContact = "/api/v1/users/add-contact";
   static const String mainDashboard="/api/emotion/flutter-dashboard";
   static const String uploadAvatar="/api/v1/users/me/avatar";
+  static const String getAllDoctors="/api/v1/professionals";
 }

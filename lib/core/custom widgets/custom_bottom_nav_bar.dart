@@ -38,7 +38,8 @@ class CustomBottomNavBar extends StatelessWidget {
           _buildNavItem(1,"assets/images/chart-histogramblack.svg","assets/images/chart-histogram.svg" , "Dashboard"),
           _buildNavItem(2,"assets/images/extentionblack.svg","assets/images/extention.svg" , "Exercises"),
           _buildNavItem(3,"assets/images/gamepadblack.svg","assets/images/gamepad.svg" , "Games"),
-          _buildNavItem(4,"assets/images/user-circle.svg","assets/images/user-circleblack.svg" , "Profile"),
+          _buildNavItem(4,"assets/images/doctor_icon_black.svg","assets/images/doctor_icon.svg" , "Doctors"),
+          _buildNavItem(5,"assets/images/user-circle.svg","assets/images/user-circleblack.svg" , "Profile"),
         ],
       ),
     );
