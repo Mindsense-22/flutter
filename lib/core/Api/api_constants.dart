@@ -13,6 +13,7 @@ class ApiConstants {
   static const String getMe = "/api/v1/users/me";
   static const String updateMe = "/api/v1/users/updateMe";
   static const String updateMyPassword = "/api/v1/users/updateMyPassword";
+  static const String deleteMe = "/api/v1/users/me";
 
   static const String analyzeFace = "/api/emotion/face";
   static const String analyzeVoice = "/api/emotion/voice";

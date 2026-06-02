@@ -254,4 +254,30 @@ class ProfileScreenProvider extends ChangeNotifier {
       rethrow;
     }
   }
+  Future<void> deleteAccount({required String password, required String reason, String mode = 'soft'}) async {
+    try {
+      isLoadingProfile = true;
+      notifyListeners();
+      bool success = await AuthService.deleteAccount(password: password, reason: reason, mode: mode);
+      if (success) {
+        // Clear stored user data
+        await SharedPreferencesitem.clear();
+        // Reset provider fields
+        profileImage = null;
+        profileImagePath = null;
+        userName = null;
+        userEmail = null;
+        userAge = null;
+        // Optionally set a flag
+        // isAccountDeleted = true; // could be used by UI
+      }
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    } finally {
+      isLoadingProfile = false;
+      notifyListeners();
+    }
+  }
 }
+

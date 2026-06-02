@@ -12,38 +12,79 @@ import 'package:mindsense_app/features/sign%20up/modules/verifypincoderesponse.d
 class AuthService {
   static String apiMessege="";
   // signup
-  static Future<void> signUp({
-    required String name,
-    required String email,
-    required String password,
-    required String passwordConfirm,
-    required int age,
-    required String role,
-  }) async {
-    try {
-      final response = await DioFactory.postData(
-        path: ApiConstants.signup,
-        data: {
-          "name": name,
-          "email": email,
-          "password": password,
-          "passwordConfirm": passwordConfirm,
-          "age": age,
-          "role":role,
-        },        
-      );
+  // static Future<void> signUp({
+  //   required String name,
+  //   required String email,
+  //   required String password,
+  //   required String passwordConfirm,
+  //   required int age,
+  //   required String role,
+  //   required File image
+  // }) async {
+  //   try {
+  //     final response = await DioFactory.postData(
+  //       path: ApiConstants.signup,
+  //       data: {
+  //         "name": name,
+  //         "email": email,
+  //         "password": password,
+  //         "passwordConfirm": passwordConfirm,
+  //         "age": age,
+  //         "role":role,
+  //         "profileImage":image
+  //       },        
+  //     );
 
-      log("SUCCESS: ${response.data}");
+  //     log("SUCCESS: ${response.data}");
       
-    } catch (e) {
-      if (e is DioException) {
-        log("STATUS: ${e.response?.statusCode}");
-        log("DATA: ${e.response?.data}");
-        apiMessege = e.response?.data["message"];
-      }
-      rethrow;
+  //   } catch (e) {
+  //     if (e is DioException) {
+  //       log("STATUS: ${e.response?.statusCode}");
+  //       log("DATA: ${e.response?.data}");
+  //       apiMessege = e.response?.data["message"];
+  //     }
+  //     rethrow;
+  //   }
+  // }
+
+  static Future<void> signUp({
+  required String name,
+  required String email,
+  required String password,
+  required String passwordConfirm,
+  required int age,
+  required String role,
+  File? image, // optional
+}) async {
+  try {
+    final formDataMap = {
+      "name": name,
+      "email": email,
+      "password": password,
+      "passwordConfirm": passwordConfirm,
+      "age": age,
+      "role": role,
+    };
+
+    if (image != null) {
+      formDataMap["profileImage"] = await MultipartFile.fromFile(
+        image.path,
+        filename: image.path.split('/').last,
+      );
     }
+
+    final formData = FormData.fromMap(formDataMap);
+
+    final response = await DioFactory.postFormData(
+      path: ApiConstants.signup,
+      data: formData,
+    );
+
+    log("SUCCESS: ${response.data}");
+  } catch (e) {
+    rethrow;
   }
+}
 
   //verifyPinCode
   static Future<VerifyPinCodeResponse> verifyPinCode({
@@ -248,5 +289,22 @@ class AuthService {
       throw e.response?.data.toString() ?? "Failed to upload avatar";
     }
   }
+  static Future<bool> deleteAccount({required String password, required String reason, String mode = 'soft'}) async {
+    try {
+      final response = await DioFactory.deleteData(
+        path: ApiConstants.deleteMe,
+        data: {'password': password, 'reason': reason},
+        queryParameters: {'mode': mode},
+      );
+      return response.data['success'] == true;
+    } on DioException catch (e) {
+        log("STATUS: ${e.response?.statusCode}");
+        log("DATA TYPE: ${e.response?.data.runtimeType}");
+        log("DATA: ${e.response?.data}");
+      final message = e.response?.data['message'] ?? 'Failed to delete account';
+      throw message;
+    }
+  }
 }
+
 

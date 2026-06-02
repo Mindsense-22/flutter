@@ -44,7 +44,7 @@ class SignupFormWid extends StatelessWidget {
             validator: provider.nameValidator,
             
           ),
-          SizedBox(height: 14.h,),
+          SizedBox(height: 10.h,),
           Text("Age",style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
@@ -58,7 +58,7 @@ class SignupFormWid extends StatelessWidget {
             icon: Icon(Icons.email_outlined),
             validator: provider.ageValidator,                                
           ),
-          SizedBox(height: 14.h,),
+          SizedBox(height: 10.h,),
     
     
           Text("Email",style: TextStyle(
@@ -74,7 +74,7 @@ class SignupFormWid extends StatelessWidget {
             icon: Icon(Icons.email_outlined),
             validator: provider.emailValidator,                                
           ),
-          SizedBox(height: 14.h,),
+          SizedBox(height: 10.h,),
 
           
 
@@ -91,7 +91,7 @@ class SignupFormWid extends StatelessWidget {
             hintText: "password",
             validator: provider.passwordValidator,
           ),          
-          SizedBox(height: 14.h),
+          SizedBox(height: 10.h,),
           Text("Re Enetr Password",style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,

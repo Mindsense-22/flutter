@@ -17,7 +17,7 @@ class SignupUppertextWid extends StatelessWidget {
               fontWeight: FontWeight.w600,
               color: Theme.of(context).colorScheme.onSecondary,
             ),),
-            Text("Smart Emotion",style: TextStyle(
+            Text("MindSense",style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,
               color: TextColers.thirdTextColor,
@@ -25,12 +25,12 @@ class SignupUppertextWid extends StatelessWidget {
             ),),
           ],
         ),
-        SizedBox(height: 8,),
-        Text("Sign in to your account",style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.w500,
-          color: Theme.of(context).colorScheme.onSecondary,
-        ),),
+        // SizedBox(height: 8,),
+        // Text("Sign in to your account",style: TextStyle(
+        //   fontSize: 24,
+        //   fontWeight: FontWeight.w500,
+        //   color: Theme.of(context).colorScheme.onSecondary,
+        // ),),
 
       ],
     );

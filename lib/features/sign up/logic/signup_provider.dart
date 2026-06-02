@@ -1,13 +1,16 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/home/ui/homescreen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 
 import 'package:mindsense_app/features/sign%20up/ui/signup_setpincode_screen.dart';
+import 'package:path_provider/path_provider.dart';
 
 class SignupProvider extends ChangeNotifier{
 
@@ -20,7 +23,8 @@ class SignupProvider extends ChangeNotifier{
   String userRole="user";
   bool signupbuttonisloading=false;
   bool checkBoxVal=false;
-  
+  File? profileImage;
+  String ?signUpPhotoPath;
   void changeSignupButtonIsLoading(val) {
     signupbuttonisloading = val;
     notifyListeners();
@@ -112,7 +116,43 @@ class SignupProvider extends ChangeNotifier{
     checkBoxVal=!checkBoxVal;
     notifyListeners();
   }
- 
+
+  Future<void> pickGalleryImage(context) async {
+    try {
+      final pickedImage = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+      );
+
+      if (pickedImage == null) return;
+
+      final directory = await getApplicationDocumentsDirectory();
+
+      final newPath =
+          '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.jpg';
+
+      final savedImage = await File(
+        pickedImage.path,
+      ).copy(newPath);
+      profileImage=savedImage;
+      signUpPhotoPath = savedImage.path;
+
+      notifyListeners();
+    } catch (e, s) {
+      log('Error picking image: $e');
+      log('StackTrace: $s');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Something went wrong. Please try again.",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   Future<void> signupButton(context) async {
     if (formKey.currentState!.validate()) {
       changeSignupButtonIsLoading(true);
@@ -125,7 +165,7 @@ class SignupProvider extends ChangeNotifier{
           password: signupPasswordController.text,
           passwordConfirm: signupReEnterPasswordController.text,
           age: int.parse(signupAgeController.text),
-          role:userRole,
+          role:userRole, image: profileImage,
         );
 
         await SharedPreferencesitem.setString(
@@ -147,15 +187,17 @@ class SignupProvider extends ChangeNotifier{
           ),
         );
         changeSignupButtonIsLoading(false);
-      } catch (e) {
+      } catch (e, s) {
         log("Signup failed");
+        log("Error: $e");
+        log("StackTrace: $s");
         changeSignupButtonIsLoading(false);
         ScaffoldMessenger.of(context).showSnackBar(
           
           SnackBar(
             duration: Duration(seconds: 1),
             backgroundColor: Colors.red,
-            content: Text(AuthService.apiMessege,style: TextStyle(
+            content: Text(AuthService.apiMessege==""?"Error With Create Acount Try Another Email":AuthService.apiMessege,style: TextStyle(
               color: Colors.white
             ),),            
           ),

@@ -75,4 +75,20 @@ class DioFactory {
     );
     return response;
   }
+
+  static Future<Response> deleteData({
+    required String path,
+    Map<String, dynamic>? data,
+    String? token,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    final response = await dio.delete(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+      options: token != null ? Options(headers: {"Authorization": "Bearer $token"}) : null,
+    );
+    return response;
+  }
 }
+
