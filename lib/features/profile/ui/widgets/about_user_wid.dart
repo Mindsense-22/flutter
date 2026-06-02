@@ -75,7 +75,7 @@ class AboutUserWid extends StatelessWidget {
                     right: 1.w,
                     child: InkWell(
                       onTap: () {
-                        val.pickGalleryImage();
+                        val.pickGalleryImage(context);
                       },
                       borderRadius: BorderRadius.circular(150.r),
                       splashColor: Colors.grey,

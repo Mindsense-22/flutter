@@ -163,7 +163,7 @@ class ProfileScreenProvider extends ChangeNotifier {
   }  
   
 
-  Future<void> pickGalleryImage() async {
+  Future<void> pickGalleryImage(context) async {
     try {
       final pickedImage = await ImagePicker().pickImage(
         source: ImageSource.gallery,
@@ -187,6 +187,12 @@ class ProfileScreenProvider extends ChangeNotifier {
     } catch (e, s) {
       log('Error picking image: $e');
       log('StackTrace: $s');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Something went wrong. Please try again.",style: TextStyle(color: Colors.white),),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
