@@ -179,7 +179,7 @@ class ProfileScreenProvider extends ChangeNotifier {
       profileImagePath = newPath; 
       photoLoading=true;
       notifyListeners();
-      //await SharedPreferencesitem.remove("avatarLink");     
+      await SharedPreferencesitem.remove("avatarLink");     
       final avatarLink = await AuthService.uploadAvatar(File(profileImagePath!));
       await SharedPreferencesitem.setString("avatarLink",avatarLink);
       photoLoading=false;
