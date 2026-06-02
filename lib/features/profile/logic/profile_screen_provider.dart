@@ -27,6 +27,7 @@ class ProfileScreenProvider extends ChangeNotifier {
   String? userName;
   String? userEmail;
   int? userAge;
+  String ?userId;
   String ? userRole;
   String ? trustedContactname;
   String ? trustedContactemail;
@@ -47,6 +48,10 @@ class ProfileScreenProvider extends ChangeNotifier {
     userAge=newage;
     notifyListeners();
   }
+  setID(id){
+    userId=id;
+    notifyListeners();
+  }
   
   Future<void> fetchUserProfile() async {
     try {
@@ -56,6 +61,7 @@ class ProfileScreenProvider extends ChangeNotifier {
       final userData = await AuthService.getMe();
       userName = userData['name'];
       userEmail = userData['email'];
+      userId= userData['_id'];
       userAge = userData['age'];
       profileImagePath=userData["profileImage"];
       userRole=userData["role"];
@@ -95,6 +101,10 @@ class ProfileScreenProvider extends ChangeNotifier {
         await SharedPreferencesitem.setInt("userAge", userAge!);
         setAge(userAge);
       }
+      if(userId!=null){
+        await SharedPreferencesitem.setString("userId", userId!);
+        setID(userId);
+      }
       // store trusted contact
       if(trustedContactname!=null){
         await SharedPreferencesitem.setString("trustedContactname", trustedContactname!);
@@ -114,7 +124,7 @@ class ProfileScreenProvider extends ChangeNotifier {
       }
       
       
-      
+      log(userId.toString());
       // isLoadingProfile = false;
       // notifyListeners();
     } catch (e) {
