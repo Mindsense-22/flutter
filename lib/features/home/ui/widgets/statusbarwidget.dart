@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mindsense_app/core/Api/api_constants.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/drive%20mode/ui/drivemode_screen.dart';
@@ -35,7 +36,7 @@ class Statusbarwidget extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(48.r)),
                   ),
                   child: 
-                  SharedPreferencesitem.getString("profileImagePath")==null
+                  SharedPreferencesitem.getString("avatarLink")==null
                   ?CachedNetworkImage(
                     imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
                     fit: BoxFit.fill,                    
@@ -43,10 +44,10 @@ class Statusbarwidget extends StatelessWidget {
                   :ClipRRect(
                     clipBehavior: Clip.antiAlias,
                     borderRadius: BorderRadius.circular(108.r),
-                    child: Image.file(
-                      val.profileImage!,
-                      fit: BoxFit.cover,                        
-                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: ApiConstants.baseUrl+val.profileImagePath!,
+                      fit: BoxFit.fill,                    
+                    )
                   ),
                 ),
               ),

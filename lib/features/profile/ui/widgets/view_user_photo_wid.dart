@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/Api/api_constants.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
@@ -52,7 +53,7 @@ Future<dynamic> messgeShowDialog(context){
                             height: 335.h,
                             width: double.infinity,
                             child: 
-                            SharedPreferencesitem.getString("profileImagePath")==null
+                            SharedPreferencesitem.getString("avatarLink")==null
                             ?ClipRRect(
                               //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r)),
                               clipBehavior: Clip.antiAlias,
@@ -70,12 +71,10 @@ Future<dynamic> messgeShowDialog(context){
                                   borderRadius: BorderRadiusGeometry.circular(20.r),
                                   clipBehavior: Clip.antiAlias,
                                   
-                                  child: Image.file(
-                                    val.profileImage!,
-                                    
-                                    //File(SharedPreferencesitem.getString("profileImagePath")!),
-                                    
-                                    fit: BoxFit.cover,                        
+                                  child: CachedNetworkImage(
+                                    imageUrl: ApiConstants.baseUrl+val.profileImagePath!,
+                                    fit: BoxFit.cover,   
+                                                    
                                   ),
                                 );
                               }

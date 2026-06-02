@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -221,6 +222,30 @@ class AuthService {
     } on DioException catch (e) {
       final message = e.response?.data["message"] ?? "Failed to add contact";
       throw message;
+    }
+  }
+
+  static Future<String> uploadAvatar(File imageFile) async {
+    try {
+      FormData formData = FormData.fromMap({
+        "avatar": await MultipartFile.fromFile(
+          imageFile.path,
+          filename: imageFile.path.split(Platform.pathSeparator).last,
+        ),
+      });
+
+      final response = await DioFactory.postFormData(
+        path: ApiConstants.uploadAvatar,
+        data: formData,
+      );
+      log(response.data.runtimeType.toString());
+      log(response.data.toString());
+      return response.data["data"]["profileImage"] ;
+    } on DioException catch (e) {
+      log("Error Data: ${e.response?.data}");
+      log("Error Type: ${e.response?.data.runtimeType}");
+
+      throw e.response?.data.toString() ?? "Failed to upload avatar";
     }
   }
 }

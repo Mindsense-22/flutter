@@ -25,11 +25,12 @@ class ProfileScreenProvider extends ChangeNotifier {
   String? userName;
   String? userEmail;
   int? userAge;
+  String ? userRole;
   String ? trustedContactname;
   String ? trustedContactemail;
   String ? trustedContactrelationship;
   String ? trustedContactstatus;
-
+  bool photoLoading=false;
   bool isLoadingProfile = false;
   setName(newname){
     userName=newname;
@@ -53,10 +54,15 @@ class ProfileScreenProvider extends ChangeNotifier {
       userName = userData['name'];
       userEmail = userData['email'];
       userAge = userData['age'];
+      profileImagePath=userData["profileImage"];
+      userRole=userData["role"];
       trustedContactname=userData["trustedContact"]["name"];
       trustedContactemail=userData["trustedContact"]["email"];
       trustedContactrelationship=userData["trustedContact"]["relationship"];
       trustedContactstatus=userData["trustedContact"]["status"];
+      profileImagePath=userData["profileImage"];      
+      await SharedPreferencesitem.setString("avatarLink",profileImagePath!);
+      notifyListeners();
       if(userName!=null){
         await SharedPreferencesitem.setString("userName", userName!);
         setName(userName);
@@ -154,26 +160,28 @@ class ProfileScreenProvider extends ChangeNotifier {
 
       final directory = await getApplicationDocumentsDirectory();
       final newPath =
-          '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.jpg';
+          '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.jpeg';
 
-      final savedImage = await File(pickedImage.path).copy(newPath);
-      //profileImagePath=null;
-      profileImage = savedImage;
-      profileImagePath = newPath;      
       
-      await SharedPreferencesitem.setString("profileImagePath",profileImagePath!);
+      profileImagePath = newPath; 
+      photoLoading=true;
       notifyListeners();
-    } catch (e) {
+      await SharedPreferencesitem.remove("avatarLink");     
+      final avatarLink = await AuthService.uploadAvatar(File(profileImagePath!));
+      await SharedPreferencesitem.setString("avatarLink",avatarLink);
+      photoLoading=false;
+      notifyListeners();
+    } catch (e, s) {
       log('Error picking image: $e');
+      log('StackTrace: $s');
     }
   }
 
   Future<void> loadProfileImage() async {  
-  final path =  SharedPreferencesitem.getString("profileImagePath");
+  final path =  SharedPreferencesitem.getString("avatarLink");
 
   if (path != null && path.isNotEmpty) {
-    profileImagePath = path;    
-    profileImage = File(path);
+    profileImagePath = path;
     notifyListeners();
   }
 }
