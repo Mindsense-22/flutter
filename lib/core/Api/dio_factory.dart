@@ -76,6 +76,19 @@ class DioFactory {
     return response;
   }
 
+  static Future<Response> patchFormData({
+    required String path,
+    required FormData data,
+    String? token,
+  }) async {
+    final response = await dio.patch(
+      path,
+      data: data,
+      options: token != null ? Options(headers: {"Authorization": "Bearer $token"}) : null,
+    );
+    return response;
+  }
+
   static Future<Response> deleteData({
     required String path,
     Map<String, dynamic>? data,

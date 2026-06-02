@@ -51,21 +51,27 @@ class AboutUserWid extends StatelessWidget {
                   Positioned(
                     top: 6.8,
                     child: Container(
+                      //clipBehavior: Clip.antiAlias,
                       width: 98.w,
                       height: 98.w,
                       decoration: BoxDecoration(                
                       borderRadius: BorderRadius.circular(108.r),                                
                     ),
                       child:
-                        SharedPreferencesitem.getString("avatarLink")==null
+                        val.avatarLink == null || val.avatarLink!.isEmpty
                         ?CachedNetworkImage(
                           imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
                           fit: BoxFit.fill,                    
                         )
                         :
-                        CachedNetworkImage(
-                          imageUrl:SharedPreferencesitem.getString("avatarLink")==null?ApiConstants.baseUrl+val.profileImagePath!:ApiConstants.baseUrl+SharedPreferencesitem.getString("avatarLink")!,
-                          fit: BoxFit.fill,                    
+                        ClipRRect(
+                          clipBehavior: Clip.antiAlias,
+                          borderRadius: BorderRadius.circular(108.r),
+                          child: CachedNetworkImage(
+                            imageUrl: ApiConstants.baseUrl + val.avatarLink!,
+                            fit: BoxFit.fill,    
+                                            
+                          ),
                         ),                        
                     ),            
                   ),

@@ -199,13 +199,26 @@ class AuthService {
     }
   }
 
-  static Future<Map<String, dynamic>> updateMe(String? name, String? email, int? age) async {
+  static Future<Map<String, dynamic>> updateMe(String? name, String? email, int? age,File ?profileImage) async {
     try {
       Map<String, dynamic> data = {};
       if (name != null) data["name"] = name;
       if (email != null) data["email"] = email;
       if (age != null) data["age"] = age;
-      
+
+      if (profileImage != null) {
+        data["profileImage"] = await MultipartFile.fromFile(
+          profileImage.path,
+          filename: profileImage.path.split(Platform.pathSeparator).last,
+        );
+        final formData = FormData.fromMap(data);
+        final response = await DioFactory.patchFormData(
+          path: ApiConstants.updateMe,
+          data: formData,
+        );
+        return response.data["data"]["user"];
+      }
+
       final response = await DioFactory.patchData(
         path: ApiConstants.updateMe,
         data: data,
@@ -216,7 +229,8 @@ class AuthService {
       throw message;
     }
   }
-
+  
+  
   static Future<String> updateMyPassword(String passwordCurrent, String password, String passwordConfirm) async {
     try {
       final response = await DioFactory.patchData(

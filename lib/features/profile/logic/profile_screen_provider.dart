@@ -1,8 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mindsense_app/core/Api/api_constants.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
 import 'package:path_provider/path_provider.dart';
@@ -32,6 +34,7 @@ class ProfileScreenProvider extends ChangeNotifier {
   String ? trustedContactstatus;
   bool photoLoading=false;
   bool isLoadingProfile = false;
+  String ? avatarLink;
   setName(newname){
     userName=newname;
     notifyListeners();
@@ -56,14 +59,18 @@ class ProfileScreenProvider extends ChangeNotifier {
       userAge = userData['age'];
       profileImagePath=userData["profileImage"];
       userRole=userData["role"];
-      trustedContactname=userData["trustedContact"]["name"];
-      trustedContactemail=userData["trustedContact"]["email"];
-      trustedContactrelationship=userData["trustedContact"]["relationship"];
-      trustedContactstatus=userData["trustedContact"]["status"];
-      profileImagePath=userData["profileImage"];      
-      if (profileImagePath != null &&
-          profileImagePath is String &&
-          profileImagePath!.isNotEmpty) {
+      final trustedContact = userData["trustedContact"];
+      if (trustedContact != null) {
+        trustedContactname = trustedContact["name"];
+        trustedContactemail = trustedContact["email"];
+        trustedContactrelationship = trustedContact["relationship"];
+        trustedContactstatus = trustedContact["status"];
+      }
+      avatarLink=userData["profileImage"]; 
+      notifyListeners();     
+      if (avatarLink != null &&
+          avatarLink is String &&
+          avatarLink!.isNotEmpty) {
 
         await SharedPreferencesitem.setString(
           "avatarLink",
@@ -115,15 +122,15 @@ class ProfileScreenProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> updateUserProfile({required  String? name, required String? email,required  int? age}) async {
+  Future updateUserProfile({required  String? name, required String? email,required  int? age,required File ?image}) async {
     try {
       isLoadingProfile = true;
-      notifyListeners();
-      
-      final updatedData = await AuthService.updateMe(name, email, age);
+      notifyListeners();      
+      final updatedData = await AuthService.updateMe(name, email, age,image);
       if (updatedData['name'] != null){userName = updatedData['name'];notifyListeners();} 
       if (updatedData['email'] != null){userEmail = updatedData['email'];notifyListeners();} 
       if (updatedData['age'] != null){userAge = updatedData['age'];notifyListeners();} 
+      if (updatedData['profileImage'] != null){profileImagePath = updatedData['profileImage'];notifyListeners();}
       if(userName!=null){
         await SharedPreferencesitem.setString("userName", userName!);
       }
@@ -136,6 +143,7 @@ class ProfileScreenProvider extends ChangeNotifier {
       
       isLoadingProfile = false;
       notifyListeners();
+      return updatedData;
     } catch (e) {
       isLoadingProfile = false;
       notifyListeners();
@@ -172,17 +180,34 @@ class ProfileScreenProvider extends ChangeNotifier {
       if (pickedImage == null) return;
 
       final directory = await getApplicationDocumentsDirectory();
-      final newPath =
-          '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.jpeg';
 
-      
-      profileImagePath = newPath; 
+      final newPath =
+          '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.PNG';
+
+      // COPY THE FILE
+      final File newImage = await File(pickedImage.path).copy(newPath);
+
+      profileImagePath = newImage.path;
       photoLoading=true;
       notifyListeners();
-      await SharedPreferencesitem.remove("avatarLink");     
-      final avatarLink = await AuthService.uploadAvatar(File(profileImagePath!));
-      await SharedPreferencesitem.setString("avatarLink",avatarLink);
+      //await SharedPreferencesitem.remove("avatarLink");
+      
+      String userName=SharedPreferencesitem.getString("userName")!;
+      String userEmail=SharedPreferencesitem.getString("userEmail")!;
+      int userAge=SharedPreferencesitem.getInt("userAge")!;
+      var data =await updateUserProfile(image: File(profileImagePath!),age: userAge,email: userEmail,name: userName);     
+      // Evict old cached image so CachedNetworkImage fetches the new one
+      final oldAvatarLink = avatarLink;
+      if (oldAvatarLink != null && oldAvatarLink.isNotEmpty) {
+        await CachedNetworkImage.evictFromCache(ApiConstants.baseUrl + oldAvatarLink);
+      }
+      avatarLink = data["profileImage"];
+      if (avatarLink != null && avatarLink!.isNotEmpty) {
+        await CachedNetworkImage.evictFromCache(ApiConstants.baseUrl + avatarLink!);
+      }
+      await SharedPreferencesitem.setString("avatarLink",avatarLink!);
       photoLoading=false;
+      loadProfileImage();
       notifyListeners();
     } catch (e, s) {
       log('Error picking image: $e');
@@ -197,13 +222,13 @@ class ProfileScreenProvider extends ChangeNotifier {
   }
 
   Future<void> loadProfileImage() async {  
-  final path =  SharedPreferencesitem.getString("avatarLink");
+    final path =  SharedPreferencesitem.getString("avatarLink");
 
-  if (path != null && path.isNotEmpty) {
-    profileImagePath = path;
-    notifyListeners();
+    if (path != null && path.isNotEmpty) {
+      avatarLink = path;
+      notifyListeners();
+    }
   }
-}
   
 
   void toggleDarkMode(bool value) {
@@ -254,6 +279,7 @@ class ProfileScreenProvider extends ChangeNotifier {
       rethrow;
     }
   }
+  
   Future<void> deleteAccount({required String password, required String reason, String mode = 'soft'}) async {
     try {
       isLoadingProfile = true;

@@ -36,7 +36,7 @@ class Statusbarwidget extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(48.r)),
                   ),
                   child: 
-                  SharedPreferencesitem.getString("avatarLink")==null
+                  val.avatarLink == null || val.avatarLink!.isEmpty
                   ?CachedNetworkImage(
                     imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
                     fit: BoxFit.fill,                    
@@ -45,8 +45,7 @@ class Statusbarwidget extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     borderRadius: BorderRadius.circular(108.r),
                     child: CachedNetworkImage(
-                       imageUrl: ApiConstants.baseUrl+val.profileImagePath!,
-                      //imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",  
+                       imageUrl: ApiConstants.baseUrl + val.avatarLink!,
                       fit: BoxFit.fill,                    
                     )
                   ),

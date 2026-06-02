@@ -88,17 +88,14 @@ class ProfileScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Padding(
             padding:  EdgeInsets.symmetric(horizontal:  20.w),
-            child: ChangeNotifierProvider(
-              create: (_) => ProfileScreenProvider()..init(),
-              child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.stretch,
-                children:  [
-                  AboutUserWid(),
-                  GeneralSettingsWid(),
-                  //FavouriteWid(),
-                  SizedBox(height: 30.h),
-                ],
-              ),
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
+              children:  [
+                AboutUserWid(),
+                GeneralSettingsWid(),
+                //FavouriteWid(),
+                SizedBox(height: 30.h),
+              ],
             ),
           ),
         ),

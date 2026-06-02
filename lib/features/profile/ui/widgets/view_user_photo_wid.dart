@@ -53,28 +53,24 @@ Future<dynamic> messgeShowDialog(context){
                             height: 335.h,
                             width: double.infinity,
                             child: 
-                            SharedPreferencesitem.getString("avatarLink")==null
-                            ?ClipRRect(
-                              //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r)),
-                              clipBehavior: Clip.antiAlias,
-                              borderRadius: BorderRadiusGeometry.circular(20.r),
-                              child: CachedNetworkImage(
-                                imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
-                                fit: BoxFit.cover,   
-                                                
-                              ),
-                            )
-                            :Consumer<ProfileScreenProvider>(
+                            Consumer<ProfileScreenProvider>(
                               builder: (context,val,child) {
+                                if (val.avatarLink == null || val.avatarLink!.isEmpty) {
+                                  return ClipRRect(
+                                    clipBehavior: Clip.antiAlias,
+                                    borderRadius: BorderRadiusGeometry.circular(20.r),
+                                    child: CachedNetworkImage(
+                                      imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
+                                      fit: BoxFit.cover,   
+                                    ),
+                                  );
+                                }
                                 return ClipRRect(
-                                  //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r)),
                                   borderRadius: BorderRadiusGeometry.circular(20.r),
                                   clipBehavior: Clip.antiAlias,
-                                  
                                   child: CachedNetworkImage(
-                                    imageUrl: ApiConstants.baseUrl+val.profileImagePath!,
+                                    imageUrl: ApiConstants.baseUrl + val.avatarLink!,
                                     fit: BoxFit.cover,   
-                                                    
                                   ),
                                 );
                               }
