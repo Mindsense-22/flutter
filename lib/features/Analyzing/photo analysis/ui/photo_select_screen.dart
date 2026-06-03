@@ -59,30 +59,27 @@ class PhotoSelectScreen extends StatelessWidget {
                   val.selctedimage != null?
                   Column(
                     children: [
-                      SizedBox(height: 65.h,),
+                      SizedBox(height: 65.h,),                      
                       Container(
-                        clipBehavior: Clip.antiAlias,
                         width: double.infinity,
-                        height: 260.h,
+                        height: 270.h,
                         decoration: BoxDecoration(
+                          color: Colors.grey[200], // Optional placeholder color while loading
                           borderRadius: BorderRadius.circular(25.r),
                           border: Border.all(
-                            color: AppColers.primaryColor,
-                            width: 1.7.w
-                          )
-                        ),
-                        child: Image.file(
-                            File(val.selctedimage!.path),
-                            width: 120.w,
-                            height: 120.h,
-                            fit: BoxFit.cover,
+                            color: AppColers.primaryColor, // Fixed typo from AppColers if needed
+                            width: 1.7.w,
                           ),
-                      ),
-                      
+                          image: DecorationImage(
+                            image: FileImage(File(val.selctedimage!.path)),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),                      
                     ],
                   )
                    
-                  :SizedBox(height: 260.h,),           
+                  :SizedBox(height: 270.h,),           
                   SizedBox(height: 20.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
