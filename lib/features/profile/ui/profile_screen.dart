@@ -83,22 +83,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 size: 22.sp,
               )
             ),
-          
-          actions: [          
-            InkWell(
-              onTap: () async{
+          //// Comment Setting Icon
+          // actions: [          
+          //   InkWell(
+          //     onTap: () async{
                 
-              },
-              borderRadius: BorderRadius.circular(120.r),            
-              child: SvgPicture.asset(
-                "assets/images/settings_icon_white.svg",
-                width: 26.w,
-                height: 26.h,
-              ),
-            ),
+          //     },
+          //     borderRadius: BorderRadius.circular(120.r),            
+          //     child: SvgPicture.asset(
+          //       "assets/images/settings_icon_white.svg",
+          //       width: 26.w,
+          //       height: 26.h,
+          //     ),
+          //   ),
             
-            SizedBox(width: 15.w,),            
-          ],
+          //   SizedBox(width: 15.w,),            
+          // ],
         ),
         body: SingleChildScrollView(
           child: Padding(
