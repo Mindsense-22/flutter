@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,21 @@ class DoctorsProvider extends ChangeNotifier{
   List<DoctorDetails> doctorsList = [];
   var follow=[{"index":int ,"isfollow":bool}];
   bool isLoading = false;
+  List<Map<String, dynamic>> sessionsList = [];
+  bool isLoadingSessions = false;
+
+  Future<void> fetchMySessions() async {
+    isLoadingSessions = true;
+    notifyListeners();
+    try {
+      sessionsList = await DoctorsService.getMySessions();
+    } catch (e) {
+      log("Sessions error: $e");
+    } finally {
+      isLoadingSessions = false;
+      notifyListeners();
+    }
+  }
 
   Future<void> getAllDoctors() async {
     isLoading = true;
@@ -56,5 +72,54 @@ class DoctorsProvider extends ChangeNotifier{
     }catch(e){
         log("unfollow :"+e.toString());
     }
-  } 
+  }
+  
+  Future<void> submitBooking(
+    BuildContext context, {
+    required GlobalKey<FormState> formKey,
+    required String professionalId,
+    required String paymentMethod,
+    required String? transferRef,
+    required File? screenshot,
+    required DateTime? startTime,
+    required DateTime? endTime,
+  }) async {
+    if (!formKey.currentState!.validate()) {
+      return;
+    }
+    if (startTime == null || endTime == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select both start and end times', style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
+      );
+      return;
+    }
+    if (screenshot == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please attach a money transfer screenshot', style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
+      );
+      return;
+    }
+
+    try {
+      await DoctorsService.bookSession(
+        professionalId: professionalId,
+        startTime: startTime,
+        endTime: endTime,
+        paymentMethod: paymentMethod,
+        paymentReference: transferRef,
+        paymentProof: screenshot,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Booking submitted successfully!', style: TextStyle(color: Colors.white)), backgroundColor: Colors.green),
+      );
+      fetchMySessions();
+      Navigator.pop(context);
+    } catch (e) {
+      log("Booking error: " + e.toString());
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to submit booking: $e', style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
+      );
+    }
+  }
 }

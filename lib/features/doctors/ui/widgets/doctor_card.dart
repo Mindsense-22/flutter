@@ -9,6 +9,7 @@ import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/features/doctors/logic/doctors_provider.dart';
 import 'package:mindsense_app/features/doctors/modules/doctordetails.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/doctors/ui/booking_screen.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -211,7 +212,8 @@ class _DoctorCardState extends State<DoctorCard> {
                     Expanded(
                       child: CustomButton(
                         onPressed: () {
-                          // Book action
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => BookingScreen(doctor: widget.doctor),));
+                          log("d id"+widget.doctor.sId.toString());
                         },
                         text: "Book",
                       ),

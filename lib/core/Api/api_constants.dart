@@ -25,4 +25,5 @@ class ApiConstants {
   static const String mainDashboard="/api/emotion/flutter-dashboard";
   static const String uploadAvatar="/api/v1/users/me/avatar";
   static const String getAllDoctors="/api/v1/professionals";
+  static const String bookSessions="/api/v1/sessions/book";
 }
