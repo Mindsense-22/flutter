@@ -10,9 +10,22 @@ import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:provider/provider.dart';
 
-class Statusbarwidget extends StatelessWidget {
+class Statusbarwidget extends StatefulWidget {
   const Statusbarwidget({super.key});
 
+  @override
+  State<Statusbarwidget> createState() => _StatusbarwidgetState();
+}
+
+class _StatusbarwidgetState extends State<Statusbarwidget> {
+   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ProfileScreenProvider>().fetchUserProfile();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Consumer<ProfileScreenProvider>(

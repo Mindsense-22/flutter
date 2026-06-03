@@ -13,8 +13,23 @@ import 'package:mindsense_app/features/profile/ui/widgets/general_settings_wid.d
 import 'package:mindsense_app/features/splash/ui/splash_screen.dart';
 import 'package:provider/provider.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ProfileScreenProvider>().fetchUserProfile();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
