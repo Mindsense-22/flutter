@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +22,12 @@ class PhotoSelectScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-      
+          title: Text("Analyze Image ",style: TextStyle(
+            color: Theme.of(context).colorScheme.onSecondary,
+            fontSize: 22.sp,
+            fontWeight: FontWeight.bold,
+          ),),
+          centerTitle: true,
         ),
       
         body: Consumer<PhotoAnalysisProvider>(
@@ -33,7 +39,7 @@ class PhotoSelectScreen extends StatelessWidget {
                 
                 children: [
                   SizedBox(
-                    height: 105.h,
+                    height: 55.h,
                   ),
                   Text(
                     textAlign: TextAlign.center,
@@ -48,8 +54,36 @@ class PhotoSelectScreen extends StatelessWidget {
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w600,
                     color: AppColers.primaryColor,
-                  ),),                
-                  SizedBox(height: 95.h,),
+                  ),),
+
+                  val.selctedimage != null?
+                  Column(
+                    children: [
+                      SizedBox(height: 65.h,),
+                      Container(
+                        clipBehavior: Clip.antiAlias,
+                        width: double.infinity,
+                        height: 260.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.r),
+                          border: Border.all(
+                            color: AppColers.primaryColor,
+                            width: 1.7.w
+                          )
+                        ),
+                        child: Image.file(
+                            File(val.selctedimage!.path),
+                            width: 120.w,
+                            height: 120.h,
+                            fit: BoxFit.cover,
+                          ),
+                      ),
+                      
+                    ],
+                  )
+                   
+                  :SizedBox(height: 260.h,),           
+                  SizedBox(height: 20.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -77,7 +111,7 @@ class PhotoSelectScreen extends StatelessWidget {
                   
       
                   SizedBox(
-                    height: 135.h,
+                    height: 25.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
