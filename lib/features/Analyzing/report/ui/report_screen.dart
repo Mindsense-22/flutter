@@ -120,28 +120,34 @@ class ReportScreen extends StatelessWidget {
                       );
                     }
                   ),
-                  SizedBox(height: 20.h,),
+                  
                   analyzingProvider.detectedEmotion=="Sad"?
-                  Container(      
-                    width: double.infinity,
-                        height: 51.h,       
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          color: AppColers.primaryColor,
-                          borderRadius: BorderRadius.circular(10)
-                        ),
-                      child: MaterialButton( 
-                        padding: EdgeInsets.all(8),
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorsScreen(),));
-                        },
-                        child:Text("Meet A Doctor →",style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black
-                        ),),
-                     )
+                  Column(
+                    children: [
+                      SizedBox(height: 20.h,),
+                      Container(      
+                        width: double.infinity,
+                            height: 51.h,       
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              color: AppColers.primaryColor,
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                          child: MaterialButton( 
+                            padding: EdgeInsets.all(8),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorsScreen(),));
+                            },
+                            child:Text("Meet A Doctor →",style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black
+                            ),),
+                        )
+                      )
+                    ],
                   )
+                  
                   :SizedBox.shrink(),
                   SizedBox(height: 20.h,),
                   Consumer<AnalyzingProvider>(
