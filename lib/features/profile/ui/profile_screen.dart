@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             "My Profile",
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 20.sp,
+              fontSize: 23.sp,
             ),
           ),
           leading:
@@ -80,7 +80,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 
               }, 
               icon: Icon(Icons.logout,
-                size: 22.sp,
+                size: 23.sp,
+                color:  Colors.red,
               )
             ),
           //// Comment Setting Icon
