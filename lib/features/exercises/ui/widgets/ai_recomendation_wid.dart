@@ -213,7 +213,7 @@ class _MainImage extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20.r),
       child: AspectRatio(
-        aspectRatio: 335 / 276,
+        aspectRatio: 335 / 350,
         child: Stack(
           fit: StackFit.expand,
           children: [

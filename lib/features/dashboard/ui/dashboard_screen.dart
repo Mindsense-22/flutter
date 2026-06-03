@@ -62,7 +62,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 const DashboardInfoWid(),
                 SizedBox(height: 20.h),
                 const DashboardWid(),
-                 SizedBox(height: 20.h),
+                 SizedBox(height: 11.h),
                 const WeeklyMoodWid(),                
                 SizedBox(height: 20.h),
                 CustomButton(

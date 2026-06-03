@@ -46,32 +46,32 @@ class ExercisesScreen extends StatelessWidget {
                   children: [                    
                     AiRecommendationCard(aiRecomendationSession: val.aiRecomendationSession,),
                     SizedBox(height: 24.h,),
-                    Text(
-                      "Quick Relief",
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).colorScheme.onSecondary
-                      ),
-                    ),
-                    SizedBox(height: 20.h,),
-                    SizedBox(
-                      height:242.h,
-                      width: double.infinity,
-                      child: QuickRelifeWid()
-                    ),
-                    SizedBox(height: 24.h,),
-                    Text(
-                      "Better Sleep",
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).colorScheme.onSecondary
-                      ),
-                    ),
-                    SizedBox(height: 20.h,),
+                    // Text(
+                    //   "Quick Relief",
+                    //   style: TextStyle(
+                    //     fontSize: 18.sp,
+                    //     fontWeight: FontWeight.w600,
+                    //     color: Theme.of(context).colorScheme.onSecondary
+                    //   ),
+                    // ),
+                    // SizedBox(height: 20.h,),
+                    // SizedBox(
+                    //   height:242.h,
+                    //   width: double.infinity,
+                    //   child: QuickRelifeWid()
+                    // ),
+                    // SizedBox(height: 24.h,),
+                    // Text(
+                    //   "Better Sleep",
+                    //   style: TextStyle(
+                    //     fontSize: 18.sp,
+                    //     fontWeight: FontWeight.w600,
+                    //     color: Theme.of(context).colorScheme.onSecondary
+                    //   ),
+                    // ),
+                    // SizedBox(height: 20.h,),
                     //last widget here
-                    BetterSleepWid()
+                    //BetterSleepWid()
                   ],
                 );
               }

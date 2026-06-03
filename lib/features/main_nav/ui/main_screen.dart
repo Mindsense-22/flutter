@@ -61,11 +61,11 @@ class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   final List<Widget> _screens = const [
-    Homescreen(),
-    DashboardScreen(),
+    Homescreen(),    
     ExercisesScreen(),
-    GamesHubScreen(),
     DoctorsScreen(),
+    GamesHubScreen(),    
+    DashboardScreen(),
     ProfileScreen(),
   ];
 
