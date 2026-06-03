@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindsense_app/core/Api/api_constants.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
+import 'package:mindsense_app/features/doctors/logic/doctors_provider.dart';
 import 'package:mindsense_app/features/doctors/modules/doctordetails.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
+import 'package:provider/provider.dart';
 
 class DoctorCard extends StatefulWidget {
   final DoctorDetails doctor;
@@ -17,10 +22,10 @@ class DoctorCard extends StatefulWidget {
 }
 
 class _DoctorCardState extends State<DoctorCard> {
-  bool isFollowing = false;
-
   @override
   Widget build(BuildContext context) {
+    var provider=context.watch<ProfileScreenProvider>();
+    
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       padding: EdgeInsets.all(16.w),
@@ -36,190 +41,194 @@ class _DoctorCardState extends State<DoctorCard> {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header: Name, Verified Icon, Followers
-          Row(
+      child: Consumer<DoctorsProvider>(
+        builder: (context,doctorsprovider,child) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
+              // Header: Name, Verified Icon, Followers
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        widget.doctor.profileImage!=null?
-                        ClipRRect(
-                          clipBehavior: Clip.antiAlias,
-                          borderRadius: BorderRadius.circular(100.r),
-                          child: CachedNetworkImage(
-                            imageUrl: ApiConstants.baseUrl+widget.doctor.profileImage!,
-                            width: 40,
-                            height: 40,
-                            fit: BoxFit.cover,                        
-                            placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator(),
+                        Row(
+                          children: [
+                            widget.doctor.profileImage!=null?
+                            ClipRRect(
+                              clipBehavior: Clip.antiAlias,
+                              borderRadius: BorderRadius.circular(100.r),
+                              child: CachedNetworkImage(
+                                imageUrl: ApiConstants.baseUrl+widget.doctor.profileImage!,
+                                width: 40,
+                                height: 40,
+                                fit: BoxFit.cover,                        
+                                placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                                errorWidget: (context, url, error) {
+                                  print("URL = $url");
+                                  print("ERROR = $error");
+                                  return ClipRRect(clipBehavior: Clip.antiAlias,
+                                    borderRadius: BorderRadius.circular(100.r),child:  Icon(Icons.error, size: 40.sp));
+                                },
+                              ),
+                            ):SizedBox.shrink(),
+                            SizedBox(width: 8.w,),
+                            Flexible(
+                              child: Text(
+                                widget.doctor.name ?? "Unknown",
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                            errorWidget: (context, url, error) {
-                              print("URL = $url");
-                              print("ERROR = $error");
-                              return ClipRRect(clipBehavior: Clip.antiAlias,
-                                borderRadius: BorderRadius.circular(100.r),child:  Icon(Icons.error, size: 40.sp));
-                            },
-                          ),
-                        ):SizedBox.shrink(),
-                        SizedBox(width: 8.w,),
-                        Flexible(
-                          child: Text(
-                            widget.doctor.name ?? "Unknown",
+                            if (widget.doctor.isVerified == true) ...[
+                              SizedBox(width: 8.w),
+                              SvgPicture.asset(
+                                "assets/images/correct_icon.svg",
+                                width: 12.w,
+                                height: 12.w,
+                              ),
+                            ],
+                          ],
+                        ),
+                        if (widget.doctor.professionalProfile?.headline != null) ...[
+                          SizedBox(height: 4.h),
+                          Text(
+                            widget.doctor.professionalProfile!.headline!,
                             style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              fontSize: 14.sp,
+                              color: Colors.grey[300],
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                        if (widget.doctor.isVerified == true) ...[
-                          SizedBox(width: 8.w),
-                          SvgPicture.asset(
-                            "assets/images/correct_icon.svg",
-                            width: 12.w,
-                            height: 12.w,
-                          ),
                         ],
                       ],
                     ),
-                    if (widget.doctor.professionalProfile?.headline != null) ...[
-                      SizedBox(height: 4.h),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
                       Text(
-                        widget.doctor.professionalProfile!.headline!,
+                        "${widget.doctor.followers?.length ?? 0}",
                         style: TextStyle(
-                          fontSize: 14.sp,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                          color: AppColers.primaryColor,
+                        ),
+                      ),
+                      Text(
+                        "Followers",
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 6.h),
+          
+              // Bio
+              Text(
+                widget.doctor.professionalProfile?.bio ?? "No bio available.",
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Colors.grey[400],
+                ),
+              ),
+              SizedBox(height: 8.h),
+              
+              // Languages
+              if (widget.doctor.professionalProfile?.languages?.isNotEmpty == true)
+                Row(
+                  children: [
+                    Icon(Icons.language, color: Colors.grey, size: 16.sp),
+                    SizedBox(width: 6.w),
+                    Expanded(
+                      child: Text(
+                        widget.doctor.professionalProfile!.languages!.join(", "),
+                        style: TextStyle(
+                          fontSize: 12.sp,
                           color: Colors.grey[300],
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                    ],
+                    ),
                   ],
                 ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
+              SizedBox(height: 10.h),
+          
+              // Price & Availability
+              Row(
+                children: [              
                   Text(
-                    "${widget.doctor.followers?.length ?? 0}",
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AppColers.primaryColor,
-                    ),
+                    "${widget.doctor.professionalProfile?.pricePerSession ?? 0} Egp / session",
+                    style: TextStyle(color: AppColers.primaryColor, fontSize: 14.sp),
                   ),
-                  Text(
-                    "Followers",
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Colors.grey,
+                  SizedBox(width: 16.w),
+                  Icon(Icons.access_time, color: Colors.blue, size: 18.sp),
+                  SizedBox(width: 4.w),
+                  Expanded(
+                    child: Text(
+                      widget.doctor.professionalProfile?.availability?.isNotEmpty == true
+                          ? widget.doctor.professionalProfile!.availability!.join(", ")
+                          : "Availability not set",
+                      style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
               ),
-            ],
-          ),
-          SizedBox(height: 6.h),
-
-          // Bio
-          Text(
-            widget.doctor.professionalProfile?.bio ?? "No bio available.",
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: Colors.grey[400],
-            ),
-          ),
-          SizedBox(height: 8.h),
+              SizedBox(height: 16.h),
           
-          // Languages
-          if (widget.doctor.professionalProfile?.languages?.isNotEmpty == true)
-            Row(
-              children: [
-                Icon(Icons.language, color: Colors.grey, size: 16.sp),
-                SizedBox(width: 6.w),
-                Expanded(
-                  child: Text(
-                    widget.doctor.professionalProfile!.languages!.join(", "),
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Colors.grey[300],
+              // Actions
+              if (provider.followingIds.contains(widget.doctor.sId))
+              
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomButton(
+                        onPressed: () {
+                          log(provider.followingIds.toString());
+                          log(widget.doctor.sId.toString());
+                          doctorsprovider .unfollowButton(widget.doctor.sId,context);
+                        },
+                        text: "Unfollow",
+                      ),
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
-            ),
-          SizedBox(height: 10.h),
-
-          // Price & Availability
-          Row(
-            children: [              
-              Text(
-                "${widget.doctor.professionalProfile?.pricePerSession ?? 0} Egp / session",
-                style: TextStyle(color: AppColers.primaryColor, fontSize: 14.sp),
-              ),
-              SizedBox(width: 16.w),
-              Icon(Icons.access_time, color: Colors.blue, size: 18.sp),
-              SizedBox(width: 4.w),
-              Expanded(
-                child: Text(
-                  widget.doctor.professionalProfile?.availability?.isNotEmpty == true
-                      ? widget.doctor.professionalProfile!.availability!.join(", ")
-                      : "Availability not set",
-                  style: TextStyle(color: Colors.white, fontSize: 14.sp),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
+                    SizedBox(width: 12.w),
+                    Expanded(
+                      child: CustomButton(
+                        onPressed: () {
+                          // Book action
+                        },
+                        text: "Book",
+                      ),
+                    ),
+                  ],
+                )
+              else
+                CustomButton(
+                  onPressed: () {
+                    doctorsprovider .followButton(widget.doctor.sId,context);
+                  },
+                  text: "Follow",
+                )
+                
             ],
-          ),
-          SizedBox(height: 16.h),
-
-          // Actions
-          if (!isFollowing)
-            CustomButton(
-              onPressed: () {
-                setState(() {
-                  isFollowing = true;
-                });
-              },
-              text: "Follow",
-            )
-          else
-            Row(
-              children: [
-                Expanded(
-                  child: CustomButton(
-                    onPressed: () {
-                      setState(() {
-                        isFollowing = false;
-                      });
-                    },
-                    text: "Unfollow",
-                  ),
-                ),
-                SizedBox(width: 12.w),
-                Expanded(
-                  child: CustomButton(
-                    onPressed: () {
-                      // Book action
-                    },
-                    text: "Book",
-                  ),
-                ),
-              ],
-            ),
-        ],
+          );
+        }
       ),
     );
   }

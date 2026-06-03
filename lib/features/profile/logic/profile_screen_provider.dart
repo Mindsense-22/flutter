@@ -36,6 +36,8 @@ class ProfileScreenProvider extends ChangeNotifier {
   bool photoLoading=false;
   bool isLoadingProfile = false;
   String ? avatarLink;
+  List followingIds=[];
+  List following=[];
   setName(newname){
     userName=newname;
     notifyListeners();
@@ -65,12 +67,20 @@ class ProfileScreenProvider extends ChangeNotifier {
       userAge = userData['age'];
       profileImagePath=userData["profileImage"];
       userRole=userData["role"];
+      following=userData["following"];
       final trustedContact = userData["trustedContact"];
       if (trustedContact != null) {
         trustedContactname = trustedContact["name"];
         trustedContactemail = trustedContact["email"];
         trustedContactrelationship = trustedContact["relationship"];
         trustedContactstatus = trustedContact["status"];
+      }
+      followingIds.clear();
+      if(following.isNotEmpty){
+        for(int i=0;i<following.length;i++){
+          followingIds.add(following[i]["_id"]);
+        }
+        log(followingIds.toString());
       }
       avatarLink=userData["profileImage"]; 
       notifyListeners();     
@@ -130,6 +140,16 @@ class ProfileScreenProvider extends ChangeNotifier {
     } catch (e) {
       log("Error fetching profile: $e");
     }
+  }
+
+  void addFollowingOptimistic(String id) {
+    if (!followingIds.contains(id)) followingIds.add(id);
+    notifyListeners();
+  }
+
+  void removeFollowingOptimistic(String id) {
+    followingIds.remove(id);
+    notifyListeners();
   }
 
   Future updateUserProfile({required  String? name, required String? email,required  int? age,required File ?image}) async {
