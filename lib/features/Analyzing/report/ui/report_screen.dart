@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/Analyzing/chossen_screen.dart';
 import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
@@ -11,6 +12,7 @@ import 'package:mindsense_app/features/Analyzing/report/ui/widgets/overallstate_
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/voiceanalysis_report_wid.dart';
 import 'package:mindsense_app/features/Analyzing/report/logic/analysisreportprovider.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
+import 'package:mindsense_app/features/doctors/ui/doctors_screen.dart';
 import 'package:mindsense_app/features/games/logic/gamification_provider.dart';
 import 'package:mindsense_app/features/games/ui/games_hub_screen.dart';
 import 'package:mindsense_app/features/games/ui/widgets/game_recommendation_card.dart';
@@ -119,7 +121,29 @@ class ReportScreen extends StatelessWidget {
                     }
                   ),
                   SizedBox(height: 20.h,),
-                  
+                  analyzingProvider.detectedEmotion=="Sad"?
+                  Container(      
+                    width: double.infinity,
+                        height: 51.h,       
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          color: AppColers.primaryColor,
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                      child: MaterialButton( 
+                        padding: EdgeInsets.all(8),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorsScreen(),));
+                        },
+                        child:Text("Meet A Doctor →",style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black
+                        ),),
+                     )
+                  )
+                  :SizedBox.shrink(),
+                  SizedBox(height: 20.h,),
                   Consumer<AnalyzingProvider>(
                     builder: (context,val,child) {
                       return Container(      
