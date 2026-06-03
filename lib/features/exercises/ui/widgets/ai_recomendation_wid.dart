@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/exercises/logic/exercises_provider.dart';
 import 'package:mindsense_app/features/exercises/modules/ai_recomendation_session.dart';
 import 'package:provider/provider.dart';
@@ -63,6 +64,7 @@ class _AiRecommendationCardState extends State<AiRecommendationCard> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Padding(
       padding: EdgeInsets.only(right: 12.w),
       child: Container(        
@@ -210,6 +212,7 @@ class _MainImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return ClipRRect(
       borderRadius: BorderRadius.circular(20.r),
       child: AspectRatio(
@@ -253,6 +256,7 @@ class _HeadingText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.read<ExercisesProvider>();
+    String detectedEmotion=SharedPreferencesitem.getString("detectedEmotion")??"Sad";
     return RichText(
       text: TextSpan(
         style: TextStyle(
@@ -266,7 +270,7 @@ class _HeadingText extends StatelessWidget {
           const TextSpan(
               text: 'Based on your recent voice and\nfacial analysis '),
           TextSpan(
-            text: provider.userstate,
+            text: detectedEmotion,
             style: const TextStyle(
               fontWeight: FontWeight.w600,
               color: Color(0xFF55EEDA),
@@ -398,6 +402,7 @@ class _MiniPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String detectedEmotion=SharedPreferencesitem.getString("detectedEmotion")??"Sad";
     return ClipRRect(
       borderRadius: BorderRadius.circular(20.r),
       child: Container(
@@ -486,7 +491,7 @@ class _MiniPlayer extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Overcoming Stress',
+                          detectedEmotion,
                           style: TextStyle(
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,

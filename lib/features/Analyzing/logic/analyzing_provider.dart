@@ -3,12 +3,14 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mindsense_app/core/Api/emotion_service.dart';
+import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/Analyzing/modules/adviceresponse.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/photo_scan_result_screen.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/report_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_scan_result_screen.dart';
 import 'package:mindsense_app/features/dashboard/logic/dashboard_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AnalyzingProvider extends ChangeNotifier {
   XFile ?selctedimage;
@@ -70,6 +72,9 @@ class AnalyzingProvider extends ChangeNotifier {
 
       detectedEmotion = result["emotion"]?["state"] ?? result["analysis"]?["state"] ?? "neutral";
       emotionScores = result["analysis"]?["scores"];
+      if(detectedEmotion!=null){
+        await SharedPreferencesitem.setString("detectedEmotion", detectedEmotion!);
+      }
       
       aiAdvice = Advice.fromJson(
         result["advice"] ?? {},
@@ -115,7 +120,10 @@ class AnalyzingProvider extends ChangeNotifier {
       log(result.toString());   
       //log(result["advice"].toString());
       detectedEmotion = result["emotion"]?["state"] ?? result["analysis"]?["state"] ?? "gg";
-      emotionScores = result["analysis"]?["scores"];   
+      emotionScores = result["analysis"]?["scores"];  
+      if(detectedEmotion!=null){
+        await SharedPreferencesitem.setString("detectedEmotion", detectedEmotion!);
+      }
       aiAdvice = Advice.fromJson(
         result["advice"] ?? {},
       );
@@ -200,7 +208,9 @@ class AnalyzingProvider extends ChangeNotifier {
       // allFinalScore=  result["emotion"]?["confidence"];
       detectedEmotion = result["emotion"]?["state"] ?? result["analysis"]?["state"] ?? "neutral";
       emotionScores = result["analysis"]?["scores"];
-      
+      if(detectedEmotion!=null){
+        await SharedPreferencesitem.setString("detectedEmotion", detectedEmotion!);
+      }
       aiAdvice = Advice.fromJson(
         result["advice"] ?? {},
       );
