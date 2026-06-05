@@ -16,16 +16,26 @@ import 'package:provider/provider.dart';
 class DoctorCard extends StatefulWidget {
   final DoctorDetails doctor;
 
-  const DoctorCard({super.key, required this.doctor});
+  DoctorCard({super.key, required this.doctor});
 
   @override
   State<DoctorCard> createState() => _DoctorCardState();
+  
 }
 
 class _DoctorCardState extends State<DoctorCard> {
+  int numberOfFollowers=0;
+  @override
+  void initState() {
+    super.initState();
+    numberOfFollowers = widget.doctor.followers?.length ?? 0;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     var provider=context.watch<ProfileScreenProvider>();
+    bool isFollowing=provider.followingIds.contains(widget.doctor.sId);
     
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
@@ -118,7 +128,7 @@ class _DoctorCardState extends State<DoctorCard> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "${widget.doctor.followers?.length ?? 0}",
+                        "$numberOfFollowers",
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
@@ -194,39 +204,94 @@ class _DoctorCardState extends State<DoctorCard> {
               SizedBox(height: 16.h),
           
               // Actions
-              if (provider.followingIds.contains(widget.doctor.sId))
+              if (isFollowing)
               
                 Row(
-                  children: [
+                  children: [                    
                     Expanded(
-                      child: CustomButton(
-                        onPressed: () {
+                      child:Container(
+                        height: 40.h,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: AppColers.primaryColor,
+                            width: 1.5.w
+                          )
+                        ),
+                        child: MaterialButton(
+                          onPressed: () {
                           log(provider.followingIds.toString());
                           log(widget.doctor.sId.toString());
                           doctorsprovider .unfollowButton(widget.doctor.sId,context);
+                          setState(() {
+                            isFollowing=false;
+                            numberOfFollowers--;
+                          });
                         },
-                        text: "Unfollow",
-                      ),
+                          child: Text("Unfollow",style: TextStyle(
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w700,
+                            color:Theme.of(context).colorScheme.onSecondary
+                          ),),
+                        ),
+                      )
+                    
                     ),
                     SizedBox(width: 12.w),
                     Expanded(
-                      child: CustomButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => BookingScreen(doctor: widget.doctor),));
-                          log("d id"+widget.doctor.sId.toString());
-                        },
-                        text: "Book",
-                      ),
+                      child:Container(
+                        height: 40.h,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          color: AppColers.primaryColor,
+                          borderRadius: BorderRadius.circular(10),
+                          
+                        ),
+                        child: MaterialButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => BookingScreen(doctor: widget.doctor),));
+                            log("d id"+widget.doctor.sId.toString());
+                            
+                          },
+                          child: Text("Book Session",style: TextStyle(
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w700,
+                            color:Theme.of(context).colorScheme.onPrimary
+                          ),),
+                        ),
+                      )
+                    
                     ),
+                    
                   ],
                 )
               else
-                CustomButton(
-                  onPressed: () {
-                    doctorsprovider .followButton(widget.doctor.sId,context);
-                  },
-                  text: "Follow",
-                )
+                Container(
+                  height: 40.h,
+                  width: double.infinity,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    color: AppColers.primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                    
+                  ),
+                  child: MaterialButton(
+                    onPressed: () {
+                      doctorsprovider .followButton(widget.doctor.sId,context);
+                      setState(() {
+                        isFollowing=true;
+                        numberOfFollowers=numberOfFollowers+1;
+                      });
+                    },
+                    child: Text("Follow",style: TextStyle(
+                      fontSize: 19.sp,
+                      fontWeight: FontWeight.w700,
+                      color:Theme.of(context).colorScheme.onPrimary
+                    ),),
+                  ),
+                ),                
                 
             ],
           );

@@ -52,7 +52,7 @@ class DoctorsProvider extends ChangeNotifier{
     log(response.data["status"]);
     Provider.of<ProfileScreenProvider>(context, listen: false)
       .fetchUserProfile();
-    getAllDoctors();    
+    //getAllDoctors();    
     }catch(e){
       log(e.toString());
     } 
@@ -67,7 +67,7 @@ class DoctorsProvider extends ChangeNotifier{
       log(response.data["status"]);
       Provider.of<ProfileScreenProvider>(context, listen: false)
         .fetchUserProfile();
-      getAllDoctors();
+      //getAllDoctors();
       
     }catch(e){
         log("unfollow :"+e.toString());
