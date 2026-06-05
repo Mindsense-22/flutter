@@ -21,6 +21,7 @@ class BookingScreen extends StatefulWidget {
 class _BookingScreenState extends State<BookingScreen> {
   String selectedPaymentMethod = "Credit Card"; // matches backend enum
   TextEditingController referenceController = TextEditingController();
+  TextEditingController durationController = TextEditingController();
   File? screenshot;
   DateTime? startTime;
   DateTime? endTime;
@@ -280,7 +281,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                   ),
                   SizedBox(width: 16.w),
-                  Expanded(
+                  /* Expanded(
                     child: InkWell(
                       onTap: () async {
                         final dt = await _pickDateTime();
@@ -300,6 +301,48 @@ class _BookingScreenState extends State<BookingScreen> {
                           style: TextStyle(color: endTime != null ? Colors.white : Colors.grey[400], fontSize: 14.sp),
                         ),
                       ),
+                    ),
+                  ), */
+                  
+                  Expanded(
+                    child: TextFormField(
+                      controller: durationController,
+                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      style: const TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: "Duration (hrs)",
+                        hintStyle: TextStyle(color: Colors.grey[400], fontSize: 14.sp),
+                        filled: true,
+                        fillColor: const Color(0xff1E293B),
+                        contentPadding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 12.w),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.r),
+                          borderSide: BorderSide(color: Colors.grey.withOpacity(0.3)),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.r),
+                          borderSide: BorderSide(color: Colors.grey.withOpacity(0.3)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.r),
+                          borderSide: BorderSide(color: AppColers.primaryColor),
+                        ),
+                      ),
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return 'Enter duration';
+                      //   }
+                      //   if (double.tryParse(value) == null) {
+                      //     return 'Invalid number';
+                      //   }
+                      //   if (double.tryParse(value)! >3) {
+                      //     return "Session Duration Can't Be More Than 3 Hours";
+                      //   }
+                      //   if (double.tryParse(value)! <1) {
+                      //     return "Session Duration Can't Be Less Than 1 Hour";
+                      //   }
+                      //   return null;
+                      // },
                     ),
                   ),
                 ],
@@ -412,6 +455,15 @@ class _BookingScreenState extends State<BookingScreen> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
+                        DateTime? calculatedEndTime = endTime;
+                        if (startTime != null && durationController.text.isNotEmpty) {
+                          double? durationInHours = double.tryParse(durationController.text);
+                          if (durationInHours != null) {
+                            int durationInMinutes = (durationInHours * 60).round();
+                            calculatedEndTime = startTime!.add(Duration(minutes: durationInMinutes));
+                          }
+                        }
+
                         context.read<DoctorsProvider>().submitBooking(
                           context,
                           formKey: _formKey,
@@ -421,7 +473,8 @@ class _BookingScreenState extends State<BookingScreen> {
                           transferRef: referenceController.text,
                           screenshot: screenshot,
                           startTime: startTime,
-                          endTime: endTime,
+                          endTime: calculatedEndTime,
+                          duration: durationController.text
                         );
                       },
                       style: ElevatedButton.styleFrom(

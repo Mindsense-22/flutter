@@ -83,6 +83,7 @@ class DoctorsProvider extends ChangeNotifier{
     required File? screenshot,
     required DateTime? startTime,
     required DateTime? endTime,
+    required String ? duration
   }) async {
     if (!formKey.currentState!.validate()) {
       return;
@@ -93,12 +94,31 @@ class DoctorsProvider extends ChangeNotifier{
       );
       return;
     }
+
     if (screenshot == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please attach a money transfer screenshot', style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
       );
       return;
     }
+    if (duration == null || duration.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please Enter Session Dutration', style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
+      );
+      return;
+    }    
+    if (double.tryParse(duration)! >3) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Session Duration Can't Be More Than 3 Hours", style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
+      );
+      return;
+    }
+    if (double.tryParse(duration)! <1) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Session Duration Can't Be Less Than 1 Hour", style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
+      );
+      return;      
+    }    
 
     try {
       await DoctorsService.bookSession(
