@@ -6,6 +6,9 @@ import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:mindsense_app/features/on%20boarding/ui/onboarding_screens.dart';
+import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
+import 'package:mindsense_app/features/splash/ui/doctor_redirect_screen.dart';
+import 'package:provider/provider.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -19,10 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    
-    
+   
     log("token :${SharedPreferencesitem.getString("token").toString()}");
     Future.delayed(Duration(milliseconds: 1400)).then((value) {
+      
       Navigator.pushAndRemoveUntil(
         // ignore: use_build_context_synchronously
         context,
