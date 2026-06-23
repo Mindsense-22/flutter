@@ -22,9 +22,9 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileScreenProvider>().fetchUserProfile();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   context.read<ProfileScreenProvider>().fetchUserProfile();
+    // });
   }
   @override
   Widget build(BuildContext context) {

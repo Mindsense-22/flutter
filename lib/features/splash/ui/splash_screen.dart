@@ -7,6 +7,7 @@ import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:mindsense_app/features/on%20boarding/ui/onboarding_screens.dart';
 
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -18,13 +19,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    
+    
     log("token :${SharedPreferencesitem.getString("token").toString()}");
-    Future.delayed(Duration(seconds: 2)).then((value) {
+    Future.delayed(Duration(milliseconds: 1400)).then((value) {
       Navigator.pushAndRemoveUntil(
         // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(builder: (context) =>
-         SharedPreferencesitem.getString("token")==null? OnboardingScreens():MainScreen(),
+         SharedPreferencesitem.getString("token")==null? OnboardingScreens():MainScreen(),       
+         
         ), 
         (route) => false,        
       );

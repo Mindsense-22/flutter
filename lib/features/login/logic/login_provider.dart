@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
@@ -64,6 +63,8 @@ class LoginProvider extends ChangeNotifier {
           ),
         );
         log(result.status);
+        
+        
         chaneIsloading(false);
         Navigator.pushAndRemoveUntil(
           context,

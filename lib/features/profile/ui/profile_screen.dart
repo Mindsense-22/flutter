@@ -83,7 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 size: 23.sp,
                 color:  Colors.red,
               )
-            ),
+          ),
           //// Comment Setting Icon
           // actions: [          
           //   InkWell(

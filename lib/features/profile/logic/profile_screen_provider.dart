@@ -103,6 +103,9 @@ class ProfileScreenProvider extends ChangeNotifier {
         await SharedPreferencesitem.setString("userName", userName!);
         setName(userName);
       }
+      if(userRole!=null){
+        await SharedPreferencesitem.setString("userRole", userRole!);        
+      }
       if(userEmail!=null){
         await SharedPreferencesitem.setString("userEmail", userEmail!);
         setEmail(userEmail);
