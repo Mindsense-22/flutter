@@ -46,13 +46,6 @@ class SessionSummaryModal extends StatelessWidget {
           color: const Color(0xff1B2540),
           borderRadius: BorderRadius.circular(24.r),
           border: Border.all(color: Colors.white.withOpacity(0.07)),
-          boxShadow: [
-            BoxShadow(
-              color: DarkThemeColors.primaryColor.withOpacity(0.08),
-              blurRadius: 40,
-              spreadRadius: 4,
-            )
-          ],
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

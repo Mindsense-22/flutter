@@ -109,16 +109,10 @@ class _SessionControlsState extends State<SessionControls> {
               padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 16.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.r),
-                gradient: const LinearGradient(
-                  colors: [DarkThemeColors.primaryColor, Color(0xff2B9889)], // Gradient teal
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: DarkThemeColors.primaryColor.withOpacity(0.3),
-                    blurRadius: 15,
-                    spreadRadius: 2,
-                  )
-                ]
+                // gradient: const LinearGradient(
+                //   colors: [DarkThemeColors.primaryColor, Color(0xff2B9889)], // Gradient teal
+                // ),
+                color:AppColers.primaryColor,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,

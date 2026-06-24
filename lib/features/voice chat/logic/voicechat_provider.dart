@@ -159,7 +159,7 @@ class VoicechatProvider extends ChangeNotifier {
         quota = data["remainingMinutes"].toString();
         changeQuota(quota);
       }
-      changeQuota(data?["remainingMinutes"]??"100");
+      changeQuota(data?["remainingMinutes"]??"");
       if (sessionWelcomeAudio != null) {
         playBase64Audio(sessionWelcomeAudio!);
       }
