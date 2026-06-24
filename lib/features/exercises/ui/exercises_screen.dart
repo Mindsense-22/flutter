@@ -28,7 +28,7 @@ class ExercisesScreen extends StatelessWidget {
             "Exercises",
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 20.sp,
+              fontSize: 22.sp,
               color: Theme.of(context).colorScheme.onSecondary
             ),
           ),

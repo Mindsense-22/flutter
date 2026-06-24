@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             "My Profile",
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 23.sp,
+              fontSize: 22.sp,
             ),
           ),
           leading:

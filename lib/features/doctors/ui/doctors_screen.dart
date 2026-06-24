@@ -29,7 +29,9 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Doctors'),
+        title:  Text('Doctors',style: TextStyle(
+          fontSize: 22.sp
+        ),),
         centerTitle: true,
         actions: [
           Consumer<DoctorsProvider>(
