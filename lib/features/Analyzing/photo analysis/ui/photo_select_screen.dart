@@ -68,7 +68,7 @@ class PhotoSelectScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(25.r),
                           border: Border.all(
                             color: AppColers.primaryColor, // Fixed typo from AppColers if needed
-                            width: 1.7.w,
+                            width: 1.2.w,
                           ),
                           image: DecorationImage(
                             image: FileImage(File(val.selctedimage!.path)),
