@@ -26,4 +26,14 @@ class ApiConstants {
   static const String uploadAvatar="/api/v1/users/me/avatar";
   static const String getAllDoctors="/api/v1/professionals";
   static const String bookSessions="/api/v1/sessions/book";
+
+  // Voice Agent Routes
+  static const String voiceSettings = "/api/v1/voice/settings";
+  static const String voiceSettingsPreview = "/api/v1/voice/settings/preview";
+  static const String voiceSessionStart = "/api/v1/voice/session/start";
+  static const String voiceSessionMessage = "/api/v1/voice/session/message";
+  static const String voiceSessionEnd = "/api/v1/voice/session/end";
+  static const String voiceHistory = "/api/v1/voice/history";
+  static const String voiceSubscriptionCheck = "/api/v1/voice/subscription/check";
+  static const String voiceSubscriptionReset = "/api/v1/voice/subscription/reset";
 }

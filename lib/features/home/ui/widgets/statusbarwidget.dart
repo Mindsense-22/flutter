@@ -39,7 +39,7 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
                 borderRadius: BorderRadius.all(Radius.circular(12.r)),
                 splashColor: const Color.fromARGB(255, 85, 85, 85),
                 onTap: () {
-                  context.read<Mainscreenprovider>().changeIndex(5);
+                  context.read<Mainscreenprovider>().changeIndex(6);
                 },
                 child: Ink(
                   width: 48.w,

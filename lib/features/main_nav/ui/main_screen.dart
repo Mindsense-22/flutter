@@ -11,6 +11,7 @@ import 'package:mindsense_app/features/doctors/ui/doctors_screen.dart';
 import 'package:mindsense_app/features/profile/ui/profile_screen.dart';
 import 'package:mindsense_app/features/splash/ui/doctor_redirect_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:mindsense_app/features/voice%20chat/ui/voicechat_screen.dart';
 
 // class MainScreen extends StatefulWidget {
 //   const MainScreen({super.key});
@@ -80,6 +81,7 @@ class _MainScreenState extends State<MainScreen> {
   }
   final List<Widget> _screens = const [
     Homescreen(),
+    VoicechatScreen(),
     ExercisesScreen(),
     DoctorsScreen(),
     GamesHubScreen(),    

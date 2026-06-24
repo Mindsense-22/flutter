@@ -35,6 +35,7 @@ import 'package:mindsense_app/features/splash/ui/splash_screen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:mindsense_app/features/games/logic/gamification_provider.dart';
+import 'package:mindsense_app/features/voice%20chat/logic/voicechat_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
@@ -100,6 +101,9 @@ void main() async{
             ),
             ChangeNotifierProvider(
               create: (_) => DoctorsProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => VoicechatProvider(),
             ),
           ],
         child: MyApp(),
