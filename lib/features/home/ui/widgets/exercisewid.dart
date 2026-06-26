@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/exercises/ui/exercises_screen.dart';
 
 class Exercisewid extends StatelessWidget {
   const Exercisewid({super.key});
@@ -65,8 +66,27 @@ class Exercisewid extends StatelessWidget {
                   ),
                 ),
               ),
+              
             ],
-          ),          
+          ), 
+          TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>  ExercisesScreen(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'View Exercise →',
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                    color: AppColers.primaryColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              )         
         ],
       ),
     );
