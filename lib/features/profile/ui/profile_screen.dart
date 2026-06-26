@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
+import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/dashboard/ui/dashboard_screen.dart';
 import 'package:mindsense_app/features/exercises/logic/audio_player_provider.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
@@ -111,7 +113,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 GeneralSettingsWid(),
                 //FavouriteWid(),
                 SizedBox(height: 30.h),
-              ],
+                
+                
+                Container(
+                  width: double.infinity,
+                  height: 45.h,
+                  decoration: BoxDecoration(
+                    
+                  ),
+                  child: MaterialButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>  DashboardScreen(),
+                        ),
+                      );
+                    },
+                    color: AppColers.primaryColor,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),                   
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/dashbord_icon2.svg',
+                          width: 21.w,
+                          height: 21.h,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.black,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        Text(
+                          'Dashboard',
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),],)
+                              ),
+                )],
             ),
           ),
         ),

@@ -18,8 +18,8 @@ class EmotionReportSummaryWid extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSummaryCard(provider),
-            SizedBox(height: 25.h),
+            //_buildSummaryCard(provider),
+            //SizedBox(height: 25.h),
             //const MoodDistributionChart(),
           ],
         );
@@ -58,7 +58,7 @@ class EmotionReportSummaryWid extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Overall Outlook",
+                " Overall Outlook",
                 style: TextStyle(
                   color: Colors.black.withAlpha(150),
                   fontSize: 14.sp,

@@ -37,12 +37,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        var provider = context.read<Mainscreenprovider>();
-        provider.changeIndex(0);
-        log(provider.index.toString());
-      },
+      // canPop: false,
+      // onPopInvokedWithResult: (didPop, result) {
+      //   var provider = context.read<Mainscreenprovider>();
+      //   provider.changeIndex(0);
+      //   log(provider.index.toString());
+      // },
       child: Scaffold(
         appBar: AppBar(
           title: Text(
