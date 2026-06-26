@@ -181,8 +181,16 @@ class GameSession {
   });
 
   GameType get gameType {
+    final searchName = gameTypeName.toLowerCase().replaceAll(' ', '');
     return GameType.values.firstWhere(
-      (e) => e.name == gameTypeName,
+      (e) {
+        final enumName = e.name.toLowerCase();
+        final enumDisplayName = e.displayName.toLowerCase().replaceAll(' ', '');
+        return enumName == searchName ||
+               enumDisplayName == searchName ||
+               enumDisplayName.contains(searchName) ||
+               searchName.contains(enumName);
+      },
       orElse: () => GameType.cloudBreathing,
     );
   }

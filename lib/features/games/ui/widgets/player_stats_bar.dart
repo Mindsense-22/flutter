@@ -90,7 +90,7 @@ class PlayerStatsBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Level $level',
+                              'Level ${level}',
                               style: TextStyle(
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w700,
@@ -148,21 +148,18 @@ class PlayerStatsBar extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 4.h),
-                      Row(
-                        children: [
-                          Text('⭐',
-                              style: TextStyle(fontSize: 12.sp)),
-                          SizedBox(width: 3.w),
-                          Text(
-                            '${gp.points}',
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.amber,
+                      
+                      Consumer<GamificationProvider>(
+                        builder: (context,val,child) {
+                          return Text(
+                            "Total XP: ${val.xp}",style: TextStyle(
+                               fontSize: 11.sp,
+                               fontWeight: FontWeight.w400,
+                               color: Colors.white54,
                             ),
-                          ),
-                        ],
-                      ),
+                          );
+                        }
+                      )
                     ],
                   ),
                 ],

@@ -36,4 +36,8 @@ class ApiConstants {
   static const String voiceHistory = "/api/v1/voice/history";
   static const String voiceSubscriptionCheck = "/api/v1/voice/subscription/check";
   static const String voiceSubscriptionReset = "/api/v1/voice/subscription/reset";
+
+  // Gamification Routes
+  static const String gamificationProfile = "/api/v1/gamification";
+  static const String gamificationComplete = "/api/v1/gamification/complete";
 }
