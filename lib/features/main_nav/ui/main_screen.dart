@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_bottom_nav_bar.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
+import 'package:mindsense_app/features/community/ui/community_screen.dart';
 import 'package:mindsense_app/features/home/ui/homescreen.dart';
 import 'package:mindsense_app/features/games/ui/games_hub_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
@@ -33,10 +34,9 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = const [
     Homescreen(),
     VoicechatScreen(),
-    //ExercisesScreen(),
     DoctorsScreen(),
-    GamesHubScreen(),    
-    //DashboardScreen(),
+    GamesHubScreen(),
+    CommunityScreen(),
     ProfileScreen(),
   ];
 
