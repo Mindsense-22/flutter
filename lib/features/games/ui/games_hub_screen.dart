@@ -10,15 +10,16 @@ import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:provider/provider.dart';
 
 class GamesHubScreen extends StatefulWidget {
-  const GamesHubScreen({super.key});
-
+  final  bool ?canpop;
+  const GamesHubScreen({super.key, this.canpop,});
+  
   @override
   State<GamesHubScreen> createState() => _GamesHubScreenState();
 }
 
 class _GamesHubScreenState extends State<GamesHubScreen> {
   final ScrollController _scrollController = ScrollController();
-
+  
   @override
   void initState() {
     super.initState();
@@ -56,7 +57,7 @@ class _GamesHubScreenState extends State<GamesHubScreen> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false,
+      canPop: widget.canpop??true,      
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
         final provider = context.read<Mainscreenprovider>();

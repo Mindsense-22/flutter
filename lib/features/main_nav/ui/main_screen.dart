@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
     Homescreen(),
     VoicechatScreen(),
     DoctorsScreen(),
-    GamesHubScreen(),
+    GamesHubScreen(canpop: false,),
     CommunityScreen(),
     ProfileScreen(),
   ];

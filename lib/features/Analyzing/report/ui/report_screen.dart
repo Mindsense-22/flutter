@@ -10,6 +10,7 @@ import 'package:mindsense_app/features/Analyzing/report/ui/widgets/voiceanalysis
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
 import 'package:mindsense_app/features/doctors/ui/doctors_screen.dart';
 import 'package:mindsense_app/features/games/logic/gamification_provider.dart';
+import 'package:mindsense_app/features/games/ui/games_hub_screen.dart';
 import 'package:mindsense_app/features/games/ui/widgets/game_recommendation_card.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
@@ -69,12 +70,8 @@ class ReportScreen extends StatelessWidget {
                         return GameRecommendationCard(
                           spec: gp.activeSpec!,
                           onPlayNow: () {                                                
-                            context.read<Mainscreenprovider>().jumpToIndex(3);
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (context) => const MainScreen()),
-                              (route) => false,
-                            );
+                            
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => GamesHubScreen(),));
                           },
                         );
                       }
