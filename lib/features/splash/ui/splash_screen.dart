@@ -1,15 +1,9 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
-import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:mindsense_app/features/on%20boarding/ui/onboarding_screens.dart';
-import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
-import 'package:mindsense_app/features/splash/ui/doctor_redirect_screen.dart';
-import 'package:provider/provider.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,8 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
    
-    log("token :${SharedPreferencesitem.getString("token").toString()}");
-    Future.delayed(Duration(milliseconds: 1400)).then((value) {
+    
+    Future.delayed(Duration(milliseconds: 1000)).then((value) {
       
       Navigator.pushAndRemoveUntil(
         // ignore: use_build_context_synchronously
@@ -56,8 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     width: 175.w,
                     height: 175.h,
                     decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      //color: Colors.blue, 
+                      color: Colors.transparent,                      
                       border: Border.all(
                         color:  Color(0xff55EEDA).withValues(alpha: .2),
                         width: 1.5,         
@@ -94,10 +87,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       width: 80.w,
                       height: 36.h,
                     ),
-                  ),
-                  
-                  
-              
+                  ),                
                 ],
               ),
               

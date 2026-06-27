@@ -10,9 +10,9 @@ class ExercisesProvider extends ChangeNotifier{
   String aiRecomendationAdioDuration="";
   AiRecomendationSession aiRecomendationSession =AiRecomendationSession(
     imageurl: "https://drive.google.com/uc?export=download&id=1aCcXuZxGQ2bqb-nHpU9vYFOAfSv58WyA", 
-    //audiourl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", 
+     
     audiourl: "https://drive.google.com/uc?export=download&id=1GMh-P_lcteN0C_ERGomjqgB4zFwEKu2E", 
-    // audioimageurl: "https://drive.google.com/uc?export=view&id=15E_ys5g0OJxEBXSxX9cpLCduwptDJjvo", 
+    
     audioimageurl: 'https://drive.google.com/uc?export=view&id=1fb1MCMS_swV6z6OFlCywqkt5xBzyir8a', 
     duration: 0
   );

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';

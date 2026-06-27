@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/features/login/logic/login_provider.dart';
 import 'package:mindsense_app/features/login/ui/widgets/login_form_wid.dart';
-import 'package:mindsense_app/features/login/ui/widgets/platforms_auth_wid.dart';
 import 'package:mindsense_app/features/login/ui/widgets/tosignup_wid.dart';
 import 'package:mindsense_app/features/login/ui/widgets/uppertext_wid.dart';
 import 'package:provider/provider.dart';
@@ -31,28 +30,18 @@ class LoginScreen extends StatelessWidget {
 
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,      
-                    children: [
-                  
+                    children: [                  
                       //upper text widget
                       UppertextWid(),
 
                       SizedBox(height: 24.h,),
-                      
+
                       //login form                      
                       LoginFormWid( provider: provider,),
                               
-                      SizedBox(height: 24,),
-                              
-                      // Text("or continue with",style: TextStyle(
-                      //   fontSize: 20,
-                      //   fontWeight: FontWeight.w500,
-                      //   color: Theme.of(context).colorScheme.onSecondary,
-                      // ),),
+                      SizedBox(height: 24,),                 
                           
                       SizedBox(height: 24,),
-                              
-                      //platforms auth
-                      //PlatformsAuth(),
                       
                       SizedBox(height: 24,),
                           

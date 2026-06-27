@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-// ─── Enums ───────────────────────────────────────────────────────────────────
-
 enum GameType {
   cloudBreathing,
   memoryMatch,
@@ -18,7 +16,6 @@ enum EnergyLevel { low, medium, high }
 
 enum DifficultyLevel { easy, medium, hard }
 
-// ─── Game Type Helpers ────────────────────────────────────────────────────────
 
 extension GameTypeExtension on GameType {
   String get displayName {
@@ -139,7 +136,6 @@ extension GameTypeExtension on GameType {
   String get name => toString().split('.').last;
 }
 
-// ─── Game Spec ────────────────────────────────────────────────────────────────
 
 class GameSpec {
   final GameType gameType;
@@ -159,7 +155,6 @@ class GameSpec {
   });
 }
 
-// ─── Game Session ─────────────────────────────────────────────────────────────
 
 class GameSession {
   final String gameTypeName;

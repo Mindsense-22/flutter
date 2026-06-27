@@ -7,8 +7,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'dart:async';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class VoicechatProvider extends ChangeNotifier {
   bool isLoading = false;
   String? errorMessage;
@@ -188,7 +186,6 @@ class VoicechatProvider extends ChangeNotifier {
       lastResponseAudio = data["responseAudio"] ?? data["audioBase64"];
       lastResponseText = data["text"] ?? data["message"] ?? data["reply"] ?? data["responseText"];
       
-      // Update quota on every message response if it's provided in the response data
       if (data["remainingMinutes"] != null) {
         quota = data["remainingMinutes"].toString();
         changeQuota(quota);
@@ -213,7 +210,7 @@ class VoicechatProvider extends ChangeNotifier {
       final data = response["data"] ?? {};
       sessionSummary = data["summary"]?.toString();
       sessionSummaryData = data is Map<String, dynamic> ? data : null;
-      sessionId = null; // Clear the current session
+      sessionId = null;
       lastResponseText = null;
       await _audioPlayer.stop();
     } catch (e) {

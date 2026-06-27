@@ -1,11 +1,9 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/profile/add%20contact/ui/addcontact_screen.dart';
-import 'package:mindsense_app/features/profile/delete%20account/ui/deleteaccount_screen.dart';
 import 'package:mindsense_app/features/profile/edit%20user%20information/ui/editinformation_screen.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:mindsense_app/features/profile/update%20password/ui/updatepassword_screen.dart';
@@ -37,17 +35,6 @@ class GeneralSettingsWid extends StatelessWidget {
           ),
           child: Column(
             children: [
-             
-              // SettingItemsWid(   
-              //   context: context,             
-              //   title: "Security",
-              //   iconPath: "assets/images/security.svg",
-              //   onTap: () {
-              //     log("Security clicked!");
-              //   },              
-              // ),
-              // SizedBox(height: 4.h,),
-
               SettingItemsWid(
                 context: context,
                 title: "Edit Personal information",
@@ -92,28 +79,10 @@ class GeneralSettingsWid extends StatelessWidget {
               ),
               SizedBox(height: 4.h,),
 
-              // SettingItemsWid(
-              //   context: context,
-              //   title: "Notification",
-              //   iconPath: "assets/images/notification_icon.svg",
-              //   onTap: () {
-              //     log("Notification clicked!");
-              //   },              
-              // ),
+
 
               SizedBox(height: 4.h,),
-              // SettingItemsWid(
-              //   context: context,
-              //   title: "Delete Account",
-              //   iconPath: "assets/images/Personalinformation_icon.svg",
-              //   onTap: () {
-              //     log("Delete Account clicked!");
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(builder: (context) => DeleteaccountScreen(),)
-              //     );
-              //   },              
-              // ),
+
               SizedBox(height: 4.h,),
             ],
           ),

@@ -1,38 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class Mainscreenprovider extends ChangeNotifier{
-//   int index=0;
-  
-//   void changeIndex(index){
-//     this.index=index;
-//     notifyListeners();
-//   }
-// }
-
-// import 'package:flutter/material.dart';
-
-// class Mainscreenprovider extends ChangeNotifier {
-//   int index = 0;
-
-//   final PageController pageController = PageController();
-
-//   void changeIndex(int newIndex) {
-//     index = newIndex;
-
-//     pageController.animateToPage(
-//       newIndex,
-//       duration: const Duration(milliseconds: 300),
-//       curve: Curves.easeInOut,
-//     );
-
-//     notifyListeners();
-//   }
-
-//   void onPageChanged(int newIndex) {
-//     index = newIndex;
-//     notifyListeners();
-//   }
-// }
 
 import 'dart:developer';
 
@@ -49,17 +14,7 @@ class Mainscreenprovider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void changeIndex(int newIndex) {
-  //   index = newIndex;
 
-  //   pageController.animateToPage(
-  //     newIndex,
-  //     duration: const Duration(milliseconds: 300),
-  //     curve: Curves.easeInOut,
-  //   );
-  //   log(index.toString());
-  //   notifyListeners();
-  // }
   void changeIndex(int newIndex) {
     index = newIndex;
     notifyListeners();
@@ -69,9 +24,6 @@ class Mainscreenprovider extends ChangeNotifier {
         newIndex,
         curve: Curves.easeOut,
         duration: const Duration(milliseconds: 100),
-        // duration: const Duration(milliseconds: 150),
-        // // curve: Curves.easeOut,
-        // curve: Curves.easeInOutCubic,
       );
     }
 
@@ -80,7 +32,7 @@ class Mainscreenprovider extends ChangeNotifier {
 
   void onPageChanged(int newIndex) {
     index = newIndex; 
-    log(index.toString());   
+    //log(index.toString());   
     notifyListeners();
   }
 

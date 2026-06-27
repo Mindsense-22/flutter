@@ -21,7 +21,7 @@ class AudioProvider extends ChangeNotifier {
 
   Future<void> play(String url) async {
     try {
-      // same audio → toggle play/pause
+      // same audio , toggle play/pause
       if (_currentUrl == url) {
         if (_state == PlayerState.playing) {
           await _player.pause();

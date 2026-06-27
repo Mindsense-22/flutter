@@ -1,14 +1,10 @@
 import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
 import 'package:mindsense_app/features/sign%20up/ui/widgets/signup_form_wid.dart';
-import 'package:mindsense_app/features/sign%20up/ui/widgets/signup_platforms_auth_wid.dart';
 import 'package:mindsense_app/features/sign%20up/ui/widgets/signup_uppertext_wid.dart';
 import 'package:mindsense_app/features/sign%20up/ui/widgets/tologin_widget.dart';
 import 'package:provider/provider.dart';
@@ -108,24 +104,11 @@ class SignupScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 5.h,),
-                      
+
                       //signup form widget
                       SignupFormWid(provider: provider,context: context,),
                               
                       SizedBox(height: 5.h,),
-                              
-                      // Text("or continue with",style: TextStyle(
-                      //   fontSize: 20,
-                      //   fontWeight: FontWeight.w500,
-                      //   color: Theme.of(context).colorScheme.onSecondary,
-                      // ),),
-                        
-                      //SizedBox(height: 3.h,),
-                              
-                      //platforms auth widget
-                      //SignupPlatformsAuthWid(),
-                     
-                      // SizedBox(height: 24,),
                       
                       //to login widget  
                       TologinWidget(),

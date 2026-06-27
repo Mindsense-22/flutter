@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
-
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final String? Function(String?)? validator;
+  // ignore: prefer_typing_uninitialized_variables
   final Icon;
 
   

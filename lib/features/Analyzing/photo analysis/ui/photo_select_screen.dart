@@ -64,10 +64,10 @@ class PhotoSelectScreen extends StatelessWidget {
                         width: double.infinity,
                         height: 270.h,
                         decoration: BoxDecoration(
-                          color: Colors.grey[200], // Optional placeholder color while loading
+                          color: Colors.grey[200], 
                           borderRadius: BorderRadius.circular(25.r),
                           border: Border.all(
-                            color: AppColers.primaryColor, // Fixed typo from AppColers if needed
+                            color: AppColers.primaryColor, 
                             width: 1.2.w,
                           ),
                           image: DecorationImage(

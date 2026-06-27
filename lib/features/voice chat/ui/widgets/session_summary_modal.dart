@@ -18,7 +18,6 @@ class SessionSummaryModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Extract the 'summary' object if it exists, otherwise fall back to summaryData itself
     final Map<String, dynamic> summary = summaryData['summary'] is Map<String, dynamic> 
         ? summaryData['summary'] 
         : summaryData;

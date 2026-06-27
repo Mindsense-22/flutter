@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/features/games/logic/gamification_provider.dart';
@@ -64,7 +63,6 @@ class _GamesHubScreenState extends State<GamesHubScreen> {
           child: CustomScrollView(
             controller: _scrollController,
             slivers: [
-              // ─── App Bar ───────────────────────────────────────────────────
               SliverAppBar(
                 floating: true,
                 snap: true,
@@ -115,16 +113,13 @@ class _GamesHubScreenState extends State<GamesHubScreen> {
                 ],
               ),
       
-              // ─── Body ──────────────────────────────────────────────────────
               SliverPadding(
                 padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
                 sliver: SliverList(
                   delegate: SliverChildListDelegate([
-                    // 1. Player Stats Bar
                     const PlayerStatsBar(),
                     SizedBox(height: 20.h),
       
-                    // 2. Active Game Canvas
                     Text(
                       'Active Game',
                       style: TextStyle(
@@ -137,7 +132,6 @@ class _GamesHubScreenState extends State<GamesHubScreen> {
                     const GameCanvas(),
                     SizedBox(height: 24.h),
       
-                    // 3. All Games Grid
                     Text(
                       'All Games',
                       style: TextStyle(

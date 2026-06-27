@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/features/dashboard/logic/dashboard_provider.dart';
-import 'package:mindsense_app/features/dashboard/ui/widgets/mood_distribution_chart.dart';
 import 'package:provider/provider.dart';
 
 class EmotionReportSummaryWid extends StatelessWidget {
@@ -10,11 +9,7 @@ class EmotionReportSummaryWid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<DashboardProvider>(
-      builder: (context, provider, child) {
-        // if (provider.isLoading && provider.emotionReport.isEmpty) {
-        //   return const Center(child: CircularProgressIndicator());
-        // }
-
+      builder: (context, provider, child) { 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

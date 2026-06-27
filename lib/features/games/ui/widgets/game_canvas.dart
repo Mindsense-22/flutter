@@ -206,7 +206,6 @@ class _GameCanvasState extends State<GameCanvas> {
   }
 }
 
-// ─── Sub-widgets ─────────────────────────────────────────────────────────────
 
 class _EmptyCanvas extends StatelessWidget {
   @override

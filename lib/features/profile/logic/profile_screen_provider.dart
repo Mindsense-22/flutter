@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -79,8 +78,7 @@ class ProfileScreenProvider extends ChangeNotifier {
       if(following.isNotEmpty){
         for(int i=0;i<following.length;i++){
           followingIds.add(following[i]["_id"]);
-        }
-        log(followingIds.toString());
+        }        
       }
       avatarLink=userData["profileImage"]; 
       notifyListeners();     
@@ -134,12 +132,7 @@ class ProfileScreenProvider extends ChangeNotifier {
       if(trustedContactstatus!=null){
         await SharedPreferencesitem.setString("trustedContactstatus", trustedContactstatus!);
         
-      }
-      
-      
-      log(userId.toString());
-      // isLoadingProfile = false;
-      // notifyListeners();
+      }  
     } catch (e) {
       log("Error fetching profile: $e");
     }
@@ -222,8 +215,7 @@ class ProfileScreenProvider extends ChangeNotifier {
 
       profileImagePath = newImage.path;
       photoLoading=true;
-      notifyListeners();
-      //await SharedPreferencesitem.remove("avatarLink");
+      notifyListeners();      
       
       String userName=SharedPreferencesitem.getString("userName")!;
       String userEmail=SharedPreferencesitem.getString("userEmail")!;
@@ -327,8 +319,6 @@ class ProfileScreenProvider extends ChangeNotifier {
         userName = null;
         userEmail = null;
         userAge = null;
-        // Optionally set a flag
-        // isAccountDeleted = true; // could be used by UI
       }
     } catch (e) {
       log(e.toString());

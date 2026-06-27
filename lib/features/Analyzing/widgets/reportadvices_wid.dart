@@ -19,7 +19,7 @@ class _ReportadvicesWidState extends State<ReportadvicesWid> {
   String _selectedLanguage = 'en';
   
   // Timer state
-  int _remainingSeconds = 180; // 3 minutes
+  int _remainingSeconds = 180; 
   bool _isTimerRunning = false;
   Timer? _timer;
   
@@ -157,7 +157,7 @@ class _ReportadvicesWidState extends State<ReportadvicesWid> {
     return Directionality(
       textDirection: _selectedLanguage == 'ar' ? TextDirection.rtl : TextDirection.ltr,
       child: Container(
-        color: const Color(0xff1E293B), // Dark background matching the image
+        color: const Color(0xff1E293B), 
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,7 +225,7 @@ class _ReportadvicesWidState extends State<ReportadvicesWid> {
             ),
             child: Row(
               children: [
-                Icon(Icons.air, color: AppColers.primaryColor), // Wind icon
+                Icon(Icons.air, color: AppColers.primaryColor), 
                 const SizedBox(width: 16),
                 Expanded(
                   child: Column(
@@ -354,7 +354,7 @@ class _ReportadvicesWidState extends State<ReportadvicesWid> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
             decoration: BoxDecoration(
-              color: const Color(0xFF1A2131), // slightly darker than list items
+              color: const Color(0xFF1A2131),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(

@@ -77,7 +77,7 @@ class _VoicechatsettingsScreenState extends State<VoicechatsettingsScreen> {
     final isLoading = context.watch<VoicechatProvider>().isLoading;
 
     return Scaffold(
-      backgroundColor: const Color(0xff121A32), // Main app background
+      backgroundColor: const Color(0xff121A32), 
       appBar: AppBar(
         centerTitle: true,
         

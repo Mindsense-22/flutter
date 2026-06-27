@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
@@ -7,14 +6,11 @@ import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 
 
-class PincodeSignupProvider extends ChangeNotifier{
-  
-  
+class PincodeSignupProvider extends ChangeNotifier{ 
   TextEditingController signUpPinCodeController =TextEditingController();
   final setPinCodeFormKey = GlobalKey<FormState>();
   bool ispincodeError = false;
   bool verifyCodeButtonisloading=false;
-
   void verifyCodeButtonisloadingfun(val){
     verifyCodeButtonisloading=val;
     notifyListeners();
@@ -82,7 +78,7 @@ class PincodeSignupProvider extends ChangeNotifier{
           backgroundColor: Colors.black,
         ),
       );
-      signUpPinCodeController.clear(); // may cause error when deal with api
+      signUpPinCodeController.clear(); 
          
       resetPinError();
     }

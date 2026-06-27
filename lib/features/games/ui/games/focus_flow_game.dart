@@ -55,13 +55,12 @@ class _FocusFlowGameState extends State<FocusFlowGame> {
     }
     final keys = _colorMap.keys.toList();
     _word = keys[_rng.nextInt(keys.length)];
-    // Ink color is always different from the word
     String ink;
     do {
       ink = keys[_rng.nextInt(keys.length)];
     } while (ink == _word);
     _inkColor = ink;
-    _correct = _inkColor; // User must tap the INK COLOR NAME
+    _correct = _inkColor; 
   }
 
   void _onTap(String tapped) {

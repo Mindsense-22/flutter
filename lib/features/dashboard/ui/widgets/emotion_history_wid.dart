@@ -51,7 +51,7 @@ class EmotionHistoryWid extends StatelessWidget {
               ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: provider.emotionHistory.length ,//> 5 ? 5 : provider.emotionHistory.length,
+                itemCount: provider.emotionHistory.length ,
                 separatorBuilder: (context, index) => Divider(
                   color: Colors.white.withAlpha(20),
                   height: 20.h,
@@ -60,26 +60,7 @@ class EmotionHistoryWid extends StatelessWidget {
                   final item = provider.emotionHistory[index];
                   return _buildHistoryItem(item);
                 },
-              ),
-              // if (provider.emotionHistory.length > 5)
-              //   Padding(
-              //     padding: EdgeInsets.only(top: 10.h),
-              //     child: Center(
-              //       child: TextButton(
-              //         onPressed: () {
-              //           // Navigate to full history screen if needed
-              //         },
-              //         child: Text(
-              //           "See All History",
-              //           style: TextStyle(
-              //             color: AppColers.primaryColor,
-              //             fontSize: 14.sp,
-              //             fontWeight: FontWeight.w600,
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
+              ),              
             ],
           ),
         );

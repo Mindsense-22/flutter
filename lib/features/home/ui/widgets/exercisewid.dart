@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/exercises/ui/exercises_screen.dart';
 
@@ -12,7 +11,7 @@ class Exercisewid extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 14.h),
       decoration: BoxDecoration(
-        color: const Color(0xff1E293B), // Dark card background
+        color: const Color(0xff1E293B), 
         borderRadius: BorderRadius.circular(20.r),        
         boxShadow: [          
           BoxShadow(            

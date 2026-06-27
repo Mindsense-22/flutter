@@ -1,13 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
-import 'package:mindsense_app/features/home/ui/homescreen.dart';
-import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 
 import 'package:mindsense_app/features/sign%20up/ui/signup_setpincode_screen.dart';
 import 'package:path_provider/path_provider.dart';

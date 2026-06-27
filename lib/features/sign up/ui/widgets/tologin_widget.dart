@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
-import 'package:mindsense_app/features/login/ui/login_screen.dart';
 
 class TologinWidget extends StatelessWidget {
   const TologinWidget({super.key});

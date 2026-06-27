@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
@@ -38,12 +37,12 @@ class UpdatepasswordProvider extends ChangeNotifier{
       return "Must contain number";
     }
 
-    // ✅ يحتوي على واحد من المسموح فقط
+
     if (!RegExp(r'[@$!%*?&]').hasMatch(val)) {
       return "Must contain one special char (@\$!%*?&)";
     }
 
-    // ❌ يمنع أي special character تاني
+
     if (RegExp(r'[^a-zA-Z0-9@$!%*?&]').hasMatch(val)) {
       return "Only allowed special chars are (@\$!%*?&)";
     }

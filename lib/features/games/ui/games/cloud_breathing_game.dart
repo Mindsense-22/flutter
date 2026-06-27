@@ -70,8 +70,7 @@ class _CloudBreathingGameState extends State<CloudBreathingGame>
           } else if (phase.name == 'Exhale') {
             _controller.duration = Duration(seconds: phase.seconds);
             await _controller.reverse(from: 1.0);
-          } else {
-            // Hold or Rest - do not update the animation, just wait.
+          } else {            
             await Future.delayed(Duration(seconds: phase.seconds));
           }
         }

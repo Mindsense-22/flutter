@@ -6,14 +6,12 @@ import 'package:mindsense_app/features/games/models/game_models.dart';
 import 'package:mindsense_app/features/games/models/gamification_model.dart';
 
 class GamificationProvider extends ChangeNotifier {
-  // ─── Persisted Keys ──────────────────────────────────────────────────────
   static const _kXp = 'gamif_xp';
   static const _kPoints = 'gamif_points';
   static const _kStreak = 'gamif_streak';
   static const _kLastPlayed = 'gamif_last_played';
   static const _kSessions = 'gamif_sessions';
 
-  // ─── State ───────────────────────────────────────────────────────────────
   int _xp = 0;
   int _points = 0;
   int _streakDays = 0;
@@ -24,7 +22,6 @@ class GamificationProvider extends ChangeNotifier {
   bool _isLoading = false;
   String? _error;
 
-  // ─── Getters ─────────────────────────────────────────────────────────────
   int get xp => _xp;
   int get points => _points;
   int get streakDays => _streakDays;
@@ -44,7 +41,6 @@ class GamificationProvider extends ChangeNotifier {
       _lastPlayed != null &&
       DateTime.now().difference(_lastPlayed!).inHours >= 24;
 
-  // ─── Init ─────────────────────────────────────────────────────────────────
   GamificationProvider() {
     _loadFromCache();
   }
@@ -76,7 +72,7 @@ class GamificationProvider extends ChangeNotifier {
         _kSessions, GameSession.encodeList(_sessions.take(50).toList()));
   }
 
-  /// Apply a [GamificationProfile] received from the API to local state.
+  
   void _applyProfile(GamificationProfile profile) {
     _xp = profile.xp;
     _points = profile.points;
@@ -85,19 +81,18 @@ class GamificationProvider extends ChangeNotifier {
 
     // Merge API past_sessions into local GameSession list (prepend, dedup by date)
     final apiSessions = profile.pastSessions.map((s) => GameSession(
-          gameTypeName: s.gameName, // Use gameName (e.g. "Focus") so substring matching works 
+          gameTypeName: s.gameName, 
           emotion: s.emotion,
           score: s.score,
           xpEarned: s.xpEarned,
-          pointsEarned: 0, // not returned by API
+          pointsEarned: 0, 
           playedAt: s.date,
-          difficulty: "unknown", // not returned by API
+          difficulty: "unknown", 
         )).toList();
 
     _sessions = apiSessions;
   }
 
-  // ─── API: Fetch Profile ───────────────────────────────────────────────────
   /// Fetches the user's gamification profile from the server and syncs state.
   Future<void> fetchProfile() async {
     _isLoading = true;
@@ -120,9 +115,7 @@ class GamificationProvider extends ChangeNotifier {
     }
   }
 
-  // ─── API: Complete Game ───────────────────────────────────────────────────
-  /// Records a completed game via the API, then syncs the returned profile.
-  /// Returns true if the user leveled up.
+
   Future<bool> completeGame(GameSpec spec, int rawScore) async {
     final oldLevel = level;
     _justLeveledUp = false;
@@ -153,7 +146,6 @@ class GamificationProvider extends ChangeNotifier {
     return _justLeveledUp;
   }
 
-  // ─── Game Recommendation ─────────────────────────────────────────────────
   GameSpec generateRecommendation(String emotion, double confidence) {
     final energy = GameEngine.inferEnergy(confidence);
     final spec = GameEngine.generateSpec(
@@ -181,7 +173,6 @@ class GamificationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Streak Milestone Check ───────────────────────────────────────────────
   bool isStreakMilestone() {
     return [3, 7, 14, 30].contains(_streakDays);
   }

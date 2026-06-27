@@ -5,9 +5,8 @@ class Advice {
   final String recommendedGoal;
   final String defaultLanguage;
   final List<String> availableLanguages;
-  final Content content;
-  
-  // New top-level fields
+  final Content content;  
+
   final String source;
   final String title;
   final String summary;

@@ -7,7 +7,6 @@ import 'package:mindsense_app/core/custom%20widgets/custom_textformfield.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/profile/add%20contact/logic/addcontact_provider.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
-import 'package:mindsense_app/features/profile/update%20password/logic/updatepassword_provider.dart';
 import 'package:provider/provider.dart';
 
 class AddcontactScreen extends StatelessWidget {

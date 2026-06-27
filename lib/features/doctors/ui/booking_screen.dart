@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/doctors/modules/doctordetails.dart';
 import 'package:mindsense_app/features/doctors/logic/doctors_provider.dart';
@@ -19,7 +17,7 @@ class BookingScreen extends StatefulWidget {
 }
 
 class _BookingScreenState extends State<BookingScreen> {
-  String selectedPaymentMethod = "Credit Card"; // matches backend enum
+  String selectedPaymentMethod = "Credit Card";
   TextEditingController referenceController = TextEditingController();
   TextEditingController durationController = TextEditingController();
   File? screenshot;
@@ -281,28 +279,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                   ),
                   SizedBox(width: 16.w),
-                  /* Expanded(
-                    child: InkWell(
-                      onTap: () async {
-                        final dt = await _pickDateTime();
-                        if (dt != null) setState(() => endTime = dt);
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 12.w),
-                        decoration: BoxDecoration(
-                          color: const Color(0xff1E293B),
-                          borderRadius: BorderRadius.circular(10.r),
-                          border: Border.all(color: Colors.grey.withOpacity(0.3)),
-                        ),
-                        child: Text(
-                          endTime != null 
-                            ? "${endTime!.year}-${endTime!.month.toString().padLeft(2, '0')}-${endTime!.day.toString().padLeft(2, '0')} ${endTime!.hour.toString().padLeft(2, '0')}:${endTime!.minute.toString().padLeft(2, '0')}" 
-                            : "End Time",
-                          style: TextStyle(color: endTime != null ? Colors.white : Colors.grey[400], fontSize: 14.sp),
-                        ),
-                      ),
-                    ),
-                  ), */
+
                   
                   Expanded(
                     child: TextFormField(
@@ -327,24 +304,9 @@ class _BookingScreenState extends State<BookingScreen> {
                           borderRadius: BorderRadius.circular(10.r),
                           borderSide: BorderSide(color: AppColers.primaryColor),
                         ),
-                      ),
-                      // validator: (value) {
-                      //   if (value == null || value.isEmpty) {
-                      //     return 'Enter duration';
-                      //   }
-                      //   if (double.tryParse(value) == null) {
-                      //     return 'Invalid number';
-                      //   }
-                      //   if (double.tryParse(value)! >3) {
-                      //     return "Session Duration Can't Be More Than 3 Hours";
-                      //   }
-                      //   if (double.tryParse(value)! <1) {
-                      //     return "Session Duration Can't Be Less Than 1 Hour";
-                      //   }
-                      //   return null;
-                      // },
                     ),
                   ),
+                  )
                 ],
               ),
               SizedBox(height: 24.h),
@@ -437,8 +399,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         backgroundColor: Colors.red,
                         padding: EdgeInsets.symmetric(vertical: 16.h),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                          //borderSide: BorderSide(color: Colors.grey.withOpacity(0.3)),
+                          borderRadius: BorderRadius.circular(10.r),                          
                         ),
                       ),
                       child: Text(
@@ -467,8 +428,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         context.read<DoctorsProvider>().submitBooking(
                           context,
                           formKey: _formKey,
-                          professionalId: widget.doctor.sId ?? '',
-                          //paymentMethod: selectedPaymentMethod,
+                          professionalId: widget.doctor.sId ?? '',                          
                           paymentMethod:"instapay",
                           transferRef: referenceController.text,
                           screenshot: screenshot,
@@ -490,7 +450,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black, // DarkThemeColors.backgroundColor or black based on the image text color
+                          color: Colors.black,
                         ),
                       ),
                     ),

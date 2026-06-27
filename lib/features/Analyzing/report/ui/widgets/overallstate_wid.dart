@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
-import 'package:mindsense_app/features/Analyzing/report/logic/analysisreportprovider.dart';
-import 'package:mindsense_app/features/Analyzing/report/ui/report_screen.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/animated_circle_progress_wid.dart';
 import 'package:mindsense_app/features/Analyzing/widgets/reportadvices_wid.dart';
 import 'package:provider/provider.dart';
@@ -44,8 +42,7 @@ class OverallstateWid extends StatelessWidget {
                   return AnimatedCircleProgress(target: val.finalScore!,state: val.detectedEmotion!,);
                 }
               ),
-              SizedBox(height: 50.h,),
-              // ── Recommended Exercises Title ──
+              SizedBox(height: 50.h,),              
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.w),
                         child: Text(

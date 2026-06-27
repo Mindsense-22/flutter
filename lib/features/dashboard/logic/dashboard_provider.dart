@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:mindsense_app/features/dashboard/modules/dashboarditems.dart';
 import 'package:mindsense_app/core/Api/emotion_service.dart';
@@ -48,9 +47,6 @@ class DashboardProvider extends ChangeNotifier {
 
     try {
       final response = await EmotionService.getMainDashboard();
-
-      // log(response.runtimeType.toString());
-      // log(response.toString());
 
       if (response['status'] == 'success') {
         final List<Map<String, dynamic>> chartData =
@@ -141,11 +137,10 @@ class DashboardProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-  // to make current data refresh when data changes
+  
   void setNeedsRefresh() {
     _needsRefresh = true;
     notifyListeners();
   }
-
   
 }

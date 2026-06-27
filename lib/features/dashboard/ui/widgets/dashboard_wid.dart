@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/features/dashboard/logic/dashboard_provider.dart';
 import 'package:mindsense_app/features/dashboard/modules/dashboarditems.dart';
-import 'package:mindsense_app/features/dashboard/ui/widgets/xaxis_wid.dart';
 import 'package:mindsense_app/features/dashboard/ui/widgets/yaxis_wid.dart';
 import 'package:provider/provider.dart';
 

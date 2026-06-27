@@ -1,11 +1,8 @@
-  import 'dart:io';
 import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/Api/api_constants.dart';
-import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +18,6 @@ Future<dynamic> messgeShowDialog(context){
             BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
               child: Container(
-               //color: Colors.black.withOpacity(0.3),
                  color: AppColers.backgroundColor.withValues(alpha: .3),
               ),
             ),

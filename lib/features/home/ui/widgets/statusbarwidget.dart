@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindsense_app/core/Api/api_constants.dart';
-import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/drive%20mode/ui/drivemode_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
@@ -21,10 +20,6 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
    @override
   void initState() {
     super.initState();
-
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   context.read<ProfileScreenProvider>().fetchUserProfile();
-    // });
   }
   @override
   Widget build(BuildContext context) {

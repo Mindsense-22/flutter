@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_passwordtextformfield.dart';
-import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
-import 'package:mindsense_app/features/profile/edit%20user%20information/logic/edit_user_information_provider.dart';
 import 'package:mindsense_app/features/profile/update%20password/logic/updatepassword_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -88,12 +85,7 @@ class UpdatepasswordScreen extends StatelessWidget {
                                 hintText: "confirm new password",
                                 validator: provider.reEnterpasswordValidator,
                               ), 
-                                    
-                                    
-                              
-                              
                               SizedBox(height: 25.h,),
-                              //login button
                               Column(
                                 children: [
                                   provider.updatePasswordisloading==false?
@@ -106,10 +98,8 @@ class UpdatepasswordScreen extends StatelessWidget {
                                   ):
                                   Center(child: CircularProgressIndicator())
                                 ],
-                              )
-                              
-                            ],
-                                    
+                              )                              
+                            ],                                    
                           ),
                         ),
                       ),
@@ -123,6 +113,4 @@ class UpdatepasswordScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }

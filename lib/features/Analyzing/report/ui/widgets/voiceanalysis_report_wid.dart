@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
-import 'package:mindsense_app/features/Analyzing/report/logic/analysisreportprovider.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/animated_circle_progress_wid.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
 import 'package:mindsense_app/features/Analyzing/widgets/reportadvices_wid.dart';
@@ -35,7 +34,7 @@ class VoiceanalysisReportWid extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // ── Header: Icon + Title ──
+
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: Row(
@@ -70,37 +69,14 @@ class VoiceanalysisReportWid extends StatelessWidget {
               
                   SizedBox(height: 12.h),
               
-                  // ── Facial State ──
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  //   child: RichText(
-                  //     text: TextSpan(
-                  //       style: TextStyle(
-                          
-                  //         fontSize: 16.sp,
-                  //         color: Colors.white,
-                  //         height: 1.5625,
-                  //       ),
-                  //       children: [
-                  //         TextSpan(
-                  //           text:'Your Voice state',
-                  //           style: TextStyle(fontWeight: FontWeight.w600),
-                  //         ),
-                  //         TextSpan(
-                  //           text: ': ${val.voiceState}',
-                  //           style: const TextStyle(fontWeight: FontWeight.w500),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
+
                   SizedBox(height: 40.h,),
                   AnimatedCircleProgress(target: val.finalScore,state: val.detectedEmotion??"nature",),
               
                   SizedBox(height: 50.h),             
                   
               
-                  // ── Recommended Exercises Title ──
+
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: Text(
@@ -116,13 +92,7 @@ class VoiceanalysisReportWid extends StatelessWidget {
               
                   SizedBox(height: 8.h),
               
-                  // ── Dynamic Exercise List ──
-                  // ...val.aiVoiceAdvices.map(
-                  //   (exercise) => Padding(
-                  //     padding: EdgeInsets.only(bottom: 8.h),
-                  //     child: _ExerciseVoiceItem(text: exercise),
-                  //   ),
-                  // ),
+
                   ReportadvicesWid(shownAdvice: val.shownAdvice2,),
                 ],
               );
@@ -134,7 +104,7 @@ class VoiceanalysisReportWid extends StatelessWidget {
   }
 }
 
-// ── Private bullet item widget ──
+
 class _ExerciseVoiceItem extends StatelessWidget {
   final String text;
   const _ExerciseVoiceItem({required this.text});

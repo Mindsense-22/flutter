@@ -11,8 +11,6 @@ import 'package:mindsense_app/features/forget%20password/ui/forgetpasswoed_setne
 import 'package:mindsense_app/features/forget%20password/ui/forgetpassword_setpincode.dart';
 import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 
 class ForgetpasswordProvider extends ChangeNotifier{
   ///////////////////////set email and send code page ////////////////////
@@ -143,8 +141,7 @@ class ForgetpasswordProvider extends ChangeNotifier{
           ),),
           backgroundColor: Colors.black,
         )
-      );
-      //forgetPasswordPinCodeController.clear(); // notice here
+      );     
       
       await Future.delayed(Duration(seconds: 3));   
       resetPinError();
@@ -268,7 +265,6 @@ class ForgetpasswordProvider extends ChangeNotifier{
               BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                 child: Container(
-                 //color: Colors.black.withOpacity(0.3),
                    color: AppColers.backgroundColor.withValues(alpha: .3),
                 ),
               ),
@@ -280,11 +276,8 @@ class ForgetpasswordProvider extends ChangeNotifier{
                   width: 335.w,
                   height: 309.h,
                   padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    //color: Colors.white,
-                    //color: Colors.white.withValues(alpha: .7),
+                  decoration: BoxDecoration(                    
                     color: Color(0xff06152D),
-                    //color: AppColers.backgroundColor.withValues(alpha: .6),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
@@ -325,9 +318,7 @@ class ForgetpasswordProvider extends ChangeNotifier{
                           style: TextStyle(                      
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
-                            //color: Color(0xff59615E)
                             color: Theme.of(context).colorScheme.onSecondary,
-                            //color: Colors.white
                           ),
                         ), 
                         SizedBox(height: 16.h,),                
@@ -338,7 +329,6 @@ class ForgetpasswordProvider extends ChangeNotifier{
                               MaterialPageRoute(builder: (context) => LoginScreen(),), 
                               (route) => false,
                             );
-                            //Navigator.pop(context);
                           },
                           text: "Back to Login"
                         )

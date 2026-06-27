@@ -15,7 +15,7 @@ class WeeklyMoodWid extends StatelessWidget {
       
       padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 14.h),
       decoration: BoxDecoration(
-        color: const Color(0xff1E293B), // Dark card background
+        color: const Color(0xff1E293B), 
         borderRadius: BorderRadius.circular(20.r),        
         boxShadow: [          
           BoxShadow(            

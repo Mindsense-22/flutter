@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 
 class CustomButton extends StatelessWidget {
-   final VoidCallback onPressed; // ✅ note VoidCallback
+   final VoidCallback onPressed; 
    final String text;
    CustomButton({super.key,  required this.onPressed, required this.text});
    

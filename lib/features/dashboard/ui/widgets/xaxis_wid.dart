@@ -23,7 +23,6 @@ class XAxis extends StatelessWidget {
         SizedBox(width: 29.w,),
         Row(
           children: [
-            //0
             SizedBox(
               height: 17.h,
               width: 23.w,
@@ -38,7 +37,6 @@ class XAxis extends StatelessWidget {
             ),
             SizedBox(width: 18.33.w,),
 
-            //1
             SizedBox(
               height: 17.h,
               width: 28.w,
@@ -53,7 +51,6 @@ class XAxis extends StatelessWidget {
             ),
             SizedBox(width: 18.33.w,),
 
-            //2
             SizedBox(
               height: 21.h,
               width: 30.w,
@@ -68,7 +65,6 @@ class XAxis extends StatelessWidget {
             ),
             SizedBox(width: 18.33.w,),
 
-            //3
             SizedBox(
               height: 17.h,
               width: 33.w,
@@ -83,7 +79,6 @@ class XAxis extends StatelessWidget {
             ),
             SizedBox(width: 18.33.w,),
 
-            //4
             SizedBox(
               height: 17.h,
               width: 32.w,
@@ -98,7 +93,6 @@ class XAxis extends StatelessWidget {
             ),
             SizedBox(width: 18.33.w,),
 
-            //5
             SizedBox(
               height: 17.h,
               width: 39.w,
@@ -113,7 +107,6 @@ class XAxis extends StatelessWidget {
             ),
             SizedBox(width: 18.33.w,),
 
-            //6
             SizedBox(
               height: 17.h,
               width: 17.w,
@@ -149,19 +142,4 @@ class XAxis extends StatelessWidget {
 
 
 
-
-// return Row(
-    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //   children: days.map((day) {
-    //     return Expanded(
-    //       child: Text(
-    //         day,
-    //         style: TextStyle(
-    //           color: const Color(0xFFcecece),
-    //           fontSize: 12.sp,
-    //           fontFamily: 'Poppins',
-    //         ),
-    //       ),
-    //     );
-    //   }).toList(),
-    // );
+

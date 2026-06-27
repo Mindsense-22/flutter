@@ -108,10 +108,7 @@ class _SessionControlsState extends State<SessionControls> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 16.h),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30.r),
-                // gradient: const LinearGradient(
-                //   colors: [DarkThemeColors.primaryColor, Color(0xff2B9889)], // Gradient teal
-                // ),
+                borderRadius: BorderRadius.circular(30.r),               
                 color:AppColers.primaryColor,
               ),
               child: Row(
@@ -167,7 +164,7 @@ class _SessionControlsState extends State<SessionControls> {
                 height: _isRecording ? 70.w : 64.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color(0xffF04E5F), // vibrant coral/red
+                  color: const Color(0xffF04E5F), 
                   boxShadow: _isRecording
                       ? [
                           BoxShadow(

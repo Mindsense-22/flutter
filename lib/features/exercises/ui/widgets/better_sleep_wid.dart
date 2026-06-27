@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:mindsense_app/features/exercises/logic/audio_player_provider.dart';
 import 'package:mindsense_app/features/exercises/logic/exercises_provider.dart';
 import 'package:provider/provider.dart';
@@ -34,25 +31,21 @@ class BetterSleepWid extends StatelessWidget {
                     padding: EdgeInsets.all(10.w),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
-                      //color: Color(0xFF1E1B4B),
                       gradient: const LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                         colors: [
-                          Color(0xFF1E1B4B), // deep indigo - left
-                          Color(0xFF0F172A), // dark navy  - right
+                          Color(0xFF1E1B4B), 
+                          Color(0xFF0F172A),
                         ],
                       ),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // ── Left: cover art + text info ──
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            // Cover art
-                            
                             Container(
                               width: 80.w,
                               height: 80.h,
@@ -67,14 +60,12 @@ class BetterSleepWid extends StatelessWidget {
                               ),
                             ),
                             SizedBox(width: 10.w),
-                            // Title + metadata
                             SizedBox(
                               width: 143.w,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  // Title
                                   Text(
                                     val.bettersleepList[index].name,
                                     style: TextStyle(                                      
@@ -85,10 +76,8 @@ class BetterSleepWid extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(height: 10.h),
-                                  // Meta row: duration + type
                                   Row(
                                     children: [
-                                      // Clock + duration
                                       Row(
                                         children: [
                                           SvgPicture.asset(
@@ -111,7 +100,6 @@ class BetterSleepWid extends StatelessWidget {
                                         ],
                                       ),
                                       SizedBox(width: 4.w),
-                                      // Headset + session type
                                       Row(
                                         children: [
                                           SvgPicture.asset(
@@ -139,46 +127,7 @@ class BetterSleepWid extends StatelessWidget {
                             ),
                           ],
                         ),
-                  
-                        // ── Right: play button ──
-                        // InkWell(
-                        //   borderRadius: BorderRadius.circular(200.r),
-                        //   splashColor: Colors.white,
-                        //   onTap: () {
-                        //     context.read<AudioProvider>().play(
-                        //       val.bettersleepList[index].audioonlinePath,
-                        //     );
-                        //   },
-                        //   // onTap: () {
-                        //   //   val.bettersleepList[index].mediaIsPlaying=!val.bettersleepList[index].mediaIsPlaying;
-                        //   //   log(val.bettersleepList[index].mediaIsPlaying.toString());
-                        //   // },
-                        //   child: Consumer<AudioProvider>(
-                        //     builder: (context,audio,child) {
-                        //       final isCurrent =audio.currentUrl == val.bettersleepList[index].audioonlinePath;
-        
-                        //       return Container(
-                        //         width: 48.w,
-                        //         height: 48.h,
-                        //         decoration: BoxDecoration(
-                        //           shape: BoxShape.circle,
-                        //           color: const Color(0xFFA855F7).withValues(alpha: 0.15),
-                        //         ),
-                        //         child: Center(
-                        //           child: 
-                        //           SvgPicture.asset(
-                        //             isCurrent && audio.isPlaying?
-                        //             'assets/images/headset.svg':
-                        //             'assets/images/icon-play-sleep2.svg',
-                        //             width: 24.w,
-                        //             height: 24.h,
-                                    
-                        //           ) ,
-                        //         ),
-                        //       );
-                        //     }
-                        //   ),
-                        // ),
+
                         InkWell(
                           borderRadius: BorderRadius.circular(200.r),
                           splashColor: Colors.white,
@@ -189,10 +138,6 @@ class BetterSleepWid extends StatelessWidget {
                               val.bettersleepList[index].audioonlinePath,
                             );
                           },
-                          // onTap:() {
-                          //   audioProvider.play(val.bettersleepList[index].audioonlinePath);
-
-                          // },
 
                           child: Consumer<AudioProvider>(
                             builder: (context, audio, child) {

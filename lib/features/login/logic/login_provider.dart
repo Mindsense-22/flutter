@@ -107,32 +107,4 @@ class LoginProvider extends ChangeNotifier {
 
 
 
-
-    
-//  void loginButton(context) {
-//     if (formKey.currentState!.validate()) {
-//       log("Form is valid");
-//       ScaffoldMessenger.of(context).showSnackBar(
-//        SnackBar(
-//         content: Text("Form is valid",style: TextStyle(
-//           color: Colors.white
-//         ),),
-//         backgroundColor: Colors.black,
-//        )
-//       );
-//       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),), (route) => false,);
-//       SharedPreferencesitem.setString("token", "111111");
-//       SharedPreferencesitem.setString("gmail", loginEmailController.text);
-//     }
-//     else {
-//       log("Form is NOT valid");
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(
-//         content: Text("Form is not valid",style: TextStyle(
-//           color: Colors.white
-//         ),),
-//         backgroundColor: Colors.black,
-//         )
-//       );
-//     }
-//   }
+

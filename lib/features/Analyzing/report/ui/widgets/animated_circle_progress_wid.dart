@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnimatedCircleProgress extends StatefulWidget {
-  final double target; // من 0 لـ 1
+  final double target; 
   final String state;
   const AnimatedCircleProgress({super.key, required this.target, required this.state});
 
@@ -29,7 +29,7 @@ class _AnimatedCircleProgressState extends State<AnimatedCircleProgress>
     animation = Tween<double>(begin: 0, end: widget.target).animate(
       CurvedAnimation(
         parent: controller,
-        curve: Curves.easeOutCubic, // حركة ناعمة
+        curve: Curves.easeOutCubic, 
       ),
     );
 

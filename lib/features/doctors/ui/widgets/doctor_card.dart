@@ -1,11 +1,9 @@
 import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindsense_app/core/Api/api_constants.dart';
-import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/features/doctors/logic/doctors_provider.dart';
 import 'package:mindsense_app/features/doctors/modules/doctordetails.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
@@ -16,7 +14,7 @@ import 'package:provider/provider.dart';
 class DoctorCard extends StatefulWidget {
   final DoctorDetails doctor;
 
-  DoctorCard({super.key, required this.doctor});
+  const DoctorCard({super.key, required this.doctor});
 
   @override
   State<DoctorCard> createState() => _DoctorCardState();
@@ -56,8 +54,7 @@ class _DoctorCardState extends State<DoctorCard> {
         builder: (context,doctorsprovider,child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header: Name, Verified Icon, Followers
+            children: [              
               Row(
                 children: [
                   Expanded(
@@ -78,9 +75,7 @@ class _DoctorCardState extends State<DoctorCard> {
                                 placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator(),
                                 ),
-                                errorWidget: (context, url, error) {
-                                  print("URL = $url");
-                                  print("ERROR = $error");
+                                errorWidget: (context, url, error) {                                  
                                   return ClipRRect(clipBehavior: Clip.antiAlias,
                                     borderRadius: BorderRadius.circular(100.r),child:  Icon(Icons.error, size: 40.sp));
                                 },
@@ -252,7 +247,7 @@ class _DoctorCardState extends State<DoctorCard> {
                         child: MaterialButton(
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => BookingScreen(doctor: widget.doctor),));
-                            log("d id"+widget.doctor.sId.toString());
+                            log("d id ${widget.doctor.sId.toString()}");
                             
                           },
                           child: Text("Book Session",style: TextStyle(

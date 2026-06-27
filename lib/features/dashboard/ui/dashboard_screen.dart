@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
@@ -6,10 +5,7 @@ import 'package:mindsense_app/features/dashboard/logic/dashboard_provider.dart';
 import 'package:mindsense_app/features/dashboard/ui/more_info_screen.dart';
 import 'package:mindsense_app/features/dashboard/ui/widgets/dashboard_info_wid.dart';
 import 'package:mindsense_app/features/dashboard/ui/widgets/dashboard_wid.dart';
-import 'package:mindsense_app/features/dashboard/ui/widgets/emotion_history_wid.dart';
-import 'package:mindsense_app/features/dashboard/ui/widgets/emotion_report_wid.dart';
 import 'package:mindsense_app/features/dashboard/ui/widgets/weekly_mood_wid.dart';
-import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -36,13 +32,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      // canPop: false,
-      // onPopInvokedWithResult: (didPop, result) {
-      //   var provider = context.read<Mainscreenprovider>();
-      //   provider.changeIndex(0);
-      //   log(provider.index.toString());
-      // },
+    return PopScope(      
       child: Scaffold(
         appBar: AppBar(
           title: Text(

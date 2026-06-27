@@ -22,7 +22,6 @@ class ForgotpasswordPincodeTextFieldWid extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.r),
         border: Border.all(color: Colors.red, width: 2.5),
-        //color: Colors.red.withOpacity(0.1),
         color: Colors.grey[400],
       ),
     );

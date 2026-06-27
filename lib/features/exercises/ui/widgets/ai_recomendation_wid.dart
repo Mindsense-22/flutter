@@ -1,7 +1,4 @@
-// ai_recommendation_card.dart
-
 import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,11 +42,7 @@ class _AiRecommendationCardState extends State<AiRecommendationCard> {
     } catch (_) {}
   }
 
-  // Future<void> _initAudio() async {
-  //   try {
-  //     await _player.setUrl(widget.aiRecomendationSession.audiourl);
-  //   } catch (_) {}
-  // }
+
 
   @override
   void dispose() {
@@ -94,19 +87,15 @@ class _AiRecommendationCardState extends State<AiRecommendationCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // ── Badge ─────────────────────────────────
             const _AiBadge(),
             SizedBox(height: 16.h),
 
-            // ── Main Image ────────────────────────────
             _MainImage(imageUrl: widget.aiRecomendationSession.imageurl),
             SizedBox(height: 16.h),
 
-            // ── Heading ───────────────────────────────
             const _HeadingText(),
             SizedBox(height: 16.h),
 
-            // ── Info chips: duration from stream ──────
             StreamBuilder<Duration?>(
               stream: _player.durationStream,
               builder: (context, durSnap) {
@@ -115,7 +104,6 @@ class _AiRecommendationCardState extends State<AiRecommendationCard> {
             ),
             SizedBox(height: 16.h),
 
-            // ── Mini Player ───────────────────────────
             StreamBuilder<Duration>(
               stream: _player.positionStream,
               builder: (context, posSnap) {
@@ -161,9 +149,6 @@ class _AiRecommendationCardState extends State<AiRecommendationCard> {
   }
 }
 
-// ─────────────────────────────────────────────
-// Badge
-// ─────────────────────────────────────────────
 class _AiBadge extends StatelessWidget {
   const _AiBadge();
 
@@ -203,9 +188,6 @@ class _AiBadge extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────
-// Main Image
-// ─────────────────────────────────────────────
 class _MainImage extends StatelessWidget {
   final String imageUrl;
   const _MainImage({required this.imageUrl});
@@ -247,9 +229,6 @@ class _MainImage extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────
-// Heading
-// ─────────────────────────────────────────────
 class _HeadingText extends StatelessWidget {
   const _HeadingText();
 
@@ -282,16 +261,9 @@ class _HeadingText extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────
-// Info Chips
-// ─────────────────────────────────────────────
-class _InfoChips extends StatelessWidget {
-  /// Null while the audio is still loading, real value once parsed.
+class _InfoChips extends StatelessWidget {  
   final Duration? duration;
   const _InfoChips(this.duration);
-
-  /// Formats Duration to a concise human-readable label.
-  /// Shows "..." while loading, e.g. "5 min", "3 min 40 sec", "1 hr 2 min".
   String _formatDuration(Duration? d) {
     if (d == null) return '  min   sec';
     if (d.inSeconds < 60) return '${d.inSeconds} sec';
@@ -317,7 +289,6 @@ class _InfoChips extends StatelessWidget {
         SizedBox(width: 16.w),
         _InfoChip(
           iconAsset: 'assets/images/clock-01.svg',
-          //label: _formatDuration(duration),
           label:_formatDuration(duration)
         ),
       ],
@@ -370,9 +341,6 @@ class _InfoChip extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────
-// Mini Player Footer
-// ─────────────────────────────────────────────
 class _MiniPlayer extends StatelessWidget {
   final String thumbnailUrl;
   final double progress;
@@ -426,7 +394,6 @@ class _MiniPlayer extends StatelessWidget {
               padding: EdgeInsets.all(12.w),
               child: Row(
                 children: [
-                  // ── Play / Pause ──────────────────────
                   GestureDetector(
                     onTap: onPlayPause,
                     child: Container(
@@ -453,7 +420,6 @@ class _MiniPlayer extends StatelessWidget {
                   ),
                   SizedBox(width: 4.w),
 
-                  // ── Next ──────────────────────────────
                   GestureDetector(
                     onTap: onNext,
                     child: SizedBox(
@@ -474,7 +440,6 @@ class _MiniPlayer extends StatelessWidget {
                   ),
                   SizedBox(width: 16.w),
 
-                  // ── Track info ────────────────────────
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -501,7 +466,6 @@ class _MiniPlayer extends StatelessWidget {
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
-                        // Live mm:ss / mm:ss
                         Text(
                           '${_formatDuration(position)} / ${_formatDuration(duration)}',
                           style: TextStyle(
@@ -517,7 +481,6 @@ class _MiniPlayer extends StatelessWidget {
                   ),
                   SizedBox(width: 16.w),
 
-                  // ── Thumbnail ─────────────────────────
                   ClipRRect(
                     borderRadius: BorderRadius.circular(16.r),
                     child: SizedBox(
@@ -541,7 +504,6 @@ class _MiniPlayer extends StatelessWidget {
               ),
             ),
 
-            // ── Seek Bar ──────────────────────────────
             _SeekBar(progress: progress, onSeek: onSeek),
           ],
         ),
@@ -550,9 +512,6 @@ class _MiniPlayer extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────
-// Seek Bar (tap or drag to seek)
-// ─────────────────────────────────────────────
 class _SeekBar extends StatelessWidget {
   final double progress;
   final ValueChanged<double> onSeek;

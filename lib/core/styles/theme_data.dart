@@ -54,8 +54,7 @@ class Themedata {
     ),
     
     scaffoldBackgroundColor: DarkThemeColors.backgroundColor,
-    appBarTheme:const AppBarTheme(
-      // this two lines to make appbar not change its color
+    appBarTheme:const AppBarTheme(      
       surfaceTintColor: Colors.transparent,
       scrolledUnderElevation: 0,
       

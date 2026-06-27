@@ -29,9 +29,7 @@ class OnboardingPageWed extends StatelessWidget {
                     opacity: .90,
                     child: Container(
                       height: 35.h,
-                      width: 65.w,
-                      //padding: EdgeInsets.all(8),
-                     // margin: EdgeInsets.symmetric(horizontal: 8),
+                      width: 65.w,                      
                       decoration: BoxDecoration(
                         color: Color(0xffE8E9EC),
                         borderRadius: BorderRadius.circular(20), 
@@ -65,7 +63,6 @@ class OnboardingPageWed extends StatelessWidget {
                   padding: EdgeInsets.all(10),              
                   width: double.infinity,             
                   decoration: BoxDecoration(
-                    //color: Colors.red,
                     color: Theme.of(context).scaffoldBackgroundColor,           
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(15),

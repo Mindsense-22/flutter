@@ -32,7 +32,6 @@ class SignupFormWid extends StatelessWidget {
           CustomTextFormField(
             controller: provider.signupNameController, 
             hintText: "Enter your Name",
-            //Icon: Icon(Icons.person_2_outlined),
             Icon: Padding(
               padding: const EdgeInsets.all(11.0),
               child: SvgPicture.asset(

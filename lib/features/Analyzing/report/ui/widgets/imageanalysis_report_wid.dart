@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/logic/photo_analysis_provider.dart';
-import 'package:mindsense_app/features/Analyzing/report/logic/analysisreportprovider.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/widgets/animated_circle_progress_wid.dart';
 import 'package:mindsense_app/features/Analyzing/widgets/reportadvices_wid.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +35,7 @@ class ImageanalysisReportWid extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   
-                  // ── Header: Icon + Title ──
+
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: Row(
@@ -71,36 +70,13 @@ class ImageanalysisReportWid extends StatelessWidget {
               
                   SizedBox(height: 12.h),
               
-                  // ── Facial State ──
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  //   child: RichText(
-                  //     text: TextSpan(
-                  //       style: TextStyle(
-                          
-                  //         fontSize: 16.sp,
-                  //         color: Colors.white,
-                  //         height: 1.5625,
-                  //       ),
-                  //       children: [
-                  //         TextSpan(
-                  //           text:'Your Facical state',
-                  //           style: TextStyle(fontWeight: FontWeight.w600),
-                  //         ),
-                  //         TextSpan(
-                  //           text: ': ${reportVal.facialState}',
-                  //           style: const TextStyle(fontWeight: FontWeight.w500),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
+
                   SizedBox(height: 40.h,),
                   AnimatedCircleProgress(target: analyzingProvider.finalScore??5,state: analyzingProvider.detectedEmotion??"nature",),
               
                   SizedBox(height: 50.h),
               
-                  // ── Recommended Exercises Title ──
+
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: Text(
@@ -117,13 +93,7 @@ class ImageanalysisReportWid extends StatelessWidget {
                   SizedBox(height: 8.h),
                   
                   ReportadvicesWid(shownAdvice: analyzingProvider.shownAdvice,),
-                  // // ── Dynamic Exercise List ──
-                  // ...analyzingProvider.aiPhotoAdvices.map(
-                  //   (exercise) => Padding(
-                  //     padding: EdgeInsets.only(bottom: 8.h),
-                  //     child: _ExerciseItem(text: exercise),
-                  //   ),
-                  // ),
+
                   
                 ],
               );
@@ -135,7 +105,7 @@ class ImageanalysisReportWid extends StatelessWidget {
   }
 }
 
-// ── Private bullet item widget ──
+
 class _ExerciseItem extends StatelessWidget {
   final String text;
   const _ExerciseItem({required this.text});

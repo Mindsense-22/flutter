@@ -1,22 +1,12 @@
 import 'dart:developer';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mindsense_app/core/Api/emotion_service.dart';
-import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
-import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
-import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/photo_scan_result_screen.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/widgets/camerapermissiondialog_wid.dart';
-import 'package:mindsense_app/features/Analyzing/report/logic/analysisreportprovider.dart';
-import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'dart:io';
+
 
 class PhotoAnalysisProvider extends ChangeNotifier{
   double targetvalue=0.0;
@@ -92,48 +82,6 @@ class PhotoAnalysisProvider extends ChangeNotifier{
     );  
   }
 
-  // Future<void> analyzeFace(BuildContext context) async {
-  //   if (selctedimage == null) return;
 
-  //   changeIsLoading(true);
-  //   try {
-  //     final result = await EmotionService.analyzeFace(File(selctedimage!.path));
-      
-  //     // Update state based on API response
-  //     stateCondition = result["analysis"]?["state"] ?? result["emotion"]?["state"] ?? "Neutral";
-      
-  //     var scores = result["analysis"]?["scores"];
-  //     if (scores != null && scores[stateCondition] != null) {
-  //       targetvalue = (scores[stateCondition] as num).toDouble();
-  //     } else {
-  //       targetvalue = (result["emotion"]?["confidence"] as num?)?.toDouble() ?? 0.0;
-  //     }
-
-  //     // Also update Analysisreportprovider
-  //     Provider.of<Analysisreportprovider>(context, listen: false).updateImageResults(targetvalue, stateCondition);
-
-  //     // Also update AnalyzingProvider if it's used elsewhere
-  //     final analyzingProvider = Provider.of<AnalyzingProvider>(context, listen: false);
-  //     analyzingProvider.setSelectedImage(selctedimage);
-  //     analyzingProvider.detectedEmotion = stateCondition;
-  //     analyzingProvider.aiAdvice = result["advice"];
-  //     analyzingProvider.emotionScores = result["analysis"]?["scores"];
-      
-  //     changeIsLoading(false);
-      
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => PhotoScanResultScreen()),
-  //     );
-  //   } catch (e) {
-  //     changeIsLoading(false);
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text(e.toString()),
-  //         backgroundColor: Colors.red,
-  //       ),
-  //     );
-  //   }
-  // }
 
 }

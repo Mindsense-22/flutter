@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'package:mindsense_app/features/Analyzing/voice analysis/ui/widgets/voicepermissiondialog_wid.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -153,17 +150,6 @@ class VoiceAnalysisProvider extends ChangeNotifier {
     }
   }
 
-  /// FORMAT TIME (MM:SS:MS)
-  // String formatTime(int milliseconds) {
-  //   final minutes = milliseconds ~/ 60000;
-  //   final seconds = (milliseconds % 60000) ~/ 1000;
-  //   final ms = (milliseconds % 1000) ~/ 10;
-
-  //   String twoDigits(int n) => n.toString().padLeft(2, '0');
-
-  //   return "${twoDigits(minutes)}:${twoDigits(seconds):${twoDigits(ms)}}";
-  // }
-
   String formatTime(int time) {
     int minutes = time ~/ 60;
     int seconds = time % 60;
@@ -181,7 +167,7 @@ class VoiceAnalysisProvider extends ChangeNotifier {
         return;
       }
 
-      await audioPlayer.stop(); // stop previous if playing
+      await audioPlayer.stop(); 
 
       await audioPlayer.play(
         DeviceFileSource(audioFile!.path),

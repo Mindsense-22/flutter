@@ -5,7 +5,6 @@ import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
-import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_scan_result_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/widgets/voicewave_wid.dart';
 import 'package:provider/provider.dart';
 
@@ -169,11 +168,7 @@ class VoiceRecordScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(100),
                                 splashColor: Colors.white.withValues(alpha: 0.2),
                                 highlightColor: Colors.transparent,
-                                onTap: () {
-                                  //old functions
-                                  // val.audioFile=null;
-                                  // val.cancelRecording();
-                                  // val.changeIsRecording();
+                                onTap: () {                                  
                                   val.stopRecording(context);
                                 },
                                 child: Container(
@@ -235,16 +230,10 @@ class VoiceRecordScreen extends StatelessWidget {
                                   analyzingProvider.submitCombinedAnalysis(context);
                                 }
                                                                 
-                              },
-                               
+                              },                               
                               text: "Analyze"
                             ):CircularProgressIndicator(),
-                            TextButton(
-                                onPressed: () {
-                                  val.playRecordedAudio();
-                                },
-                                child: const Text("Play audio",),
-                            ),                                                  
+                                                                             
                           ],
                         );
                       }

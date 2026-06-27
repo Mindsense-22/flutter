@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/sign%20up/logic/pincode_signup_provider.dart';
-import 'package:mindsense_app/features/sign%20up/logic/signup_provider.dart';
 import 'package:pinput/pinput.dart';
 
 class SignupPincodetextfieldWid extends StatelessWidget {
@@ -22,7 +21,6 @@ class SignupPincodetextfieldWid extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.r),
         border: Border.all(color: Colors.red, width: 2.5),
-        //color: Colors.red.withOpacity(0.1),
         color: Colors.grey[400],
       ),
     );

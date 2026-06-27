@@ -14,8 +14,7 @@ class DashboardInfoWid extends StatelessWidget {
 
       ),
       child:
-       Row(
-         //spacing: 53.w,
+       Row(         
          mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           

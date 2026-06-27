@@ -48,13 +48,7 @@ class _CustomPasswordTextFormFieldState
             width: 24.w,
             height: 24.h,
           ),
-        ),
-        // prefix: SvgPicture.asset(
-        //   "assets/images/lock-password.svg",
-        //   width: 24.w,
-        //   height: 24.h,
-        // ),
-        //prefixIcon: Icon(Icons.lock_open_outlined),
+        ),        
         hintText: widget.hintText,
         hintStyle: const TextStyle(
           color: TextColers.secondaryTextColor,

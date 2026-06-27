@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,8 +49,7 @@ class AboutUserWid extends StatelessWidget {
                   ),
                   Positioned(
                     top: 6.8,
-                    child: Container(
-                      //clipBehavior: Clip.antiAlias,
+                    child: Container(  
                       width: 98.w,
                       height: 98.w,
                       decoration: BoxDecoration(                
@@ -93,20 +91,8 @@ class AboutUserWid extends StatelessWidget {
                           border: Border.all(
                             color: Color(0xff0B0F19),
                             width: 2.w,
-                          ), 
-                          // boxShadow: [          
-                          //   BoxShadow(            
-                          //     color: Color(0xff2DD4BF).withAlpha(40),
-                          //     blurRadius: 16.r,
-                          //     offset: const Offset(0,-10),
-                          //   ),
-                          //   BoxShadow(
-                              
-                          //     color: Color(0xff2DD4BF).withAlpha(40),
-                          //     blurRadius: 16.r,
-                          //     offset: const Offset(2,10),
-                          //   ),
-                          // ],
+                          ),
+                          
                         ),
                         child: SvgPicture.asset("assets/images/camera_icon_black.svg",
                           height: 16.h,

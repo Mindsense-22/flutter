@@ -6,8 +6,7 @@ import 'package:mindsense_app/features/games/models/gamification_model.dart';
 class GameficationService {
   static String apiMessage = "";
 
-  /// GET /api/v1/gamification
-  /// Fetches the user's gamification profile (xp, points, streak_days, last_played, past_sessions).
+  
   static Future<GamificationProfile> getProfile() async {
     try {
       final response = await DioFactory.getData(
@@ -21,9 +20,7 @@ class GameficationService {
     }
   }
 
-  /// POST /api/v1/gamification/complete
-  /// Records a completed game, awards XP, and updates streak.
-  /// Returns the updated [GamificationProfile].
+  
   static Future<GamificationProfile> completeGame({
     required String gameName,
     required String gameType,

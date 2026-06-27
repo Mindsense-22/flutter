@@ -181,7 +181,7 @@ class _MySessionsScreenState extends State<MySessionsScreen> {
                       Row(
                         children: [
                           Text(
-                            price.toString()+" EGP"  ,
+                            "${price.toString()} EGP"  ,
                             style: TextStyle(color: AppColers.primaryColor, fontSize: 13.sp),
                           ),
                           SizedBox(width: 6.w),

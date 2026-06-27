@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
@@ -41,8 +40,7 @@ class EditUserInformationProvider extends ChangeNotifier {
   String ? editFormValidator(String ? val){
     // if(editAgeController.text.isEmpty&&editNameController.text.isEmpty){
     //   return "fill Any Field To Confirm Edits";                          
-    // }
-    
+    // }    
     return null;
   }
 

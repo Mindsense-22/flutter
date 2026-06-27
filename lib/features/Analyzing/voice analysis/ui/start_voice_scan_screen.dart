@@ -4,11 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
-import 'package:mindsense_app/features/Analyzing/photo%20analysis/logic/photo_analysis_provider.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_record_screen.dart';
-import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/voice_scan_result_screen.dart';
-import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
@@ -17,21 +14,10 @@ class StartVoiceScanScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      // canPop: false,      
-      // onPopInvokedWithResult: (didPop, result) {
-      //   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),  (route) => false,);
-      // },
-      child: Scaffold(
-      
-        appBar: AppBar(
-          // leading: IconButton(
-          //   icon: Icon(Icons.arrow_back,size: 24.w,),
-          //   onPressed: () {
-          //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),  (route) => false,);
-          //   },
-          // ),
-        ),
+    return PopScope(      
+      child: Scaffold(      
+        appBar: AppBar(),       
+        
       
         body: SingleChildScrollView(
           child: Padding(

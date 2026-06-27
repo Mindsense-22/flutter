@@ -29,7 +29,6 @@ class VoicechatScreen extends StatelessWidget {
                     
                     return Column(
                       children: [
-                        // Glowing Orb — takes flexible space in the top half
                         Expanded(
                           child: Center(
                             child: PulsingOrb(isAnimating: isAnimating),
@@ -37,7 +36,6 @@ class VoicechatScreen extends StatelessWidget {
                         ),
                         if (provider.lastResponseText != null)SizedBox(height: 30.h,),
 
-                        // Bottom section — controls + subtitle, scrollable to avoid overflow
                         SingleChildScrollView(
                           physics: const NeverScrollableScrollPhysics(),
                           child: Column(
@@ -56,8 +54,9 @@ class VoicechatScreen extends StatelessWidget {
                                   ],
                                 ),
                               SizedBox(height: 24.h),
-                              // Controls (Start Session or Mic/Stop)
+
                               const SessionControls(),
+                              
                               SizedBox(height: 50.h),
 
                               

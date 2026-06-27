@@ -1,7 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/dio_factory.dart';
 import 'package:mindsense_app/core/Api/doctors_service.dart';
@@ -35,7 +33,7 @@ class DoctorsProvider extends ChangeNotifier{
     try {
       doctorsList = await DoctorsService.getAllDoctors();
     } catch (e) {
-      // Handle error silently or add error state later
+      // 
     } finally {
       isLoading = false;
       notifyListeners();
@@ -49,10 +47,9 @@ class DoctorsProvider extends ChangeNotifier{
       path: "/api/v1/professionals/$id/follow",
       data: {}
     );
-    log(response.data["status"]);
+    //log(response.data["status"]);
     Provider.of<ProfileScreenProvider>(context, listen: false)
       .fetchUserProfile();
-    //getAllDoctors();    
     }catch(e){
       log(e.toString());
     } 
@@ -67,10 +64,10 @@ class DoctorsProvider extends ChangeNotifier{
       log(response.data["status"]);
       Provider.of<ProfileScreenProvider>(context, listen: false)
         .fetchUserProfile();
-      //getAllDoctors();
+      
       
     }catch(e){
-        log("unfollow :"+e.toString());
+        log("unfollow :${e.toString()}");
     }
   }
   
@@ -136,7 +133,7 @@ class DoctorsProvider extends ChangeNotifier{
       fetchMySessions();
       Navigator.pop(context);
     } catch (e) {
-      log("Booking error: " + e.toString());
+      log("Booking error: ${e.toString()}");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to submit booking: $e', style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
       );

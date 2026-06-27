@@ -55,7 +55,6 @@ class _BalloonPopGameState extends State<BalloonPopGame> {
     );
     setState(() => _balloons.add(balloon));
 
-    // Auto-remove after 4 seconds if not tapped
     Timer(const Duration(seconds: 4), () {
       if (!mounted) return;
       if (_balloons.any((b) => b.id == id)) {
