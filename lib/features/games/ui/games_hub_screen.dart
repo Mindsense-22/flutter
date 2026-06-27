@@ -20,6 +20,14 @@ class _GamesHubScreenState extends State<GamesHubScreen> {
   final ScrollController _scrollController = ScrollController();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<GamificationProvider>().fetchProfile();
+    });
+  }
+
+  @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
