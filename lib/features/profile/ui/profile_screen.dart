@@ -48,13 +48,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
-            "My Profile",
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 22.sp,
-            ),
-          ),
+          // title: Text(
+          //   "My Profile",
+          //   style: TextStyle(
+          //     fontWeight: FontWeight.w600,
+          //     fontSize: 22.sp,
+          //   ),
+          // ),
           leading:
           IconButton(
               onPressed: () async {

@@ -20,7 +20,7 @@ class AboutUserWid extends StatelessWidget {
       builder: (context,val,child) {
         return Column(
           children: [
-            SizedBox(height: 18.h),
+            SizedBox(height: 10.h),
             InkWell(
               borderRadius: BorderRadius.circular(110.r),
               splashColor: Colors.blueGrey[600],
@@ -104,7 +104,7 @@ class AboutUserWid extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 15.h),
             Text(
               SharedPreferencesitem.getString("userName")??
               val.userName??              
@@ -126,7 +126,7 @@ class AboutUserWid extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            SizedBox(height: 24.h),
+            SizedBox(height: 23.h),
           ],
         );
       }
