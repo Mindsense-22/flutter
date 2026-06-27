@@ -25,7 +25,7 @@ class VoiceHeader extends StatelessWidget {
             ),
             child: Consumer<VoicechatProvider>(
               builder: (context,val,child) {
-                String quotaStr = val.quota ?? SharedPreferencesitem.getString("voiceQuota") ?? "100";
+                String quotaStr = val.quota ?? SharedPreferencesitem.getString("voiceQuota") ?? " ";
                 if (quotaStr.length > 6) {
                   quotaStr = quotaStr.substring(0, 8);
                 }
