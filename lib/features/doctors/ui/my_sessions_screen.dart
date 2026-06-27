@@ -44,7 +44,7 @@ class _MySessionsScreenState extends State<MySessionsScreen> {
         elevation: 0,
         title: Text(
           'My Sessions',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 24.sp),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 22.sp),
         ),
         centerTitle: true,
         leading: IconButton(

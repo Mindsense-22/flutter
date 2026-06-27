@@ -28,6 +28,7 @@ class GeneralSettingsWid extends StatelessWidget {
         SizedBox(height: 8.h),
 
         Container(
+          width: double.infinity,
           padding: EdgeInsets.all(8.w),
           decoration: BoxDecoration(
             color: Color(0xff1E293B),
