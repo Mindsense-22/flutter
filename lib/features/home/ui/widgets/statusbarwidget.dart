@@ -40,23 +40,32 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
                   width: 48.w,
                   height: 48.h,
                   decoration: BoxDecoration(
-                    color: AppColers.primaryColor,
+                    color: Colors.transparent,
                     borderRadius: BorderRadius.all(Radius.circular(48.r)),
                   ),
                   child: 
                   val.avatarLink == null || val.avatarLink!.isEmpty
-                  ?CachedNetworkImage(
-                    imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
-                    fit: BoxFit.fill,                    
-                  )
-                  :ClipRRect(
-                    clipBehavior: Clip.antiAlias,
-                    borderRadius: BorderRadius.circular(108.r),
+                  ?Container(
+                    clipBehavior: Clip.antiAlias,                    
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(108.r),
+                    ),
                     child: CachedNetworkImage(
-                       imageUrl: ApiConstants.baseUrl + val.avatarLink!,
+                      imageUrl: "https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
                       fit: BoxFit.fill,                    
-                    )
-                  ),
+                    ),
+                  )
+                  :Container(
+                    clipBehavior: Clip.antiAlias,                    
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(108.r),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: ApiConstants.baseUrl + val.avatarLink!,
+                      fit: BoxFit.fill,                    
+                    ),
+                  )
+                  
                 ),
               ),
             ),            
