@@ -13,6 +13,7 @@ import 'package:mindsense_app/features/exercises/logic/audio_player_provider.dar
 import 'package:mindsense_app/features/exercises/logic/exercises_provider.dart';
 import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
 import 'package:mindsense_app/features/login/logic/login_provider.dart';
+import 'package:mindsense_app/features/login/ui/login_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/profile/add%20contact/logic/addcontact_provider.dart';
 import 'package:mindsense_app/features/profile/edit%20user%20information/logic/edit_user_information_provider.dart';
@@ -117,7 +118,7 @@ class MyApp extends StatelessWidget {
               child: child!,
             );
           },
-          home: SplashScreen(),
+          home: LoginScreen(),
         );
       } 
     );

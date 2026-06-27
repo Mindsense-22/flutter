@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_button.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_emailtextformfield.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_passwordtextformfield.dart';
@@ -18,7 +19,7 @@ class LoginFormWid extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Email",style: TextStyle(
-              fontSize: 16,
+              fontSize: 16.sp,
               fontWeight: FontWeight.w500,
               color: Theme.of(context).colorScheme.onSecondary,
             ),),   
@@ -31,7 +32,7 @@ class LoginFormWid extends StatelessWidget {
               validator: provider.emailValidator,
             ),
 
-            SizedBox(height: 16,),
+            SizedBox(height: 16.h,),
 
             Text("Password",style: TextStyle(
               fontSize: 16,
@@ -39,7 +40,7 @@ class LoginFormWid extends StatelessWidget {
               color: Theme.of(context).colorScheme.onSecondary,
             ),),
         
-            SizedBox(height: 5,),
+            SizedBox(height: 5.h,),
         
             CustomPasswordTextFormField(
               controller: provider.loginpasswordController, 
@@ -55,13 +56,13 @@ class LoginFormWid extends StatelessWidget {
                 },
                 child: Text("Forgot Password?",                      
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.onSecondary,
               ),)),
             ),
             
-            SizedBox(height: 28,),
+            SizedBox(height: 25.h,),
             //login button
             Consumer<LoginProvider>(
               builder: (context,val,child) {

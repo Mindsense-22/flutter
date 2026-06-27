@@ -30,7 +30,8 @@ class LoginScreen extends StatelessWidget {
 
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,      
-                    children: [                  
+                    children: [    
+                      SizedBox(height: 80.h,),              
                       //upper text widget
                       UppertextWid(),
 
@@ -38,15 +39,13 @@ class LoginScreen extends StatelessWidget {
 
                       //login form                      
                       LoginFormWid( provider: provider,),
-                              
-                      SizedBox(height: 24,),                 
-                          
-                      SizedBox(height: 24,),
                       
-                      SizedBox(height: 24,),
-                          
+                      SizedBox(height: 100.h,),
+                     
                       //to sign up page
                       Center(child: TosignupWid()),
+
+                      
 
                     ],
                   );
