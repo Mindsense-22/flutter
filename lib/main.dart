@@ -7,6 +7,7 @@ import 'package:mindsense_app/features/Analyzing/logic/analyzing_provider.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/logic/photo_analysis_provider.dart';
 import 'package:mindsense_app/features/Analyzing/report/logic/analysisreportprovider.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
+import 'package:mindsense_app/features/community/logic/community_provider.dart';
 import 'package:mindsense_app/features/dashboard/logic/dashboard_provider.dart';
 import 'package:mindsense_app/features/doctors/logic/doctors_provider.dart';
 import 'package:mindsense_app/features/exercises/logic/audio_player_provider.dart';
@@ -93,6 +94,9 @@ void main() async{
             ),
             ChangeNotifierProvider(
               create: (_) => VoicechatProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => CommunityProvider(),
             ),
           ],
         child: MyApp(),
