@@ -1,26 +1,64 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/community_service.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/features/community/models/community_model.dart';
 
 class CommunityProvider extends ChangeNotifier {
   bool postisLoading = false;
   bool isFeedLoading = false;
+  bool isLoadingMore = false;
+  bool hasMore = true;
+  int _currentPage = 1;
+  static const int _pageLimit = 10;
+
   String? error;
   List<FeedPost> feedPosts = [];
 
-  Future<void> fetchFeed({int page = 1, int limit = 10}) async {
+  /// Fetches page 1 and replaces the list (used on first load & pull-to-refresh)
+  Future<void> fetchFeed() async {
     isFeedLoading = true;
     error = null;
+    _currentPage = 1;
+    hasMore = true;
     notifyListeners();
 
     try {
-      final posts = await CommunityService.getFeed(page: page, limit: limit);
+      final posts = await CommunityService.getFeed(page: 1, limit: _pageLimit);
       feedPosts = posts;
+      hasMore = posts.length >= _pageLimit;
       isFeedLoading = false;
       notifyListeners();
     } catch (e) {
       error = e.toString();
       isFeedLoading = false;
+      notifyListeners();
+    }
+  }
+
+  /// Appends the next page to the list (pagination / infinite scroll)
+  Future<void> loadMoreFeed() async {
+    if (isLoadingMore || !hasMore) return;
+
+    isLoadingMore = true;
+    notifyListeners();
+
+    try {
+      final nextPage = _currentPage + 1;
+      final posts = await CommunityService.getFeed(page: nextPage, limit: _pageLimit);
+      if (posts.isNotEmpty) {
+        _currentPage = nextPage;
+        feedPosts = [...feedPosts, ...posts];
+        hasMore = posts.length >= _pageLimit;
+      } else {
+        hasMore = false;
+      }
+      isLoadingMore = false;
+      notifyListeners();
+    } catch (e) {
+      error = e.toString();
+      isLoadingMore = false;
       notifyListeners();
     }
   }
@@ -60,6 +98,106 @@ class CommunityProvider extends ChangeNotifier {
     } catch (e) {
       error = e.toString();
       postisLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> updatePost({
+    required String postId,
+    required String type,
+    required String content,
+    required String visibility,
+    String? circleId,
+  }) async {
+    if (content.isEmpty) {
+      error = "Content cannot be empty.";
+      notifyListeners();
+      return false;
+    }
+
+    postisLoading = true;
+    error = null;
+    notifyListeners();
+
+    try {
+      final updateData = {
+        "type": type.toLowerCase(),
+        "content": content,
+        "visibility": visibility.toLowerCase(),
+        if (circleId != null && circleId != 'Global') "circle": circleId,
+      };
+
+      final updatedPost = await CommunityService.updatePost(
+        postId,
+        updateData: updateData,
+      );
+
+      final index = feedPosts.indexWhere((post) => post.id == postId);
+      if (index != -1) {
+        feedPosts[index] = updatedPost;
+      }
+
+      postisLoading = false;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      error = e.toString();
+      postisLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> deletePost(context,String postId) async {
+    if (postId.isEmpty) {
+      error = "Post id is required.";
+      notifyListeners();
+      return false;
+    }
+
+    postisLoading = true;
+    error = null;
+    notifyListeners();
+
+    try {
+      await CommunityService.deletePost(postId);
+      feedPosts.removeWhere((post) => post.id == postId);
+      postisLoading = false;
+      customSnackbar(context, false, "Post Deleted");
+      notifyListeners();
+      return true;
+    } catch (e) {
+      error = e.toString();
+      postisLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> reportPost(context,String postId) async {
+    if (postId.isEmpty) {
+      error = "Post id is required.";
+      notifyListeners();
+      return false;
+    }
+
+    postisLoading = true;
+    error = null;
+    notifyListeners();
+
+    try {
+      await CommunityService.reportContent(postId,"Spam");      
+      postisLoading = false;
+      customSnackbar(context, false, "Post Reported");
+      log("Post Reported");
+      notifyListeners();
+      return true;
+    } catch (e) {
+      error = e.toString();
+      postisLoading = false;
+      log("Post not Reported");
+      log(e.toString());
       notifyListeners();
       return false;
     }

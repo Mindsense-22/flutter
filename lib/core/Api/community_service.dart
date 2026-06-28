@@ -5,8 +5,7 @@ import 'package:mindsense_app/features/community/models/community_model.dart';
 
 class CommunityService {
   static String apiMessage = "";
-
-  // 8.1 Fetch Community Overview
+  
   static Future<CommunityOverview> getOverview() async {
     try {
       final response = await DioFactory.getData(
@@ -20,7 +19,7 @@ class CommunityService {
     }
   }
 
-  // 8.2 Fetch Feed
+  
   static Future<List<FeedPost>> getFeed({int page = 1, int limit = 10}) async {
     try {
       final response = await DioFactory.getData(
@@ -32,14 +31,16 @@ class CommunityService {
       );
       final data = response.data as Map<String, dynamic>;
       final rawList = data['data'] as List<dynamic>;
-      return rawList.map((e) => FeedPost.fromJson(e as Map<String, dynamic>)).toList();
+      return rawList
+          .map((e) => FeedPost.fromJson(e as Map<String, dynamic>))
+          .toList();
     } on DioException catch (e) {
       apiMessage = e.response?.data["message"] ?? "Failed to fetch feed";
       throw apiMessage;
     }
   }
 
-  // 8.3 Create Post
+
   static Future<FeedPost> createPost({required Map<String, dynamic> postData}) async {
     try {
       final response = await DioFactory.postData(
@@ -54,7 +55,7 @@ class CommunityService {
     }
   }
 
-  // 8.4 Update Post
+
   static Future<FeedPost> updatePost(String id, {required Map<String, dynamic> updateData}) async {
     try {
       final response = await DioFactory.patchData(
@@ -69,7 +70,7 @@ class CommunityService {
     }
   }
 
-  // 8.5 Delete Post
+
   static Future<Map<String, dynamic>> deletePost(String id) async {
     try {
       final response = await DioFactory.deleteData(
@@ -86,7 +87,7 @@ class CommunityService {
     }
   }
 
-  // 8.6 React to Post
+
   static Future<FeedPost> reactToPost(String id, String type) async {
     try {
       final response = await DioFactory.postData(
@@ -101,7 +102,7 @@ class CommunityService {
     }
   }
 
-  // 8.7 Save Post
+
   static Future<FeedPost> savePost(String id) async {
     try {
       final response = await DioFactory.postData(
@@ -116,7 +117,7 @@ class CommunityService {
     }
   }
 
-  // 8.8 Share Post
+
   static Future<FeedPost> sharePost(String id) async {
     try {
       final response = await DioFactory.postData(
@@ -131,7 +132,7 @@ class CommunityService {
     }
   }
 
-  // 8.9 Get Comments
+
   static Future<List<Comment>> getPostComments(String id) async {
     try {
       final response = await DioFactory.getData(
@@ -146,7 +147,7 @@ class CommunityService {
     }
   }
 
-  // 8.10 Add Comment
+
   static Future<Comment> addPostComment(String id, String text) async {
     try {
       final response = await DioFactory.postData(
@@ -161,14 +162,15 @@ class CommunityService {
     }
   }
 
-  // 8.11 Report Content
+
   static Future<Map<String, dynamic>> reportContent(String targetId, String reason) async {
     try {
       final response = await DioFactory.postData(
         path: ApiConstants.communityReports,
         data: {
           "targetId": targetId,
-          "reason": reason,
+          "reason": "other",
+          "targetType": "post"
         },
       );
       final data = response.data as Map<String, dynamic>;
@@ -179,7 +181,7 @@ class CommunityService {
     }
   }
 
-  // 8.12 Get Health
+
   static Future<Map<String, dynamic>> getHealth() async {
     try {
       final response = await DioFactory.getData(

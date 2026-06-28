@@ -79,7 +79,7 @@ class FeedPost {
   final int trendingScore;
   final List<Reaction> reactions;
   final DateTime createdAt;
-
+  final List savedBy;
   FeedPost({
     required this.id,
     this.author,
@@ -94,7 +94,7 @@ class FeedPost {
     required this.reportCount,
     required this.trendingScore,
     required this.reactions,
-    required this.createdAt,
+    required this.createdAt, required this.savedBy,
   });
 
   factory FeedPost.fromJson(Map<String, dynamic> json) {
@@ -113,6 +113,7 @@ class FeedPost {
       trendingScore: json['trendingScore'] as int? ?? 0,
       reactions: (json['reactions'] as List<dynamic>? ?? []).map((e) => Reaction.fromJson(e)).toList(),
       createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : DateTime.now(),
+      savedBy: json['savedBy'] as List? ?? [],
     );
   }
 }
