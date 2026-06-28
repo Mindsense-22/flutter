@@ -1,12 +1,16 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:mindsense_app/core/styles/colors.dart';
+import 'package:mindsense_app/features/dashboard/ui/dashboard_screen.dart';
 import 'package:mindsense_app/features/games/logic/gamification_provider.dart';
 import 'package:mindsense_app/features/games/models/game_models.dart';
 import 'package:mindsense_app/features/games/ui/widgets/game_canvas.dart';
 import 'package:mindsense_app/features/games/ui/widgets/player_stats_bar.dart';
 import 'package:mindsense_app/features/games/ui/widgets/recent_sessions_wid.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
+import 'package:mindsense_app/features/games/ui/rank_screen.dart';
 import 'package:provider/provider.dart';
 
 class GamesHubScreen extends StatefulWidget {
@@ -68,6 +72,39 @@ class _GamesHubScreenState extends State<GamesHubScreen> {
         log(provider.index.toString());
       },
       child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            MaterialButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  RankScreen(),
+                  ),
+                );
+              },
+              color: Color(0xff1E293B),
+              elevation: 1,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.r),
+              ),                   
+              child: Row(
+                
+                children: [
+                  Icon(Icons.emoji_events),
+                  SizedBox(width: 6.8.w),
+                  Text(
+                    'Ranking',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),],)
+                        ),
+            SizedBox(width: 10.w,)
+          ],
+        ),
         body: SafeArea(
           child: CustomScrollView(
             controller: _scrollController,

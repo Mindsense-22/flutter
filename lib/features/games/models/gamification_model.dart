@@ -57,3 +57,70 @@ class GamificationProfile {
     );
   }
 }
+
+class LeaderboardReputation {
+  final int supportScore;
+  final int consistency;
+  final int contribution;
+  final int helpful;
+  final int trust;
+  final int level;
+
+  const LeaderboardReputation({
+    required this.supportScore,
+    required this.consistency,
+    required this.contribution,
+    required this.helpful,
+    required this.trust,
+    required this.level,
+  });
+
+  factory LeaderboardReputation.fromJson(Map<String, dynamic> json) {
+    return LeaderboardReputation(
+      supportScore: json['supportScore'] as int? ?? 0,
+      consistency: json['consistency'] as int? ?? 0,
+      contribution: json['contribution'] as int? ?? 0,
+      helpful: json['helpful'] as int? ?? 0,
+      trust: json['trust'] as int? ?? 50,
+      level: json['level'] as int? ?? 1,
+    );
+  }
+}
+
+class LeaderboardEntry {
+  final String id;
+  final String name;
+  final GamificationProfile? gamification;
+  final LeaderboardReputation? reputation;
+
+  const LeaderboardEntry({
+    required this.id,
+    required this.name,
+    this.gamification,
+    this.reputation,
+  });
+
+  factory LeaderboardEntry.fromJson(Map<String, dynamic> json) {
+    GamificationProfile? gamification;
+    if (json['gamification'] != null) {
+      gamification = GamificationProfile.fromJson(
+        json['gamification'] as Map<String, dynamic>,
+      );
+    }
+
+    LeaderboardReputation? reputation;
+    final communityProfile = json['communityProfile'] as Map<String, dynamic>?;
+    if (communityProfile != null && communityProfile['reputation'] != null) {
+      reputation = LeaderboardReputation.fromJson(
+        communityProfile['reputation'] as Map<String, dynamic>,
+      );
+    }
+
+    return LeaderboardEntry(
+      id: json['_id'] as String,
+      name: json['name'] as String,
+      gamification: gamification,
+      reputation: reputation,
+    );
+  }
+}

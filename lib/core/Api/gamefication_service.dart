@@ -50,4 +50,25 @@ class GameficationService {
       throw apiMessage;
     }
   }
+
+  /// Fetches the leaderboard for a given [period].
+  /// [period] can be "weekly", "monthly", or "allTime".
+  static Future<List<LeaderboardEntry>> getLeaderboard({
+    String period = "weekly",
+  }) async {
+    try {
+      final response = await DioFactory.getData(
+        path: ApiConstants.leaderboard,
+        queryParameters: {"period": period},
+      );
+      final data = response.data as Map<String, dynamic>;
+      final rawList = data['data'] as List<dynamic>;
+      return rawList
+          .map((e) => LeaderboardEntry.fromJson(e as Map<String, dynamic>))
+          .toList();
+    } on DioException catch (e) {
+      apiMessage = e.response?.data["message"] ?? "Failed to fetch leaderboard";
+      throw apiMessage;
+    }
+  }
 }

@@ -5,6 +5,33 @@ import 'package:mindsense_app/features/games/logic/game_engine.dart';
 import 'package:mindsense_app/features/games/models/game_models.dart';
 import 'package:mindsense_app/features/games/models/gamification_model.dart';
 
+/// Flattened leaderboard entry stored in the provider.
+class LeaderboardUser {
+  final String id;
+  final String name;
+  final int xp;
+  final int level;
+  final int contribution;
+
+  const LeaderboardUser({
+    required this.id,
+    required this.name,
+    required this.xp,
+    required this.level,
+    required this.contribution,
+  });
+
+  factory LeaderboardUser.fromEntry(LeaderboardEntry entry) {
+    return LeaderboardUser(
+      id: entry.id,
+      name: entry.name,
+      xp: entry.gamification?.xp ?? 0,
+      level: entry.reputation?.level ?? 1,
+      contribution: entry.reputation?.contribution ?? 0,
+    );
+  }
+}
+
 class GamificationProvider extends ChangeNotifier {
   static const _kXp = 'gamif_xp';
   static const _kPoints = 'gamif_points';
@@ -22,6 +49,11 @@ class GamificationProvider extends ChangeNotifier {
   bool _isLoading = false;
   String? _error;
 
+  // Leaderboard
+  List<LeaderboardUser> _leaderboard = [];
+  bool _isLeaderboardLoading = false;
+  String? _leaderboardError;
+
   int get xp => _xp;
   int get points => _points;
   int get streakDays => _streakDays;
@@ -30,6 +62,10 @@ class GamificationProvider extends ChangeNotifier {
   GameSpec? get activeSpec => _activeSpec;
   bool get isLoading => _isLoading;
   String? get error => _error;
+
+  List<LeaderboardUser> get leaderboard => _leaderboard;
+  bool get isLeaderboardLoading => _isLeaderboardLoading;
+  String? get leaderboardError => _leaderboardError;
 
   int get level => GameEngine.calculateLevel(_xp);
   double get xpProgress => GameEngine.xpProgress(_xp);
@@ -144,6 +180,27 @@ class GamificationProvider extends ChangeNotifier {
     }
 
     return _justLeveledUp;
+  }
+
+  /// Fetches the leaderboard for the given [period] ("weekly", "monthly", "allTime")
+  /// and stores the results as a flat [LeaderboardUser] list sorted by XP descending.
+  Future<void> fetchLeaderboard({String period = 'weekly'}) async {
+    _isLeaderboardLoading = true;
+    _leaderboardError = null;
+    notifyListeners();
+
+    try {
+      final entries = await GameficationService.getLeaderboard(period: period);
+      _leaderboard = entries
+          .map(LeaderboardUser.fromEntry)
+          .toList()
+        ;
+    } catch (e) {
+      _leaderboardError = e.toString();
+    } finally {
+      _isLeaderboardLoading = false;
+      notifyListeners();
+    }
   }
 
   GameSpec generateRecommendation(String emotion, double confidence) {
