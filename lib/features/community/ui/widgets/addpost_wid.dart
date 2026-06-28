@@ -37,6 +37,7 @@ class _AddpostWidState extends State<AddpostWid> {
 
   final TextEditingController _contentController = TextEditingController();
   int _charCount = 0;
+  String? _errorMessage;
 
   @override
   void initState() {
@@ -171,6 +172,30 @@ class _AddpostWidState extends State<AddpostWid> {
             ),
           ),
           SizedBox(height: 16.h),
+          if (_errorMessage != null) ...[          
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+              decoration: BoxDecoration(
+                color: Colors.red.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(color: Colors.red.withValues(alpha: 0.4)),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.error_outline, color: Colors.redAccent, size: 16.sp),
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    child: Text(
+                      _errorMessage!,
+                      style: TextStyle(color: Colors.redAccent, fontSize: 12.sp),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 12.h),
+          ],
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -191,9 +216,10 @@ class _AddpostWidState extends State<AddpostWid> {
                   return MaterialButton(
                     onPressed: provider.postisLoading ? null : () async {
                       if (_contentController.text.trim().isEmpty) {
-                        customSnackbar(context, true, 'Content cannot be empty');                        
+                        setState(() => _errorMessage = 'Content cannot be empty.');
                         return;
                       }
+                      setState(() => _errorMessage = null);
                       
                       bool success = await provider.addPost(
                         type: _intention,
@@ -204,10 +230,9 @@ class _AddpostWidState extends State<AddpostWid> {
                       
                       if (success && context.mounted) {
                         Navigator.pop(context);
-                        customSnackbar(context, false, "Post Added");
+                        customSnackbar(context, false, "post added");
                       } else if (!success && provider.error != null && context.mounted) {
-                        customSnackbar(context, true, provider.error??"Error");
-                        
+                        setState(() => _errorMessage = provider.error);
                       }
                     },
                     color: const Color(0xff55EEDA),

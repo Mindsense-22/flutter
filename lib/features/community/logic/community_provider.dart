@@ -4,8 +4,26 @@ import 'package:mindsense_app/features/community/models/community_model.dart';
 
 class CommunityProvider extends ChangeNotifier {
   bool postisLoading = false;
+  bool isFeedLoading = false;
   String? error;
   List<FeedPost> feedPosts = [];
+
+  Future<void> fetchFeed({int page = 1, int limit = 10}) async {
+    isFeedLoading = true;
+    error = null;
+    notifyListeners();
+
+    try {
+      final posts = await CommunityService.getFeed(page: page, limit: limit);
+      feedPosts = posts;
+      isFeedLoading = false;
+      notifyListeners();
+    } catch (e) {
+      error = e.toString();
+      isFeedLoading = false;
+      notifyListeners();
+    }
+  }
 
   Future<bool> addPost({
     required String type,
@@ -46,4 +64,5 @@ class CommunityProvider extends ChangeNotifier {
       return false;
     }
   }
+
 }
