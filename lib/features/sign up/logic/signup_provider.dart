@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 
 import 'package:mindsense_app/features/sign%20up/ui/signup_setpincode_screen.dart';
@@ -136,16 +137,8 @@ class SignupProvider extends ChangeNotifier{
     } catch (e, s) {
       log('Error picking image: $e');
       log('StackTrace: $s');
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            "Something went wrong. Please try again.",
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.red,
-        ),
-      );
+      customSnackbar(context,true,"Something went wrong");
+     
     }
   }
 
@@ -168,11 +161,8 @@ class SignupProvider extends ChangeNotifier{
           "userEmail",
           signupEmailController.text,
         );
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Pin Code sent To your Email"),
-          ),
-        );
+        customSnackbar(context,false,"Pin Code sent To your Email");
+        
 
         Navigator.push(
           context,
@@ -188,29 +178,14 @@ class SignupProvider extends ChangeNotifier{
         log("Error: $e");
         log("StackTrace: $s");
         changeSignupButtonIsLoading(false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          
-          SnackBar(
-            duration: Duration(seconds: 1),
-            backgroundColor: Colors.red,
-            content: Text(AuthService.apiMessege==""?"Error With Create Acount Try Another Email":AuthService.apiMessege,style: TextStyle(
-              color: Colors.white
-            ),),            
-          ),
-        );
+        customSnackbar(context,true,"Signup failed");
+       
       }
 
     } else {
       log("Form is NOT valid");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: Duration(milliseconds: 700),
-          content: Text("Form Is NOT Valid",style: TextStyle(
-            color: Colors.white
-          ),),
-          backgroundColor: Colors.red,
-        ),
-      );
+      customSnackbar(context,true,"Form Is NOT Valid");
+      
     }
   }
 }

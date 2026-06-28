@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:provider/provider.dart';
 import 'package:mindsense_app/features/voice%20chat/logic/voicechat_provider.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
@@ -60,9 +61,8 @@ class _SessionControlsState extends State<SessionControls> {
       );
     } else {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Microphone permission required")),
-        );
+        customSnackbar(context,false,"Microphone permission required");
+        
       }
     }
   }

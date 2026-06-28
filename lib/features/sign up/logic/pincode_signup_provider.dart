@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 
@@ -33,16 +34,8 @@ class PincodeSignupProvider extends ChangeNotifier{
         await SharedPreferencesitem.setInt("userage", result.user.age);
         await SharedPreferencesitem.setString("userid", result.user.id);
         await SharedPreferencesitem.setBool("isverified", result.user.isVerified); 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            duration: Duration(milliseconds: 1500),
-            content: Text(
-              "Account added successfully!",
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: const Color.fromARGB(255, 34, 75, 36),
-          ),
-        );
+        customSnackbar(context,false,"Account added successfully!");
+        
         verifyCodeButtonisloadingfun(false);
         Navigator.pushAndRemoveUntil(
           context,
@@ -52,32 +45,17 @@ class PincodeSignupProvider extends ChangeNotifier{
       } catch (e) {
         log("ERROR: $e");
         verifyCodeButtonisloadingfun(false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            duration: Duration(milliseconds:1500 ),
-            content: Text(e.toString(),style: TextStyle(
-              color: Colors.white
-            ),),
-            backgroundColor: Colors.red,
-          )
-        );   
+        customSnackbar(context,true,e.toString());
+           
         signUpPinCodeController.clear();  
       }       
     }
     else {
       changeIsPinCodeError();   
       HapticFeedback.vibrate();
-
+      customSnackbar(context,true,"Form is not valid,Enter Pin Code Again");
       log("Form is NOT valid");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: Duration(milliseconds:1500 ),
-          content: Text("Form is not valid , Enter Pin Code Again",style: TextStyle(
-            color: Colors.white
-          ),),
-          backgroundColor: Colors.black,
-        ),
-      );
+      
       signUpPinCodeController.clear(); 
          
       resetPinError();
@@ -107,22 +85,13 @@ class PincodeSignupProvider extends ChangeNotifier{
       final email = SharedPreferencesitem.getString("gmail");
 
       await AuthService.resendSignUpPinCode(email!);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Code sent again"),
-          backgroundColor: Colors.green,
-        ),
-      );
+      customSnackbar(context,false,"Code sent again");
+      
       changeIsResendCode(false);
 
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.toString()),
-          backgroundColor: Colors.red,
-        ),
-      );
+      customSnackbar(context,true,e.toString());
+      
     } finally {
       verifyCodeButtonisloading = false;
       notifyListeners();

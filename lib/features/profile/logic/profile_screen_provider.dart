@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mindsense_app/core/Api/api_constants.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
 import 'package:path_provider/path_provider.dart';
@@ -237,12 +238,8 @@ class ProfileScreenProvider extends ChangeNotifier {
     } catch (e, s) {
       log('Error picking image: $e');
       log('StackTrace: $s');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Something went wrong. Please try again.",style: TextStyle(color: Colors.white),),
-          backgroundColor: Colors.red,
-        ),
-      );
+      customSnackbar(context,true,"Something went wrong,try again");
+      
     }
   }
 

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/dio_factory.dart';
 import 'package:mindsense_app/core/Api/doctors_service.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/features/doctors/modules/doctordetails.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:provider/provider.dart';
@@ -86,34 +87,28 @@ class DoctorsProvider extends ChangeNotifier{
       return;
     }
     if (startTime == null || endTime == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please select both start and end times', style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
-      );
+      customSnackbar(context,true,"Please select both start and end times");
+      
       return;
     }
 
     if (screenshot == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please attach a money transfer screenshot', style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
-      );
+      customSnackbar(context,true,"Please attach a money transfer screenshot");
+      
       return;
     }
     if (duration == null || duration.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please Enter Session Dutration', style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
-      );
+      customSnackbar(context,true,"Enter Session Dutration");
       return;
     }    
     if (double.tryParse(duration)! >3) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Session Duration Can't Be More Than 3 Hours", style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
-      );
+      customSnackbar(context,true,"Session Duration Can't Be More Than 3 Hours");
+      
       return;
     }
     if (double.tryParse(duration)! <1) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Session Duration Can't Be Less Than 1 Hour", style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
-      );
+      customSnackbar(context,true,"Session Duration Can't Be Less Than 1 Hour");
+           
       return;      
     }    
 
@@ -126,17 +121,14 @@ class DoctorsProvider extends ChangeNotifier{
         paymentReference: transferRef,
         paymentProof: screenshot,
       );
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Booking submitted successfully!', style: TextStyle(color: Colors.white)), backgroundColor: Colors.green),
-      );
+      customSnackbar(context,false,"Booking submitted successfully!");
+      
       fetchMySessions();
       Navigator.pop(context);
     } catch (e) {
       log("Booking error: ${e.toString()}");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to submit booking: $e', style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
-      );
+      customSnackbar(context,true,"Failed to submit booking: $e");
+      
     }
   }
 }

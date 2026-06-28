@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mindsense_app/core/Api/emotion_service.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/Analyzing/modules/adviceresponse.dart';
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/photo_scan_result_screen.dart';
@@ -79,15 +80,8 @@ class AnalyzingProvider extends ChangeNotifier {
         stackTrace: stackTrace,
       );
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: Duration(milliseconds: 1500),
-          content: Text("Failed To connect ",style: TextStyle(
-            color: Colors.white
-          ),),
-          backgroundColor: Colors.red,
-        ),
-      );
+      customSnackbar(context,true,"Failed To connect");
+      
     }
   }
 
@@ -123,15 +117,8 @@ class AnalyzingProvider extends ChangeNotifier {
       isAnalyzing = false;
       notifyListeners();
       log("Voice analysis error: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: Duration(milliseconds: 1500),
-          content: Text("Failed To connect ",style: TextStyle(
-            color: Colors.white
-          ),),
-          backgroundColor: Colors.red,
-        ),
-      );
+      customSnackbar(context,true,"Failed To connect");
+      
     }
   }
 
@@ -166,15 +153,7 @@ class AnalyzingProvider extends ChangeNotifier {
       isAnalyzing = false;
       notifyListeners();
       log("Combined analysis error: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: Duration(milliseconds: 1500),
-          content: Text("Failed To connect ",style: TextStyle(
-            color: Colors.white
-          ),),
-          backgroundColor: Colors.red,
-        ),
-      );
+      customSnackbar(context,true,"Failed To connect");
     }
   }
 

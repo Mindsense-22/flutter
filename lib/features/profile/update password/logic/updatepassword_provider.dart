@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 
 class UpdatepasswordProvider extends ChangeNotifier{
@@ -76,41 +77,20 @@ class UpdatepasswordProvider extends ChangeNotifier{
         oldPasswordController.clear();
         newPasswordController.clear();
         reEnterNewPasswordController.clear();
-        ScaffoldMessenger.of(context).showSnackBar(          
-          SnackBar(
-            duration: Duration(seconds: 1),
-            backgroundColor: const Color.fromARGB(255, 20, 116, 23),
-            content: Text("Password Updated Succesfuly",style: TextStyle(
-              color: Colors.white
-            ),),            
-          ),
-        );
+        customSnackbar(context,false,"Password Updated Succesfuly");
+        
         changeUpdatePasswordIsLoading(false);
       } catch (e) {
         log("Update Password failed");
         changeUpdatePasswordIsLoading(false);
-        ScaffoldMessenger.of(context).showSnackBar(          
-          SnackBar(
-            duration: Duration(seconds: 1),
-            backgroundColor: Colors.red,
-            content: Text(AuthService.apiMessege,style: TextStyle(
-              color: Colors.white
-            ),),            
-          ),
-        );
+        customSnackbar(context,true,AuthService.apiMessege);
+        
       }
 
     } else {
       log("Form is NOT valid");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: Duration(milliseconds: 700),
-          content: Text("Form Is NOT Valid",style: TextStyle(
-            color: Colors.white
-          ),),
-          backgroundColor: Colors.red,
-        ),
-      );
+      customSnackbar(context,true,"Form Is NOT Valid");
+      
     }
   } 
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/exercises/logic/audio_player_provider.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
@@ -16,22 +17,13 @@ class DoctorRedirectScreen extends StatelessWidget {
         leading:
           IconButton(
               onPressed: () async {
-                final nav = Navigator.of(context);
-                final scm=ScaffoldMessenger.of(context);
+                customSnackbar(context,true,"Loged Out");
                 context.read<Mainscreenprovider>().index = 0;
                 context.read<AudioProvider>().stop();
                 await SharedPreferencesitem.clear();
-                scm.showSnackBar(
-                  SnackBar(
-                    duration: Duration(seconds: 1),
-                    content: Text(
-                      "Logged Out!",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-                nav.pushAndRemoveUntil(                  
+                
+                // ignore: use_build_context_synchronously
+                Navigator.of(context).pushAndRemoveUntil(                  
                   MaterialPageRoute(builder: (_) => SplashScreen()),
                   (route) => false,
                 );                

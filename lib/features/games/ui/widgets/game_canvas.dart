@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/features/games/logic/gamification_provider.dart';
 import 'package:mindsense_app/features/games/models/game_models.dart';
 import 'package:mindsense_app/features/games/ui/games/balloon_pop_game.dart';
@@ -58,22 +59,8 @@ class _GameCanvasState extends State<GameCanvas> {
   }
 
   void _showNotification(BuildContext ctx, String msg, Color color) {
-    ScaffoldMessenger.of(ctx).showSnackBar(
-      SnackBar(
-        backgroundColor: color,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r)),
-        content: Text(
-          msg,
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w700,
-              fontSize: 14.sp),
-        ),
-        duration: const Duration(seconds: 3),
-      ),
-    );
+    customSnackbar(context,false,msg);
+    
   }
 
   @override

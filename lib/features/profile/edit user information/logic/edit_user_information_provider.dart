@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:provider/provider.dart';
@@ -61,45 +62,22 @@ class EditUserInformationProvider extends ChangeNotifier {
           email: null, image: null,
         );       
 
-        
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Information updated"),
-          ),
-        );
+        customSnackbar(context,false,"Information updated");
+       
         editAgeController.clear();
         editNameController.clear();
         changeEditButtonIsLoading(false);
       } catch (e) {
         log("Signup failed");
         changeEditButtonIsLoading(false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          
-          SnackBar(
-            duration: Duration(seconds: 1),
-            backgroundColor: Colors.red,
-            content: Text(
-              AuthService.apiMessege.isEmpty?
-              "Edits Not Complete":
-              AuthService.apiMessege,
-              style: TextStyle(
-              color: Colors.white
-            ),),            
-          ),
-        );
+        customSnackbar(context,true,"Edits Not Complete");
+        
       }
 
     } else {
       log("Form is NOT valid");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: Duration(milliseconds: 700),
-          content: Text("Fill Any Field First",style: TextStyle(
-            color: Colors.white
-          ),),
-          backgroundColor: Colors.red,
-        ),
-      );
+      customSnackbar(context,true,"Fill Any Field First");
+      
     }
   }
 

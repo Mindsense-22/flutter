@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 
@@ -51,17 +52,8 @@ class LoginProvider extends ChangeNotifier {
         await SharedPreferencesitem.setString("token", result.token);
         
         await SharedPreferencesitem.setString("userEmail", loginEmailController.text);
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            duration: Duration(milliseconds: 1250),
-            content: Text(
-              "Login successful !",
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: Colors.green,
-          ),
-        );
+                
+        customSnackbar(context,false,"Login successful !");
         log(result.status);
         
         
@@ -75,30 +67,14 @@ class LoginProvider extends ChangeNotifier {
       } catch (e) {
         chaneIsloading(false);
         log(e.toString());
-        ScaffoldMessenger.of(context).showSnackBar(
-          
-          SnackBar(
-            duration: Duration(milliseconds: 1250),
-            content: Text(e.toString(),style: TextStyle(
-              color: Colors.white
-            ),),
-            backgroundColor: Colors.red,
-          ),
-        );
+        customSnackbar(context,true,e.toString());
+        
       }
 
     } else {
       log("Form is NOT valid");
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Form is not valid",
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.black,
-        ),
-      );
+      customSnackbar(context,true,"Form is not valid");
+      
     }
   }
   
@@ -107,4 +83,4 @@ class LoginProvider extends ChangeNotifier {
 
 
 
-
+

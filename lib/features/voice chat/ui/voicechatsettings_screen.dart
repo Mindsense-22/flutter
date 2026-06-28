@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/voice%20chat/logic/voicechat_provider.dart';
 import 'package:provider/provider.dart';
@@ -51,9 +52,8 @@ class _VoicechatsettingsScreenState extends State<VoicechatsettingsScreen> {
     if (provider.errorMessage == null) {
       Navigator.of(context).pop();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(provider.errorMessage!)),
-      );
+      customSnackbar(context,true,provider.errorMessage!);
+      
     }
   }
 
@@ -66,9 +66,8 @@ class _VoicechatsettingsScreenState extends State<VoicechatsettingsScreen> {
     );
     if (!mounted) return;
     if (provider.errorMessage != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(provider.errorMessage!)),
-      );
+      customSnackbar(context,true,provider.errorMessage!);
+      
     }
   }
 

@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_passwordtextformfield.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_textformfield.dart';
 import 'package:mindsense_app/features/splash/ui/splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -37,21 +38,14 @@ class _DeleteaccountScreenState extends State<DeleteaccountScreen> {
       // After successful deletion, navigate back to login or pop all screens
       
       if (!mounted) return;
+      customSnackbar(context,false,"Account deleted successfully");
       
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.green,
-          content: Text('Account deleted successfully',style: TextStyle(color: Colors.white),)),
-      );
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context) => SplashScreen(), ), (route) => false);
     } catch (e) {
       if (!mounted) return;
       log(e.toString());
-      ScaffoldMessenger.of(context).showSnackBar(        
-        SnackBar(
-          backgroundColor: Colors.red,
-          content: Text("Error Ocoured in Deleting " ,style: TextStyle(color: Colors.white),)),
-      );
+      customSnackbar(context,true,"Error Ocoured in Deleting");
+      
     }
   }
 

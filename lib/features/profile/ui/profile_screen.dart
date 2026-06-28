@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/dashboard/ui/dashboard_screen.dart';
@@ -58,22 +59,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           leading:
           IconButton(
               onPressed: () async {
-                final nav = Navigator.of(context);
-                final scm=ScaffoldMessenger.of(context);
+                customSnackbar(context,true,"Logged Out!");
+
                 context.read<Mainscreenprovider>().index = 0;
                 context.read<AudioProvider>().stop();
-                await SharedPreferencesitem.clear();
-                scm.showSnackBar(
-                  SnackBar(
-                    duration: Duration(seconds: 1),
-                    content: Text(
-                      "Logged Out!",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-                nav.pushAndRemoveUntil(                  
+                await SharedPreferencesitem.clear();                
+                // ignore: use_build_context_synchronously
+                Navigator.of(context).pushAndRemoveUntil(                  
                   MaterialPageRoute(builder: (_) => SplashScreen()),
                   (route) => false,
                 );                
