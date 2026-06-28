@@ -92,7 +92,7 @@ class CommunityService {
     try {
       final response = await DioFactory.postData(
         path: "${ApiConstants.feed}/$id/react",
-        data: {"type": type},
+        data: {"type": "support"},
       );
       final data = response.data as Map<String, dynamic>;
       return FeedPost.fromJson(data['data'] as Map<String, dynamic>);

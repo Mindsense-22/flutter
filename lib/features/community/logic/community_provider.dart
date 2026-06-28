@@ -203,4 +203,88 @@ class CommunityProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> sharePost(context,String postId) async {
+    if (postId.isEmpty) {
+      error = "Post id is required.";
+      notifyListeners();
+      return false;
+    }
+
+    postisLoading = true;
+    error = null;
+    notifyListeners();
+
+    try {
+      await CommunityService.sharePost(postId,);      
+      postisLoading = false;
+      customSnackbar(context, false, "Post Shared");
+      log("Post Shared");
+      notifyListeners();
+      return true;
+    } catch (e) {
+      error = e.toString();
+      postisLoading = false;
+      log("Post not Shared");
+      log(e.toString());
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> savePost(context,String postId) async {
+    if (postId.isEmpty) {
+      error = "Post id is required.";
+      notifyListeners();
+      return false;
+    }
+
+    postisLoading = true;
+    error = null;
+    notifyListeners();
+
+    try {
+      await CommunityService.savePost(postId,);      
+      postisLoading = false;
+      customSnackbar(context, false, "Post Saved");
+      log("Post Saved");
+      notifyListeners();
+      return true;
+    } catch (e) {
+      error = e.toString();
+      postisLoading = false;
+      log("Post not Saved");
+      log(e.toString());
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> reaactPost(context,String postId) async {
+    if (postId.isEmpty) {
+      error = "Post id is required.";
+      notifyListeners();
+      return false;
+    }
+
+    postisLoading = true;
+    error = null;
+    notifyListeners();
+
+    try {
+      await CommunityService.reactToPost(postId,"support");      
+      postisLoading = false;
+      customSnackbar(context, false, "Post supported");
+      log("Post supported");
+      notifyListeners();
+      return true;
+    } catch (e) {
+      error = e.toString();
+      postisLoading = false;
+      log("Post not supported");
+      log(e.toString());
+      notifyListeners();
+      return false;
+    }
+  }
+
 }

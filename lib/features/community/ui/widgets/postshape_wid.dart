@@ -6,6 +6,7 @@ import 'package:mindsense_app/core/Api/api_constants.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/community/logic/community_provider.dart';
 import 'package:mindsense_app/features/community/models/community_model.dart';
+import 'package:mindsense_app/features/community/ui/commnets_screen.dart';
 import 'package:mindsense_app/features/community/ui/widgets/editpost_wid.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,8 @@ class _PostshapeWidState extends State<PostshapeWid> {
   late int shareCount;
   late int saveCounts;
   var userid = "";
-
+  bool isSaved=false;  
+  bool isLiked=false;
   @override
   void initState() {
     super.initState();
@@ -39,6 +41,14 @@ class _PostshapeWidState extends State<PostshapeWid> {
         ? widget.post.author['_id'] as String?
         : widget.post.author as String?;
     return authorId == userid;
+  }
+  bool checkIsSaved(){    
+   return widget.post.savedBy.contains(userid);
+  }
+  bool checkIsLikeed() {
+    return widget.post.reactions.any(
+      (reaction) => reaction.user == userid,
+    );
   }
 
   String? _authorProfileImage() {
@@ -78,7 +88,9 @@ class _PostshapeWidState extends State<PostshapeWid> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              widget.post.visibility == "public" &&
+              widget.post.visibility == "public"
+              //||widget.post.visibility =="nickname" 
+              &&
                       profileImage != null &&
                       profileImage.isNotEmpty
                   ? Container(
@@ -89,7 +101,7 @@ class _PostshapeWidState extends State<PostshapeWid> {
                         borderRadius: BorderRadius.circular(108.r),
                       ),
                       child: CachedNetworkImage(
-                        imageUrl: ApiConstants.baseUrl + profileImage,
+                        imageUrl:profileImage!=null? ApiConstants.baseUrl + profileImage:"https://drive.google.com/uc?export=download&id=1HQGGxju316dlVBAE5NkTzAa5drUkEZDm",
                         fit: BoxFit.fill,
                       ),
                     )
@@ -241,44 +253,139 @@ class _PostshapeWidState extends State<PostshapeWid> {
           SizedBox(height: 12.h),
           Row(
             children: [
-              Icon(Icons.favorite_border, color: Colors.grey[600], size: 25.sp),
-              SizedBox(width: 5.w),
+              Spacer(),
               Text(
-                '$likeCounts',
-                style: TextStyle(color: Colors.grey[600], fontSize: 18.sp),
-              ),
-              SizedBox(width: 20.w),
-              Icon(Icons.chat, color: Colors.grey[600], size: 25.sp),
-              SizedBox(width: 5.w),
-              Text(
-                '$commentCounts',
-                style: TextStyle(color: Colors.grey[600], fontSize: 18.sp),
-              ),
-              SizedBox(width: 20.w),
-              Icon(Icons.share_outlined, color: Colors.grey, size: 25.sp),
-              SizedBox(width: 5.w),
-              Text(
-                '$shareCount',
-                style: TextStyle(color: Colors.grey, fontSize: 18.sp),
-              ),
-              SizedBox(width: 20.w),
-              Icon(Icons.bookmark_border, color: Colors.grey[600], size: 25.sp),
-              SizedBox(width: 5.w),
-              Text(
-                '$saveCounts',
-                style: TextStyle(color: Colors.grey[600], fontSize: 18.sp),
-              ),
-              const Spacer(),
-              Expanded(
-                child: Text(
-                  overflow:TextOverflow.ellipsis,
-                  maxLines: 1, 
-                  timeAgo(widget.post.createdAt),
-                  style: TextStyle(color: Colors.grey[600], fontSize: 13.sp),
-                ),
+                overflow:TextOverflow.ellipsis,
+                maxLines: 1, 
+                timeAgo(widget.post.createdAt),
+                style: TextStyle(color: Colors.grey[600], fontSize: 13.sp),
               ),
             ],
           ),
+          SizedBox(height: 9.h,),
+          
+          Row(
+            children: [
+              //like button
+              Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius:BorderRadius.circular(40.r)
+                ),
+                child: MaterialButton(
+                  clipBehavior: Clip.hardEdge,
+                  onPressed: isLiked||checkIsLikeed()
+                ? null
+                : () async {
+                    await context
+                        .read<CommunityProvider>()
+                        .reaactPost(context, widget.post.id);
+
+                    setState(() {
+                      likeCounts++;
+                      isLiked = true;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Icon(isLiked||checkIsLikeed()?Icons.favorite:Icons.favorite_border, color: Colors.grey[600], size: 25.sp),
+                      SizedBox(width: 5.w),
+                      Text(
+                        '$likeCounts',
+                        style: TextStyle(color: Colors.grey[600], fontSize: 18.sp),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              
+              //comment button
+              Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius:BorderRadius.circular(40.r)
+                ),
+                child: MaterialButton(
+                  clipBehavior: Clip.hardEdge,
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CommnetsScreen(),));
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.chat_bubble_outline, color: Colors.grey[600], size: 25.sp),
+                      SizedBox(width: 5.w),
+                      Text(
+                        '$commentCounts',
+                        style: TextStyle(color: Colors.grey[600], fontSize: 18.sp),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              
+
+              //share button
+              Container(                
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius:BorderRadius.circular(40.r)
+                ),
+                child: MaterialButton(
+                  clipBehavior: Clip.hardEdge,
+                  onPressed: () {
+                    context.read<CommunityProvider>().sharePost(context, widget.post.id);
+                    setState(() {
+                      shareCount++;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.share_outlined, color: Colors.grey, size: 25.sp),
+                      SizedBox(width: 5.w),
+                      Text(
+                        '$shareCount',
+                        style: TextStyle(color: Colors.grey, fontSize: 18.sp),
+                      ),
+                    ],
+                  ),
+                ),
+              ),             
+
+              //save button
+              Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius:BorderRadius.circular(40.r)
+                ),
+                child: MaterialButton(
+                  clipBehavior: Clip.hardEdge,
+                  onPressed: isSaved||checkIsSaved()
+                ? null
+                : () async {
+                    await context
+                        .read<CommunityProvider>()
+                        .savePost(context, widget.post.id);
+
+                    setState(() {
+                      saveCounts++;
+                      isSaved = true;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Icon(checkIsSaved()||isSaved?Icons.bookmark:Icons.bookmark_border, color: Colors.grey[600], size: 25.sp),
+                      SizedBox(width: 5.w),
+                      Text(
+                        '$saveCounts',
+                        style: TextStyle(color: Colors.grey[600], fontSize: 18.sp),
+                      ),
+                    ],
+                  ),
+                ),
+              ), 
+            ],
+          ),
+          
         ],
       ),
     );
