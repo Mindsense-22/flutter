@@ -77,11 +77,11 @@ class _RankScreenState extends State<RankScreen> {
     final rank = index + 1;
     Color rankColor;
     if (rank == 1) {
-      rankColor = const Color(0xFFFFD700); // Gold
+      rankColor = const Color(0xFFFFD700); 
     } else if (rank == 2) {
-      rankColor = const Color(0xFFC0C0C0); // Silver
+      rankColor = const Color(0xFFC0C0C0);
     } else if (rank == 3) {
-      rankColor = const Color(0xFFCD7F32); // Bronze
+      rankColor = const Color(0xFFCD7F32); 
     } else {
       rankColor = Colors.white;
     }
@@ -108,18 +108,7 @@ class _RankScreenState extends State<RankScreen> {
                 color: rankColor,
               ),
             ),
-          ),
-          // CircleAvatar(
-          //   radius: 20.r,
-          //   backgroundColor: Theme.of(context).primaryColor.withValues(alpha: 0.2),
-          //   child: Text(
-          //     user.name.isNotEmpty ? user.name[0].toUpperCase() : '?',
-          //     style: TextStyle(
-          //       color: Theme.of(context).colorScheme.onSecondary,
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //   ),
-          // ),
+          ),          
           SizedBox(width: 10.w),
           Expanded(
             child: Column(

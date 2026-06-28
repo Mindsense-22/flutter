@@ -182,8 +182,7 @@ class GamificationProvider extends ChangeNotifier {
     return _justLeveledUp;
   }
 
-  /// Fetches the leaderboard for the given [period] ("weekly", "monthly", "allTime")
-  /// and stores the results as a flat [LeaderboardUser] list sorted by XP descending.
+  
   Future<void> fetchLeaderboard({String period = 'weekly'}) async {
     _isLeaderboardLoading = true;
     _leaderboardError = null;
