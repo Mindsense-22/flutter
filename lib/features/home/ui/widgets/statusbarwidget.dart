@@ -63,7 +63,7 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
                       borderRadius: BorderRadius.circular(108.r),
                     ),
                     child: CachedNetworkImage(
-                      imageUrl:SharedPreferencesitem.getString("avatarLink")! == val.avatarLink! ?ApiConstants.baseUrl + SharedPreferencesitem.getString("avatarLink")! :ApiConstants.baseUrl + val.avatarLink!,
+                      imageUrl:ApiConstants.baseUrl + val.avatarLink!,
                       fit: BoxFit.fill,                    
                     ),
                   )
@@ -80,23 +80,24 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
                   children: [
                     Text(
                       "Hello, ",style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.bold,
                         color: Color(0xff7C9CD1)
                       ),
                     ),
                     Text(
-                      SharedPreferencesitem.getString("userName")!.split(' ').first == val.userName!.split(' ').first?SharedPreferencesitem.getString("userName")!.split(' ').first:val.userName!.split(' ').first,style: TextStyle(
-                        fontSize: 12.sp,
+                      SharedPreferencesitem.getString("userName") !=null ?
+                      SharedPreferencesitem.getString("userName")!.split(' ').first :val.userName!.split(' ').first,style: TextStyle(
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.bold,
                         color: Color(0xff7C9CD1)
                       ),
                     ),
                   ],
                 ),
-                
+                SizedBox(height:  2.h),
                 Text(
-                  "Here is your Emotional wellness \noverview",style: TextStyle(
+                  "Here is your Emotional \nwellness overview",style: TextStyle(
                     fontSize: 8.sp,
                     fontWeight: FontWeight.w400,
                     color: Colors.white

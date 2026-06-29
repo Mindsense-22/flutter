@@ -19,7 +19,7 @@ class CurrentstateTotalscansWid extends StatelessWidget {
         return Container(
           padding: EdgeInsets.all(20.r),
           decoration: BoxDecoration(
-            color: const Color(0xff1E293B), // Sleek Slate Dark Background
+            color: const Color(0xff1E293B), 
             borderRadius: BorderRadius.circular(24.r),            
           ),
           child: Row(
