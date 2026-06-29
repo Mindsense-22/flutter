@@ -72,7 +72,7 @@ class DashboardWid extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 315.h,
+              height: 330.h,
               width: 21.w,
               child: YAxis(),
             ),
@@ -146,10 +146,11 @@ class DashboardWid extends StatelessWidget {
     required Color color,
     required String day,
   }) {
-    final barHeight = 315.h;
+    final barHeight = 300.h;
     final fillHeight = maxValue > 0 ? ((value/10) / maxValue) * barHeight : 0.0;    
     
-    return Column(      
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       spacing: 5.h,
       children: [
         Container(

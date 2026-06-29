@@ -25,7 +25,7 @@ class Homescreen extends StatelessWidget {
                 Tipwid(),
                 SizedBox(height: 24.h,),
                 Exercisewid(),
-                SizedBox(height: 32.h,),
+                SizedBox(height: 18.h,),
                 Homescreenbuttom(),
                 SizedBox(height: 16.h,),
               ],
