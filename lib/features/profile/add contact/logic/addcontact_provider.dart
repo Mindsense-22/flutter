@@ -61,18 +61,21 @@ class AddcontactProvider extends ChangeNotifier{
         contactName.clear();
         contactEmail.clear();
         contactRelationship.clear();
+        if (!context.mounted) return;
         customSnackbar(context,false,"Connect Request Sent Succesfuly");
         
         changeAddContactIsLoading(false);
       } catch (e) {
         log("Update Password failed");
         changeAddContactIsLoading(false);
+        if (!context.mounted) return;
         customSnackbar(context,true,"AuthService.apiMessege");
         
       }
 
     } else {
       log("Form is NOT valid");
+      if (!context.mounted) return;
       customSnackbar(context,true,"Form Is NOT Valid");
       
     }

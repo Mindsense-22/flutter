@@ -54,7 +54,7 @@ class LoginProvider extends ChangeNotifier {
         await SharedPreferencesitem.setString("token", result.token);
         
         await SharedPreferencesitem.setString("userEmail", loginEmailController.text);
-                
+        if (!context.mounted) return;        
         customSnackbar(context,false,"Login successful !");
         log(result.status);
         
@@ -70,12 +70,14 @@ class LoginProvider extends ChangeNotifier {
       } catch (e) {
         chaneIsloading(false);
         log(e.toString());
+        if (!context.mounted) return;
         customSnackbar(context,true,e.toString());
         
       }
 
     } else {
       log("Form is NOT valid");
+      if (!context.mounted) return;
       customSnackbar(context,true,"Form is not valid");
       
     }

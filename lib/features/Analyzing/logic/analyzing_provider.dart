@@ -117,6 +117,7 @@ class AnalyzingProvider extends ChangeNotifier {
       isAnalyzing = false;
       notifyListeners();
       log("Voice analysis error: $e");
+      if (!context.mounted) return;
       customSnackbar(context,true,"Failed To connect");
       
     }
@@ -153,6 +154,7 @@ class AnalyzingProvider extends ChangeNotifier {
       isAnalyzing = false;
       notifyListeners();
       log("Combined analysis error: $e");
+      if (!context.mounted) return;
       customSnackbar(context,true,"Failed To connect");
     }
   }

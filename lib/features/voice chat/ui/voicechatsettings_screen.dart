@@ -52,6 +52,7 @@ class _VoicechatsettingsScreenState extends State<VoicechatsettingsScreen> {
     if (provider.errorMessage == null) {
       Navigator.of(context).pop();
     } else {
+      if (!context.mounted) return;
       customSnackbar(context,true,provider.errorMessage!);
       
     }
@@ -66,6 +67,7 @@ class _VoicechatsettingsScreenState extends State<VoicechatsettingsScreen> {
     );
     if (!mounted) return;
     if (provider.errorMessage != null) {
+      if (!context.mounted) return;
       customSnackbar(context,true,provider.errorMessage!);
       
     }

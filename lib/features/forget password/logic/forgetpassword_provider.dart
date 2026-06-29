@@ -46,6 +46,7 @@ class ForgetpasswordProvider extends ChangeNotifier{
         await AuthService.forgotPassword(forgetPasswordEmailController.text);
         
         changeSendCodeButtonIsLoading(false);
+        if (!context.mounted) return;
         customSnackbar(context,false,"Code sent to your email");
         
         SharedPreferencesitem.setString("forgetPasswordEmailController", forgetPasswordEmailController.text);
@@ -54,12 +55,14 @@ class ForgetpasswordProvider extends ChangeNotifier{
         changeSendCodeButtonIsLoading(false);
         notifyListeners();
         log(e.toString());
+        if (!context.mounted) return;
         customSnackbar(context,true,AuthService.apiMessege.toString());
         
       }
     }
     else {
       log("Form is NOT valid");
+      if (!context.mounted) return;
       customSnackbar(context,true,"Form is not valid");
       
     }
@@ -90,6 +93,7 @@ class ForgetpasswordProvider extends ChangeNotifier{
         print(forgetPasswordEmailController.text.isEmpty.toString());
         changeVerifyCodeButtonIsLoading(false);
         await SharedPreferencesitem.setString("forgetPasswordPinCodeController", forgetPasswordPinCodeController.text);
+        if (!context.mounted) return;
         customSnackbar(context,false,"Code verified successfully");
         
         Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetpasswoedSetnewpassword()));
@@ -98,6 +102,7 @@ class ForgetpasswordProvider extends ChangeNotifier{
         HapticFeedback.vibrate();
         log(forgetPasswordEmailController.text.toString());
         log(e.toString());
+        if (!context.mounted) return;
         customSnackbar(context,true,e.toString());
         
         
@@ -110,6 +115,7 @@ class ForgetpasswordProvider extends ChangeNotifier{
       HapticFeedback.vibrate();
 
       log("Form is NOT valid");
+      if (!context.mounted) return;
       customSnackbar(context,true,"Eror,Enter Pin Code Again");
          
       
@@ -188,6 +194,7 @@ class ForgetpasswordProvider extends ChangeNotifier{
         resetPasswordButtonisloading = false;
         passwordChangeSuccessfuly = true;
         notifyListeners();
+        if (!context.mounted) return;
         customSnackbar(context,false,"Password reset successful");
         
         messgeShowDialog(context);
@@ -196,12 +203,14 @@ class ForgetpasswordProvider extends ChangeNotifier{
         resetPasswordButtonisloading = false;
         notifyListeners();
         log(e.toString());
+        if (!context.mounted) return;
         customSnackbar(context,true,e.toString());
         
       }
     }
     else {
       log("Form is NOT valid");
+      if (!context.mounted) return;
       customSnackbar(context,true,"Form is not valid");
       
     }

@@ -164,6 +164,7 @@ class CommunityProvider extends ChangeNotifier {
       await CommunityService.deletePost(postId);
       feedPosts.removeWhere((post) => post.id == postId);
       postisLoading = false;
+      
       customSnackbar(context, false, "Post Deleted");
       notifyListeners();
       return true;
@@ -189,6 +190,7 @@ class CommunityProvider extends ChangeNotifier {
     try {
       await CommunityService.reportContent(postId,"Spam");      
       postisLoading = false;
+      
       customSnackbar(context, false, "Post Reported");
       log("Post Reported");
       notifyListeners();
@@ -217,6 +219,7 @@ class CommunityProvider extends ChangeNotifier {
     try {
       await CommunityService.sharePost(postId,);      
       postisLoading = false;
+      
       customSnackbar(context, false, "Post Shared");
       log("Post Shared");
       notifyListeners();
@@ -245,6 +248,7 @@ class CommunityProvider extends ChangeNotifier {
     try {
       await CommunityService.savePost(postId,);      
       postisLoading = false;
+      
       customSnackbar(context, false, "Post Saved");
       log("Post Saved");
       notifyListeners();

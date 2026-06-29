@@ -44,6 +44,7 @@ class _DeleteaccountScreenState extends State<DeleteaccountScreen> {
     } catch (e) {
       if (!mounted) return;
       log(e.toString());
+      if (!context.mounted) return;
       customSnackbar(context,true,"Error Ocoured in Deleting");
       
     }

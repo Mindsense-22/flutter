@@ -77,18 +77,21 @@ class UpdatepasswordProvider extends ChangeNotifier{
         oldPasswordController.clear();
         newPasswordController.clear();
         reEnterNewPasswordController.clear();
+        if (!context.mounted) return;
         customSnackbar(context,false,"Password Updated Succesfuly");
         
         changeUpdatePasswordIsLoading(false);
       } catch (e) {
         log("Update Password failed");
         changeUpdatePasswordIsLoading(false);
+        if (!context.mounted) return;
         customSnackbar(context,true,AuthService.apiMessege);
         
       }
 
     } else {
       log("Form is NOT valid");
+      if (!context.mounted) return;
       customSnackbar(context,true,"Form Is NOT Valid");
       
     }

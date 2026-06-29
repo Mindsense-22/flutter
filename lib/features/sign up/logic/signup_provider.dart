@@ -137,6 +137,7 @@ class SignupProvider extends ChangeNotifier{
     } catch (e, s) {
       log('Error picking image: $e');
       log('StackTrace: $s');
+      if (!context.mounted) return;
       customSnackbar(context,true,"Something went wrong");
      
     }
@@ -161,6 +162,7 @@ class SignupProvider extends ChangeNotifier{
           "userEmail",
           signupEmailController.text,
         );
+        if (!context.mounted) return;
         customSnackbar(context,false,"Pin Code sent To your Email");
         
 
@@ -178,12 +180,14 @@ class SignupProvider extends ChangeNotifier{
         log("Error: $e");
         log("StackTrace: $s");
         changeSignupButtonIsLoading(false);
+        if (!context.mounted) return;
         customSnackbar(context,true,"Signup failed");
        
       }
 
     } else {
       log("Form is NOT valid");
+      if (!context.mounted) return;
       customSnackbar(context,true,"Form Is NOT Valid");
       
     }

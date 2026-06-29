@@ -87,26 +87,31 @@ class DoctorsProvider extends ChangeNotifier{
       return;
     }
     if (startTime == null || endTime == null) {
+      if (!context.mounted) return;
       customSnackbar(context,true,"Please select both start and end times");
       
       return;
     }
 
     if (screenshot == null) {
+      if (!context.mounted) return;
       customSnackbar(context,true,"Please attach a money transfer screenshot");
       
       return;
     }
     if (duration == null || duration.isEmpty) {
+      if (!context.mounted) return;
       customSnackbar(context,true,"Enter Session Dutration");
       return;
     }    
     if (double.tryParse(duration)! >3) {
+      if (!context.mounted) return;
       customSnackbar(context,true,"Session Duration Can't Be More Than 3 Hours");
       
       return;
     }
     if (double.tryParse(duration)! <1) {
+      if (!context.mounted) return;
       customSnackbar(context,true,"Session Duration Can't Be Less Than 1 Hour");
            
       return;      
@@ -121,12 +126,14 @@ class DoctorsProvider extends ChangeNotifier{
         paymentReference: transferRef,
         paymentProof: screenshot,
       );
+      if (!context.mounted) return;
       customSnackbar(context,false,"Booking submitted successfully!");
       
       fetchMySessions();
       Navigator.pop(context);
     } catch (e) {
       log("Booking error: ${e.toString()}");
+      if (!context.mounted) return;
       customSnackbar(context,true,"Failed to submit booking: $e");
       
     }

@@ -34,6 +34,7 @@ class PincodeSignupProvider extends ChangeNotifier{
         await SharedPreferencesitem.setInt("userage", result.user.age);
         await SharedPreferencesitem.setString("userid", result.user.id);
         await SharedPreferencesitem.setBool("isverified", result.user.isVerified); 
+        if (!context.mounted) return;
         customSnackbar(context,false,"Account added successfully!");
         
         verifyCodeButtonisloadingfun(false);
@@ -45,6 +46,7 @@ class PincodeSignupProvider extends ChangeNotifier{
       } catch (e) {
         log("ERROR: $e");
         verifyCodeButtonisloadingfun(false);
+        if (!context.mounted) return;
         customSnackbar(context,true,e.toString());
            
         signUpPinCodeController.clear();  
@@ -53,6 +55,7 @@ class PincodeSignupProvider extends ChangeNotifier{
     else {
       changeIsPinCodeError();   
       HapticFeedback.vibrate();
+      if (!context.mounted) return;
       customSnackbar(context,true,"Form is not valid,Enter Pin Code Again");
       log("Form is NOT valid");
       
@@ -85,11 +88,13 @@ class PincodeSignupProvider extends ChangeNotifier{
       final email = SharedPreferencesitem.getString("gmail");
 
       await AuthService.resendSignUpPinCode(email!);
+      if (!context.mounted) return;
       customSnackbar(context,false,"Code sent again");
       
       changeIsResendCode(false);
 
     } catch (e) {
+      if (!context.mounted) return;
       customSnackbar(context,true,e.toString());
       
     } finally {

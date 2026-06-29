@@ -61,6 +61,7 @@ class _SessionControlsState extends State<SessionControls> {
       );
     } else {
       if (mounted) {
+        if (!context.mounted) return;
         customSnackbar(context,false,"Microphone permission required");
         
       }

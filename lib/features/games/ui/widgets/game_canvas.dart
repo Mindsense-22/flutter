@@ -59,6 +59,7 @@ class _GameCanvasState extends State<GameCanvas> {
   }
 
   void _showNotification(BuildContext ctx, String msg, Color color) {
+    if (!context.mounted) return;
     customSnackbar(context,false,msg);
     
   }

@@ -238,6 +238,7 @@ class ProfileScreenProvider extends ChangeNotifier {
     } catch (e, s) {
       log('Error picking image: $e');
       log('StackTrace: $s');
+      if (!context.mounted) return;
       customSnackbar(context,true,"Something went wrong,try again");
       
     }

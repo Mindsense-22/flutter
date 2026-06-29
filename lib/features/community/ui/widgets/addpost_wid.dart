@@ -230,6 +230,7 @@ class _AddpostWidState extends State<AddpostWid> {
                       
                       if (success && context.mounted) {
                         Navigator.pop(context);
+                        if (!context.mounted) return;
                         customSnackbar(context, false, "post added");
                       } else if (!success && provider.error != null && context.mounted) {
                         setState(() => _errorMessage = provider.error);

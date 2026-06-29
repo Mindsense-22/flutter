@@ -20,9 +20,18 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
    
     
-    Future.delayed(Duration(milliseconds: 1000)).then((value)async {
+    Future.delayed(Duration(milliseconds: 800)).then((value)async {
       if (!mounted) return;
-      
+      if(SharedPreferencesitem.getString("token")!=null){
+        WidgetsBinding.instance.addPostFrameCallback((_) async{
+          if (!mounted) return;
+          await context.read<Homescreenprovider>().fetchEmotionHistory();                   
+          
+        });
+          
+          
+        
+      }
       Navigator.pushAndRemoveUntil(
         // ignore: use_build_context_synchronously
         context,

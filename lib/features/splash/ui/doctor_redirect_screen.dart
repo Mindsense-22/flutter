@@ -17,6 +17,7 @@ class DoctorRedirectScreen extends StatelessWidget {
         leading:
           IconButton(
               onPressed: () async {
+                if (!context.mounted) return;
                 customSnackbar(context,true,"Loged Out");
                 context.read<Mainscreenprovider>().index = 0;
                 context.read<AudioProvider>().stop();

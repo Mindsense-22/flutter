@@ -74,6 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           leading:
           IconButton(
               onPressed: () async {
+                if (!context.mounted) return;
                 customSnackbar(context,true,"Logged Out!");
 
                 final mainProvider = context.read<Mainscreenprovider>();

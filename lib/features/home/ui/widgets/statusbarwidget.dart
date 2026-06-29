@@ -80,7 +80,7 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
                   children: [
                     Text(
                       "Hello, ",style: TextStyle(
-                        fontSize: 13.sp,
+                        fontSize: 17.sp,
                         fontWeight: FontWeight.bold,
                         color: Color(0xff7C9CD1)
                       ),
@@ -89,7 +89,7 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
                      (SharedPreferencesitem.getString("userName") ?? val.userName ?? "")
                         .split(" ")
                         .first,style: TextStyle(
-                        fontSize: 13.sp,
+                        fontSize: 17.sp,
                         fontWeight: FontWeight.bold,
                         color: Color(0xff7C9CD1)
                       ),
