@@ -265,128 +265,122 @@ class _PostshapeWidState extends State<PostshapeWid> {
           SizedBox(height: 9.h,),
           
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              //like button
-              Container(
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius:BorderRadius.circular(40.r)
-                ),
-                child: MaterialButton(
-                  clipBehavior: Clip.hardEdge,
-                  onPressed: isLiked||checkIsLikeed()
-                ? null
-                : () async {
-                    await context
-                        .read<CommunityProvider>()
-                        .reaactPost(context, widget.post.id);
-
-                    setState(() {
-                      likeCounts++;
-                      isLiked = true;
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Icon(isLiked||checkIsLikeed()?Icons.favorite:Icons.favorite_border, color: Colors.grey[600], size: 25.sp),
-                      SizedBox(width: 5.w),
-                      Text(
-                        '$likeCounts',
-                        style: TextStyle(color: Colors.grey[600], fontSize: 18.sp),
-                      ),
-                    ],
-                  ),
-                ),
+              // Like button
+              _ActionButton(
+                icon: isLiked || checkIsLikeed()
+                    ? Icons.favorite
+                    : Icons.favorite_border,
+                label: '$likeCounts',
+                onTap: isLiked || checkIsLikeed()
+                    ? null
+                    : () async {
+                        await context
+                            .read<CommunityProvider>()
+                            .reaactPost(context, widget.post.id);
+                        setState(() {
+                          likeCounts++;
+                          isLiked = true;
+                        });
+                      },
               ),
-              
-              //comment button
-              Container(
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius:BorderRadius.circular(40.r)
-                ),
-                child: MaterialButton(
-                  clipBehavior: Clip.hardEdge,
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => CommnetsScreen(),));
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.chat_bubble_outline, color: Colors.grey[600], size: 25.sp),
-                      SizedBox(width: 5.w),
-                      Text(
-                        '$commentCounts',
-                        style: TextStyle(color: Colors.grey[600], fontSize: 18.sp),
-                      ),
-                    ],
-                  ),
-                ),
+
+              // Comment button
+              Consumer<CommunityProvider>(
+                builder: (context, provider, _) {
+                  final total = commentCounts +
+                      (provider.commentCountDeltas[widget.post.id] ?? 0);
+                  return _ActionButton(
+                    icon: Icons.chat_bubble_outline,
+                    label: '$total',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CommnetsScreen(postid: widget.post.id),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
-              
 
-              //share button
-              Container(                
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius:BorderRadius.circular(40.r)
-                ),
-                child: MaterialButton(
-                  clipBehavior: Clip.hardEdge,
-                  onPressed: () {
-                    context.read<CommunityProvider>().sharePost(context, widget.post.id);
-                    setState(() {
-                      shareCount++;
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.share_outlined, color: Colors.grey, size: 25.sp),
-                      SizedBox(width: 5.w),
-                      Text(
-                        '$shareCount',
-                        style: TextStyle(color: Colors.grey, fontSize: 18.sp),
-                      ),
-                    ],
-                  ),
-                ),
-              ),             
+              // Share button
+              _ActionButton(
+                icon: Icons.share_outlined,
+                label: '$shareCount',
+                onTap: () {
+                  context
+                      .read<CommunityProvider>()
+                      .sharePost(context, widget.post.id);
+                  setState(() => shareCount++);
+                },
+              ),
 
-              //save button
-              Container(
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius:BorderRadius.circular(40.r)
-                ),
-                child: MaterialButton(
-                  clipBehavior: Clip.hardEdge,
-                  onPressed: isSaved||checkIsSaved()
-                ? null
-                : () async {
-                    await context
-                        .read<CommunityProvider>()
-                        .savePost(context, widget.post.id);
-
-                    setState(() {
-                      saveCounts++;
-                      isSaved = true;
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Icon(checkIsSaved()||isSaved?Icons.bookmark:Icons.bookmark_border, color: Colors.grey[600], size: 25.sp),
-                      SizedBox(width: 5.w),
-                      Text(
-                        '$saveCounts',
-                        style: TextStyle(color: Colors.grey[600], fontSize: 18.sp),
-                      ),
-                    ],
-                  ),
-                ),
-              ), 
+              // Save button
+              _ActionButton(
+                icon: isSaved || checkIsSaved()
+                    ? Icons.bookmark
+                    : Icons.bookmark_border,
+                label: '$saveCounts',
+                onTap: isSaved || checkIsSaved()
+                    ? null
+                    : () async {
+                        await context
+                            .read<CommunityProvider>()
+                            .savePost(context, widget.post.id);
+                        setState(() {
+                          saveCounts++;
+                          isSaved = true;
+                        });
+                      },
+              ),
             ],
           ),
           
         ],
+      ),
+    );
+  }
+}
+
+/// Compact icon + label button with no minimum-width constraint.
+/// Uses InkWell so it never causes horizontal overflow.
+class _ActionButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback? onTap;
+
+  const _ActionButton({
+    required this.icon,
+    required this.label,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(40.r),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              color: Colors.grey[600],
+              size: 22.sp,
+            ),
+            SizedBox(width: 4.w),
+            Text(
+              label,
+              style: TextStyle(color: Colors.grey[600], fontSize: 15.sp),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -287,4 +287,86 @@ class CommunityProvider extends ChangeNotifier {
     }
   }
 
+  List<Comment> comments = [];
+  bool commentsIsLoading = false;
+  String? commenterror;
+  /// Tracks how many comments were added locally per post (postId → delta)
+  Map<String, int> commentCountDeltas = {};
+  Future<List<Comment>?> getPostComments(String postId) async {
+    if (postId.isEmpty) {
+      error = "Post id is required.";
+      notifyListeners();
+      return null;
+    }
+
+    commentsIsLoading = true;
+    error = null;
+    notifyListeners();
+
+    try {
+      comments = await CommunityService.getPostComments(postId);
+
+      commentsIsLoading = false;
+      log("Comments fetched successfully");
+      notifyListeners();
+
+      return comments;
+    } catch (e) {
+      error = e.toString();
+      commentsIsLoading = false;
+
+      log("Failed to fetch comments");
+      log(e.toString());
+
+      notifyListeners();
+      return null;
+    }
+  }
+
+  bool addCommentIsLoading = false;
+  String? addCommentError;
+  var commentContrroller=TextEditingController();
+  Future<Comment?> addComment(context,String postId, String text) async {
+    if (postId.isEmpty) {
+      addCommentError = "Post id is required.";
+      notifyListeners();
+      return null;
+    }
+
+    if (text.trim().isEmpty) {
+      addCommentError = "Comment cannot be empty.";
+      notifyListeners();
+      return null;
+    }
+
+    addCommentIsLoading = true;
+    addCommentError = null;
+    notifyListeners();
+
+    try {
+      final comment = await CommunityService.addPostComment(postId, text);
+      
+      comments.insert(0,comment);
+      commentCountDeltas[postId] = (commentCountDeltas[postId] ?? 0) + 1;
+      customSnackbar(context, false, "Comment added successfully");
+      addCommentIsLoading = false;
+      log("Comment added successfully");
+      commentContrroller.clear();
+      FocusScope.of(context).unfocus(); 
+      notifyListeners();
+
+      return comment;
+    } catch (e) {
+      addCommentError = e.toString();
+      addCommentIsLoading = false;
+
+      log("Failed to add comment");
+      customSnackbar(context, true, "Comment Not added ");
+      log(e.toString());
+
+      notifyListeners();
+      return null;
+    }
+  }
+ 
 }

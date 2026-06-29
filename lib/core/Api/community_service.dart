@@ -152,7 +152,7 @@ class CommunityService {
     try {
       final response = await DioFactory.postData(
         path: "${ApiConstants.feed}/$id/comments",
-        data: {"text": text},
+        data: {"content": text},
       );
       final data = response.data as Map<String, dynamic>;
       return Comment.fromJson(data['data'] as Map<String, dynamic>);
