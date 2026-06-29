@@ -9,6 +9,7 @@ import 'package:mindsense_app/features/Analyzing/photo%20analysis/logic/photo_an
 import 'package:mindsense_app/features/Analyzing/photo%20analysis/ui/start_photo_scan_screen.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/report_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/ui/start_voice_scan_screen.dart';
+import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class PhotoScanResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
+    
       ),
       
       body: Padding(
@@ -91,6 +92,9 @@ class PhotoScanResultScreen extends StatelessWidget {
                     padding: EdgeInsets.all(8),
                     onPressed:(){
                       Navigator.push(context, MaterialPageRoute(builder: (context) => StartVoiceScanScreen(),));
+                      WidgetsBinding.instance.addPostFrameCallback((_) async{
+                        await context.read<Homescreenprovider>().fetchEmotionHistory();
+                      });
                     },
                     child: Row(
                       spacing: 5.w,
@@ -125,6 +129,9 @@ class PhotoScanResultScreen extends StatelessWidget {
                     padding: EdgeInsets.all(8),
                     onPressed:(){
                       Navigator.push(context, MaterialPageRoute(builder: (context) => ReportScreen(),));
+                        WidgetsBinding.instance.addPostFrameCallback((_) async{
+                          await context.read<Homescreenprovider>().fetchEmotionHistory();
+                        });
                     },
                     child: Text("See Results",style: TextStyle(
                       fontSize: 20,
@@ -154,6 +161,9 @@ class PhotoScanResultScreen extends StatelessWidget {
                           return MaterialButton( 
                             padding: EdgeInsets.all(8),
                             onPressed:(){
+                              WidgetsBinding.instance.addPostFrameCallback((_) async{
+                                await context.read<Homescreenprovider>().fetchEmotionHistory();
+                              });
                               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),(route) => false,);
                               Navigator.push(context, MaterialPageRoute(builder: (context) => StartPhotoScanScreen(),));
                               val.selctedimage=null;

@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/Analyzing/report/ui/report_screen.dart';
 import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_analysis_provider.dart';
+import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
 import 'package:provider/provider.dart';
 
 class VoiceScanResultScreen extends StatelessWidget {
@@ -88,6 +89,9 @@ class VoiceScanResultScreen extends StatelessWidget {
                       padding: EdgeInsets.all(8),
                       onPressed:(){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => ReportScreen(),));
+                        WidgetsBinding.instance.addPostFrameCallback((_) async{
+                          await context.read<Homescreenprovider>().fetchEmotionHistory();
+                        });
                       },
                       child: Text("See Results",style: TextStyle(
                         fontSize: 20,
@@ -115,7 +119,9 @@ class VoiceScanResultScreen extends StatelessWidget {
                       onPressed:(){
                         Navigator.pop(context);
                         Navigator.pop(context);
-                        
+                        WidgetsBinding.instance.addPostFrameCallback((_) async{
+                          await context.read<Homescreenprovider>().fetchEmotionHistory();
+                        });
                       },
                       child: Row(
                         spacing: 5.w,

@@ -2,8 +2,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
+import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:mindsense_app/features/on%20boarding/ui/onboarding_screens.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,7 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
    
     
     Future.delayed(Duration(milliseconds: 1000)).then((value) {
-      
+      if(SharedPreferencesitem.getString("token")!=null){
+        WidgetsBinding.instance.addPostFrameCallback((_) async{
+          await context.read<Homescreenprovider>().fetchEmotionHistory();
+        });
+        
+      }
       Navigator.pushAndRemoveUntil(
         // ignore: use_build_context_synchronously
         context,
