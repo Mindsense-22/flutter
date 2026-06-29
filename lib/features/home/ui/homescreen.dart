@@ -71,26 +71,26 @@ class Homescreen extends StatelessWidget {
           color: AppColers.primaryColor, 
           backgroundColor: const Color(0xff1E293B), 
           onRefresh: () async {
-            // Triggers API call on swipe down
+            
             await context.read<Homescreenprovider>().fetchEmotionHistory();
+            // ignore: use_build_context_synchronously
+            await context.read<Homescreenprovider>().fetchIntervention();
           },
-          child: SingleChildScrollView(
-            // CRITICAL FIX: Ensures pull-to-refresh works even if screen content is short
+          child: SingleChildScrollView(            
             physics: const AlwaysScrollableScrollPhysics(),
-            child: Padding(
-              // FIXED: Scaled padding with ScreenUtil
+            child: Padding(              
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 14.h),
               child: Column(
                 children: [
                   const Statusbarwidget(),
                   SizedBox(height: 25.h),
                   
-                  // --- Main Widgets ---
+                  
                   const CurrentstateTotalscansWid(),
                   SizedBox(height: 22.h),
-                  
-                  const Tipwid(),
-                  SizedBox(height: 22.h),
+
+                  //const Tipwid(),
+                  //SizedBox(height: 22.h),
                   
                   const Exercisewid(),
                   SizedBox(height: 22.h),

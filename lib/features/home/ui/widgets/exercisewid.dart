@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/exercises/ui/exercises_screen.dart';
+import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
+import 'package:mindsense_app/features/home/ui/widgets/analysisrequired_wid.dart';
+import 'package:provider/provider.dart';
 
 class Exercisewid extends StatelessWidget {
   const Exercisewid({super.key});
@@ -33,59 +37,64 @@ class Exercisewid extends StatelessWidget {
           
           Text(
             "Recommended Exercises",
-
             style: TextStyle(                    
               color: AppColers.primaryColor,
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,              
             ),
           ),
-          SizedBox(height: 8.h),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 8),
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
+          SizedBox(height: 12.h),
+          Consumer<Homescreenprovider>(
+            builder: (context,provider,_) {
+              return SizedBox(
+                height: 250.h,
+                child:
+                 SharedPreferencesitem.getString("currentstate_home")==null?
+                 AnalysisRequiredWidget()
+                 :
+                 provider.showedExercises.isEmpty?
+                 Center(
+                  child:                  
+                  CircularProgressIndicator()
+                   
+                 ):
+                 ListView.separated(                  
+                  scrollDirection: Axis.vertical,
+                  itemCount:provider.showedExercises.length ,
+                  separatorBuilder: (context, index) => SizedBox(height: 8.h,),
+                  itemBuilder:(context, index) =>  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 8),
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      SizedBox(width: 10.w),
+                      Expanded(
+                        child: Text(
+                          provider.showedExercises[index],
+                          
+                          style: TextStyle(                    
+                            color: Colors.white,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,              
+                          ),
+                        ),
+                      ),
+                      
+                    ],
+                  )
+                   
                 ),
-              ),
-              SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  "Take a deep breath through your nose for 4 seconds",
-                  maxLines: 2,
-                  style: TextStyle(                    
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,              
-                  ),
-                ),
-              ),
-              
-            ],
+              );
+            }
           ), 
-          TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>  ExercisesScreen(),
-                    ),
-                  );
-                },
-                child: Text(
-                  'View Exercise →',
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    color: AppColers.primaryColor,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              )         
+            
         ],
       ),
     );
