@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindsense_app/core/Api/api_constants.dart';
+import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
 import 'package:mindsense_app/features/drive%20mode/ui/drivemode_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/profile/logic/profile_screen_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Statusbarwidget extends StatefulWidget {
   const Statusbarwidget({super.key});
@@ -61,7 +63,7 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
                       borderRadius: BorderRadius.circular(108.r),
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: ApiConstants.baseUrl + val.avatarLink!,
+                      imageUrl:SharedPreferencesitem.getString("avatarLink")! == val.avatarLink! ?ApiConstants.baseUrl + SharedPreferencesitem.getString("avatarLink")! :ApiConstants.baseUrl + val.avatarLink!,
                       fit: BoxFit.fill,                    
                     ),
                   )
@@ -74,17 +76,29 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Hello, here's",style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xff7C9CD1)
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      "Hello, ",style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff7C9CD1)
+                      ),
+                    ),
+                    Text(
+                      SharedPreferencesitem.getString("userName")!.split(' ').first == val.userName!.split(' ').first?SharedPreferencesitem.getString("userName")!.split(' ').first:val.userName!.split(' ').first,style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff7C9CD1)
+                      ),
+                    ),
+                  ],
                 ),
+                
                 Text(
-                  "your status",style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
+                  "Here is your Emotional wellness \noverview",style: TextStyle(
+                    fontSize: 8.sp,
+                    fontWeight: FontWeight.w400,
                     color: Colors.white
                   ),
                 ),
