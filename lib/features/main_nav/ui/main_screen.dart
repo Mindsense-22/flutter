@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_bottom_nav_bar.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/features/community/ui/community_screen.dart';
+import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
 import 'package:mindsense_app/features/home/ui/homescreen.dart';
 import 'package:mindsense_app/features/games/ui/games_hub_screen.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
@@ -24,10 +25,19 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async{
       if (SharedPreferencesitem.getString("token") != null) {
-        context.read<ProfileScreenProvider>().fetchUserProfile();
-      }
+        final profileProvider = context.read<ProfileScreenProvider>();
+        final homeProvider = context.read<Homescreenprovider>();
+
+        await profileProvider.fetchUserProfile();
+        if (!mounted) return;
+
+        await homeProvider.fetchEmotionHistory();
+        if (!mounted) return;
+
+        await homeProvider.fetchIntervention();
+      }        
     });
     
   }

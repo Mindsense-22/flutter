@@ -74,21 +74,7 @@ class AnalysisRequiredWidget extends StatelessWidget {
           ),
 
           SizedBox(height: 15.h),
-
-          // SizedBox(
-          //   width: double.infinity,
-          //   child: ElevatedButton.icon(
-          //     onPressed: onPressed,
-          //     icon: const Icon(Icons.analytics_outlined),
-          //     label: const Text("Start Analysis"),
-          //     style: ElevatedButton.styleFrom(
-          //       minimumSize: const Size.fromHeight(50),
-          //       shape: RoundedRectangleBorder(
-          //         borderRadius: BorderRadius.circular(14),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          
         ],
       ),
     );

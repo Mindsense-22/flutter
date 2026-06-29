@@ -86,8 +86,9 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
                       ),
                     ),
                     Text(
-                      SharedPreferencesitem.getString("userName") !=null ?
-                      SharedPreferencesitem.getString("userName")!.split(' ').first :val.userName!.split(' ').first,style: TextStyle(
+                     (SharedPreferencesitem.getString("userName") ?? val.userName ?? "")
+                        .split(" ")
+                        .first,style: TextStyle(
                         fontSize: 13.sp,
                         fontWeight: FontWeight.bold,
                         color: Color(0xff7C9CD1)

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 import 'package:mindsense_app/core/styles/colors.dart';
-import 'package:mindsense_app/features/exercises/ui/exercises_screen.dart';
 import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
 import 'package:mindsense_app/features/home/ui/widgets/analysisrequired_wid.dart';
 import 'package:provider/provider.dart';
