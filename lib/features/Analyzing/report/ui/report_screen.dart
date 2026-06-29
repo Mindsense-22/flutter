@@ -12,6 +12,7 @@ import 'package:mindsense_app/features/doctors/ui/doctors_screen.dart';
 import 'package:mindsense_app/features/games/logic/gamification_provider.dart';
 import 'package:mindsense_app/features/games/ui/games_hub_screen.dart';
 import 'package:mindsense_app/features/games/ui/widgets/game_recommendation_card.dart';
+import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
 import 'package:mindsense_app/features/main_nav/logic/mainscreenprovider.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:provider/provider.dart';
@@ -87,6 +88,9 @@ class ReportScreen extends StatelessWidget {
                         child: MaterialButton( 
                           padding: EdgeInsets.all(8),
                           onPressed:(){
+                            WidgetsBinding.instance.addPostFrameCallback((_) {        
+                              context.read<Homescreenprovider>().fetchEmotionHistory();
+                            });
                             final analyzingProvider = context.read<AnalyzingProvider>();
                             String emotion = 'neutral';
                             final condition = analyzingProvider.detectedEmotion!.toLowerCase();
@@ -128,6 +132,9 @@ class ReportScreen extends StatelessWidget {
                           child: MaterialButton( 
                             padding: EdgeInsets.all(8),
                             onPressed: () {
+                              WidgetsBinding.instance.addPostFrameCallback((_) {        
+                              context.read<Homescreenprovider>().fetchEmotionHistory();
+                            });
                               Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorsScreen(),));
                             },
                             child:Text("Meet A Doctor →",style: TextStyle(
@@ -163,6 +170,9 @@ class ReportScreen extends StatelessWidget {
                                 return MaterialButton( 
                                   padding: EdgeInsets.all(8),
                                   onPressed:(){
+                                    WidgetsBinding.instance.addPostFrameCallback((_) {        
+                                      context.read<Homescreenprovider>().fetchEmotionHistory();
+                                    });
                                     Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => MainScreen(),),(route) => false,);
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => ChossenScreen(),));
                                     PaintingBinding.instance.imageCache.clear();
@@ -202,6 +212,9 @@ class ReportScreen extends StatelessWidget {
                                 return MaterialButton( 
                                   padding: EdgeInsets.all(8),
                                   onPressed:(){
+                                    WidgetsBinding.instance.addPostFrameCallback((_) {        
+                                      context.read<Homescreenprovider>().fetchEmotionHistory();
+                                    });
                                     Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => MainScreen(),),(route) => false,);
                                     PaintingBinding.instance.imageCache.clear();
                                     val.selctedimage=null;
