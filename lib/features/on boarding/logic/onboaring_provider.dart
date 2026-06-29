@@ -33,4 +33,10 @@ class OnboardingProvider extends ChangeNotifier{
     log(currentPage.toString());
     notifyListeners();
   }
+
+  void resetProvider() {
+    currentPage = 0;
+    position = 0;
+    notifyListeners();
+  }
 }

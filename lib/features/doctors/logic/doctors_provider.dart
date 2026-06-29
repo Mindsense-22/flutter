@@ -131,4 +131,12 @@ class DoctorsProvider extends ChangeNotifier{
       
     }
   }
+  void resetProvider() {
+    doctorsList.clear();
+    follow = [{"index":int ,"isfollow":bool}];
+    isLoading = false;
+    sessionsList.clear();
+    isLoadingSessions = false;
+    notifyListeners();
+  }
 }

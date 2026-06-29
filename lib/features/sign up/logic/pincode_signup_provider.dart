@@ -98,5 +98,12 @@ class PincodeSignupProvider extends ChangeNotifier{
     }
   }
   
+  void resetProvider() {
+    signUpPinCodeController.clear();
+    ispincodeError = false;
+    verifyCodeButtonisloading = false;
+    isresendcode = false;
+    notifyListeners();
+  }
 
 }

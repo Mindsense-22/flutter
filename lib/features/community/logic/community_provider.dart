@@ -369,4 +369,21 @@ class CommunityProvider extends ChangeNotifier {
     }
   }
  
+  void resetProvider() {
+    postisLoading = false;
+    isFeedLoading = false;
+    isLoadingMore = false;
+    hasMore = true;
+    _currentPage = 1;
+    error = null;
+    feedPosts.clear();
+    comments.clear();
+    commentsIsLoading = false;
+    commenterror = null;
+    commentCountDeltas.clear();
+    addCommentIsLoading = false;
+    addCommentError = null;
+    commentContrroller.clear();
+    notifyListeners();
+  }
 }

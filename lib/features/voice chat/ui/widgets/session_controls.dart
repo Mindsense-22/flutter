@@ -46,7 +46,7 @@ class _SessionControlsState extends State<SessionControls> {
     }
     if (!mounted) return;
     // Reset everything back to default after modal is closed
-    provider.reset();
+    provider.resetProvider();
   }
 
   void _onPointerDown(PointerDownEvent event) async {

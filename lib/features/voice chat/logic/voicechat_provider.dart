@@ -53,7 +53,7 @@ class VoicechatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void reset() {
+  void resetProvider() {
     sessionId = null;
     sessionWelcomeAudio = null;
     lastResponseAudio = null;
@@ -62,6 +62,8 @@ class VoicechatProvider extends ChangeNotifier {
     sessionSummaryData = null;
     isLoading = false;
     errorMessage = null;
+    history.clear();
+    subscriptionInfo = null;
     _audioPlayer.stop();
     notifyListeners();
   }

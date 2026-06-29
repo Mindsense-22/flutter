@@ -66,7 +66,7 @@ class AudioProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void reset() {
+  void resetProvider() {
     if (_disposed) return;
 
     _currentUrl = null;

@@ -78,6 +78,11 @@ class AddcontactProvider extends ChangeNotifier{
     }
   } 
 
-
-
+  void resetProvider() {
+    contactName.clear();
+    contactEmail.clear();
+    contactRelationship.clear();
+    addContactisloading = false;
+    notifyListeners();
+  }
 }

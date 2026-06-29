@@ -324,6 +324,27 @@ class ProfileScreenProvider extends ChangeNotifier {
       isLoadingProfile = false;
       notifyListeners();
     }
+  
+}
+void resetProvider() {
+    isDarkMode = true;
+    profileImage = null;
+    profileImagePath = null;
+    userName = null;
+    userEmail = null;
+    userAge = null;
+    userId = null;
+    userRole = null;
+    trustedContactname = null;
+    trustedContactemail = null;
+    trustedContactrelationship = null;
+    trustedContactstatus = null;
+    photoLoading = false;
+    isLoadingProfile = false;
+    avatarLink = null;
+    followingIds.clear();
+    following.clear();
+    notifyListeners();
   }
 }
 

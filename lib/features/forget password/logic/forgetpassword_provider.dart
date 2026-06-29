@@ -299,5 +299,18 @@ class ForgetpasswordProvider extends ChangeNotifier{
     );
   }
 
+  void resetProvider() {
+    forgetPasswordEmailController.clear();
+    sendCodeButtonisloading = false;
+    forgetPasswordPinCodeController.clear();
+    ispincodeError = false;
+    verifyCodeButtonisloading = false;
+    resedcodebuttonloading = false;
+    setNewPasswoedController.clear();
+    confirmPasswoedController.clear();
+    resetPasswordButtonisloading = false;
+    passwordChangeSuccessfuly = false;
+    notifyListeners();
+  }
 
 }

@@ -97,5 +97,10 @@ class ExercisesProvider extends ChangeNotifier{
     
   ];
 
-
+  void resetProvider() {
+    userstate = "Overcoming Stress";
+    isAudioPlaying = false;
+    aiRecomendationAdioDuration = "";
+    notifyListeners();
+  }
 }

@@ -41,4 +41,12 @@ class Mainscreenprovider extends ChangeNotifier {
     pageController.dispose();
     super.dispose();
   }
+
+  void resetProvider() {
+    index = 0;
+    if (pageController.hasClients) {
+      pageController.jumpToPage(0);
+    }
+    notifyListeners();
+  }
 }

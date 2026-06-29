@@ -14,6 +14,21 @@ import 'package:mindsense_app/features/profile/ui/widgets/general_settings_wid.d
 import 'package:mindsense_app/features/splash/ui/splash_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'package:mindsense_app/features/Analyzing/voice analysis/logic/voice_analysis_provider.dart';
+import 'package:mindsense_app/features/community/logic/community_provider.dart';
+import 'package:mindsense_app/features/dashboard/logic/dashboard_provider.dart';
+import 'package:mindsense_app/features/doctors/logic/doctors_provider.dart';
+import 'package:mindsense_app/features/exercises/logic/exercises_provider.dart';
+import 'package:mindsense_app/features/games/logic/gamification_provider.dart';
+import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
+import 'package:mindsense_app/features/login/logic/login_provider.dart';
+import 'package:mindsense_app/features/profile/add contact/logic/addcontact_provider.dart';
+import 'package:mindsense_app/features/profile/edit user information/logic/edit_user_information_provider.dart';
+import 'package:mindsense_app/features/profile/update password/logic/updatepassword_provider.dart';
+import 'package:mindsense_app/features/sign up/logic/pincode_signup_provider.dart';
+import 'package:mindsense_app/features/sign up/logic/signup_provider.dart';
+import 'package:mindsense_app/features/voice chat/logic/voicechat_provider.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -61,15 +76,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () async {
                 customSnackbar(context,true,"Logged Out!");
 
-                context.read<Mainscreenprovider>().index = 0;
-                context.read<AudioProvider>().stop();
+                final mainProvider = context.read<Mainscreenprovider>();
+                final audioProvider = context.read<AudioProvider>();
+                final voiceAnalysisProvider = context.read<VoiceAnalysisProvider>();
+                final communityProvider = context.read<CommunityProvider>();
+                final dashboardProvider = context.read<DashboardProvider>();
+                final doctorsProvider = context.read<DoctorsProvider>();
+                final exercisesProvider = context.read<ExercisesProvider>();
+                final gamificationProvider = context.read<GamificationProvider>();
+                final homeScreenProvider = context.read<Homescreenprovider>();
+                final loginProvider = context.read<LoginProvider>();
+                final addContactProvider = context.read<AddcontactProvider>();
+                final editUserProvider = context.read<EditUserInformationProvider>();
+                final profileScreenProvider = context.read<ProfileScreenProvider>();
+                final updatePasswordProvider = context.read<UpdatepasswordProvider>();
+                final pinCodeProvider = context.read<PincodeSignupProvider>();
+                final signupProvider = context.read<SignupProvider>();
+                final voicechatProvider = context.read<VoicechatProvider>();
+                
                 await SharedPreferencesitem.clear();                
-                // ignore: use_build_context_synchronously
-                Navigator.of(context).pushAndRemoveUntil(                  
+                if (!context.mounted) return;
+                await Navigator.of(context).pushAndRemoveUntil(                  
                   MaterialPageRoute(builder: (_) => SplashScreen()),
                   (route) => false,
-                );                
+                );
+                               
                 
+                mainProvider.resetProvider();
+                audioProvider.resetProvider();
+                voiceAnalysisProvider.resetProvider();
+                communityProvider.resetProvider();
+                dashboardProvider.resetProvider();
+                doctorsProvider.resetProvider();
+                exercisesProvider.resetProvider();
+                gamificationProvider.resetProvider();
+                homeScreenProvider.resetProvider();
+                loginProvider.resetProvider();
+                addContactProvider.resetProvider();
+                editUserProvider.resetProvider();
+                profileScreenProvider.resetProvider();
+                updatePasswordProvider.resetProvider();
+                pinCodeProvider.resetProvider();
+                signupProvider.resetProvider();
+                voicechatProvider.resetProvider();
+
+                 
               }, 
               icon: Icon(Icons.logout,
                 size: 23.sp,

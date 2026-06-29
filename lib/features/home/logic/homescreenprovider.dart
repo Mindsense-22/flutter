@@ -73,38 +73,43 @@ class Homescreenprovider extends ChangeNotifier {
     String ? goal,
     String ? context,
     String ? language,
-  }) async {   
-    try {
-      String userState=SharedPreferencesitem.getString("currentstate_home")??"Stressed";
-      final response = await InterventionService.postIntervention(
-        state: userState,
-        goal: "Relax",
-        context: "Work deadline",
-        language: "en",
-      );
-      
-      if (response['status'] == 'success') {
-        interventionData = response;
-        returnedExercises=interventionData!["advice"]["content"]["en"]["goals"]["calm"]["plan"]??[];
-        if(returnedExercises!=[]){
-          // for(int i=0;i<returnedExercises.length;i++){
-          //  await  SharedPreferencesitem.setString("returnedExercisesnum$i", returnedExercises[i]);
-          // }
-          // for(int i=0;i<returnedExercises.length;i++){
-          //   showedExercises.add(SharedPreferencesitem.getString("returnedExercisesnum$i")!);
-            
-          // }
-          showedExercises=returnedExercises;
-          notifyListeners();
-
+  }) async {
+    if(SharedPreferencesitem.getString("currentstate_home")!=null){
+      try {
+        String userState=SharedPreferencesitem.getString("currentstate_home")??"Stressed";
+        final response = await InterventionService.postIntervention(
+          state: userState,
+          goal: "Relax",
+          context: "Work deadline",
+          language: "en",
+        );
+        
+        if (response['status'] == 'success') {
+          interventionData = response;
+          returnedExercises=interventionData!["advice"]["content"]["en"]["goals"]["calm"]["plan"]??[];
+          if(returnedExercises!=[]){          
+            showedExercises=returnedExercises;
+            notifyListeners();
+          }
         }
+      } catch (e) {
+        log(e.toString());
       }
-    } catch (e) {
-      log(e.toString());
-    } finally {
-      
-      notifyListeners();
-    }
+    }   
+     
+  }
+
+  void resetProvider() {
+    selectedIndex = -1;
+    imogistatus = "";
+    totalScans = 0;
+    currentstate = "";
+    confidence = 0;
+    emotionHistory.clear();
+    interventionData = null;
+    returnedExercises.clear();
+    showedExercises.clear();
+    notifyListeners();
   }
    
 }

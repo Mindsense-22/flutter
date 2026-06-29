@@ -176,4 +176,19 @@ class VoiceAnalysisProvider extends ChangeNotifier {
       debugPrint("Play error: $e");
     }
   }
+
+  void resetProvider() {
+    isRecording = false;
+    recordTime = 0;
+    timer?.cancel();
+    timer = null;
+    recoredStoped = false;
+    audioFile = null;
+    amplitudes.clear();
+    amplitudeTimer?.cancel();
+    amplitudeTimer = null;
+    targetvalue = (80 / 100);
+    stateCondition = "Positive";
+    notifyListeners();
+  }
 }

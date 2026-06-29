@@ -188,4 +188,18 @@ class SignupProvider extends ChangeNotifier{
       
     }
   }
+
+  void resetProvider() {
+    signupPasswordController.clear();
+    signupReEnterPasswordController.clear();
+    signupNameController.clear();
+    signupEmailController.clear();
+    signupAgeController.clear();
+    userRole = "user";
+    signupbuttonisloading = false;
+    checkBoxVal = false;
+    profileImage = null;
+    signUpPhotoPath = null;
+    notifyListeners();
+  }
 }

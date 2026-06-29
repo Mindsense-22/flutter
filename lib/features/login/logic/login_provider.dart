@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/authservice.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
+import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
+import 'package:provider/provider.dart';
 
 class LoginProvider extends ChangeNotifier {
   TextEditingController loginEmailController =TextEditingController();
@@ -63,6 +65,7 @@ class LoginProvider extends ChangeNotifier {
           MaterialPageRoute(builder: (context) => MainScreen()),
           (route) => false,
         );
+        
 
       } catch (e) {
         chaneIsloading(false);
@@ -77,7 +80,13 @@ class LoginProvider extends ChangeNotifier {
       
     }
   }
-  
+  void resetProvider() {
+    loginEmailController.clear();
+    loginpasswordController.clear();
+    isloading = false;
+    islogined = false;
+    notifyListeners();
+  }
 }
 
 

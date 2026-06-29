@@ -94,4 +94,12 @@ class UpdatepasswordProvider extends ChangeNotifier{
     }
   } 
 
+  void resetProvider() {
+    oldPasswordController.clear();
+    newPasswordController.clear();
+    reEnterNewPasswordController.clear();
+    updatePasswordisloading = false;
+    notifyListeners();
+  }
+
 }

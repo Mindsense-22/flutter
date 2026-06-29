@@ -51,6 +51,12 @@ class AudioProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resetProvider() {
+    _currentUrl = null;
+    _state = PlayerState.stopped;
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     _player.dispose();

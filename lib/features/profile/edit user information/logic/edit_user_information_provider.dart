@@ -80,5 +80,10 @@ class EditUserInformationProvider extends ChangeNotifier {
       
     }
   }
-
+  void resetProvider() {
+    editNameController.clear();
+    editAgeController.clear();
+    editbuttonisloading = false;
+    notifyListeners();
+  }
 }

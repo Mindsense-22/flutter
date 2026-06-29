@@ -232,4 +232,20 @@ class GamificationProvider extends ChangeNotifier {
   bool isStreakMilestone() {
     return [3, 7, 14, 30].contains(_streakDays);
   }
+
+  void resetProvider() {
+    _xp = 0;
+    _points = 0;
+    _streakDays = 0;
+    _lastPlayed = null;
+    _sessions.clear();
+    _activeSpec = null;
+    _justLeveledUp = false;
+    _isLoading = false;
+    _error = null;
+    _leaderboard.clear();
+    _isLeaderboardLoading = false;
+    _leaderboardError = null;
+    notifyListeners();
+  }
 }

@@ -142,5 +142,17 @@ class DashboardProvider extends ChangeNotifier {
     _needsRefresh = true;
     notifyListeners();
   }
-  
+
+  void resetProvider() {
+    userStatus = "Nuteral";
+    _isLoading = false;
+    _dashBoardIsLoading = false;
+    emotionHistory.clear();
+    emotionReport.clear();
+    mainDashboardData.clear();
+    _error = null;
+    _needsRefresh = true;
+    dashboardItems.clear();
+    notifyListeners();
+  }
 }
