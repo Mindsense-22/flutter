@@ -74,8 +74,11 @@ class Homescreenprovider extends ChangeNotifier {
     String ? context,
     String ? language,
   }) async {
+    log("BEgin");
     if(SharedPreferencesitem.getString("currentstate_home")!=null){
+      log("after if");
       try {
+        log("aftertry");
         String userState=SharedPreferencesitem.getString("currentstate_home")??"Stressed";
         final response = await InterventionService.postIntervention(
           state: userState,

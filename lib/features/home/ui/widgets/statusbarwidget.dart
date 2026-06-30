@@ -80,7 +80,7 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
                   children: [
                     Text(
                       "Hello, ",style: TextStyle(
-                        fontSize: 17.sp,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                         color: Color(0xff7C9CD1)
                       ),
@@ -89,7 +89,7 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
                      (SharedPreferencesitem.getString("userName") ?? val.userName ?? "")
                         .split(" ")
                         .first,style: TextStyle(
-                        fontSize: 17.sp,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                         color: Color(0xff7C9CD1)
                       ),
@@ -99,7 +99,7 @@ class _StatusbarwidgetState extends State<Statusbarwidget> {
                 SizedBox(height:  2.h),
                 Text(
                   "Here is your Emotional \nwellness overview",style: TextStyle(
-                    fontSize: 8.sp,
+                    fontSize: 9.sp,
                     fontWeight: FontWeight.w400,
                     color: Colors.white
                   ),

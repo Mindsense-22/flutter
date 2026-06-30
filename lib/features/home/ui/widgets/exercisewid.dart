@@ -57,6 +57,7 @@ class Exercisewid extends StatelessWidget {
                   CircularProgressIndicator()
                    
                  ):
+                //SizedBox.shrink():
                  ListView.separated(                  
                   scrollDirection: Axis.vertical,
                   itemCount:provider.showedExercises.length ,
