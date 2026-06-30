@@ -60,7 +60,17 @@ class FeedWid extends StatelessWidget {
           itemCount: val.feedPosts.length,
           separatorBuilder: (context, index) => SizedBox(height: 12.h),
           itemBuilder: (context, index) {            
-            return PostshapeWid(post: val.feedPosts[index],);
+            return PostshapeWid(
+              key: ValueKey(val.feedPosts[index].id),
+              post: val.feedPosts[index],
+            );
+          },
+          findChildIndexCallback: (Key key) {
+            if (key is ValueKey<String>) {
+              final index = val.feedPosts.indexWhere((post) => post.id == key.value);
+              return index >= 0 ? index : null;
+            }
+            return null;
           },
         );
       },

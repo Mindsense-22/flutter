@@ -133,10 +133,22 @@ class _CommunityScreenState extends State<CommunityScreen> {
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
                             if (index < val.feedPosts.length) {
+                              final post = val.feedPosts[index];
                               return Padding(
+                                key: ValueKey(post.id),
                                 padding: EdgeInsets.only(bottom: 12.h),
-                                child: PostshapeWid(post: val.feedPosts[index]),
+                                child: PostshapeWid(
+                                  key: ValueKey(post.id),
+                                  post: post,
+                                ),
                               );
+                            }
+                            return null;
+                          },
+                          findChildIndexCallback: (Key key) {
+                            if (key is ValueKey<String>) {
+                              final index = val.feedPosts.indexWhere((post) => post.id == key.value);
+                              return index >= 0 ? index : null;
                             }
                             return null;
                           },

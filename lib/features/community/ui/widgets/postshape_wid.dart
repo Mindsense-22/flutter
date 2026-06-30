@@ -36,6 +36,19 @@ class _PostshapeWidState extends State<PostshapeWid> {
     userid = SharedPreferencesitem.getString("userId") ?? "";
   }
 
+  @override
+  void didUpdateWidget(covariant PostshapeWid oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.post != widget.post) {
+      likeCounts = widget.post.reactions.length;
+      commentCounts = widget.post.commentCount;
+      shareCount = widget.post.shareCount;
+      saveCounts = widget.post.savedBy.length;
+      if (!isLiked) isLiked = checkIsLikeed();
+      if (!isSaved) isSaved = checkIsSaved();
+    }
+  }
+
   bool checkIsUserPost() {
     final authorId = widget.post.author is Map
         ? widget.post.author['_id'] as String?
