@@ -17,23 +17,26 @@ class DashboardProvider extends ChangeNotifier {
   String? get error => _error;
   bool get needsRefresh => _needsRefresh;
   List <DashboardItems> dashboardItems=[];
-    
+  bool allDashboardLoading=false;  
   
   
   Future<void> refreshData() async {
     _isLoading = true;
     _error = null;
+    allDashboardLoading=true;
     notifyListeners();
     try {
       await Future.wait([
         fetchEmotionHistory(),
         fetchEmotionReport(),
-        
+        fetchMainDashboard(),
       ]);
-      
+      allDashboardLoading=false;
+      notifyListeners();
     } catch (e) {
       _error = e.toString();
     } finally {
+      allDashboardLoading = false;
       _isLoading = false;
       notifyListeners();
     }

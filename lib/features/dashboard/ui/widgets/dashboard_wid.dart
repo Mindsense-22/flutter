@@ -16,7 +16,7 @@ class DashboardWid extends StatelessWidget {
     return Consumer<DashboardProvider>(
       builder: (context, provider, child) {
         return Container(
-          height:345.h,
+          height:360.h,
           width: double.infinity,          
           decoration: BoxDecoration(
             color:Colors.transparent,
@@ -72,13 +72,13 @@ class DashboardWid extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 330.h,
+              height: 345.h,
               width: 21.w,
               child: YAxis(),
             ),
             SizedBox(width: 13.w,),
             SizedBox(
-              height: 340.h,
+              height: 355.h,
               width: 306.w,
               child: Padding(
                 padding: EdgeInsets.only(right: 0.w),
@@ -146,7 +146,7 @@ class DashboardWid extends StatelessWidget {
     required Color color,
     required String day,
   }) {
-    final barHeight = 300.h;
+    final barHeight = 315.h;
     final fillHeight = maxValue > 0 ? ((value/10) / maxValue) * barHeight : 0.0;    
     
     return Column(
