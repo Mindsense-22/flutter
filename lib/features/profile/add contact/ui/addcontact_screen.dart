@@ -131,7 +131,7 @@ class AddcontactScreen extends StatelessWidget {
 
                       Container(
                         width: double.infinity,
-                        height: 190.h,   
+                        height: 170.h,   
                         
                         padding: EdgeInsets.all(12.w), 
                         decoration: BoxDecoration(
@@ -175,10 +175,10 @@ class AddcontactScreen extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          profileProvider.trustedContactname ?? "No Name Set",
+                                          profileProvider.trustedContactname!.toUpperCase() ?? "No Name Set",
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 22.sp, 
+                                            fontSize: 19.sp, 
                                             fontWeight: FontWeight.bold,
                                             letterSpacing: 0.5,
                                           ),
@@ -222,7 +222,7 @@ class AddcontactScreen extends StatelessWidget {
                                     profileProvider.trustedContactemail ?? "No Email Linked",
                                     style: TextStyle(
                                       color: Colors.white70, 
-                                      fontSize: 16.sp, 
+                                      fontSize: 15.sp, 
                                       fontWeight: FontWeight.w400,
                                     ),
                                     maxLines: 1,
