@@ -68,6 +68,8 @@ class Homescreenprovider extends ChangeNotifier {
   // intervention
   List returnedExercises=[];
   List showedExercises=[];
+  bool isInterventionload=false;
+  bool isEror=false;
   Future<void> fetchIntervention({
     String ? state,
     String ? goal,
@@ -79,6 +81,9 @@ class Homescreenprovider extends ChangeNotifier {
       log("after if");
       try {
         log("aftertry");
+        isInterventionload=true;
+        isEror=false;
+        notifyListeners();
         String userState=SharedPreferencesitem.getString("currentstate_home")??"Stressed";
         final response = await InterventionService.postIntervention(
           state: userState,
@@ -95,7 +100,13 @@ class Homescreenprovider extends ChangeNotifier {
             notifyListeners();
           }
         }
+        isInterventionload=false;
+        notifyListeners();
       } catch (e) {
+        isInterventionload=false;
+        notifyListeners();
+        isEror=true;
+        notifyListeners();
         log(e.toString());
       }
     }   

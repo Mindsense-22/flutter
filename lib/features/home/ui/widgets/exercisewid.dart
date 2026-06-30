@@ -51,13 +51,13 @@ class Exercisewid extends StatelessWidget {
                  SharedPreferencesitem.getString("currentstate_home")==null?
                  AnalysisRequiredWidget()
                  :
-                 provider.showedExercises.isEmpty?
+                 provider.isInterventionload?            
                  Center(
                   child:                  
                   CircularProgressIndicator()
                    
                  ):
-                //SizedBox.shrink():
+                 provider.isEror==false?                 
                  ListView.separated(                  
                   scrollDirection: Axis.vertical,
                   itemCount:provider.showedExercises.length ,
@@ -90,7 +90,26 @@ class Exercisewid extends StatelessWidget {
                     ],
                   )
                    
-                ),
+                )
+                :Center(child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 10.h,
+                  children: [
+                    Text(
+                      textAlign: TextAlign.center,
+                      "Can't get your exercises \nright now",style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    Text(
+                      textAlign: TextAlign.center,
+                      "Check your internet",style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey.shade400
+                    ),),
+                  ],
+                )),
               );
             }
           ), 
