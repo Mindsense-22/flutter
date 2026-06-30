@@ -105,13 +105,10 @@ class AddcontactScreen extends StatelessWidget {
                                 controller: provider.contactEmail, 
                                 hintText: "type contact email",
                                 validator: provider.emailValidator,
-                              ), 
-                                    
-                                    
-                              
+                              ),
                               
                               SizedBox(height: 25.h,),
-                              //login button
+
                               Column(
                                 children: [
                                   provider.addContactisloading==false?
@@ -131,43 +128,112 @@ class AddcontactScreen extends StatelessWidget {
                           ),
                         ),
                       ):
+
                       Container(
                         width: double.infinity,
-                        height: 150.h,
+                        height: 190.h,   
+                        
+                        padding: EdgeInsets.all(12.w), 
                         decoration: BoxDecoration(
-                          color: const Color(0xff1E293B),
+                          gradient: const LinearGradient(
+                            colors: [Color(0xff1E293B), Color(0xff0F172A)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(24.r), 
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.05), 
+                            width: 1,
+                          ),
+                          
                         ),
-                        child: Column(                          
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  profileProvider.trustedContactname??" ",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.sp
-                                  ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  profileProvider.trustedContactrelationship??" ",
-                                  style: TextStyle(
-                                    color: AppColers.primaryColor,
-                                    fontSize: 16.sp
-                                  ),
-                                ),
-                              ],
+                            Container(
+                              width: 60.w,
+                              height: 60.h,
+                              decoration: BoxDecoration(
+                                color: AppColers.primaryColor.withOpacity(0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.shield_outlined, 
+                                color: AppColers.primaryColor,
+                                size: 28.sp,
+                              ),
                             ),
-                            Text(
-                              profileProvider.trustedContactemail??" ",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 22.sp
+                            SizedBox(width: 12.w),                             
+
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          profileProvider.trustedContactname ?? "No Name Set",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 22.sp, 
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 0.5,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                                        decoration: BoxDecoration(
+                                          color: AppColers.primaryColor,
+                                          borderRadius: BorderRadius.circular(30.r),
+                                        ),
+                                        child: Text(
+                                          (profileProvider.trustedContactrelationship ?? "Contact").toUpperCase(),
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: Colors.black, 
+                                            fontSize: 10.sp,
+                                            
+                                            letterSpacing: 1.0, 
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 12.h),
+                                  
+                                  Text(
+                                    "TRUSTED EMAIL ADDRESS",
+                                    style: TextStyle(
+                                      color: Colors.white38,
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 1.2,
+                                    ),
+                                  ),
+                                  SizedBox(height: 6.h),                                  
+                                  
+                                  Text(
+                                    profileProvider.trustedContactemail ?? "No Email Linked",
+                                    style: TextStyle(
+                                      color: Colors.white70, 
+                                      fontSize: 16.sp, 
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
-                      ),
+                      ),                      
                     ],
                   );
                 }
