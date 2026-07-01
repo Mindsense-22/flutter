@@ -110,6 +110,7 @@ class _GamesHubScreenState extends State<GamesHubScreen> {
             controller: _scrollController,
             slivers: [
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 floating: true,
                 snap: true,
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
