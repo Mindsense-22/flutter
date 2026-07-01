@@ -76,11 +76,11 @@ class Homescreenprovider extends ChangeNotifier {
     String ? context,
     String ? language,
   }) async {
-    log("BEgin");
+   
     if(SharedPreferencesitem.getString("currentstate_home")!=null){
-      log("after if");
+     
       try {
-        log("aftertry");
+        
         isInterventionload=true;
         isEror=false;
         notifyListeners();
