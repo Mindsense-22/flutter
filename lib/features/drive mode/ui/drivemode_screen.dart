@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 import 'package:mindsense_app/features/drive%20mode/logic/drivemode_provider.dart';
 import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,7 @@ class _DrivemodeScreenState extends State<DrivemodeScreen> {
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
           context.read<DrivemodeProvider>().stopFetching(context);
+          customSnackbar(context, true, "Drive mode closed");
           
         }
       },
@@ -123,8 +125,7 @@ class _DrivemodeScreenState extends State<DrivemodeScreen> {
                   padding: EdgeInsets.all(8),
                   onPressed:(){
                     context.read<DrivemodeProvider>().stopFetching(context);
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),(route) => false,);
-                   
+                    Navigator.pop(context);                   
                   },
                   child: Text("Exit drive mode",style: TextStyle(
                     fontSize: 20,

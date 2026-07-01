@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
 
 class DrivemodeProvider extends ChangeNotifier {
   Map<String, dynamic> statusData = {};
@@ -33,7 +32,7 @@ class DrivemodeProvider extends ChangeNotifier {
   void stopFetching(context) {
     isFinished = true;
     _cancelToken?.cancel("Drive mode stopped"); 
-    customSnackbar(context, true, "Drive mode closed");
+    
     notifyListeners();
   }
 
