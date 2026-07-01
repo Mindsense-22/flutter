@@ -93,7 +93,15 @@ class AnalyzingProvider extends ChangeNotifier {
       final result = await EmotionService.analyzeVoice(selectedaudio!);   
       log(result.toString());   
       detectedEmotion = result["emotion"]?["state"] ?? result["analysis"]?["state"] ?? "gg";
-      emotionScores = result["analysis"]?["scores"];  
+      emotionScores = result["analysis"]?["scores"];
+      MapEntry<String, dynamic>? getHighestScore(Map<String, dynamic>? scores) {
+        if (scores == null || scores.isEmpty) return null;
+
+        return scores.entries
+            .reduce((a, b) => a.value > b.value ? a : b);
+      }
+      //log(emotionScores.toString()) ;
+      final highest = getHighestScore(emotionScores);
       if(detectedEmotion!=null){
         await SharedPreferencesitem.setString("detectedEmotion", detectedEmotion!);
       }
@@ -101,9 +109,11 @@ class AnalyzingProvider extends ChangeNotifier {
         result["advice"] ?? {},
       );
       shownAdvice2=aiAdvice;      
-      finalScore = (result["emotion"]?["confidence"] as num?)?.toDouble() ?? 0.0;
-
-
+      finalScore = (result["emotion"]?["confidence"] as num?)?.toDouble() ?? 0.62;
+      
+      finalScore = highest?.value?.toDouble() ?? 0.62;
+      
+      log("after highest") ;
       isAnalyzing = false;
 
       Provider.of<DashboardProvider>(context, listen: false).setNeedsRefresh();
