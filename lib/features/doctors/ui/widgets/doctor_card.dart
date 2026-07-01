@@ -63,24 +63,29 @@ class _DoctorCardState extends State<DoctorCard> {
                       children: [
                         Row(
                           children: [
-                            widget.doctor.profileImage!=null?
                             ClipRRect(
                               clipBehavior: Clip.antiAlias,
                               borderRadius: BorderRadius.circular(100.r),
                               child: CachedNetworkImage(
-                                imageUrl: ApiConstants.baseUrl+widget.doctor.profileImage!,
+                                imageUrl: widget.doctor.profileImage != null && widget.doctor.profileImage!.isNotEmpty
+                                    ? ApiConstants.baseUrl + widget.doctor.profileImage!
+                                    : "https://drive.google.com/uc?export=download&id=1lOoHNvh57TJTcyV6hwAw4xHKsnCZcNYt",
                                 width: 40,
                                 height: 40,
                                 fit: BoxFit.cover,                        
                                 placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator(),
                                 ),
-                                errorWidget: (context, url, error) {                                  
-                                  return ClipRRect(clipBehavior: Clip.antiAlias,
-                                    borderRadius: BorderRadius.circular(100.r),child:  Icon(Icons.error, size: 40.sp));
+                                errorWidget: (context, url, error) { 
+                                  return CachedNetworkImage(
+                                    imageUrl: "https://drive.google.com/uc?export=download&id=1lOoHNvh57TJTcyV6hwAw4xHKsnCZcNYt",
+                                    width: 40,
+                                    height: 40,
+                                    fit: BoxFit.cover,
+                                  );
                                 },
                               ),
-                            ):SizedBox.shrink(),
+                            ),
                             SizedBox(width: 8.w,),
                             Flexible(
                               child: Text(
