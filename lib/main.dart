@@ -10,6 +10,7 @@ import 'package:mindsense_app/features/Analyzing/voice%20analysis/logic/voice_an
 import 'package:mindsense_app/features/community/logic/community_provider.dart';
 import 'package:mindsense_app/features/dashboard/logic/dashboard_provider.dart';
 import 'package:mindsense_app/features/doctors/logic/doctors_provider.dart';
+import 'package:mindsense_app/features/drive%20mode/logic/drivemode_provider.dart';
 import 'package:mindsense_app/features/exercises/logic/audio_player_provider.dart';
 import 'package:mindsense_app/features/exercises/logic/exercises_provider.dart';
 import 'package:mindsense_app/features/home/logic/homescreenprovider.dart';
@@ -95,6 +96,9 @@ void main() async{
             ),
             ChangeNotifierProvider(
               create: (_) => CommunityProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => DrivemodeProvider(),
             ),
           ],
         child: MyApp(),
