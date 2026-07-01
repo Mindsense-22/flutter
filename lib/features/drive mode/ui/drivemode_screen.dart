@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindsense_app/features/drive%20mode/logic/drivemode_provider.dart';
+import 'package:mindsense_app/features/main_nav/ui/main_screen.dart';
 import 'package:provider/provider.dart';
 
 class DrivemodeScreen extends StatefulWidget {
@@ -122,7 +123,8 @@ class _DrivemodeScreenState extends State<DrivemodeScreen> {
                   padding: EdgeInsets.all(8),
                   onPressed:(){
                     context.read<DrivemodeProvider>().stopFetching(context);
-                    Navigator.pop(context);
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen(),),(route) => false,);
+                   
                   },
                   child: Text("Exit drive mode",style: TextStyle(
                     fontSize: 20,
