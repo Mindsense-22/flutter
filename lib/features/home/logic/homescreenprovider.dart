@@ -8,7 +8,7 @@ import 'package:mindsense_app/core/shared%20prefrances/sharedprefrances.dart';
 class Homescreenprovider extends ChangeNotifier {
   int selectedIndex = -1;
   String imogistatus="";
-
+  Map<String, dynamic>?  emotionScores;  
   int totalScans=0;
   String currentstate="";
   double confidence=0;
@@ -50,7 +50,17 @@ class Homescreenprovider extends ChangeNotifier {
         emotionHistory = response ;
         totalScans=emotionHistory["results"]??0;
         currentstate=emotionHistory["data"][0]["state"]??"";
-        confidence=emotionHistory["data"][0]["confidence"]??0;
+        emotionScores = emotionHistory["data"][0]["raw"]?["scores"];
+        MapEntry<String, dynamic>? getHighestScore(Map<String, dynamic>? scores) {
+          if (scores == null || scores.isEmpty) return null;
+
+          return scores.entries
+              .reduce((a, b) => a.value > b.value ? a : b);
+        }
+      
+        confidence=emotionHistory["data"][0]["confidence"]??0.62;
+        final highest = getHighestScore(emotionScores);
+        confidence=highest?.value?.toDouble() ?? 0.62;
         await SharedPreferencesitem.setString("currentstate_home", currentstate);
         await SharedPreferencesitem.setInt("totalScans_home", totalScans);
         await SharedPreferencesitem.setDouble("confidence_home", confidence);
