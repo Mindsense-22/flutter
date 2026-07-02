@@ -100,7 +100,7 @@ class AnalyzingProvider extends ChangeNotifier {
         return scores.entries
             .reduce((a, b) => a.value > b.value ? a : b);
       }
-      //log(emotionScores.toString()) ;
+      
       final highest = getHighestScore(emotionScores);
       if(detectedEmotion!=null){
         await SharedPreferencesitem.setString("detectedEmotion", detectedEmotion!);

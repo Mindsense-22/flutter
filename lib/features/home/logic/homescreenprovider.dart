@@ -57,10 +57,10 @@ class Homescreenprovider extends ChangeNotifier {
           return scores.entries
               .reduce((a, b) => a.value > b.value ? a : b);
         }
-      
-        confidence=emotionHistory["data"][0]["confidence"]??0.62;
         final highest = getHighestScore(emotionScores);
-        confidence=highest?.value?.toDouble() ?? 0.62;
+        confidence=emotionHistory["data"][0]["confidence"]??highest?.value?.toDouble()??0.62;
+               
+        
         await SharedPreferencesitem.setString("currentstate_home", currentstate);
         await SharedPreferencesitem.setInt("totalScans_home", totalScans);
         await SharedPreferencesitem.setDouble("confidence_home", confidence);

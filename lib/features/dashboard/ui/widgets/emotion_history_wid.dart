@@ -108,10 +108,11 @@ class EmotionHistoryWid extends StatelessWidget {
 
       return scores.entries
           .reduce((a, b) => a.value > b.value ? a : b);
-    }      
-    double confidence = (item['confidence'] as num?)?.toDouble() ?? 0.62;
-    final highest = getHighestScore(item["raw"]["scores"]);
-    confidence=highest?.value?.toDouble() ?? 0.62;
+    }     
+    final highest = getHighestScore(item["raw"]["scores"]); 
+    double confidence = (item['confidence'] as num?)?.toDouble() ??highest?.value?.toDouble() ?? 0.62;
+    
+    
     //
     
     final String dateStr = item['createdAt'] ?? '';
