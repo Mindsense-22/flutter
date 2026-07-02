@@ -43,7 +43,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           centerTitle: true,
         ),
-        body: provider.allDashboardLoading
+        body: provider.allDashboardLoading||(provider.isLoading && provider.emotionHistory.isEmpty)
             ? const Center(
                 child: CircularProgressIndicator(),
               )
