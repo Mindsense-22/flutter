@@ -102,7 +102,18 @@ class EmotionHistoryWid extends StatelessWidget {
   Widget _buildHistoryItem(Map<String, dynamic> item) {
     final String state = item['state'] ?? 'Unknown';
     final String source = item['source'] ?? 'unknown';
-    final double confidence = (item['confidence'] as num?)?.toDouble() ?? 0.0;
+    //
+    MapEntry<String, dynamic>? getHighestScore(Map<String, dynamic>? scores) {
+      if (scores == null || scores.isEmpty) return null;
+
+      return scores.entries
+          .reduce((a, b) => a.value > b.value ? a : b);
+    }      
+    double confidence = (item['confidence'] as num?)?.toDouble() ?? 0.62;
+    final highest = getHighestScore(item["raw"]["scores"]);
+    confidence=highest?.value?.toDouble() ?? 0.62;
+    //
+    
     final String dateStr = item['createdAt'] ?? '';
     
     DateTime? date;
