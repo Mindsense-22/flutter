@@ -56,8 +56,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
               child: CustomScrollView(
                 controller: _scrollController,
                 physics: const AlwaysScrollableScrollPhysics(),
-                slivers: [
-                  // Top spacing + add-post header
+                slivers: [                  
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.w),

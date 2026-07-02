@@ -63,8 +63,7 @@ class CurrentstateTotalscansWid extends StatelessWidget {
                           color: const Color(0xffA78BFA), 
                         ),
                         SizedBox(width: 4.w),
-                        Text(
-                          //"Confidence: ${provider.confidence*100}%",
+                        Text(                          
                           SharedPreferencesitem.getDouble("confidence_home")==null?
                           "Confidence: ${(provider.confidence * 100).toStringAsFixed(0)}%":
                           "Confidence: ${(SharedPreferencesitem.getDouble("confidence_home")! * 100).toStringAsFixed(0)}%",                          
@@ -79,8 +78,7 @@ class CurrentstateTotalscansWid extends StatelessWidget {
                     SizedBox(height: 6.h),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10.r),
-                      child: LinearProgressIndicator(
-                        //value: progressValue.clamp(0.0, 1.0),
+                      child: LinearProgressIndicator(                        
                         value:SharedPreferencesitem.getDouble("confidence_home")==null? progressValue.clamp(0.0, 1.0):SharedPreferencesitem.getDouble("confidence_home")!.clamp(0.0, 1.0),
                         backgroundColor: Colors.white.withOpacity(0.1),
                         valueColor: const AlwaysStoppedAnimation<Color>(Color(0xffA78BFA)),

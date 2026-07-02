@@ -102,7 +102,6 @@ class _PostshapeWidState extends State<PostshapeWid> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               widget.post.visibility == "public"
-              //||widget.post.visibility =="nickname" 
               &&
                       profileImage != null &&
                       profileImage.isNotEmpty
@@ -359,8 +358,7 @@ class _PostshapeWidState extends State<PostshapeWid> {
   }
 }
 
-/// Compact icon + label button with no minimum-width constraint.
-/// Uses InkWell so it never causes horizontal overflow.
+
 class _ActionButton extends StatelessWidget {
   final IconData icon;
   final String label;

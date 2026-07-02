@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mindsense_app/core/Api/community_service.dart';
 import 'package:mindsense_app/core/custom%20widgets/custom_snackbar.dart';
@@ -16,7 +15,6 @@ class CommunityProvider extends ChangeNotifier {
   String? error;
   List<FeedPost> feedPosts = [];
 
-  /// Fetches page 1 and replaces the list (used on first load & pull-to-refresh)
   Future<void> fetchFeed() async {
     isFeedLoading = true;
     error = null;

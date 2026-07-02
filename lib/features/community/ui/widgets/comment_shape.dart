@@ -39,7 +39,6 @@ class CommentShapeWidget extends StatelessWidget {
     return DateFormat('dd/MM/yyyy, hh:mm a').format(date);
   }
     final String formattedDate =timeAgo(comment.createdAt);
-        // '${comment.createdAt.day}/${comment.createdAt.month}/${comment.createdAt.year}';
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
@@ -49,7 +48,7 @@ class CommentShapeWidget extends StatelessWidget {
           ClipOval(
             child: imageUrl != null
                 ? CachedNetworkImage(
-                    imageUrl: imageUrl, // baseUrl is already included above
+                    imageUrl: imageUrl, 
                     width: 40,
                     height: 40,
                     fit: BoxFit.cover,
