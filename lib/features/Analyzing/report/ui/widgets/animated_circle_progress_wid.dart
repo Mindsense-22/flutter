@@ -55,7 +55,8 @@ class _AnimatedCircleProgressState extends State<AnimatedCircleProgress>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "${(animation.value * 100).toInt()}%",
+                  "${(animation.value * 100).toStringAsFixed(0)}%",
+                  //"${(animation.value * 100).toInt()}%",
                   style: TextStyle(
                     fontSize: 24.sp,
                     color: Theme.of(context).colorScheme.onSecondary,

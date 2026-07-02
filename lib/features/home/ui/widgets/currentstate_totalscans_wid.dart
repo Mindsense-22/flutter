@@ -66,8 +66,8 @@ class CurrentstateTotalscansWid extends StatelessWidget {
                         Text(
                           //"Confidence: ${provider.confidence*100}%",
                           SharedPreferencesitem.getDouble("confidence_home")==null?
-                          "Confidence: ${(provider.confidence * 100).toStringAsFixed(2)}%":
-                          "Confidence: ${(SharedPreferencesitem.getDouble("confidence_home")! * 100).toStringAsFixed(2)}%",                          
+                          "Confidence: ${(provider.confidence * 100).toStringAsFixed(0)}%":
+                          "Confidence: ${(SharedPreferencesitem.getDouble("confidence_home")! * 100).toStringAsFixed(0)}%",                          
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
